@@ -1,0 +1,76 @@
+<name-input data-form="userForm" data-ng-params="params" data-control-label="Name" data-env="env" data-row="1" data-tabindex="1"
+  required></name-input>
+  <date-input data-control-label="Date of Birth" data-form="userForm" data-ng-model="params.dateOfBirth" data-values="env"
+    data-param-type="birthday" data-row="2" data-tabindex="2" required></date-input>
+    <sex-input data-form="userForm" data-ng-model="params.gender" data-control-label="Sex" data-env="env" data-tabindex="3"></sex-input>
+    <ssn-input data-form="userForm" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="'ssn'"
+      data-tabindex="4" required></ssn-input>
+      <!-- Marital Status -->
+      <marital-status data-form="userForm" data-ng-model="params.maritalStatus" data-control-label="Marital Status" data-env="env"
+        data-row="'maritalStatus'" data-tabindex="5"></marital-status>
+        <!-- End Marital Status -->
+        <address-input data-form="userForm" data-ng-params="params" data-control-label="Address" data-env="env" data-row="'address'"
+          data-tabindex="6"></address-input>
+          <phone-input data-form="userForm" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="'phone'"
+            data-tabindex="7"></phone-input>
+            <div class="row-item" data-ng-click="env.row='email'" data-ng-class="{ 'highlighted': env.row=='email',
+                      'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist
+                    }">
+              <label class="description">Email</label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6" data-ng-class="{'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist }">
+                    <input name="email" type="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                      tabindex="8" />
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row-item" data-ng-click="env.row='customerId'" data-ng-class="{ 'highlighted': env.row=='customerId',
+                      'has-error': env.customerIdExist
+                     }">
+                <label class="description">ParticipantID</label>
+                <div class="content">
+                  <div class="row">
+                    <div class="form-group col-xs-6" data-ng-class="{ 'has-error': env.customerIdExist }">
+                      <input name="participantid" type="text" class="form-control" maxlength="20" data-ng-model="params.customerId" tabindex="9"
+                      />
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="row-item" data-ng-click="env.row=9" data-ng-class="{ 'highlighted': env.row==9,
+                      'has-error': userForm.employerId.$invalid && (!userForm.employerId.$pristine || env.showValid)
+                    }">
+                  <label class="description">Client</label>
+                  <div class="content">
+                    <div class="content">
+                      <div class="row">
+                        <div class="form-group col-xs-6 input-autocomplete" data-ng-class="{ 'has-error': userForm.employerId.$invalid && (!userForm.employerId.$pristine || env.showValid) }">
+
+                          <input type="text" tabindex="10" ng-model="paramsAutoComplete.employer" placeholder="Client Name (Minimum 3 characters)"
+                            typeahead-editable="false" typeahead-wait-ms="500" typeahead-min-length="3" typeahead-on-select="changeEmployer($item['id'], $model, $label)"
+                            typeahead="item as item.clientName for item in findClient($viewValue)" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div data-ng-if="env.products.beniCompAdvantage || env.products.beniCompSelect">
+                    <div class="dotted-bottom"></div>
+                    <div class="row-item" data-ng-click="env.row=11.2" data-ng-class="{ 'highlighted': env.row==11.2 }">
+                      <label class="description">Products</label>
+                      <div class="content">
+                        <div class="checkbox-line" data-ng-if="env.products.beniCompAdvantage">
+                          <input name="beniCompAdvantage" type="checkbox" id="beniCompAdvantage" data-ng-model="params.products.beniCompAdvantage"
+                            tabindex="11" />
+                          <label class="choice" for="beniCompAdvantage">BeniComp Advantage</label>
+                        </div>
+                        <div class="checkbox-line" data-ng-if="env.products.beniCompSelect">
+                          <input name="beniCompSelect" type="checkbox" id="beniCompSelect" data-ng-model="params.products.beniCompSelect" tabindex="12"
+                          />
+                          <label class="choice" for="beniCompSelect">BeniComp Select</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>

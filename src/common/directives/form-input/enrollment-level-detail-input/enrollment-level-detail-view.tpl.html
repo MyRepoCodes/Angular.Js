@@ -1,0 +1,25 @@
+<div class="row-item">
+  <label class="description">{{ controlLabel }}</label>
+  <div class="content" data-ng-if="option==0">
+    <span data-ng-if="ngModel==0">Employee</span>
+    <span data-ng-if="ngModel==1">Employee + Child</span>
+    <span data-ng-if="ngModel==2">Employee + Children</span>
+    <span data-ng-if="ngModel==3">Employee + Spouse</span>
+    <span data-ng-if="ngModel==4">Family</span>
+  </div>
+  <div class="content" data-ng-if="option==1">
+    <span data-ng-if="ngModel==1">Employee</span>
+    <span data-ng-if="ngModel==1">Employee + 1</span>
+    <span data-ng-if="ngModel==1">Employee + 2</span>
+    <span data-ng-if="ngModel==1">Family</span>
+  </div>
+  <div class="content" data-ng-if="option==2">
+    <span data-ng-if="ngModel==2">Employee</span>
+    <span data-ng-if="ngModel==2">Employee + Spouse</span>
+    <span data-ng-if="ngModel==2">Family</span>
+  </div>
+  <div class="content" data-ng-if="option==3">
+    <span data-ng-if="ngModel==3">Employee</span>
+    <span data-ng-if="ngModel==3">Family</span>
+  </div>
+</div>

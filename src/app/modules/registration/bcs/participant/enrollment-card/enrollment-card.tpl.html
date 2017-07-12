@@ -1,0 +1,30 @@
+<form name="ecForm" novalidate>
+  <div class="form-description">
+    <h2>Enrollment Card</h2>
+    <div class="summary"></div>
+  </div>
+  <div class="pagination_header">
+    <table class="ap_table_pagination" width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+      <tr>
+        <td align="center">
+          <span id="page_num_1" class="ap_tp_num" data-ng-class="{ 'ap_tp_num_active': localStep==0 }">1</span>
+          <span id="page_title_1" class="ap_tp_text" data-ng-class="{ 'ap_tp_text_active': localStep==0 }">Participant Information</span>
+        </td>
+        <td align="center" class="ap_tp_arrow">&gt;</td>
+        <td align="center">
+          <span id="page_num_2" class="ap_tp_num" data-ng-class="{ 'ap_tp_num_active': localStep==1 }">2</span>
+          <span id="page_title_2" class="ap_tp_text" data-ng-class="{ 'ap_tp_text_active': localStep==1 }">Dependent Information</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div data-ng-if="localStep == 0"
+       data-ng-include="'modules/registration/bcs/participant/enrollment-card/templates/participant-information.tpl.html'">
+  </div>
+  <div data-ng-if="localStep == 1"
+       data-ng-include="'modules/registration/bcs/participant/enrollment-card/templates/dependent-information.tpl.html'">
+  </div>
+  <div class="alert alert-danger" style="margin: 2px 0;" data-ng-show="env.error">{{ env.error }}</div>
+</form>

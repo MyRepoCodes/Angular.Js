@@ -1,0 +1,291 @@
+<div data-ng-if="env.step === 1">
+  <form name="reportForm" novalidate>
+    <!-- Section Select a Product -->
+    <div class="row-item"
+         data-ng-click="env.row='selectProduct'"
+         data-ng-class="{ 'highlighted': env.row=='selectProduct' }">
+      <label class="description">Select a Product for your report</label>
+      <div class="content">
+        <div class="radio-line" ng-repeat="item in env.listProducts">
+          <input name="choiceType" type="radio" id="Group0_{{item.name}}"
+                 data-ng-value="item.name"
+                 data-ng-model="params.selectProduct"
+                 tabindex="1.{{item.id}}">
+          <label class="choice" for="Group0_{{item.name}}">{{item.label}}</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- If select Product BCA -->
+    <div ng-if="params.selectProduct ==='bca'">
+
+      <div class="dotted-line"></div>
+
+      <!--BeniComp Advantage -->
+      <div class="row-item">
+        <h3>BeniComp Advantage</h3>
+        <small>Select the report below that you would like to generate</small>
+      </div>
+
+      <div class="row-item"
+           data-ng-click="env.row='bcaListOfReports'"
+           data-ng-class="{ 'highlighted': env.row=='bcaListOfReports' ,
+                      'has-error': env.showValid}">
+        <label class="description">BeniComp Advantage List of Reports</label>
+        <div class="content">
+          <div ng-repeat="item in env.listBCAListOfReports" class="checkbox-line">
+            <input name="{{item.name}}" type="checkbox" id="Group1_{{item.name}}"
+                   data-ng-model="params.bcaListOfReports[item.name]"
+                   tabindex="2.{{item.id}}"/>
+            <label class="choice" for="Group1_{{item.name}}">{{item.label}}</label>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- Selected Preventive Health Management -->
+      <div data-ng-if="params.bcaListOfReports['preventiveHealthManagement']">
+
+
+        <!-- Preventive Health Management -->
+        <div class="row-item"
+             data-ng-click="env.row='preventiveHealthManagement'"
+             data-ng-class="{ 'highlighted': env.row=='preventiveHealthManagement' ,
+                      'has-error': env.showValid}">
+          <label class="description">Preventive Health Management</label>
+          <div class="content">
+            <div ng-repeat="item in env.listPreventiveHealthManagement" class="checkbox-line">
+              <input name="{{item.name}}" type="checkbox" id="Group2_{{item.name}}"
+                     data-ng-model="params.preventiveHealthManagement[item.name]"
+                     tabindex="3.{{item.id}}"/>
+              <label class="choice" for="Group2_{{item.name}}">{{item.label}}</label>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Selected Plan Design -->
+        <div data-ng-if="params.preventiveHealthManagement['planDesign']">
+
+          <!-- Plan Design Reports -->
+          <div class="dotted-line"></div>
+          <div class="row-item">
+            <h3>Plan Design Reports</h3>
+            <small>Reports related to the design of the plan and incentive structure.</small>
+          </div>
+
+          <!-- Plan Design Report -->
+          <div class="row-item"
+               data-ng-click="env.row='planDesignReport'"
+               data-ng-class="{ 'highlighted': env.row=='planDesignReport' ,
+                      'has-error': env.showValid}">
+            <label class="description">Plan Design Report</label>
+            <div class="content">
+              <div ng-repeat="item in env.listPlanDesignReports.planDesignReport" class="checkbox-line">
+                <input name="{{item.name}}" type="checkbox" id="Group3_{{item.name}}"
+                       data-ng-model="params.planDesignReports.planDesignReport[item.name]"
+                       tabindex="4.{{item.id}}"/>
+                <label class="choice" for="Group3_{{item.name}}">{{item.label}}</label>
+              </div>
+
+            </div>
+          </div>
+          <!-- Plan Design Report Additions -->
+          <div class="row-item"
+               data-ng-click="env.row='planDesignReportAdditions'"
+               data-ng-class="{ 'highlighted': env.row=='planDesignReportAdditions' ,
+                      'has-error': env.showValid}">
+            <label class="description">Plan Design Report Additions</label>
+            <div class="content">
+              <div ng-repeat="item in env.listPlanDesignReports.planDesignReportAdditions" class="checkbox-line">
+                <input name="{{item.name}}" type="checkbox" id="Group4_{{item.name}}"
+                       data-ng-model="params.planDesignReports.planDesignReportAdditions[item.name]"
+                       tabindex="5.{{item.id}}"/>
+                <label class="choice" for="Group4_{{item.name}}">{{item.label}}</label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Selected Plan Design==> Selected Participation -->
+          <div data-ng-if="params.planDesignReports.planDesignReport['participation']">
+
+            <!-- Participation Reports -->
+            <div class="dotted-line"></div>
+            <div class="row-item">
+              <h3>Participation Reports</h3>
+              <small>Reports related to program participation</small>
+            </div>
+
+            <!-- Participation Report -->
+            <div class="row-item"
+                 data-ng-click="env.row='participationReport'"
+                 data-ng-class="{ 'highlighted': env.row=='participationReport' ,
+                      'has-error': env.showValid}">
+              <label class="description">Participation Report</label>
+              <div class="content">
+                <div ng-repeat="item in env.listParticipationReports" class="checkbox-line">
+                  <input name="{{item.name}}" type="checkbox" id="Group5_{{item.name}}"
+                         data-ng-model="params.participationReports[item.name]"
+                         tabindex="6.{{item.id}}"/>
+                  <label class="choice" for="Group5_{{item.name}}">{{item.label}}</label>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Health Risk Reports -->
+        <div class="dotted-line"></div>
+        <div class="row-item">
+          <h3>Health Risk Reports</h3>
+          <small>Population health risk assessment reports</small>
+        </div>
+        <!-- Population Health Risk Assessment -->
+        <div class="row-item"
+             data-ng-click="env.row='PopulationHealthRiskAssessment'"
+             data-ng-class="{ 'highlighted': env.row=='PopulationHealthRiskAssessment' ,
+                      'has-error': env.showValid}">
+          <label class="description">Population Health Risk Assessment</label>
+          <div class="content">
+            <div ng-repeat="item in env.listPopulationHealthRiskAssessment" class="checkbox-line">
+              <input name="{{item.name}}" type="checkbox" id="Group6_{{item.name}}"
+                     data-ng-model="params.populationHealthRiskAssessment[item.name]"
+                     tabindex="8.{{item.id}}"/>
+              <label class="choice" for="Group6_{{item.name}}">{{item.label}}</label>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Selected Plan Design -->
+        <div data-ng-if="params.preventiveHealthManagement['planDesign']">
+
+          <!-- Selected Plan Design==> Selected Participation -->
+          <div data-ng-if="params.planDesignReports.planDesignReport['participation']">
+
+            <!-- Selected Plan Design==> Selected Participation==> Selected Health Screening -->
+            <div data-ng-if="params.participationReports['healthScreening']">
+
+              <!-- Health Screening Reports -->
+              <div class="dotted-line"></div>
+              <div class="row-item">
+                <h3>Health Screening Reports</h3>
+                <small>Reports on participants and their health screening</small>
+              </div>
+              <!-- Health Screening Report -->
+              <div class="row-item"
+                   data-ng-click="env.row='healthScreeningReports'"
+                   data-ng-class="{ 'highlighted': env.row=='healthScreeningReports' ,
+                      'has-error': env.showValid}">
+                <label class="description">Health Screening Report</label>
+                <div class="content">
+                  <div ng-repeat="item in env.listHealthScreeningReports" class="checkbox-line">
+                    <input name="{{item.name}}" type="checkbox" id="Group7_{{item.name}}"
+                           data-ng-model="params.healthScreeningReports[item.name]"
+                           tabindex="8.{{item.id}}"/>
+                    <label class="choice" for="Group7_{{item.name}}">{{item.label}}</label>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Selected Metabolic Syndrome -->
+        <div data-ng-if="params.preventiveHealthManagement['metabolicSyndrome']">
+
+          <!-- Metabolic Syndrome Profile -->
+          <div class="dotted-line"></div>
+          <div class="row-item">
+            <h3>Metabolic Syndrome Profile</h3>
+            <small>Reports on metabolic risk factors</small>
+          </div>
+
+          <!-- Metabolic Syndrome Report -->
+          <div class="row-item"
+               data-ng-click="env.row='yearsToInclude'"
+               data-ng-class="{ 'highlighted': env.row=='yearsToInclude' ,
+                      'has-error': env.showValid}">
+            <label class="description">Years to include</label>
+            <div class="content">
+              <div ng-repeat="item in env.listMetabolicSyndromeReport" class="checkbox-line">
+                <input name="{{item.name}}" type="checkbox" id="Group8_{{item.name}}"
+                       data-ng-model="params.metabolicSyndromeReport[item.name]"
+                       tabindex="9.{{item.id}}"/>
+                <label class="choice" for="Group8_{{item.name}}">{{item.label}}</label>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Selected Trend Report -->
+        <div data-ng-if="params.preventiveHealthManagement['trendReport']">
+
+          <!-- Annual Trend Report -->
+          <div class="dotted-line"></div>
+          <div class="row-item">
+            <h3>Annual Trend Report</h3>
+            <small>Reports on population health trends</small>
+          </div>
+
+          <!-- Years to include -->
+          <div class="row-item"
+               data-ng-click="env.row='yearsToInclude'"
+               data-ng-class="{ 'highlighted': env.row=='yearsToInclude' ,
+                      'has-error': env.showValid}">
+            <label class="description">Years to include</label>
+            <div class="content">
+              <div ng-repeat="item in env.listAnnualTrendReport.yearsToInclude" class="checkbox-line">
+                <input name="{{item.name}}" type="checkbox" id="Group9_{{item.name}}"
+                       data-ng-model="params.annualTrendReport.yearsToInclude[item.name]"
+                       tabindex="10.{{item.id}}"/>
+                <label class="choice" for="Group9_{{item.name}}">{{item.label}}</label>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Trend Report Values -->
+          <div class="row-item"
+               data-ng-click="env.row='trendReportValues'"
+               data-ng-class="{ 'highlighted': env.row=='trendReportValues' ,
+                      'has-error': env.showValid}">
+            <label class="description">Trend Report Values</label>
+            <div class="content">
+              <div ng-repeat="item in env.listAnnualTrendReport.trendReportValues" class="checkbox-line">
+                <input name="{{item.name}}" type="checkbox" id="Group11_{{item.name}}"
+                       data-ng-model="params.annualTrendReport.trendReportValues[item.name]"
+                       tabindex="12.{{item.id}}"/>
+                <label class="choice" for="Group11_{{item.name}}">{{item.label}}</label>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Button Submit -->
+    <div class="buttons" data-ng-if="params.selectProduct">
+      <a class="btn btn-green" data-ng-click="runReport(reportForm.$valid)">Run Report</a>
+    </div>
+  </form>
+
+</div>
+
+<div data-ng-if="env.step === 2">
+  <div data-ng-include="'modules/reports/templates/reports-page-result.tpl.html'"></div>
+</div>

@@ -1,0 +1,52 @@
+<!--<li data-ng-if="isHaveHealthResult !== false" data-ng-class="{'active': checkState == 'dashboard' }">
+  <a data-ng-if="!isUseMobile" data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.dashboard" class="dashboard-item">Dashboard</a>
+</li>-->
+<li data-ng-class="{'active': checkState == 'registration' }">
+  <a data-ng-if="!isUseMobile" data-ng-click="goRegistration()" class="registration-item">Registration</a>
+  <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.registration" class="registration-item">Registration</a>
+</li>
+<li data-ng-class="{'active': checkState == 'biomarkers' }">
+  <a data-ui-sref="loggedIn.modules.health-results.biomarkers" class="biomarkers-item">Health Screening Results</a>
+</li>
+<!--<li data-ng-class="{'active': checkState == 'health-results' }"><a data-ui-sref="loggedIn.modules.health-results" class="health-results-item">Health Results</a></li>
+<li class="sub-menu" data-ng-class="{'active': checkState == 'biomarkers' }"><a data-ui-sref="loggedIn.modules.health-results.biomarkers" class="biomarkers-item">Health Screening Results</a></li>
+<li class="sub-menu" data-ng-class="{'active': checkState == 'metabolic-syndrome' }"><a data-ui-sref="loggedIn.modules.health-results.metabolic-syndrome" class="metabolic-syndrome-item">Metabolic Syndrome</a></li>-->
+<li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+  <a class="imp-documents-item" data-ng-if="!clientUrl" data-ui-sref="loggedIn.modules.imp-documents.list">
+    Important Documents <span class="badge badge-danger"
+                              tooltips
+                              tooltip-lazy="true"
+                              tooltip-side="right"
+                              tooltip-class="tooltip-notif"
+                              tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+  </a>
+  <a class="imp-documents-item" data-ng-if="clientUrl" data-ui-sref="loggedIn.modules.imp-documentsClientUrl.list({clientUrl:clientUrl})">
+    Important Documents <span class="badge badge-danger"
+                              tooltips
+                              tooltip-lazy="true"
+                              tooltip-side="right"
+                              tooltip-class="tooltip-notif"
+                              tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+  </a>
+</li>
+<!--<li data-ng-class="{'active': checkState == 'health-topics-participant' }"><a data-ui-sref="loggedIn.modules.health-topics-participant" class="health-topics-item">Health Topics</a></li>-->
+<!--<li data-ng-class="{'active': checkState == 'selectedClaim' }" class="has-sub">
+  <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="new-claims-item">Claims</a>
+  <ul>
+    <li data-ng-class="{'active': checkState == 'submit-claims' }"><a data-ui-sref="loggedIn.modules.submit-claims" class="new-claims-item">Submit a Claim</a></li>
+    <li data-ng-class="{'active': checkState == 'status-claims' }"><a data-ui-sref="loggedIn.modules.status-claims" class="biomarkers-item">Claim Status</a></li>
+  </ul>
+</li>-->
+<li class="has-sub" data-ng-class="{'open' : isUseMobile}">
+  <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="benicomp-select-item">BeniComp Select</a>
+  <ul>
+    <li data-ng-class="{'active': checkState == 'enrollmentCards' }"><a data-ui-sref="loggedIn.modules.enrollmentCards" class="registration-item">Enrollment Cards</a></li>
+    <li data-ng-class="{'active': checkState == 'directDeposit' }"><a data-ui-sref="loggedIn.modules.directDeposit" class="registration-item">EFT</a></li>
+    <li data-ng-class="{'active': checkState == 'submit-claims' }"><a data-ui-sref="loggedIn.modules.submit-claims" class="new-claims-item">Submit a Claim</a></li>
+    <li data-ng-class="{'active': checkState == 'status-claims' }"><a data-ui-sref="loggedIn.modules.status-claims" class="biomarkers-item">Claim Status</a></li>
+  </ul>
+</li>
+<!--<li data-ng-class="{'active': checkState == 'health-screening' }"><a data-ui-sref="loggedIn.modules.health-screening" class="imp-documents-item">Health Screening</a></li>-->
+<!--<li data-ng-class="{'active': checkState == 'profile' }"><a data-ui-sref="loggedIn.modules.profile" class="profile-item">Profile</a></li>
+<li data-ng-if="!isUseMobile"><a data-ng-click="logout()" class="logout-item">Logout</a></li>-->

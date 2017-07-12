@@ -1,0 +1,48 @@
+<form name="userForm" novalidate autocomplete="off">
+  <div class="row form-description dotted-line infoClient">
+
+    <div class="col-md-4">
+      <h2>Profile</h2>
+    </div>
+
+    <div class="col-md-8 row-item">
+      <label class="description" ng-if="currentUser.customerId">
+        Participant ID: <span class="text-green">{{currentUser.customerId}}</span>
+      </label>
+      <label class="description" ng-if="currentUser.employer.pulseId">
+        Client ID: <span class="text-green">{{currentUser.parentPrefixPulseId}}-{{currentUser.employer.pulseId}}</span>
+      </label>
+      <label class="description" ng-if="currentUser.pulseId">
+        PULSE ID: <span class="text-green">{{currentUser.prefixPulseId}}-{{currentUser.pulseId}}</span>
+      </label>
+    </div>
+    <div class="col-md-12 summary">Please review your profile below and update your information if it has changed.</div>
+  </div>
+  <name-input data-form="userForm" data-ng-params="params" data-control-label="Name" data-env="env" data-row="1" data-tabindex="1" required></name-input>
+  <address-input data-form="userForm" data-ng-params="params" data-control-label="Address" data-env="env" data-row="2" data-tabindex="2"></address-input>
+  <phone-input data-form="userForm" data-ng-model="params.phoneNumber" control-label="Phone" data-env="env" data-row="3" data-tabindex="3"></phone-input>
+  <div class="row-item" data-ng-click="env.row=4"
+       data-ng-class="{ 'highlighted': env.row==4 }">
+    <label class="description">Email<span class="is-required">*</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{'has-error' : (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist }">
+          <input name="email" type="email" class="form-control"
+                 data-ng-model="params.email"
+                 data-ng-pattern="patternRegexs.email"
+                 tabindex="4"
+                 required/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons" data-ng-click="env.row=0">
+    <button class="btn btn-green" data-ng-click="update(userForm)" tabindex="12">Save changes</button>
+    <button class="btn btn-white" data-ng-click="cancel()" tabindex="13">Cancel</button>
+  </div>
+  <div class="alert alert-danger" data-ng-if="env.error">{{ env.error }}</div>
+  <div class="alert alert-success" data-ng-if="env.success">{{ env.success }}</div>
+  <div class="alert alert-info" data-ng-if="env.inforChangePassword">{{ env.inforChangePassword }}</div>
+</form>

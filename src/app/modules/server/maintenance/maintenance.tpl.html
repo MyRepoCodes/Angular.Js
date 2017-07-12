@@ -1,0 +1,69 @@
+<div class="panel panel-green warp-shadow">
+    <div class="panel-body">
+        <form name="form" novalidate autocomplete="off">
+            <div class="form-description">
+                <h2>System Maintenance</h2>
+            </div>
+
+            <div class="form-reasons-contact">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="row-item" data-ng-click="env.row=1" data-ng-class="{ 'highlighted': env.row==1}">
+                            <div class="content">
+                                <div class="checkbox-line">
+                                    <input id="isMaintenance" class="cursor-pointer" type="checkbox" name="isMaintenance" data-ng-model="params.isMaintenance"
+                                        tabindex="1">
+                                    <label class="choice cursor-pointer" for="isMaintenance">Click here for System Maintenance</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reasons -->
+                        <div class="row-item" ng-show="params.isMaintenance" data-ng-click="env.row=2" data-ng-class="{ 'highlighted': env.row==2}">
+                            <label class="description">Reasons</label>
+                            <div class="reasons">
+                                <div class="form-group">
+                                    <textarea class="form-control" id="reasons" name="reasons" rows="5" data-ng-model="params.reasons" tabindex="2" />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Image -->
+                        <div class="row-item" ng-show="params.isMaintenance" data-ng-click="env.row=3" data-ng-class="{ 
+                            'highlighted': env.row==3
+                            }">
+                            <input name="tempFile" type="hidden" />
+                            <label class="description">Upload Image</label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-8">
+                                        <input id="file_element" name="element" class="element file" type="file" />
+                                        <div id="file_element_queue" class="file_queue"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="buttons text-right" data-ng-click="env.row=0">
+                            <button class="btn btn-green" data-ng-click="submit(params)" tabindex="29">SUBMIT</button>
+                        </div>
+
+                        <div class="alert alert-success" data-ng-if="env.successMessage">{{ env.successMessage }}</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title">Send Mail</h3>
+
+    <div ng-if="list_particiapnt">
+        <p><b>We will send email for the Participants:</b></p>
+        <p>{{list_particiapnt}}</p>
+    </div>
+
+    <div class="buttons text-center">
+        <b ng-if="isLoading" class="text-green">Sending</b>
+        <button ng-if="!isLoading" ng-click="sendMail()" class="btn btn-green">Submit</button>
+        <p>
+            <b ng-if="statusSendMail === 'success'" class="text-green2">Send E-mail Success</b>
+            <b ng-if="statusSendMail === 'error'" class="text-danger">Send E-mail Error. Please try again!</b>
+        </p>
+    </div>
+</div>

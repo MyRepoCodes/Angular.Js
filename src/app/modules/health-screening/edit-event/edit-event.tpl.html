@@ -1,0 +1,161 @@
+<div class="modal-header">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title">Edit Event</h3>
+</div>
+<div class="modal-body modal-form-event">
+  <form name="form" class="form-horizontal" novalidate autocomplete="off">
+    <div class="list-group">
+      <div class="form-group"
+           data-ng-class="{ 'has-error' : form.summary.$invalid && (!form.summary.$pristine || showValid),
+                            'has-success': form.summary.$valid }">
+        <input name="summary" type="text" placeholder="Untitled event" class="form-control"
+               data-ng-model="params.summary" required>
+      </div>
+      <div class="row row-time" data-ng-if="!allDay">
+        <div class="col-sm-3 col-sm-25 form-group"
+             data-ng-class="{ 'has-error' : form.dateStart.$invalid && (!form.dateStart.$pristine || showValid),
+                              'has-success': form.dateStart.$valid }">
+          <div class="datepicker-wrap" data-ng-class="{ 'opened' : openedStart }">
+            <div class="input-group">
+              <input type="text" class="form-control"
+                     data-ng-model="params.dateStart"
+                     datepicker-popup="{{format}}"
+                     is-open="openedStart"
+                     datepicker-options="dateOptions"
+                     close-text="Close"
+                     required/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-22 form-group"
+             data-ng-class="{ 'has-error' : form.timeStart.$invalid && (!form.timeStart.$pristine || showValid),
+                              'has-success': form.timeStart.$valid }">
+          <div class="timepicker-wrap">
+            <div class="input-group bootstrap-timepicker timepicker">
+              <input type="text" class="form-control input-small"
+                     data-ng-model="params.timeStart"
+                     time-picker
+                     required/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-6"><label class="control-label">to</label></div>
+        <div class="col-sm-3 col-sm-22 form-group"
+             data-ng-class="{ 'has-error' : form.timeEnd.$invalid && (!form.timeEnd.$pristine || showValid),
+                              'has-success': form.timeEnd.$valid }">
+          <div class="timepicker-wrap">
+            <div class="input-group bootstrap-timepicker timepicker">
+              <input type="text" class="form-control input-small"
+                     data-ng-model="params.timeEnd"
+                     time-picker
+                     required/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-25 form-group"
+             data-ng-class="{ 'has-error' : form.dateEnd.$invalid && (!form.dateEnd.$pristine || showValid),
+                              'has-success': form.dateEnd.$valid }">
+          <div class="datepicker-wrap" data-ng-class="{ 'opened' : openedEnd }">
+            <div class="input-group">
+              <input type="text" class="form-control"
+                     data-ng-model="params.dateEnd"
+                     datepicker-popup="{{format}}"
+                     is-open="openedEnd"
+                     datepicker-options="dateOptions"
+                     close-text="Close"
+                     required/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-time" data-ng-if="allDay">
+        <div class="col-sm-3 col-sm-25 form-group"
+             data-ng-class="{ 'has-error' : form.dateStart.$invalid && (!form.dateStart.$pristine || showValid),
+                              'has-success': form.dateStart.$valid }">
+          <div class="datepicker-wrap" data-ng-class="{ 'opened' : openedStart }">
+            <div class="input-group">
+              <input type="text" class="form-control"
+                     data-ng-model="params.dateStart"
+                     datepicker-popup="{{format}}"
+                     is-open="openedStart"
+                     datepicker-options="dateOptions"
+                     close-text="Close"
+                     required/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openStart($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-6"><label class="control-label">to</label></div>
+        <div class="col-sm-3 col-sm-25 form-group"
+             data-ng-class="{ 'has-error' : form.dateEnd.$invalid && (!form.dateEnd.$pristine || showValid),
+                              'has-success': form.dateEnd.$valid }">
+          <div class="datepicker-wrap" data-ng-class="{ 'opened' : openedEnd }">
+            <div class="input-group">
+              <input type="text" class="form-control"
+                     data-ng-model="params.dateEnd"
+                     datepicker-popup="{{format}}"
+                     is-open="openedEnd"
+                     datepicker-options="dateOptions"
+                     close-text="Close"
+                     required/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" data-ng-click="openEnd($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row"
+           data-ng-class="{ 'has-error' : form.location.$invalid && (!form.location.$pristine || showValid),
+                            'has-success': form.location.$valid }">
+        <label class="control-label col-sm-2">Where</label>
+        <div class="col-sm-10">
+          <input name="location" type="hidden" class="form-control"
+                 data-ng-model="params.location"
+                 required>
+          <input type="text" placeholder="Enter a location" class="form-control"
+                 g-places-autocomplete
+                 force-selection="true"
+                 data-ng-model="newValues.place">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Attachments</label>
+        <div class="col-sm-10">
+          <div class="file_queue" style="margin-bottom: 5px;" data-ng-if="attachments.length>0">
+            <div class="uploadifive-queue-item" data-ng-repeat="attachment in attachments">
+              <a class="close" data-ng-click="deleteAttachment(attachment)">
+                <img border="0" src="assets/images/icons/delete.png"></a>
+              <div><span class="filename"><img align="absmiddle" class="file_attached" src="assets/images/icons/attach.gif">{{ attachment.title }}</span></div>
+            </div>
+          </div>
+          <select-files-upload data-ng-model="params.files" data-upload-url="uploadUrl"></select-files-upload>
+        </div>
+      </div>
+      <div class="form-group row"
+           data-ng-class="{ 'has-error' : form.description.$invalid && (!form.description.$pristine || showValid),
+                            'has-success': form.description.$valid }">
+        <label class="control-label col-sm-2">Description</label>
+        <div class="col-sm-10">
+          <textarea name="description" class="form-control"
+                    data-ng-model="params.description"
+                    rows="3" required></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="buttons" style="text-align: center;">
+      <a class="btn btn-midnightblue" data-ng-click="deleteEvent()">Delete</a>
+      <button class="btn btn-green" data-ng-click="editEvent(form.$valid)">Edit</button>
+    </div>
+  </form>
+</div>

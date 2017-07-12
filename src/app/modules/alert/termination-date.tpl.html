@@ -1,0 +1,17 @@
+<div class="modal-body modal-body-default">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title text-center">What is the termination date?</h3>
+  <div class="form-content">
+    <div class="panel panel-modal-default modal-termination-date">
+      <div class="panel-body">
+        <form name="tdFrom" novalidate autocomplete="off">
+          <date-input data-form="tdFrom" data-ng-model="params.terminationDate" data-values="env" data-row="1" data-tabindex="1" data-control-label="Termination date" required></date-input>
+          <div class="groupbuttons">
+            <button class="btn btn-green" data-ng-click="save(tdFrom.$valid)">Save</button>
+            <button class="btn btn-green" data-ng-click="cancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<enrollment-level-input data-form="userForm"
+                        data-ng-model="params.enrollmentLevel"
+                        data-control-label="Enrollment Level Options"
+                        data-env="env"
+                        data-row="enrollmentLevel"
+                        readonly></enrollment-level-input>
+<div class="dotted-bottom"></div>
+<div class="row-item" data-ng-click="env.row=9.3" data-ng-class="{ 'highlighted': env.row==9.3 }">
+  <label class="description">Benefit Year</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <!-- Single button -->
+        <div class="btn-group incentive-dropdown" dropdown data-ng-if="incentiveList.length > 0">
+          <button id="single-button" class="form-control" dropdown-toggle><span data-ng-bind="getLabelByIncentive(env.currentIncentive)"></span> &nbsp;&nbsp;<span class="caret"></span></button>
+          <ul class="dropdown-menu" dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem" data-ng-repeat="item in incentiveList">
+              <a data-ng-click="changeCurrentIncentive(item, userForm)" data-ng-bind="getLabelByIncentive(item)"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="benefit-year" data-ng-if="env.currentIncentive">
+  <div class="row">
+    <div class="col-xs-6">
+      <date-input data-form="userForm"
+                  data-ng-model="incentiveParams.startDate"
+                  data-control-label="Benefit Start Date"
+                  data-values="env"
+                  data-row="10"
+                  readonly></date-input>
+    </div>
+    <div class="col-xs-6">
+      <date-input data-form="userForm"
+                  data-ng-model="incentiveParams.endDate"
+                  data-control-label="Benefit End Date"
+                  data-values="env"
+                  data-row="11"
+                  readonly></date-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <date-input data-form="userForm"
+                  data-ng-model="incentiveParams.registerStartDate"
+                  data-control-label="Registration Start Date"
+                  data-values="env"
+                  data-row="12"
+                  readonly></date-input>
+    </div>
+    <div class="col-xs-6">
+      <date-input data-form="userForm"
+                  data-ng-model="incentiveParams.registerEndDate"
+                  data-control-label="Registration End Date"
+                  data-values="env"
+                  data-row="13"
+                  readonly></date-input>
+    </div>
+  </div>
+  <plan-input data-form="userForm" data-ng-model="incentiveParams.plans" data-plan-option="incentiveParams.planOption" data-control-label="Benefit Plan Options" data-env="env" data-row="14" readonly></plan-input>
+  <!-- targets option -->
+  <div class="row-item" data-ng-click="env.row=19" data-ng-class="{ 'highlighted': env.row==19 }">
+    <label class="description">Targets option</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group targets-option col-xs-6">
+          <select class="form-control"
+                  ng-options="item.value as item.name for item in compare.clientIncentivesTargets"
+                  ng-change="changeTargetsOption(incentiveParams.targetsOption)"
+                  ng-model="incentiveParams.targetsOption"
+                  data-ng-disabled="true">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <client-incentives-input data-form="userForm" data-ng-model="incentiveParams" data-control-label="Client Incentives" data-env="env" data-row="20" readonly></client-incentives-input>
+</div>
+<div class="dotted-bottom"></div>

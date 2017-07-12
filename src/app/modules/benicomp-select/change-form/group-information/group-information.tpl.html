@@ -1,0 +1,60 @@
+<form name="giForm" novalidate autocomplete="off">
+  <div class="row-item"
+       data-ng-click="env.row='groupName'"
+       data-ng-class="{ 'highlighted': env.row=='groupName',
+                        'has-error': giForm.groupName.$invalid && (!giForm.groupName.$pristine || env.showValid)
+                      }">
+    <label class="description">Group Name<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': giForm.groupName.$invalid && (!giForm.groupName.$pristine || env.showValid) }">
+          <input name="groupName" type="text" class="form-control"
+                 data-ng-model="params.groupName"
+                 tabindex="1" required/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item"
+       data-ng-click="env.row='groupNumber'"
+       data-ng-class="{ 'highlighted': env.row=='groupNumber',
+                        'has-error': giForm.groupNumber.$invalid && (!giForm.groupNumber.$pristine || env.showValid)
+                      }">
+    <label class="description">Group Number</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': giForm.groupNumber.$invalid && (!giForm.groupNumber.$pristine || env.showValid) }">
+          <input name="groupNumber" type="text" class="form-control"
+                 data-ng-model="params.groupNumber"
+                 tabindex="2"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <name-input data-form="giForm" data-control-label="Insured's Name" data-ng-params="params" data-env="env" data-tabindex="3" required></name-input>
+  <div class="row-item"
+       data-ng-click="env.row='typeOfChange'"
+       data-ng-class="{ 'highlighted': env.row=='typeOfChange' ,
+                      'has-error': !typeOfChangeIsValid(params) && env.showValid}">
+    <label class="description">Type of Change</label>
+    <div class="content">
+      <div class="checkbox-line">
+        <input name="insuredAndDependentInformation" type="checkbox" id="insuredAndDependentInformation"
+               data-ng-model="params.typeOfChange.insuredAndDependentInformation"
+               tabindex="4.1"/>
+        <label class="choice" for="insuredAndDependentInformation">Insured and Dependent Information</label>
+      </div>
+
+      <div class="checkbox-line">
+        <input name="baseHealthInsuranceSpd" type="checkbox" id="baseHealthInsuranceSpd"
+               data-ng-model="params.typeOfChange.baseHealthInsuranceSpd"
+               tabindex="4.2"/>
+        <label class="choice" for="baseHealthInsuranceSpd">Base Health Insurance Summary Plan Description (SPD)</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="buttons ng-scope" data-ng-click="env.row=0">
+    <button class="btn btn-green" data-ng-click="continue(giForm.$valid)" tabindex="5">Continue <i class="fa fa-chevron-right"></i></button>
+  </div>
+</form>

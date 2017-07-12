@@ -1,0 +1,19 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['relationToParticipant_' + inputId].$invalid && (!form['relationToParticipant_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <select name="relationToParticipant_{{ inputId }}" class="form-control"
+                data-ng-model="ngModel"
+                data-ng-disabled="isReadonly"
+                data-ng-options="k as v for (k, v) in relationToParticipantList"
+                tabindex="{{ tabindex }}"
+                data-ng-required="required"></select>
+      </div>
+    </div>
+  </div>
+</div>

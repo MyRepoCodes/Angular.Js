@@ -1,0 +1,390 @@
+<div class="panel panel-green">
+  <div class="panel-heading">
+    <h4 class="text-center">Health Result</h4>
+  </div>
+  <div class="panel-body">
+    <div class="table-container">
+
+      <!-- Search -->
+      <div class="table-filter">
+        <div class="input-group">
+          <input class="form-control hr-input-filter"
+                 placeholder="Search by last name particpaint"
+                 data-ng-model="filter.lastName"/>
+          <span class="input-group-addon"><i class="icon icon-search"></i></span>
+        </div>
+      </div>
+
+      <!-- Filter -->
+      <div class="table-dropdown">
+
+        <!-- Filter by client-->
+        <div class="pull-left">
+          <div class="dropdown">
+            <button class="dropdown-toggle filter-participant-client">
+              <span data-ng-if="!filter.clientName">Filter by Client</span>
+              <span data-ng-if="filter.clientName">By : {{filter.clientName}}</span>
+              <span class="fa fa-angle-down"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li data-ng-repeat="employer in employerList"
+                  data-ng-class="{ 'selected': employer == currEmployer }">
+                <a data-ng-click="choiceEmployer(employer)"
+                   onclick="$('.filter-participant-client').trigger('click');">
+                  {{employer.clientName}}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- filter by Alert Level  -->
+        <!--<div class="pull-left">
+            <div class="dropdown">
+                <button class="dropdown-toggle filter-alertLevel">
+                    <span data-ng-if="!filter.alertLevel">Filter by Alert Level</span>
+                    <span data-ng-if="filter.alertLevel">By : {{filter.alertLevel}}</span>
+                    <span class="fa fa-angle-down"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-ng-repeat="item in alertLevels"
+                        data-ng-class="{ 'selected': item.value == currAlertLevel }">
+                        <a data-ng-click="choiceAlertLevel(item.value)"
+                           onclick="$('.filter-alertLevel').trigger('click');">
+                            {{item.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>-->
+
+        <div class="pull-right" data-ng-show="currEmployer || currAlertLevel">
+          <a class="close" data-ng-click="filterEmployerClear()"><i
+              class="icon icon-close"></i></a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <!-- Filter by Biomarker severity -->
+      <div class="filterBiomarker">
+        <div class="header">
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-xs-4">
+                <select name="filterNameBiomarker"
+                        class="form-control"
+                        data-ng-model="filterBio.namebiomarker"
+                        data-ng-options="item.value as item.name for item in biomarkers">
+                  <option value="">All</option>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <select name="filterValueBiomarker"
+                        class="form-control"
+                        data-ng-model="filterBio.compareBiomarker"
+                        data-ng-options="item.value as item.name for item in compareBiomarkers">
+                  <option value="">All</option>
+                </select>
+              </div>
+              <div class="col-xs-4">
+                <input class="form-control hr-input-filter"
+                       placeholder="value"
+                       data-ng-model="filterBio.valueBiomarker"/>
+
+              </div>
+            </div>
+            <div class="col-md-12 margin-top-10">
+              <div class="col-xs-6">
+                <select name="filterNameBiomarker"
+                        class="form-control"
+                        data-ng-model="filterBio.alertLevel"
+                        data-ng-options="item.value as item.name for item in alertLevels">
+                  <option value="">All Alert Level</option>
+                </select>
+              </div>
+              <div class="col-xs-2">
+                <button class="btn-greenheader-result btn"
+                        ng-click="filterBiomarker(filterBio)">Filter
+                </button>
+              </div>
+              <div class="col-xs-2">
+                <button class="btn-whiteheader-result btn"
+                        ng-click="clearFilterBiomarker()">Clear
+                </button>
+              </div>
+            </div>
+            <div class="col-md-12 margin-top-10">
+              <div class="col-xs-6">
+                <button class="btn-greenheader-result btn"
+                        ng-click="filterMetabolic()">All participants with metabolic syndrome
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+
+      <!-- List participant -->
+      <div class="clear-both table-double hr_participant"
+           data-if="!loading"
+           data-ng-class="{'full-control' : isFullControl() && tableParams.data.length > 0 && !loading}">
+        <div class="table-double-content">
+          <div class="table-responsive table-responsive-pagination">
+            <table ng-table="tableParams" show-filter="false" class="table">
+
+              <tr ng-repeat="item in tableParams.data" show-filter="true">
+                <td data-title="'Last Name'" sortable="'lastName'">
+                  {{item.lastName}}
+                </td>
+
+                <td data-title="'Client'" sortable="'clientName'">
+                  {{item.clientName}}
+                </td>
+
+                <td data-title="'Weight'" sortable="'healthResult.weight'">
+                  {{item.healthResult.weight | number}}
+                </td>
+
+                <td data-title="'Height'" sortable="'healthResult.height'">
+                  {{item.healthResult.height | number}}
+                </td>
+
+                <td data-title="'SmokerResponse'" sortable="'healthResult.smokerResponse'">
+                  {{item.healthResult.smokerResponse}}
+                </td>
+
+                <td data-title="'BMIValue'" sortable="'healthResult.bmiValue'">
+                  {{item.healthResult.bmiValue | number}}
+                </td>
+
+                <td data-title="'CalcBMI'" sortable="'healthResult.calcBmi'">
+                  {{item.healthResult.calcBmi | number}}
+                </td>
+
+                <td data-title="'BodyFat'" sortable="'healthResult.bodyFat'">
+                  {{item.healthResult.bodyFat | number}}
+                </td>
+
+                <td data-title="'Waist'" sortable="'healthResult.waist'">
+                  {{item.healthResult.waist | number}}
+                </td>
+
+                <td data-title="'Hip'" sortable="'healthResult.hip'">
+                  {{item.healthResult.hip | number}}
+                </td>
+
+                <td data-title="'BPDValue1'" sortable="'healthResult.bpdValue1'">
+                  {{item.healthResult.bpdValue1 | number}}
+                </td>
+
+                <td data-title="'BPSValue1'" sortable="'healthResult.bpsValue1'">
+                  {{item.healthResult.bpsValue1 | number}}
+                </td>
+
+                <td data-title="'BPDValue1'" sortable="'healthResult.bpdValue1'">
+                  {{item.healthResult.bpdValue1 | number}}
+                </td>
+
+                <td data-title="'BPSValue2'" sortable="'healthResult.bpdValue2'">
+                  {{item.healthResult.bpdValue2 | number}}
+                </td>
+
+                <td data-title="'HDL'" sortable="'healthResult.hdl'">
+                  {{item.healthResult.hdl | number}}
+                </td>
+
+                <td data-title="'LDL'" sortable="'healthResult.ldl'">
+                  {{item.healthResult.ldl | number}}
+                </td>
+
+                <td data-title="'TotCholesterol'" sortable="'healthResult.totChol'">
+                  {{item.healthResult.totChol | number}}
+                </td>
+
+                <td data-title="'SerumContine'" sortable="'healthResult.serumContine'">
+                  {{item.healthResult.serumContine | number}}
+                </td>
+
+                <td data-title="'A1C'" sortable="'healthResult.a1c'">
+                  {{item.healthResult.a1c | number}}
+                </td>
+
+                <td data-title="'Glucose'" sortable="'healthResult.glucose'">
+                  {{item.healthResult.glucose | number}}
+                </td>
+
+                <td data-title="'Fructosamine'" sortable="'healthResult.fructosamine'">
+                  {{item.healthResult.fructosamine | number}}
+                </td>
+
+                <td data-title="'BUN'" sortable="'healthResult.bun'">
+                  {{item.healthResult.bun | number}}
+                </td>
+
+                <td data-title="'Creatinine'" sortable="'healthResult.creatinine'">
+                  {{item.healthResult.creatinine | number}}
+                </td>
+
+                <td data-title="'Alkaline'" sortable="'healthResult.alkaline'">
+                  {{item.healthResult.alkaline | number}}
+                </td>
+
+                <td data-title="'Bilirubin'" sortable="'healthResult.bilirubin'">
+                  {{item.healthResult.bilirubin | number}}
+                </td>
+
+                <td data-title="'AST'" sortable="'healthResult.ast'">
+                  {{item.healthResult.ast | number}}
+                </td>
+
+                <td data-title="'ALT'" sortable="'healthResult.alt'">
+                  {{item.healthResult.alt | number}}
+                </td>
+
+                <td data-title="'GGT'" sortable="'healthResult.ggt'">
+                  {{item.healthResult.ggt | number}}
+                </td>
+
+                <td data-title="'Protein'" sortable="'healthResult.protein'">
+                  {{item.healthResult.protein | number}}
+                </td>
+
+                <td data-title="'Albumin'" sortable="'healthResult.albumin'">
+                  {{item.healthResult.albumin | number}}
+                </td>
+
+                <td data-title="'Globulin'" sortable="'healthResult.globulin'">
+                  {{item.healthResult.globulin | number}}
+                </td>
+
+                <td data-title="'ALB'" sortable="'healthResult.alb'">
+                  {{item.healthResult.alb | number}}
+                </td>
+
+                <td data-title="'Triglycerides'" sortable="'healthResult.triglycerides'">
+                  {{item.healthResult.triglycerides | number}}
+                </td>
+
+                <td data-title="'PSA'" sortable="'healthResult.psa'">
+                  {{item.healthResult.psa | number}}
+                </td>
+
+                <td data-title="'WhiteBlood'" sortable="'healthResult.whiteBlood'">
+                  {{item.healthResult.whiteBlood | number}}
+                </td>
+
+                <td data-title="'RedBlood'" sortable="'healthResult.redBlood'">
+                  {{item.healthResult.redBlood | number}}
+                </td>
+
+                <td data-title="'Hemoglobin'" sortable="'healthResult.hemoglobin'">
+                  {{item.healthResult.hemoglobin | number}}
+                </td>
+
+                <td data-title="'Hematocrit'" sortable="'healthResult.hematocrit'">
+                  {{item.healthResult.hematocrit | number}}
+                </td>
+
+                <td data-title="'MeanCorpVol'" sortable="'healthResult.meanCorpVol'">
+                  {{item.healthResult.meanCorpVol | number}}
+                </td>
+
+                <td data-title="'MeanCorpHem'" sortable="'healthResult.meanCorpHem'">
+                  {{item.healthResult.meanCorpHem | number}}
+                </td>
+
+                <td data-title="'MeanCorpHemCo'" sortable="'healthResult.meanCorpHemCo'">
+                  {{item.healthResult.meanCorpHemCo | number}}
+                </td>
+
+                <td data-title="'RedCellDistr'" sortable="'healthResult.redCellDistr'">
+                  {{item.healthResult.redCellDistr | number}}
+                </td>
+
+                <td data-title="'Platelets'" sortable="'healthResult.platelets'">
+                  {{item.healthResult.platelets | number}}
+                </td>
+
+                <td data-title="'GSP'" sortable="'healthResult.gsp'">
+                  {{item.healthResult.gsp | number}}
+                </td>
+
+                <td data-title="'T4'" sortable="'healthResult.t4'">
+                  {{item.healthResult.t4 | number}}
+                </td>
+
+                <td data-title="'HsCRP'" sortable="'healthResult.hscrp'">
+                  {{item.healthResult.hscrp | number}}
+                </td>
+
+                <td data-title="'NTproBNP'" sortable="'healthResult.nTproBNP'">
+                  {{item.healthResult.nTproBNP | number}}
+                </td>
+
+                <td data-title="'TSH'" sortable="'healthResult.tsh'">
+                  {{item.healthResult.tsh | number}}
+                </td>
+
+                <td data-title="'Homocysteine'" sortable="'healthResult.homocysteine'">
+                  {{item.healthResult.homocysteine | number}}
+                </td>
+
+                <td data-title="'Lipoprotein'" sortable="'healthResult.lipoprotein'">
+                  {{item.healthResult.lipoprotein | number}}
+                </td>
+
+              </tr>
+              <tr class="empty" data-ng-if="loading">
+                <td colspan="5" class="text-center">
+                  <div class="loading-indicator"></div>
+                </td>
+              </tr>
+              <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                <td colspan="5" class="text-center">
+                  <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+                  <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+                </td>
+              </tr>
+              <!--</tbody>-->
+            </table>
+          </div>
+        </div>
+        <div class="table-double-action"
+             data-ng-if="isFullControl() && tableParams.data.length > 0 && !loading">
+          <table class="table ng-table">
+            <thead>
+            <tr>
+              <th class="action">
+                <span class="button action-remove"
+                      title="{{ 'userManager.button.title.removeMultiple' | translate }}"
+                      data-ng-click="removeMultipleUsers()"
+                      data-ng-if="tableParams.data.length>0">
+                        <i class="icon"></i>
+                </span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in tableParams.data">
+              <td class="action">
+                <span class="button action-remove"
+                      title="{{ 'userManager.button.title.remove' | translate }}"
+                      data-ng-click="remove(item)">
+                        <i class="icon"></i>
+                </span>
+                <span class="button action-edit"
+                      title="{{ 'userManager.button.title.edit' | translate }}"
+                      data-ng-click="edit(item)">
+                    <i class="icon"></i>
+                </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

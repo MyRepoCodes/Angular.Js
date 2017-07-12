@@ -1,0 +1,53 @@
+<div class="panel panel-green panel-health">
+  <div class="panel-heading">
+    <h1 class="heading pull-left">Biomarkers</h1>
+    <h3 ng-if="isHealthStatusNeedsAttention" class="status pull-right">Health Status: <span class="text-alert">Needs Attention!</span></h3>
+    <div class="line-green"></div>
+  </div>
+  <div class="panel-body">
+    <div class="bmi_general">
+      <span class="text-green">HEIGHT:</span><b ng-bind="currentHealthResult.heightShow"></b><i>&nbsp; &nbsp;</i>
+      <span class="text-green">WEIGHT:</span><b ng-bind="currentHealthResult.weightShow"></b><i>&nbsp; &nbsp;</i>
+      <span class="text-green">WAIST SIZE:</span><b ng-bind="currentHealthResult.waistShow"></b><i>&nbsp; &nbsp;</i>
+      <span class="text-green">HIP SIZE:</span><b ng-bind="currentHealthResult.hipShow"></b><i>&nbsp; &nbsp;</i>
+      <span class="text-green">BODY FAT:</span><b ng-bind="currentHealthResult.bodyFatShow"></b>
+    </div>
+    <div class="intro">
+      <!--<p>Based on your screening results you have <span class="text-alert">passed {{ rewardInfo.totalPassed }} out of {{ rewardInfo.totalCount }}</span>
+          metabolic syndrome criteria which means you are at a lower risk for heart disease, diabetes and
+          stroke
+          than someone passing {{ rewardInfo.totalPassed -1 }} out of 5.
+          <a class="text-green" data-ng-click="openHealthCoachForm()">Contact a BeniComp health coach at no cost to you.</a>
+      </p>-->
+      <p ng-if="rewardInfo.totalPassed !== 5">
+        Based on your screening results you have passed <span class="text-alert">{{ rewardInfo.totalPassed }} out of {{ rewardInfo.totalCount }}</span>
+        metabolic syndrome criteria which means <span class="text-alert">you are at a higher risk for heart disease,
+        diabetes and stroke</span> than someone passing {{rewardInfo.totalPassed + 1}} out of {{ rewardInfo.totalCount }}.
+        <a class="text-green" data-ng-click="openHealthCoachForm()">Contact a BeniComp health coach at no cost to you.</a>
+      </p>
+      <p ng-if="rewardInfo.totalPassed === 5">
+        Based on your screening results you have
+        passed 5 out of 5 metabolic syndrome criteria which means you are at a lower risk for heart
+        disease, diabetes, and stroke than someone passing 4 out of 5
+      </p>
+    </div>
+    <div class="controls">
+      <div class="heading pull-left"><span class="pointer" data-ng-click="(expression!='alpha') ? expression='alpha' : expression='reverse'">Health Risks</span>
+      </div>
+      <div class="filter-control pull-right">
+        Filter your results:
+        <span data-ng-click="expression='all'" data-ng-class="{ 'active' : expression=='all' }">All</span>
+        <span class="separate">|</span>
+        <span data-ng-click="expression='in'" data-ng-class="{ 'active' : expression=='in' }">In Range</span>
+        <span class="separate">|</span>
+        <span data-ng-click="expression='out'" data-ng-class="{ 'active' : expression=='out' }">Out of Range</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="progress-items">
+      <div class="progress-control" data-ng-repeat="heath in healthList | filterHealthList : expression">
+        <progress-bar data="heath"/>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div class="panel-manager-tool">
+  <div class="breadcrumb">
+    <span data-ng-click="goStateList()">{{ 'document.breadcrumb' | translate }}</span>
+  </div>
+  <div class="filter" data-ng-if="isClientManager || isAdmin">
+    <div class="dropdown">
+      <button class="dropdown-toggle">{{ getFilterName() }} <i class="icon icon-filter"></i></button>
+      <ul class="dropdown-menu">
+        <li>
+          <a data-ng-click="goState('loggedIn.modules.imp-documents.client')">Client</a>
+        </li>
+        <li>
+          <a data-ng-click="goState('loggedIn.modules.imp-documents.healthcoach')">Health Coach</a>
+        </li>
+        <!--<li data-ng-hide="parentState == 'participant'"
+                data-ng-class="{ 'selected': parentState == 'participant' }">
+            <a data-ng-click="goState('loggedIn.modules.imp-documents.participant')">Participant</a>
+        </li>-->
+
+      </ul>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="form-content">
+  <div class="table-container documentList">
+    <div class="table-filter">
+      <div class="input-group">
+        <input class="form-control input-filter" data-ng-model="filter.keyword"/>
+        <span class="input-group-addon"><i class="icon icon-search"></i></span>
+      </div>
+    </div>
+
+    <div class="table-dropdown">
+      <div class="pull-left">
+        <div class="dropdown">
+          <button class="dropdown-toggle filter-participant-client" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient">
+            <span data-ng-if="!filter.clientName">Client</span>
+            <span data-ng-if="filter.clientName">{{filter.clientName}}</span>
+            <span class="fa fa-angle-down"></span>
+          </button>
+
+          <div class="toggle-select-client" ng-if="env.isOpenSelectClient">
+            <div class="input-autocomplete">
+              <input type="text"
+                     ng-model="paramsAutoComplete.employer"
+                     placeholder=""
+                     typeahead-editable="false"
+                     typeahead-wait-ms="500"
+                     typeahead-min-length="3"
+                     typeahead-on-select="choiceEmployer($item)"
+                     typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5"
+                     class="form-control">
+            </div>
+            <span class="close-btn">
+            <i class="icon icon-close" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient"></i>
+          </span>
+          </div>
+          <!--<ul class="dropdown-menu">-->
+            <!--<li data-ng-repeat="employer in employerList"-->
+                <!--data-ng-class="{ 'selected': employer == currEmployer }">-->
+              <!--<a data-ng-click="choiceEmployer(employer)"-->
+                 <!--onclick="$('.filter-participant-client').trigger('click');">{{employer.clientName }}</a>-->
+            <!--</li>-->
+          <!--</ul>-->
+
+
+        </div>
+
+      </div>
+
+      <div class="pull-right" data-ng-show="currEmployer">
+        <a class="close" data-ng-click="filterEmployerClear()"><i class="icon icon-close"></i></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="table-responsive table-responsive-pagination">
+      <table ng-table="tableParams" show-filter="false" class="table">
+        <tr ng-repeat="item in tableParams.data" class="cursor-pointer"
+            data-ng-click="goParticipantDetail(item)">
+          <td data-title="'Participant Name'" sortable="'name'">
+            {{ item.name }}
+          </td>
+          <td data-title="'Client'" sortable="'clientName'">
+            {{ item.clientName }}
+          </td>
+
+          <td data-title="'Documents'" sortable="'documents'">
+            {{ item.documents }}
+          </td>
+        </tr>
+        <tr data-ng-if="loading">
+          <td colspan="2" class="text-center">
+            <div class="loading-indicator"></div>
+          </td>
+        </tr>
+        <tr data-ng-if="tableParams.data.length == 0 && !loading">
+          <td colspan="2" class="text-center">
+            {{ 'document.empty_1' | translate }}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="content-invoice-popup">
+    <div class="invoice-header">
+        <div class="group-left">
+            <div class="logo-invoice">
+                <img src="assets/images/benicomp-green.png">
+            </div>
+            <p ng-bind-html="data.clientName"></p>
+            <p>Group: {{data.groupNumber}}</p>
+        </div>
+        <div class="group-right">
+            <div class="content-right">
+                <p>{{data.selectionDateString}}</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="invoice-content">
+        <div class="content-item">
+            <div class="title">SUBTOTAL</div>
+            <div class="value">{{data.divisionPayment|invoiceCurrency:2:'$'}}</div>
+        </div>
+        <div class="content-item">
+            <div class="title">{{data.fee}}% ADMINISTRATION FEE</div>
+            <div class="value">${{data.adminFee}}</div>
+        </div>
+        <div class="content-item-total">
+            <div class="note text-green">* Administration free {{data.fee}}% of eligible charges</div>
+            <div class="title">TOTAL TO BE PAID</div>
+            <div class="value value-total">{{data.total|invoiceCurrency:2:'$'}}</div>
+        </div>
+    </div>
+    <div class="invoice-list">
+        <h3>Request For Funding Report</h3>
+        <table>
+            <tr>
+                <th>CLAIM NUMBER</th>
+                <th>PARTICIPANT ID</th>
+                <th>DATE OF SERVICE</th>
+                <th>CHARGE</th>
+                <th class="text-align-right">PAY AMOUNT</th>
+            </tr>
+            <tr ng-repeat="(key, item) in dataReports">
+                <td ng-bind-html="item.claimNbr"></td>
+                <td ng-bind-html="item.participantId"></td>
+                <td ng-bind-html="item.dateOfService"></td>
+                <td>{{ item.charge|invoiceCurrency:2:'$' }}</td>
+                <td class="text-align-right">{{ item.payAmount|invoiceCurrency:2:'$'}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="content-item-total">
+        <div class="title">TOTAL</div>
+        <div class="value value-total">{{data.total|invoiceCurrency:2:'$'}}</div>
+    </div>
+</div>

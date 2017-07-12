@@ -1,0 +1,69 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title">Select User</h3>
+
+    <div class="table-container">
+        <div class="table-filter">
+            <div class="input-group">
+                <input class="form-control input-filter" data-ng-model="filter.q"/>
+                <span class="input-group-addon"><i class="icon icon-search"></i></span>
+            </div>
+        </div>
+        <div class="table-double">
+            <div class="table-double-content">
+                <div class="table-responsive table-responsive-pagination">
+                    <table ng-table="tableParams" show-filter="false" class="table">
+                        <thead>
+                        <tr>
+                            <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('lastName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('lastName', 'desc')
+                                      }"
+                                    ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+                                <div>Last Name</div>
+                            </th>
+                            <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('firstName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('firstName', 'desc')
+                                      }"
+                                    ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+                                <div>First Name</div>
+                            </th>
+                            <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('email', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('email', 'desc')
+                                      }"
+                                    ng-click="tableParams.sorting({'email' : tableParams.isSortBy('email', 'asc') ? 'desc' : 'asc'})">
+                                <div>Email</div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in tableParams.data" data-ng-click="choiceUser(item)">
+                            <td data-title="'Last Name'" sortable="'lastName'">
+                                {{item.lastName}}
+                            </td>
+                            <td data-title="'First Name'" sortable="'firstName'">
+                                {{item.firstName}}
+                            </td>
+                            <td data-title="'Email'" sortable="'email'">
+                                {{item.email}}
+                            </td>
+                        </tr>
+                        <tr class="empty" data-ng-if="loading">
+                            <td colspan="3" class="text-center">
+                                <div class="loading-indicator"></div>
+                            </td>
+                        </tr>
+                        <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                            <td colspan="3" class="text-center">
+                                {{ 'userManager.empty_1' | translate }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

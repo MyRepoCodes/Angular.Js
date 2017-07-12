@@ -1,0 +1,96 @@
+<div class="form-content">
+  <div class="panel panel-green">
+    <div class="panel-body" data-ng-show="step==1">
+      <form name="healthCoachForm" novalidate>
+        <div class="form-description">
+          <h2>Request a BeniComp Health Coach</h2>
+          <p>Healthy living has its rewards! Please fill out the form below to get started.</p>
+        </div>
+        <div class="row-item" data-ng-click="env.row=1" data-ng-class="{ 'highlighted' : env.row==1, 'has-error': !validReasonForRequest() && env.showValid }">
+          <label class="description">Reason for requesting a BeniComp health coach. </label>
+          <div class="content">
+            <div class="checkbox-line">
+              <input id="nutritionCoaching" name="nutritionCoaching" type="checkbox" data-ng-model="params.nutritionCoaching">
+              <label class="choice" for="nutritionCoaching">Nutrition coaching</label>
+            </div>
+            <div class="checkbox-line">
+              <input id="fitnessCoaching" name="fitnessCoaching" type="checkbox" data-ng-model="params.fitnessCoaching">
+              <label class="choice" for="fitnessCoaching">Fitness coaching</label>
+            </div>
+            <div class="checkbox-line">
+              <input id="healthResultsExplanation" name="healthResultsExplanation" type="checkbox" data-ng-model="params.healthResultsExplanation">
+              <label class="choice" for="healthResultsExplanation">Health results explanation</label>
+            </div>
+            <div class="checkbox-line">
+              <input id="healthAlertNotification" name="healthAlertNotification" type="checkbox" data-ng-model="params.healthAlertNotification">
+              <label class="choice" for="healthAlertNotification">Health alert notification</label>
+            </div>
+          </div>
+        </div>
+        <div class="row-item" data-ng-click="env.row=2" data-ng-class="{ 'highlighted' : env.row==2 }">
+          <label class="description">Preferred method(s) of contact: </label>
+          <div class="content">
+            <div class="checkbox-inline">
+              <input id="phone" name="phone" type="checkbox" data-ng-model="params.phone">
+              <label class="choice" for="phone">Phone</label>
+            </div>
+            <div class="checkbox-inline">
+              <input id="email" name="email" type="checkbox" data-ng-model="params.email">
+              <label class="choice" for="email">Email</label>
+            </div>
+            <div class="checkbox-inline">
+              <input id="beniCompPulsePortal" name="beniCompPulsePortal" type="checkbox" data-ng-model="params.beniCompPulsePortal">
+              <label class="choice" for="beniCompPulsePortal">BeniComp PULSE portal</label>
+            </div>
+          </div>
+        </div>
+        <div data-ng-if="params.phone">
+          <phone-input data-form="healthCoachForm" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="3" data-tabindex="2" required></phone-input>
+        </div>
+        <div class="row-item" data-ng-hide="!params.email" data-ng-click="env.row=4"
+             data-ng-class="{ 'highlighted' : env.row==4,  'has-error' : healthCoachForm.emailAddress.$invalid && (!healthCoachForm.emailAddress.$pristine || env.showValid) || (!validEmail() && env.showValid) }">
+          <label class="description">Email</label>
+          <div class="content">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="form-group"
+                     data-ng-class="{ 'has-error' : healthCoachForm.emailAddress.$invalid && (!healthCoachForm.emailAddress.$pristine || env.showValid) }">
+                  <input name="emailAddress" type="email"
+                         class="form-control text-default"
+                         data-ng-model="params.emailAddress"
+                         data-ng-pattern="patternRegexs.email"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item" data-ng-click="env.row=5" data-ng-class="{ 'highlighted' : env.row==5 }">
+          <label class="description">Additional Comments</label>
+          <div class="content">
+            <div class="form-group" data-ng-class="{ 'has-error' : healthCoachForm.comments.$invalid && (!healthCoachForm.comments.$pristine || env.showValid) }">
+                            <textarea id="comments" name="comments"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.comments"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-green" data-ng-click="submit(healthCoachForm.$valid)">SUBMIT</button>
+          <button class="btn btn-white" data-ng-click="cancel()">CANCEL</button>
+        </div>
+      </form>
+    </div>
+    <div class="panel-body" data-ng-show="step==2">
+      <!--<div class="congratulations">
+          <span>Congratulations! You've taken the next step to a healthier lifestyle. We are in the process of assigning you a BeniComp health coach.</span>
+      </div>-->
+
+      <div class="congratulations_success">
+        <span>Your health coach request has been submitted.</span>
+      </div>
+    </div>
+  </div>
+</div>

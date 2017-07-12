@@ -1,0 +1,83 @@
+<!--<ul data-ng-if="!isParticipantBeniCompSelect()"-->
+<!--data-ng-controller="SidebarParticipantController"-->
+<!--data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-participant-bca.tpl.html'"></ul>-->
+<!--<ul data-ng-if="isParticipantBeniCompSelect()"-->
+<!--data-ng-controller="SidebarParticipantController"-->
+<!--data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-participant-bcs.tpl.html'"></ul>-->
+
+
+<ul data-ng-controller="SidebarParticipantController">
+
+  <!-- BeniComp Advantage -->
+  <li ng-if="isParticipantHaveBeniCompAdvantage()" class="has-sub" data-ng-class="{'open' : isUseMobile}">
+    <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="benicomp-advantage-item">BeniComp Advantage</a>
+    <ul>
+
+      <li data-ng-if="isHaveHealthResult !== false" data-ng-class="{'active': checkState == 'dashboard' }">
+        <a data-ng-if="!isUseMobile" data-ng-click="goDashboard('bca')" class="dashboard-item">Dashboard</a>
+        <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.dashboard({'type': 'bca'})" class="dashboard-item">Dashboard</a>
+      </li>
+
+      <li data-ng-class="{'active': checkState == 'registration' }">
+        <a data-ng-if="!isUseMobile" data-ng-click="goRegistration(false,'bca')" class="registration-item">Registration</a>
+        <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.registration({'type': 'bca'})" class="registration-item">Registration</a>
+      </li>
+
+      <li data-ng-class="{'active': checkState == 'biomarkers' }">
+        <a data-ui-sref="loggedIn.modules.health-results.biomarkers" class="biomarkers-item">Health Screening Results</a>
+      </li>
+
+    </ul>
+  </li>
+
+
+  <!-- BeniComp Select -->
+  <li ng-if="isParticipantHaveBeniCompSelect()" class="has-sub" data-ng-class="{'open' : isUseMobile}">
+    <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="benicomp-select-item">BeniComp Select</a>
+    <ul>
+
+      <!--<li data-ng-class="{'active': checkState == 'dashboard' }">
+        <a data-ng-if="!isUseMobile" data-ng-click="goDashboard('bcs')" class="dashboard-item">Dashboard</a>
+        <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.dashboard({'type': 'bcs'})" class="dashboard-item">Dashboard</a>
+      </li>-->
+      <li data-ng-if="!hasRegistrationDisable" data-ng-class="{'active': checkState == 'registration' }">
+        <a data-ng-if="!isUseMobile" data-ng-click="goRegistration(false,'bcs')" class="registration-item">Registration</a>
+        <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.registration({'type': 'bcs'})" class="registration-item">Registration</a>
+      </li>
+
+      <li data-ng-class="{'active': checkState == 'bcs-par-claims' }">
+        <a data-ui-sref="loggedIn.modules.bcs-par-claims" class="new-claims-item">Claims</a>
+      </li>
+
+    </ul>
+  </li>
+
+
+  <!-- Forms -->
+  <li class="has-sub" data-ng-class="{ 'closeSubMenu': isUseMobile }">
+    <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="registration-item">
+      <span class="text-green icon-bss-plus-minus">+</span>Forms</a>
+    <ul style="display: none;">
+      <li data-ng-class="{ 'active': checkState == 'directDeposit' }"><a data-ui-sref="loggedIn.modules.directDeposit" class="registration-item">Direct Deposit</a></li>
+      <li data-ng-class="{ 'active': checkState == 'privacyAuthorizationForm' }"><a data-ui-sref="loggedIn.modules.privacyAuthorizationForm" class="registration-item">Privacy Authorization Form</a></li>
+      <!--<li data-ng-class="{ 'active': checkState == 'changeFormAll' }"><a data-ui-sref="loggedIn.modules.changeForm({type: 'Participant'})" class="registration-item">Change Form</a></li>-->
+    </ul>
+  </li>
+
+  <!-- Important Documents -->
+  <li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+    <a class="imp-documents-item" data-ng-if="!clientUrl" data-ui-sref="loggedIn.modules.imp-documents.list">
+      Important Documents  <span class="badge badge-danger"
+                                 tooltips
+                                 tooltip-lazy="true"
+                                 tooltip-side="right"
+                                 tooltip-class="tooltip-notif"
+                                 tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+    </a>
+    <a class="imp-documents-item" data-ng-if="clientUrl" data-ui-sref="loggedIn.modules.imp-documentsClientUrl.list({clientUrl:clientUrl})">
+      Important Documents <span class="badge badge-danger" data-ng-if="!!badgeNotif">{{ badgeNotif }}</span>
+    </a>
+  </li>
+
+</ul>
+

@@ -1,0 +1,823 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row }">
+  <label class="description">{{ controlLabel }}</label>
+  <div class="content">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="bodyMassIndex_{{ inputId }}" type="checkbox" id="bodyMassIndex_{{ inputId }}"
+                 data-ng-model="params.bodyMassIndex"
+                 data-ng-disabled="readonly || params.waistCircumference"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="bodyMassIndex_{{ inputId }}">Body Mass Index</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="bloodPressure_{{ inputId }}" type="checkbox" id="bloodPressure_{{ inputId }}"
+                 data-ng-model="params.bloodPressure"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="bloodPressure_{{ inputId }}">Blood Pressure</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="bloodSugar_{{ inputId }}" type="checkbox" id="bloodSugar_{{ inputId }}"
+                 data-ng-model="params.bloodSugar"
+                 data-ng-disabled="readonly || params.a1c"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="bloodSugar_{{ inputId }}">Blood Glucose</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="ldlCholesterol_{{ inputId }}" type="checkbox" id="ldlCholesterol_{{ inputId }}"
+                 data-ng-model="params.ldlCholesterol"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="ldlCholesterol_{{ inputId }}">LDL Cholesterol</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="nicotinUse_{{ inputId }}" type="checkbox" id="nicotinUse_{{ inputId }}"
+                 data-ng-model="params.nicotinUse"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="nicotinUse_{{ inputId }}">Nicotine Use</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="participation_{{ inputId }}" type="checkbox" id="participation_{{ inputId }}"
+                 data-ng-model="params.participation"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="participation_{{ inputId }}">Participation</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="healthCoaching_{{ inputId }}" type="checkbox" id="healthCoaching_{{ inputId }}"
+                 data-ng-model="params.healthCoaching"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="healthCoaching_{{ inputId }}">Health Coaching</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="healthRiskAssessment_{{ inputId }}" type="checkbox" id="healthRiskAssessment_{{ inputId }}"
+                 data-ng-model="params.healthRiskAssessment"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="healthRiskAssessment_{{ inputId }}">Health Risk Assessment</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="a1c_{{ inputId }}" type="checkbox" id="a1c_{{ inputId }}"
+                 data-ng-model="params.a1c"
+                 data-ng-disabled="readonly || params.bloodSugar"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="a1c_{{ inputId }}">A1C</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="checkbox-line">
+          <input name="waistCircumference_{{ inputId }}" type="checkbox" id="waistCircumference_{{ inputId }}"
+                 data-ng-model="params.waistCircumference"
+                 data-ng-disabled="readonly || params.bodyMassIndex"
+                 tabindex="{{ tabindex }}"/>
+          <label class="choice" for="waistCircumference_{{ inputId }}">Waist Circumference</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="client_incentives">
+  <!--Body Mass Index-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.bodyMassIndex">
+    <h3>BMI Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bmi1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bmi1' }">
+        <label class="description">BMI Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bmiSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bodyMassIndexReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bodyMassIndexReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bmi2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bmi2' }">
+        <label class="description">BMI Reward - Family </label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bmiFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bodyMassIndexReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bodyMassIndexReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bmi3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bmi3' }">
+        <label class="description">BMI Goal </label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="bmiGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.bodyMassIndexReward.goal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Blood Pressure-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.bloodPressure">
+    <h3>Blood Pressure Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bp1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bp1' }">
+        <label class="description">Blood Pressure Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bpSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodPressureReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bloodPressureReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bp2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bp2' }">
+        <label class="description">Blood Pressure Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bpFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodPressureReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bloodPressureReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bp3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bp3' }">
+        <label class="description">Blood Pressure Systolic Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="bpSystolicGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodPressureReward.systolicGoal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+        <label class="description">Blood Pressure Diastolic Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="bpDiastolicGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodPressureReward.diastolicGoal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Blood Sugar-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.bloodSugar">
+    <h3>Blood Sugar Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bs1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bs1' }">
+        <label class="description">Blood Sugar Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bsSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodSugarReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bloodSugarReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bs2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bs2' }">
+        <label class="description">Blood Sugar Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="bsFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodSugarReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.bloodSugarReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_bs3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_bs3' }">
+        <label class="description">Blood Sugar Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="bsGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.bloodSugarReward.goal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--LDL Cholesterol-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.ldlCholesterol">
+    <h3>LDL Cholesterol Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_lc1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_lc1' }">
+        <label class="description">LDL Cholesterol Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="lcSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.ldlCholesterolReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.ldlCholesterolReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_lc2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_lc2' }">
+        <label class="description">LDL Cholesterol Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="lcFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.ldlCholesterolReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.ldlCholesterolReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_lc3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_lc3' }">
+        <label class="description">LDL Cholesterol Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="lcGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.ldlCholesterolReward.goal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Nicotine Use-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.nicotinUse">
+    <h3>Nicotine Use Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_nu1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_nu1' }">
+        <label class="description">Nicotine Use Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="nuSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.nicotinUseReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.nicotinUseReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_nu2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_nu2' }">
+        <label class="description">Nicotine Use Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="nuFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.nicotinUseReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.nicotinUseReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_nu3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_nu3' }">
+        <label class="description">Nicotine Use Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="nuGoal" type="text" class="form-control"
+                     data-ng-model="ngModel.nicotinUseReward.goal"
+                     data-ng-disabled="true"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Participation-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.participation">
+    <h3>Participation Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_pp1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_pp1' }">
+        <label class="description">Participation Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="ppSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.participationReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.participationReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_pp2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_pp2' }">
+        <label class="description">Participation Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="ppFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.participationReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.participationReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_pp3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_pp3' }">
+        <label class="description">Participation Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="ppGoal" type="text" class="form-control"
+                     data-ng-model="ngModel.participationReward.goal"
+                     data-ng-disabled="true"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Health Coaching-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.healthCoaching">
+    <h3>Health Coaching Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hc1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hc1' }">
+        <label class="description">Health Coaching Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="hcSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.healthCoachingReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.healthCoachingReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hc2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hc2' }">
+        <label class="description">Health Coaching Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="hcFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.healthCoachingReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.healthCoachingReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hc3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hc3' }">
+        <label class="description">Health Coaching Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="hcGoal" type="text" class="form-control"
+                     data-ng-model="ngModel.healthCoachingReward.goal"
+                     data-ng-disabled="true"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Health Risk Assessment-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.healthRiskAssessment">
+    <h3>Health Risk Assessment Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hr1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hr1' }">
+        <label class="description">HRA Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="hrSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.healthRiskAssessmentReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.healthRiskAssessmentReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hr2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hr2' }">
+        <label class="description">HRA Reward - Family</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="hrFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.healthRiskAssessmentReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.healthRiskAssessmentReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_hr3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_hr3' }">
+        <label class="description">HRA Goal</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="hrGoal" type="text" class="form-control"
+                     data-ng-model="ngModel.healthRiskAssessmentReward.goal"
+                     data-ng-disabled="true"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--A1C-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.a1c">
+    <h3>A1C Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_a1c1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_a1c1' }">
+        <label class="description">A1C Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="wcSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.a1cReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.a1cReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_a1c2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_a1c2' }">
+        <label class="description">A1C Reward - Family </label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="wcFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.a1cReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.a1cReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_a1c3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_a1c3' }">
+        <label class="description">A1C Goal </label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="wcGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.a1cReward.goal"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Waist Circumference-->
+  <div class="row row-plan margin-top-10" data-ng-show="params.waistCircumference">
+    <h3>Waist Circumference Reward</h3>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_wc1'"
+           data-ng-class="{ 'highlighted': env.row==row+'_wc1' }">
+        <label class="description">Waist Circumference Reward - Single</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="wcSingleAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.waistCircumferenceReward.singleAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.waistCircumferenceReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_wc2'"
+           data-ng-class="{ 'highlighted': env.row==row+'_wc2' }">
+        <label class="description">Waist Circumference Reward - Family </label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-7">
+              <input name="wcFamilyAmount" type="number" class="form-control"
+                     data-ng-model="ngModel.waistCircumferenceReward.familyAmount"
+                     filtered-input="number"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+            <div class="form-group col-xs-5">
+              <select class="form-control"
+                      data-ng-model="ngModel.waistCircumferenceReward.typesTime"
+                      data-ng-options="item.value as item.label for item in typesTimeList"
+                      data-ng-disabled="readonly"
+                      tabindex="{{ tabindex }}">
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="row-item" data-ng-click="env.row=row+'_wc3'"
+           data-ng-class="{ 'highlighted': env.row==row+'_wc3' }">
+        <label class="description">Waist Circumference Goal - Male</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="wcGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.waistCircumferenceReward.goalMale"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+        <label class="description">Waist Circumference Goal - Female</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <input name="wcGoal" type="number" class="form-control"
+                     data-ng-model="ngModel.waistCircumferenceReward.goalFemale"
+                     data-ng-disabled="readonly"
+                     tabindex="{{ tabindex }}"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

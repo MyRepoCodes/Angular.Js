@@ -1,0 +1,44 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="userForm" novalidate autocomplete="off" class="edit-one-client">
+      <div class="form-description row">
+        <div class="col-md-4">
+          <h2>Detail a Client</h2>
+        </div>
+        <div class="col-md-8 row-item">
+          <label class="description">PULSE ID: <span class="text-green">{{ originDefaults.userInfo.prefixPulseId + "-" + originDefaults.userInfo.pulseId }}</span> </label>
+        </div>
+      </div>
+      <div class="header-tab">
+        <tabset class="tab-set">
+          <!-- Profile -->
+          <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+            <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/view/profile.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Advantage -->
+          <tab select="selectTab(tabsets.beniCompAdvantage.tabindex)" active="tabsets.beniCompAdvantage.active" disabled="tabsets.beniCompAdvantage.disabled" data-ng-if="!tabsets.beniCompAdvantage.disabled">
+            <tab-heading class="tab-beniCompAdvantage">{{ tabsets.beniCompAdvantage.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/view/benicomp-advantage.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Select -->
+          <tab select="selectTab(tabsets.beniCompSelect.tabindex)" active="tabsets.beniCompSelect.active" disabled="tabsets.beniCompSelect.disabled" data-ng-if="!tabsets.beniCompSelect.disabled">
+            <tab-heading class="tab-beniCompSelect">{{ tabsets.beniCompSelect.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/view/benicomp-select.tpl.html'"></div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+      <div class="content-footer">
+        <div class="buttons" data-ng-click="env.row=0">
+          <a class="btn btn-white" data-ng-click="cancel()" tabindex="1001">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

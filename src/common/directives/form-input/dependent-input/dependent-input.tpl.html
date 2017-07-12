@@ -1,0 +1,24 @@
+
+<div data-ng-repeat="item in dependentList track by $index">
+  <name-input data-form="form" data-ng-params="item" data-control-label="Dependent {{ $index+1 }} Name" data-env="env" readonly></name-input>
+  <div class="row-item">
+    <label class="description">Dependent's Pulse ID: <span class="text-green">{{ participantInfo|formatNumberId:item.numberId:"Child" }}</span></label>
+  </div>
+  <!--<div class="row-item" ng-if="scopeParent.isAdmin">-->
+    <!--<label class="description">Participant Key: <span class="text-green">{{ item.participantKey }}</span></label>-->
+  <!--</div>-->
+  <!--<div class="row-item" ng-if="scopeParent.isAdmin">-->
+    <!--<label class="description">Dependent Rec.Code: <span class="text-green">{{ item.dependentRecCode }}</span></label>-->
+  <!--</div>-->
+  <ssn-input data-form="form" data-ng-model="item.ssn" data-control-label="Dependent {{ $index+1 }} Social Security Number" data-env="env" readonly></ssn-input>
+  <date-input data-form="form" data-ng-model="item.dateOfBirth" data-control-label="Dependent {{ $index+1 }} Date of Birth" data-values="env" readonly></date-input>
+  <sex-input data-form="form" data-ng-model="item.gender" data-control-label="Dependent {{ $index+1 }} Sex" data-env="env" readonly></sex-input>
+  <relation-to-participant data-form="form" data-ng-model="item.relationToParticipant" data-control-label="Relation To Participant" data-env="env" readonly></relation-to-participant>
+</div>
+
+<div class="row-item">
+  <div class="content">
+    <a class="btn btn-green btn-small" ng-if="!readonly" data-ng-click="createOrUpdateDependent()">Manage Dependents</a>
+    <a class="btn btn-green btn-small" ng-if="readonly" data-ng-click="openConfirm()">Manage Dependents</a>
+  </div>
+</div>

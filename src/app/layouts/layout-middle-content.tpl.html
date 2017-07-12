@@ -1,0 +1,17 @@
+<div id="wrap" class="layout-middle-content">
+    <div ng-mousedown="mouseClick()" class="container" ng-class="{'mobile-hide':showMenuOnMobile,'mobile-slide':!showMenuOnMobile}">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-4 left-sidebar"
+                 data-ng-include="'modules/sidebar/sidebar.tpl.html'"
+                 data-ng-controller="SidebarController">
+                sidebar left
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-8 main-content">
+                <div data-ui-view="main-content">
+                    main content
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

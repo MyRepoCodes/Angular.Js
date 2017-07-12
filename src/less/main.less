@@ -1,0 +1,65 @@
+/**
+ * This is the main application stylesheet. It should include or import all
+ * stylesheets used throughout the application as this is the only stylesheet in
+ * the Grunt configuration that is automatically processed.
+ */
+
+
+/**
+ * First, we include the Twitter Bootstrap LESS files. Only the ones used in the
+ * project should be imported as the rest are just wasting space.
+ *
+ * Example: @import '../../vendor/bootstrap/less/bootstrap.less";
+ */
+
+// Core bootstrap
+//@import "../../vendor/bootstrap/less/bootstrap.less";
+
+// Font awesome
+@import "../../vendor/font-awesome/less/font-awesome.less";
+
+// Font glyphicons
+@icon-font-path: "../assets/fonts/";
+//** File name for all font files.
+@icon-font-name: "glyphicons-halflings-regular";
+@icon-font-svg-id: "glyphicons_halflingsregular";
+@import "../../vendor/bootstrap/less/glyphicons.less";
+
+// Plugins
+@import "../../vendor/bootstrap-datepicker/less/datepicker3.less";
+@import "../../vendor/ng-table/dist/ng-table.less";
+@import "plugins/fullcalendar.less";
+@import "plugins/timepicker.less";
+@import "plugins/g-places-autocomplete.less";
+
+// Theme forza
+@import "forza/styles.less";
+
+/**
+ * This is our main variables file. It in turn imports the `variables` file from
+ * Twitter Bootstrap. We must include it last so we can overwrite any variable
+ * definitions in our imported stylesheets.
+ */
+
+@import 'variables.less';
+@import 'mixins.less';
+
+/**
+ * Now that all app-wide styles have been applied, we can load the styles for
+ * all the submodules and components we are using.
+ *
+ * Example: @import '../app/index/index.less';
+ *
+ */
+
+/**
+ * Rest of view-related styles
+ */
+@import "icons.less";
+@import 'layouts.less';
+@import 'model.less';
+@import 'ng-table.less';
+@import 'style.less';
+@import 'invoice.less';
+@import 'responsive.less';
+@import 'common.less';

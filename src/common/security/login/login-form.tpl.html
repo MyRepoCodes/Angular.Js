@@ -1,0 +1,46 @@
+<div class="panel panel-green responsive-equal-height-grid" data-ng-controller="LoginController">
+    <div class="panel-heading">
+        <h4 class="text-center">Account Login</h4>
+    </div>
+    <div class="panel-body login">
+        <form name="loginForm" novalidate autocomplete="off">
+            <div class="form-group"
+                    data-ng-class="{ 'has-error' : loginForm.username.$invalid && (!loginForm.username.$pristine || showValid) }">
+                <input type="text" name="username" class="form-control" placeholder="Username"
+                        data-ng-model="user.username"
+                        tabindex="1"
+                        required/>
+            </div>
+            <div class="form-group text-right">
+                <a class="btn-link" data-ng-click="goForgotUsername()">Forgot Username</a>
+            </div>
+            <div class="form-group"
+                    data-ng-class="{ 'has-error' : loginForm.password.$invalid && (!loginForm.password.$pristine || showValid) }">
+                <input type="password" name="password" class="form-control" placeholder="Password"
+                        data-ng-model="user.password"
+                        tabindex="2"
+                        required/>
+            </div>
+            <div class="form-group text-right">
+                <a class="btn-link" data-ng-click="goForgotPassword()">Forgot Password</a>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-green btn-width-100" data-ng-click="login()" tabindex="3">LOGIN</button>
+            </div>
+            <div data-ng-if="sticky" data-ng-class="['sticky', 'alert', 'alert-'+sticky.type]" style="margin: 2px 0;">
+                {{ sticky.message }}
+                <button class="close" ng-click="removeSticky('login')">x</button>
+            </div>
+            <div class="alert alert-warning" data-ng-if="authReason">{{ authReason }}</div>
+            <div class="alert alert-danger" data-ng-if="authError">{{ authError }}</div>
+        </form>
+        <div class="form-group text-center">
+            <a class="btn-link text-underline" data-ng-click="goFindAccount()">Don't have an account? Click here.</a>
+        </div>
+        <div class="form-group text-center" data-ng-if="brand">
+            <div class="text-center">
+                <img class="logo-bank" data-ng-src="{{ brand }}"/>
+            </div>
+        </div>
+    </div>
+</div>

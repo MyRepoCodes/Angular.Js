@@ -1,0 +1,64 @@
+<div class="modal-body modal-body-default modal-body-contact" ng-if="!isLoading">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+
+  <div ng-if="type === 'contact'">
+    <h3 class="modal-title">Contact</h3>
+    <p>Name: <b>{{data.firstName}} {{data.lastName}}</b></p>
+    <p>Email: <b>{{data.email}}</b></p>
+    <p>Company: <b data-ng-bind="data.company"></b></p>
+    <p>Date of Birth: <b data-ng-bind="data.dateOfBirth | contactFormat"></b></p>
+    <p>Phone: <b data-ng-bind="data.telephone | phoneNumberFormat"></b></p>
+    <p>Who would you like to contact:
+      <b>
+        {{ (data.contactTo === 0) ? 'HealthCoach' : ( (data.contactTo === 1) ? 'Customer Service' : (data.contactTo === 2) ? 'Client Account Manager' : "")}}
+      </b>
+    </p>
+
+    <p data-ng-if="data.contactTo === 0">Reason for requesting:
+    <p data-ng-if="data.reasons.nutritionCoaching"><b>&nbsp;&nbsp;&nbsp; - Nutrition coaching</b></p>
+    <p data-ng-if="data.reasons.fitnessCoaching"><b>&nbsp;&nbsp;&nbsp; - Fitness coaching</b></p>
+    <p data-ng-if="data.reasons.healthResultsExplanation"><b>&nbsp;&nbsp;&nbsp; - Health results explanation</b></p>
+    </p>
+    <p>Contact preference: <b>{{data.contactType === 0 ? 'Phone' : (data.contactType === 1 ? 'Email' : (data.contactType === 2 ? 'Portal' : '')) }}</b></p>
+    <p>Content:</p>
+    <div class="content-contact" ng-bind-html="data.content"></div>
+
+    <br/>
+    <button class="btn btn-greenheader-result btn-reply" data-ng-click="isOpenFormContact = true">Reply</button>
+    <div class="popup-form" ng-if="isOpenFormContact">
+      <form name="replyForm" id="replyForm">
+        <b class="popup-title">Reply message subject:</b>
+        <span class="is-required">*</span>
+        <input name="replySubject" class="form-control" required type="text" ng-model="reply.subject" placeholder="Subject"/>
+        <b class="popup-title">Reply message content:</b>
+        <span class="is-required">*</span>
+        <textarea name="replyContent" class="form-control" required ng-model="reply.content" placeholder="Reply content" rows="5"/>
+        <p style="padding-top: 10px;">
+          <button class="btn btn-greenheader-result text-right" type="submit"
+                  ng-disabled="replyForm.$invalid"
+                  data-ng-click="sendEmail(data, reply)">Send your reply
+          </button>
+        </p>
+
+      </form>
+      <p ng-if="statusSendMail">{{statusSendMail}}</p>
+      <p ng-if="errors">Errors: {{errors}}</p>
+    </div>
+
+  </div>
+
+  <div ng-if="type === 'participantsurveys'">
+    <h3 class="modal-title">Survey</h3>
+    <p ng-if="data.surveyName">surveyName: {{data.surveyName}}</p>
+    <p>From: {{data.participant.firstName}} {{data.participant.lastName}}</p>
+    <p>Content:</p>
+    <div class="content-contact">
+      <p><i>Q: What wellness obstacles did you face before working with a coach from BeniComp Advantage?</i> <br/>A: <span ng-bind-html="data.line1"></span></p>
+      <p><i>Q: What lifestyle changes have you made since speaking with a coach? </i> <br/> A: <span ng-bind-html="data.line2"></span></p>
+      <p><i>Q: What were the two most influential factors in your success? </i> <br/> A: <span ng-bind-html="data.line3"></span></p>
+      <p><i>Q: How has your success in health and wellness affected other areas of your life?</i> <br/> A: <span ng-bind-html="data.line4"></span></p>
+      <p><i>Q: Is there anything else you would like to say?</i> <br/> A: <span ng-bind-html="data.line5"></span></p>
+    </div>
+  </div>
+
+</div>

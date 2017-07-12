@@ -1,0 +1,36 @@
+<enrollment-level-detail-input data-form="userForm" data-ng-model="params.coverageLevel" data-option="env.currentEnrollmentLevel" data-control-label="Enrollment Level" data-env="env" data-row="'coverageLevel'" data-tabindex="2"></enrollment-level-detail-input>
+<div class="row-item" data-ng-click="env.row='incentiveAssignId'" data-ng-class="{ 'highlighted': env.row=='incentiveAssignId' }">
+  <label class="description">Plan Benefit Year</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <select name="incentiveAssignId" class="form-control"
+                data-ng-model="params.incentiveAssignId"
+                data-ng-options="item.id as getLabelByIncentive(item) for item in incentiveList"
+                data-ng-change="selectIncentive(params.incentiveAssignId)"
+                tabindex="3">
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<plan-input data-form="userForm" data-ng-model="incentiveParams.plans" data-plan-option="incentiveParams.planOption" data-control-label="Benefit Plan Options" data-env="env" data-row="plans" data-tabindex="4" data-reload="true" readonly></plan-input>
+<div class="row-item" data-ng-click="env.row=12"
+     data-ng-class="{ 'highlighted': env.row==10 }"
+     data-ng-if="env.clientLocationList.length>0">
+  <label class="description">Client Location</label>
+  <div class="content">
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <select name="clientLocation" class="form-control"
+                  data-ng-model="params.clientLocation"
+                  tabindex="5"
+                  data-ng-options="env.clientLocationList.indexOf(clientLocation) as (clientLocation | clientLocationLabel) for clientLocation in env.clientLocationList">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<client-location-input data-ng-if="env.currentClientLocation" client-location="env.currentClientLocation"></client-location-input>-->

@@ -1,0 +1,17 @@
+<div class="row-item" data-ng-click="env.row=row" data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['phoneNumber_' + inputId].$invalid && (!form['phoneNumber_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group" data-ng-class="{
+            'col-xs-6' : (isShowFull === 'false'),
+            'col-xs-12' : (isShowFull === 'true'),
+            'has-error' : form['phoneNumber_' + inputId].$invalid && (!form['phoneNumber_' + inputId].$pristine || env.showValid)}">
+        <input name="phoneNumber_{{ inputId }}" type="text" class="form-control" data-ng-model="ngModel" data-ng-pattern="patternRegexs.phone"
+          input-mask="phone" data-ng-disabled="readonly" data-ng-required="required" tabindex="{{ tabindex }}" />
+        <label class="control-label">(###) ###-####</label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<form name="registerForm" novalidate>
+  <div class="form-description">
+    <h2>Participant Registration</h2>
+    <div class="summary">Healthy living has its rewards! Please fill out the form in its entirety.</div>
+  </div>
+  <name-input data-form="registerForm" data-control-label="Name" data-ng-params="params" data-env="env" row="1" data-tabindex="1" required></name-input>
+  <date-input data-form="registerForm" data-ng-model="params.dateOfBirth" data-values="env" data-control-label="Date of Birth" data-param-type="birthday" data-row="2" data-tabindex="4" required></date-input>
+  <div class="row-item"
+       data-ng-click="env.row=3"
+       data-ng-class="{ 'highlighted': env.row==3 }">
+    <label class="description">Sex<span class="is-required">*</span></label>
+    <div class="content">
+      <div class="radio-inline">
+        <input id="sexMale" type="radio" name="isMale"
+               data-ng-value="'M'"
+               data-ng-model="params.gender"
+               tabindex="7"
+               required>
+        <label class="choice" for="sexMale">Male</label>
+      </div>
+      <div class="radio-inline">
+        <input id="sexFemale" type="radio" name="isMale"
+               data-ng-value="'F'"
+               data-ng-model="params.gender"
+               tabindex="8">
+        <label class="choice" for="sexFemale">Female</label>
+      </div>
+    </div>
+  </div>
+  <ssn-input data-form="registerForm" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="4" data-tabindex="9" required></ssn-input>
+  <div class="line-green"></div>
+  <div class="form-description unborder">
+    <h2>Contact Information</h2>
+  </div>
+  <address-input data-form="registerForm" data-control-label="Address" data-ng-params="params" data-env="env" data-row="5" data-tabindex="10" required></address-input>
+  <phone-input data-form="registerForm" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="6" data-tabindex="16" required></phone-input>
+  <div class="row-item"
+       data-ng-click="env.row=7"
+       data-ng-class="{ 'highlighted': env.row==7,
+                        'has-error': registerForm.email.$invalid && (!registerForm.email.$pristine || env.showValid)
+                      }">
+    <label class="description">Email<span class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{'has-error' : registerForm.email.$invalid && (!registerForm.email.$pristine || env.showValid)}">
+          <input name="email" type="email" class="form-control"
+                 data-ng-model="params.email"
+                 data-ng-pattern="patternRegexs.email"
+                 tabindex="17"
+                 required/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item"
+       data-ng-click="env.row='confirm'"
+       data-ng-class="{ 'highlighted': env.row=='confirm',
+                        'has-error': registerForm.confirm.$invalid && (!registerForm.confirm.$pristine || env.showValid)
+                      }">
+    <label class="description">Confirm Email<span class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{'has-error': registerForm.confirm.$invalid && (!registerForm.confirm.$pristine || env.showValid)}">
+          <input name="confirm" type="email" class="form-control"
+                 data-ng-model="env.confirm"
+                 data-password-verify="params.email"
+                 tabindex="18"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="line-green"></div>
+  <div class="form-description unborder">
+    <h2>Plan Information</h2>
+  </div>
+  <div class="row-item" data-ng-click="env.row='participantType'" data-ng-class="{ 'highlighted': env.row=='participantType' }">
+    <label class="description">Participant Type</label>
+    <div class="content">
+      <div class="radio-inline">
+        <input id="participant_type_0" type="radio" name="participantType"
+               data-ng-value="0"
+               data-ng-model="params.participantType"
+               tabindex="19"/>
+        <label class="choice" for="participant_type_0">Employee</label>
+      </div>
+      <div class="radio-inline">
+        <input id="participant_type_1" type="radio" name="participantType"
+               data-ng-value="1"
+               data-ng-model="params.participantType"
+               tabindex="20"/>
+        <label class="choice" for="participant_type_1">Spouse</label>
+      </div>
+    </div>
+  </div>
+  <enrollment-level-detail-input data-form="registerForm" data-ng-model="params.coverageLevel" data-option="env.currentEnrollmentLevel" data-control-label="Enrollment Level" data-env="env" data-row="8" data-tabindex="21" disabled></enrollment-level-detail-input>
+  <div class="row-item" data-ng-click="env.row='clientLocationList'"
+       data-ng-class="{ 'highlighted': env.row=='clientLocationList' }"
+       data-ng-if="env.clientLocationList.length>0">
+    <label class="description">Client Location</label>
+    <div class="content">
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <select name="clientLocation" class="form-control"
+                    data-ng-model="params.clientLocation"
+                    tabindex="26"
+                    data-ng-options="env.clientLocationList.indexOf(clientLocation) as (clientLocation | clientLocationLabel) for clientLocation in env.clientLocationList">
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="line-green"></div>
+  <div class="form-summary">
+    <h2>Summary</h2>
+    <p>By checking this box you agree that the information you have supplied is True to the fullest extent of your knowledge.</p>
+    <p>Any person who knowingly and with intent to injure, defraud, or deceive any insurer files a statement of claim or an application containing any false, incomplete, or misleading information will
+      be subject to criminal penalties applicable to state laws.</p>
+  </div>
+  <div class="row-item" data-ng-class="{ 'has-error' : registerForm.agree.$invalid && (!registerForm.agree.$pristine || env.showValid) }">
+    <label class="description">Agree to the terms by checking the box below.<span class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="checkbox-line">
+        <input id="agree" type="checkbox" name="agree"
+               data-ng-model="env.agree"
+               tabindex="27"
+               required/>
+
+        <label class="choice" for="agree">I agree</label>
+      </div>
+    </div>
+  </div>
+  <div class="buttons" data-ng-click="row=0">
+    <button class="btn btn-green" data-ng-click="submit(registerForm.$valid)" tabindex="28">Submit</button>
+    <button data-ng-if="step === registrationStatus.editRegister" class="btn btn-white" data-ng-click="cancel()" tabindex="29">Cancel</button>
+  </div>
+  <div class="alert alert-danger" style="margin: 2px 0;" data-ng-show="error">{{ error }}</div>
+</form>

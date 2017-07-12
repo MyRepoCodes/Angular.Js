@@ -1,0 +1,172 @@
+<div class="dotted-line"></div>
+<div class="row-item">
+  <h3>Name Change</h3>
+</div>
+
+<!-- Who is the name change for -->
+<div class="row-item"
+     data-ng-click="env.row='nameChange'"
+     data-ng-class="{ 'highlighted': env.row=='nameChange',
+      'has-error': !whoIsTheNameChangeIsValid(params) && env.showValid}">
+  <label class="description">Who is the name change for?<span class="is-required"> *</span></label>
+  <div class="content">
+
+    <div class="checkbox-line">
+      <input name="nameChangeInsured" type="checkbox" id="nameChangeInsured"
+             data-ng-model="params.nameChange.insured"
+             tabindex="20"/>
+      <label class="choice" for="nameChangeInsured">Insured</label>
+    </div>
+
+    <div class="checkbox-line">
+      <input name="nameChangeDependent" type="checkbox" id="nameChangeDependent"
+             data-ng-model="params.nameChange.dependent"
+             tabindex="21"/>
+      <label class="choice" for="nameChangeDependent">Dependent</label>
+    </div>
+  </div>
+
+</div>
+
+<!-- nameChangeDependentsCount -->
+<div class="row-item" ng-if="params.nameChange.dependent" data-ng-click="env.row='nameChangeDependentsCount'"
+     data-ng-class="{ 'highlighted': env.row=='nameChangeDependentsCount' }">
+  <label class="description">Please choose a Dependent<span class="is-required"> *</span></label>
+  <!--<div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6"
+           data-ng-class="{ 'has-error': icForm.nameChangeDependentsCount.$invalid && (!icForm.nameChangeDependentsCount.$pristine || env.showValid) }">
+        <select name="nameChangeDependentsCount" class="form-control"
+                required="required"
+                data-ng-model="params.nameChangeDependentsCount"
+                data-ng-options="item.id as item.label for item in env.nameChangeDependentsCount"
+                tabindex="22">
+        </select>
+      </div>
+    </div>
+  </div>-->
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6"
+           data-ng-class="{ 'has-error': icForm.nameChangeDependentsCount.$invalid && (!icForm.nameChangeDependentsCount.$pristine || env.showValid) }">
+        <select name="nameChangeDependentsCount" class="form-control"
+                required="required"
+                data-ng-model="env.dependentSelect"
+                data-ng-options="item as (item | fullName) for item in env.dependentList"
+                data-ng-change="selectDependent(env.dependentSelect)"
+                tabindex="22">
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Insured -->
+<div ng-if="params.nameChange.insured">
+  <div class="dotted-line"></div>
+  <div class="row-item">
+    <h3>Insured</h3>
+  </div>
+
+
+  <name-input data-form="icForm" data-control-label="Insured New Name" data-ng-params="params.nameChangeInsuredName"
+              data-env="env" data-tabindex="23" required></name-input>
+
+  <div class="row-item"
+       data-ng-click="env.row='reasonForChange'"
+       data-ng-class="{ 'highlighted': env.row=='reasonForChange' }">
+    <label class="description">Reason for Change<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="radio-line">
+        <input name="marriage" type="radio" id="marriage"
+               data-ng-model="params.nameChangeInsuredReason"
+               value="marriage"
+               tabindex="24"/>
+        <label class="choice" for="marriage">Marriage</label>
+      </div>
+
+      <div class="radio-line">
+        <input name="divorce" type="radio" id="divorce"
+               data-ng-model="params.nameChangeInsuredReason"
+               value="divorce"
+               tabindex="25"/>
+        <label class="choice" for="divorce">Divorce</label>
+      </div>
+
+      <div class="radio-line">
+        <input name="other" type="radio" id="other"
+               data-ng-model="params.nameChangeInsuredReason"
+               value="other"
+               tabindex="26"/>
+        <label class="choice" for="other">Other</label>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row-item"
+       data-ng-if="params.nameChangeInsuredReason === 'other'"
+       data-ng-click="env.row='nameChangeInsuredReasonOther'"
+       data-ng-class="{ 'highlighted': env.row=='nameChangeInsuredReasonOther',
+                      'has-error': icForm.nameChangeInsuredReasonOther.$invalid && (!icForm.nameChangeInsuredReasonOther.$pristine || env.showValid)
+                    }">
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': icForm.nameChangeInsuredReasonOther.$invalid &&
+             (!icForm.nameChangeInsuredReasonOther.$pristine || env.showValid) }">
+          <input name="nameChangeInsuredReasonOther" type="text"
+                 required
+                 class="form-control"
+                 data-ng-model="params.nameChangeInsuredReasonOther"
+                 tabindex="27"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- dependent -->
+<div ng-if="params.nameChange.dependent">
+
+  <!-- Dependent list -->
+  <div ng-repeat="dependent in params.nameChangeDependentsList track by $index">
+
+    <div class="dotted-line"></div>
+    <div class="row-item">
+      <label class="fs-20">Dependent {{$index + 1}} <span class="remove-icon" title="Remove" ng-click="removeSelectDependent(dependent)">X</span></label>
+    </div>
+
+    <name-input data-form="icForm"
+                data-control-label="Dependent {{$index + 1}} Old Name"
+                data-ng-params="dependent.name_old"
+                data-env="env" data-tabindex="{{ $index + 28}}" required readonly></name-input>
+
+    <name-input data-form="icForm"
+                data-control-label="Dependent {{$index + 1}} New Name"
+                data-ng-params="dependent.name"
+                data-env="env" data-tabindex="{{ $index + 29}}" required></name-input>
+
+    <div class="row-item" data-ng-click="env.row='relationshipToInsured'+ $index"
+         data-ng-class="{ 'highlighted': env.row=='relationshipToInsured'+ $index}">
+      <label class="description">Relationship to Insured<span class="is-required"> *</span></label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-6"
+               data-ng-class="{ 'has-error': icForm['relationshipToInsured'+ $index].$invalid && (!icForm['relationshipToInsured'+ $index].$pristine || env.showValid) }">
+            <select name="relationshipToInsured{{$index}}" class="form-control"
+                    required="required"
+                    data-ng-model="dependent.relationshipToInsured"
+                    data-ng-options="item.id as item.label for item in env.relationshipToInsured"
+                    tabindex="{{ $index + 30 + 0.99}}">
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

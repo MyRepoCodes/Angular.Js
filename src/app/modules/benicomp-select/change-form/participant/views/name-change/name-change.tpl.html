@@ -1,0 +1,34 @@
+<div class="row-item">
+  <h3 ng-if="type === 1">Name Change</h3>
+  <small>Please be sure to update all applicable fields.</small>
+</div>
+
+
+<name-input data-form="form" data-required="params.isEditProfile" data-control-label="Name" data-ng-params="params.nameChangeInsuredName"
+  data-env="env" data-tabindex="1"></name-input>
+
+<div class="row-item" ng-if="!params.isEditProfile" data-ng-click="env.row='reasonForChange'" data-ng-class="{ 'highlighted': env.row=='reasonForChange' }">
+  <label class="description">Reason for Change</label>
+  <div class="content">
+    <div class="radio-line" ng-repeat="(key, item) in nameChangeConstants.reasonForChangeList">
+      <input name="{{key}}" id="name_change_{{key}}" type="radio" data-ng-model="params.nameChangeInsuredReason" value="{{key}}"
+        tabindex="2" />
+      <label class="choice" for="name_change_{{key}}">{{item}}</label>
+    </div>
+  </div>
+</div>
+
+<div class="row-item" data-ng-if="params.nameChangeInsuredReason === 'other'" data-ng-click="env.row='nameChangeInsuredReasonOther'"
+  data-ng-class="{ 'highlighted': env.row=='nameChangeInsuredReasonOther',
+                      'has-error': form.nameChangeInsuredReasonOther.$invalid && (!form.nameChangeInsuredReasonOther.$pristine || env.showValid)
+                    }">
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form.nameChangeInsuredReasonOther.$invalid &&
+             (!form.nameChangeInsuredReasonOther.$pristine || env.showValid) }">
+        <input name="nameChangeInsuredReasonOther" type="text" class="form-control" data-ng-model="params.nameChangeInsuredReasonOther"
+          tabindex="3" />
+      </div>
+    </div>
+  </div>
+</div>

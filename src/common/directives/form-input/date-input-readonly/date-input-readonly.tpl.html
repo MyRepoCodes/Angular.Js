@@ -1,0 +1,48 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row }">
+  <label class="description">{{ controlLabel }}</label>
+  <div class="content date-of-birth">
+    <div class="checkbox-inline">
+      <div class="form-group">
+        <input name="dateElementMonth_{{ inputId }}" type="text" id="dateElementMonth_{{ inputId }}" class="form-control month"
+               data-ng-model="dateElement.month"
+               data-ng-change="changeDateElementMonth(dateElement.month)"
+               data-ng-class="{ 'ng-dirty' : dirtyDateElementMonth }"
+               data-ng-pattern="patternRegexs.month"
+               input-mask="month"
+               tabindex="{{ tabindex }}" maxlength="2" size="1"
+               data-ng-disabled="true"/>
+        <label class="control-label" for="dateElementMonth_{{ inputId }}">MM</label>
+      </div>
+    </div>
+    <div class="checkbox-inline separate">/</div>
+    <div class="checkbox-inline">
+      <div class="form-group">
+        <input name="dateElementDate_{{ inputId }}" type="text" id="dateElementDate_{{ inputId }}" class="form-control date"
+               data-ng-model="dateElement.date"
+               data-ng-change="changeDateElementDate(dateElement.date)"
+               data-ng-class="{ 'ng-dirty' : dirtyDateElementDate }"
+               data-ng-pattern="patternRegexs.date"
+               input-mask="date"
+               tabindex="{{ tabindex }}" size="1"
+               data-ng-disabled="true"/>
+        <label class="control-label" for="dateElementDate_{{ inputId }}">DD</label>
+      </div>
+    </div>
+    <div class="checkbox-inline separate">/</div>
+    <div class="checkbox-inline">
+      <div class="form-group">
+        <input name="dateElementYear_{{ inputId }}" type="text" id="dateElementYear_{{ inputId }}" class="form-control"
+               data-ng-model="dateElement.year"
+               data-ng-change="changeDateElementYear(dateElement.year)"
+               data-ng-class="{ 'ng-dirty' : dirtyDateElementYear }"
+               data-ng-pattern="patternRegexs.year"
+               input-mask="year"
+               tabindex="{{ tabindex }}" maxlength="4" size="3"
+               data-ng-disabled="true"/>
+        <label class="control-label" for="dateElementYear_{{ inputId }}">YYYY</label>
+      </div>
+    </div>
+  </div>
+</div>

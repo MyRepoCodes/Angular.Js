@@ -1,0 +1,204 @@
+<div class="table-container">
+  <div class="table-filter">
+    <div class="input-group">
+      <input class="form-control input-filter" data-ng-model="filter.search"/>
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+  </div>
+  <div class="table-dropdown">
+
+    <!-- Client -->
+    <div class="pull-left padding-right-15">
+      <div class="dropdown">
+
+        <button class="dropdown-toggle filter-participant-client" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient">
+          <span data-ng-if="!labels.clientName">Client</span>
+          <span data-ng-if="labels.clientName">{{ labels.clientName}}</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <div class="toggle-select-client" ng-if="env.isOpenSelectClient">
+          <div class="input-autocomplete">
+            <input type="text"
+                   ng-model="paramsAutoComplete.employer"
+                   placeholder=""
+                   typeahead-editable="false"
+                   typeahead-wait-ms="500"
+                   typeahead-min-length="3"
+                   typeahead-on-select="choiceEmployer($item)"
+                   typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5"
+                   class="form-control">
+          </div>
+          <span class="close-btn">
+            <i class="icon icon-close" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- registered -->
+    <div class="pull-left padding-right-15">
+      <div class="dropdown">
+        <button class="dropdown-toggle filter-registered">
+          <span>{{ labels.registered }}</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-ng-repeat="registered in registeredList" data-ng-class="{ 'selected': registered == currRegistered }">
+            <a data-ng-click="choiceRegistered(registered)" onclick="$('.filter-registered').trigger('click');">{{ registered.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- healthResult -->
+    <div class="pull-left padding-right-15">
+      <div class="dropdown">
+        <button class="dropdown-toggle filter-health-result">
+          <span>{{ labels.healthResult }}</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-ng-repeat="healthResult in healthResultList" data-ng-class="{ 'selected': healthResult == currHealthResult }">
+            <a data-ng-click="choiceHealthResult(healthResult)" onclick="$('.filter-health-result').trigger('click');">{{ healthResult.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- coverageLevel -->
+    <div class="pull-left padding-right-15">
+      <div class="dropdown">
+        <button class="dropdown-toggle filter-coverage-level">
+          <span>{{ labels.coverageLevel }}</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-ng-repeat="coverageLevel in coverageLevelList" data-ng-class="{ 'selected': coverageLevel == currCoverageLevel }">
+            <a data-ng-click="choiceCoverageLevel(coverageLevel)" onclick="$('.filter-coverage-level').trigger('click');">{{ coverageLevel.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <!-- Benefit Year-->
+    <div data-ng-if="labels.clientName" class="pull-left padding-right-15">
+      <div class="dropdown">
+        <button class="dropdown-toggle filter-archive">
+          <span data-ng-if="filter.incentiveSelected">{{getLabelByIncentive(filter.incentiveSelected)}}</span>
+          <span data-ng-if="!filter.incentiveSelected">Benefit Year</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li ng-click="changeCurrentIncentive()">
+            <a onclick="$('.filter-archive').trigger('click');">All</a>
+          </li>
+          <li ng-repeat="item in currEmployer.incentives" ng-click="changeCurrentIncentive(item)">
+            <a onclick="$('.filter-archive').trigger('click');">{{getLabelByIncentive(item)}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- fileFormat -->
+    <div class="pull-left">
+      <div class="dropdown">
+        <button class="dropdown-toggle filter-file-format">
+          <span>{{ labels.fileFormat }}</span>
+          <span class="fa fa-angle-down"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li data-ng-repeat="fileFormat in fileFormatList" data-ng-class="{ 'selected': fileFormat == currFileFormat }">
+            <a data-ng-click="choiceFileFormat(fileFormat)" onclick="$('.filter-fileFormat').trigger('click');">{{ fileFormat.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ICON Close -->
+    <div class="pull-right" data-ng-show="currEmployer || currRegistered || currHealthResult || currCoverageLevel || currFileFormat">
+      <a class="close" data-ng-click="filterClear()"><i class="icon icon-close"></i></a>
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+  <div class="table-double" data-ng-class="{'full-control one': tableParams.data.length > 0 && !loading}">
+    <div class="table-double-content">
+      <div class="table-responsive table-responsive-pagination">
+        <table ng-table="tableParams" show-filter="false" class="table">
+          <thead>
+          <tr>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('lastName', 'asc'), 'sort-desc': tableParams.isSortBy('lastName', 'desc') }"
+                ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+              <div>Last Name</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('firstName', 'asc'), 'sort-desc': tableParams.isSortBy('firstName', 'desc') }"
+                ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+              <div>First Name</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('clientName', 'asc'), 'sort-desc': tableParams.isSortBy('clientName', 'desc') }"
+                ng-click="tableParams.sorting({'clientName' : tableParams.isSortBy('clientName', 'asc') ? 'desc' : 'asc'})">
+              <div>Client</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('username', 'asc'), 'sort-desc': tableParams.isSortBy('username', 'desc') }"
+                ng-click="tableParams.sorting({'username' : tableParams.isSortBy('username', 'asc') ? 'desc' : 'asc'})">
+              <div>Username</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('email', 'asc'), 'sort-desc': tableParams.isSortBy('email', 'desc') }"
+                ng-click="tableParams.sorting({'email' : tableParams.isSortBy('email', 'asc') ? 'desc' : 'asc'})">
+              <div>Email</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in tableParams.data">
+            <td data-title="'Last Name'" sortable="'lastName'">{{ item.lastName }}</td>
+            <td data-title="'First Name'" sortable="'firstName'">{{ item.firstName }}</td>
+            <td data-title="'Client'" sortable="'clientName'">{{ item.clientName }}</td>
+            <td data-title="'Username'" sortable="'userName'">{{ item.userName }}</td>
+            <td data-title="'Email'" sortable="'email'">{{ item.email }}</td>
+          </tr>
+          <tr class="empty" data-ng-if="loading">
+            <td colspan="5" class="text-center">
+              <div class="loading-indicator"></div>
+            </td>
+          </tr>
+          <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+            <td colspan="5" class="text-center">
+              <span ng-if="filter.search">{{ 'userManager.empty_1' | translate }}</span>
+              <span ng-if="!filter.search">{{ 'userManager.empty_2' | translate }}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="table-double-action" data-ng-if="tableParams.data.length > 0 && !loading">
+      <table class="table ng-table">
+        <thead>
+        <tr>
+          <th class="action">
+            <span class="button action-download"
+                  title="{{ 'userManager.button.title.download' | translate }}"
+                  data-ng-click="downloadUsers()"
+                  data-ng-if="tableParams.data.length>0">
+                    <i class="icon"></i>
+            </span>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in tableParams.data">
+          <td class="action">
+             <span class="button action-download"
+                   title="{{ 'userManager.button.title.download' | translate }}"
+                   data-ng-click="downloadUser(item)">
+                <i class="icon"></i>
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

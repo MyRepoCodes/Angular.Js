@@ -1,0 +1,10 @@
+<div class="panel panel-green">
+  <div class="panel-heading">
+    <h4 class="text-center">Health Screening</h4>
+  </div>
+  <div class="panel-body">
+    <ui-g-calendar-client data-ng-if="isEmployer"></ui-g-calendar-client>
+    <ui-g-calendar-participant data-ng-if="isParticipant || isClientManager || isHealthCoachManager"></ui-g-calendar-participant>
+    <br>
+  </div>
+</div>

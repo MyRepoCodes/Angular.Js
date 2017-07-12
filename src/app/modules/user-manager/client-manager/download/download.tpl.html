@@ -1,0 +1,81 @@
+<div class="table-container">
+  <div class="table-filter">
+    <div class="input-group">
+      <input class="form-control input-filter" data-ng-model="filter.search"/>
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-double" data-ng-class="{'full-control one': tableParams.data.length > 0 && !loading}">
+        <div class="table-double-content">
+          <div class="table-responsive table-responsive-pagination">
+            <table ng-table="tableParams" show-filter="false" class="table">
+              <thead>
+              <tr>
+                <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('lastName', 'asc'), 'sort-desc': tableParams.isSortBy('lastName', 'desc') }"
+                    ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+                  <div>Last Name</div>
+                </th>
+                <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('firstName', 'asc'), 'sort-desc': tableParams.isSortBy('firstName', 'desc') }"
+                    ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+                  <div>First Name</div>
+                </th>
+                <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('email', 'asc'), 'sort-desc': tableParams.isSortBy('email', 'desc') }"
+                    ng-click="tableParams.sorting({'email' : tableParams.isSortBy('email', 'asc') ? 'desc' : 'asc'})">
+                  <div>Email</div>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="item in tableParams.data">
+                <td data-title="'Last Name'" sortable="'lastName'">{{ item.lastName }}</td>
+                <td data-title="'First Name'" sortable="'firstName'">{{ item.firstName }}</td>
+                <td data-title="'Email'" sortable="'email'">{{ item.email }}</td>
+              </tr>
+              <tr class="empty" data-ng-if="loading">
+                <td colspan="3" class="text-center">
+                  <div class="loading-indicator"></div>
+                </td>
+              </tr>
+              <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                <td colspan="3" class="text-center">
+                  <span ng-if="filter.search">{{ 'userManager.empty_1' | translate }}</span>
+                  <span ng-if="!filter.search">{{ 'userManager.empty_2' | translate }}</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="table-double-action" data-ng-if="tableParams.data.length > 0 && !loading">
+          <table class="table ng-table">
+            <thead>
+            <tr>
+              <th class="action">
+                <span class="button action-download"
+                      title="{{ 'userManager.button.title.download' | translate }}"
+                      data-ng-click="downloadUsers()"
+                      data-ng-if="tableParams.data.length>0">
+                        <i class="icon"></i>
+                </span>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in tableParams.data">
+              <td class="action">
+               <span class="button action-download"
+                     title="{{ 'userManager.button.title.download' | translate }}"
+                     data-ng-click="downloadUser(item)">
+                  <i class="icon"></i>
+              </span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

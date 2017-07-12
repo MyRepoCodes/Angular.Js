@@ -1,0 +1,34 @@
+<name-input data-form="form"
+            data-control-label="Dependent {{ elementIndex }} Name"
+            data-ng-params="params"
+            data-env="env"
+            data-row="{{ prefix+'1' }}"
+            data-tabindex="{{ tabindex }}"></name-input>
+<date-input data-control-label="Dependent {{ elementIndex }} Date of Birth"
+            data-form="form"
+            data-ng-model="params.dateOfBirth"
+            data-values="env"
+            data-param-type="birthday"
+            data-row="{{ prefix+'2' }}"
+            data-tabindex="{{ tabindex }}"></date-input>
+<div class="row-item"
+     data-ng-click="env.row=prefix+'3'"
+     data-ng-class="{ 'highlighted': env.row==prefix+'3' }">
+  <label class="description">Dependent {{ elementIndex }} Sex </label>
+  <div class="content">
+    <div class="radio-inline">
+      <input id="{{ prefix }}Male" type="radio" name="{{ prefix }}isMale"
+             data-ng-value="true"
+             data-ng-model="params.gender"
+             tabindex="{{ tabindex }}"/>
+      <label class="choice" for="{{ prefix }}Male">Male</label>
+    </div>
+    <div class="radio-inline">
+      <input id="{{ prefix }}Female" type="radio" name="{{ prefix }}isMale"
+             data-ng-value="false"
+             data-ng-model="params.gender"
+             tabindex="{{ tabindex }}"/>
+      <label class="choice" for="{{ prefix }}Female">Female</label>
+    </div>
+  </div>
+</div>

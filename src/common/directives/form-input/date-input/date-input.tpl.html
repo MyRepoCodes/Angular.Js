@@ -1,0 +1,48 @@
+<div class="row-item" data-ng-click="env.row=row" data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['dateElementMonth_' + inputId].$invalid && (!form['dateElementMonth_' + inputId].$pristine || env.showValid) ||
+                                   form['dateElementDate_' + inputId].$invalid && (!form['dateElementDate_' + inputId].$pristine || env.showValid) ||
+                                   form['dateElementYear_' + inputId].$invalid && (!form['dateElementYear_' + inputId].$pristine || env.showValid) ||
+                                   form['dateElement_' + inputId].$invalid && (!form['dateElement_' + inputId].$pristine || env.showValid) ||
+                                   !!hasError ||
+                                    isError() && env.showValid
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content date-of-birth">
+    <div class="checkbox-inline">
+      <div class="form-group" data-ng-class="{ 'has-error' : form['dateElementMonth_' + inputId].$invalid && (!form['dateElementMonth_' + inputId].$pristine || env.showValid) }">
+        <input name="dateElementMonth_{{ inputId }}" type="text" id="dateElementMonth_{{ inputId }}" class="form-control month" data-ng-model="dateElement.month"
+          data-ng-change="changeDateElementMonth(dateElement.month)" data-ng-class="{ 'ng-dirty' : dirtyDateElementMonth }"
+          data-ng-pattern="patternRegexs.month" input-mask="month" data-ng-disabled="readonly" data-ng-required="required"
+          tabindex="{{ tabindex }}" maxlength="2" size="1" />
+        <label class="control-label" for="dateElementMonth_{{ inputId }}">MM</label>
+      </div>
+    </div>
+    <div class="checkbox-inline separate">/</div>
+    <div class="checkbox-inline">
+      <div class="form-group" data-ng-class="{ 'has-error' : form['dateElementDate_' + inputId].$invalid && (!form['dateElementDate_' + inputId].$pristine || env.showValid) }">
+        <input name="dateElementDate_{{ inputId }}" type="text" id="dateElementDate_{{ inputId }}" class="form-control date" data-ng-model="dateElement.date"
+          data-ng-change="changeDateElementDate(dateElement.date)" data-ng-class="{ 'ng-dirty' : dirtyDateElementDate }" data-ng-pattern="patternRegexs.date"
+          input-mask="date" data-ng-disabled="readonly" data-ng-required="required" tabindex="{{ tabindex }}" size="1" />
+        <label class="control-label" for="dateElementDate_{{ inputId }}">DD</label>
+      </div>
+    </div>
+    <div class="checkbox-inline separate">/</div>
+    <div class="checkbox-inline">
+      <div class="form-group" data-ng-class="{ 'has-error' : form['dateElementYear_' + inputId].$invalid && (!form['dateElementYear_' + inputId].$pristine || env.showValid) }">
+        <input name="dateElementYear_{{ inputId }}" type="text" id="dateElementYear_{{ inputId }}" class="form-control" data-ng-model="dateElement.year"
+          data-ng-change="changeDateElementYear(dateElement.year)" data-ng-class="{ 'ng-dirty' : dirtyDateElementYear }" data-ng-pattern="patternRegexs.year"
+          input-mask="year" data-ng-disabled="readonly" data-ng-required="required" tabindex="{{ tabindex }}" maxlength="4"
+          size="3" />
+        <label class="control-label" for="dateElementYear_{{ inputId }}">YYYY</label>
+      </div>
+    </div>
+    <div class="checkbox-inline" data-ng-hide="readonly">
+      <div class="datepicker-box">
+        <input name="dateElement_{{ inputId }}" type="text" class="form-control datepicker datepicker-hidden" data-ng-model="ngModel"
+          datepicker-popup="MM/dd/yyyy" datepicker-options="dateOptions" close-on-date-selection="false" is-open="dateElementOptions.opened"
+          close-text="Close" tabindex="{{ tabindex+10000 }}" />
+        <span ng-if="isShowCalendar && isShowCalendar !=='false' " class="glyphicon glyphicon-calendar" data-ng-click="dateElementOpen($event)"></span>
+      </div>
+    </div>
+  </div>
+</div>

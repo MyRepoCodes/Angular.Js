@@ -1,0 +1,13 @@
+<div class="event-tools">
+  <div class="alert alert-danger" data-ng-if="initUser && isClickAuthButton && !isAuthenticated && !checkAuth()">Google account of you is not match the system!<br>Please sign out and try again.</div>
+  <div data-ng-if="!checkAuth()">
+    <!--Button for the user to click to initiate auth sequence -->
+    <button class="btn btn-primary" data-ng-click="authorize()">Authorize</button>
+  </div>
+  <div data-ng-if="checkAuth()">
+    <button class="btn btn-primary" data-ng-click="createEvent()">Create Event</button>
+  </div>
+  <br><br>
+</div>
+<div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+

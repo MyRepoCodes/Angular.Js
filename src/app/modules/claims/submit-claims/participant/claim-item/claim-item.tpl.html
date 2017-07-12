@@ -1,0 +1,134 @@
+<div class="dotted-bottom"></div>
+<div class="row-item">
+  <h3>Claim Item {{ elementIndex }}</h3>
+  <div class="remove-claims" ng-if="elementIndex > 1">
+    <span title="Remove Claim Item {{ elementIndex }}" ng-click="removeClaimItem()" class="">
+      X
+    </span>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='claim_item_' + inputId + '.1'" data-ng-class="{ 'highlighted': env.row=='claim_item_' + inputId + '.1',
+                      'has-error': form['typeOfClaimItem_' + inputId].$invalid && (!form['typeOfClaimItem_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Type of Claim Item<span class="is-required">*</span></label>
+  <div class="content">
+
+    <div class="radio-inline">
+      <input name="typeOfClaimItem_{{inputId}}" type="radio" id="typeOfClaimItem_{{inputId}}.1" data-ng-model="ngModel.typeOfClaimItem"
+        data-ng-value="1" tabindex="{{ tabindex }}" />
+      <label for="typeOfClaimItem_{{inputId}}.1" class="choice">Dental</label>
+    </div>
+    <div class="radio-inline">
+      <input name="typeOfClaimItem_{{inputId}}" type="radio" id="typeOfClaimItem_{{inputId}}.2" data-ng-model="ngModel.typeOfClaimItem"
+        data-ng-value="2" tabindex="{{ tabindex }}" />
+      <label for="typeOfClaimItem_{{inputId}}.2" class="choice">Vision</label>
+    </div>
+    <div class="radio-inline">
+      <input name="typeOfClaimItem_{{inputId}}" type="radio" id="typeOfClaimItem_{{inputId}}.3" data-ng-model="ngModel.typeOfClaimItem"
+        data-ng-value="3" tabindex="{{ tabindex }}" />
+      <label for="typeOfClaimItem_{{inputId}}.3" class="choice">Pharmacy</label>
+    </div>
+    <div class="radio-inline">
+      <input name="typeOfClaimItem_{{inputId}}" type="radio" id="typeOfClaimItem_{{inputId}}.4" data-ng-model="ngModel.typeOfClaimItem"
+        data-ng-value="4" tabindex="{{ tabindex }}" />
+      <label for="typeOfClaimItem_{{inputId}}.4" class="choice">Medical</label>
+    </div>
+
+    <div ng-if="ngModel.typeOfClaimItem === 1 || ngModel.typeOfClaimItem === 2 || ngModel.typeOfClaimItem === 4">
+      <b>NOTE: Please submit your primary EOB and any other supporting documentation you may have to support your claim.</b>
+    </div>
+    <div ng-if="ngModel.typeOfClaimItem === 3">
+      <b>NOTE: Please submit a printout from the pharmacy and any other supporting documentation you may have to support your claim.</b>
+    </div>
+
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='claim_item_' + inputId + '.2'" data-ng-class="{ 'highlighted': env.row=='claim_item_' + inputId + '.2',
+                      'has-error': form['providerOfServices_' + inputId].$invalid && (!form['providerOfServices_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Provider of Services<span class="is-required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <input name="providerOfServices_{{inputId}}" type="text" class="form-control" data-ng-model="ngModel.providerOfServices"
+          tabindex="{{ tabindex }}" required/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<date-input data-form="form" 
+data-ng-model="ngModel.dateIncurred" 
+data-control-label="Date Incurred" 
+data-values="env"
+data-date-options="_env.dateOptions"
+  data-row="{{ 'claim_item_' + inputId + '.3' }}" data-tabindex="{{ tabindex }}"></date-input>
+
+
+<div class="row-item" data-ng-click="env.row='claim_item_' + inputId + '.4'" data-ng-class="{ 'highlighted': env.row=='claim_item_' + inputId + '.4',
+                      'has-error': form['amountOfExpenseDollars_' + inputId].$invalid && (!form['amountOfExpenseDollars_' + inputId].$pristine || env.showValid) ||
+                                   form['amountOfExpenseCents_' + inputId].$invalid && (!form['amountOfExpenseCents_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Amount of Expense<span class="is-required">*</span></label>
+  <div class="content amount">
+    <div class="row">
+      <div class="col-unit">$</div>
+      <div class="form-group col-xs-2 col-currency" data-ng-class="{ 'has-error': form['amountOfExpenseDollars_' + inputId].$invalid && (!form['amountOfExpenseDollars_' + inputId].$pristine || env.showValid) }">
+        <input name="amountOfExpenseDollars_{{inputId}}" type="text" class="form-control" data-ng-model="ngModel.amountOfExpenseDollars"
+          data-ng-pattern="patternRegexs.currency" filtered-input="number" tabindex="{{ tabindex }}" required/>
+        <label class="control-label">Dollars</label>
+      </div>
+      <!--<div class="col-dot">.</div>-->
+      <!--<div class="form-group col-xs-2 col-cents" data-ng-class="{ 'has-error': form['amountOfExpenseCents_' + inputId].$invalid && (!form['amountOfExpenseCents_' + inputId].$pristine || env.showValid) }">
+              <input name="amountOfExpenseCents_{{inputId}}" type="text" class="form-control" data-ng-model="ngModel.amountOfExpenseCents"
+                data-ng-pattern="patternRegexs.number" filtered-input="number" tabindex="{{ tabindex }}" maxlength="2" required/>
+              <label class="control-label">Cents</label>
+            </div>-->
+    </div>
+  </div>
+</div>
+
+
+<div class="row-item" data-ng-click="env.row='claim_item_' + inputId + '.5'" data-ng-class="{ 'highlighted': env.row=='claim_item_' + inputId + '.5',
+                      'has-error': form['amountEligibleDollars_' + inputId].$invalid && (!form['amountEligibleDollars_' + inputId].$pristine || env.showValid) ||
+                                   form['amountEligibleCents_' + inputId].$invalid && (!form['amountEligibleCents_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Amount Eligible for Reimbursement by BeniComp Select<span class="is-required">*</span></label>
+  <div class="content amount">
+    <div class="row">
+      <div class="col-unit">$</div>
+      <div class="form-group col-xs-2 col-currency" data-ng-class="{ 'has-error': form['amountEligibleDollars_' + inputId].$invalid && (!form['amountEligibleDollars_' + inputId].$pristine || env.showValid) }">
+        <input name="amountEligibleDollars_{{inputId}}" type="text" class="form-control" data-ng-model="ngModel.amountEligibleDollars"
+          data-ng-pattern="patternRegexs.currency" filtered-input="number" tabindex="{{ tabindex }}" required/>
+        <label class="control-label">Dollars</label>
+      </div>
+      <!--<div class="col-dot">.</div>-->
+      <!--<div class="form-group col-xs-2 col-cents" data-ng-class="{ 'has-error': form['amountEligibleCents_' + inputId].$invalid && (!form['amountEligibleCents_' + inputId].$pristine || env.showValid) }">
+                <input name="amountEligibleCents_{{inputId}}" type="text" class="form-control" data-ng-model="ngModel.amountEligibleCents"
+                  data-ng-pattern="patternRegexs.number" filtered-input="number" tabindex="{{ tabindex }}" maxlength="2" required/>
+                <label class="control-label">Cents</label>
+              </div>-->
+    </div>
+
+    <p ng-if="_env.isErrorAmount" class="text-red">
+      <small> Amount Eligible for Reimbursement can not exceed the amount of the Expense.</small>
+    </p>
+  </div>
+</div>
+
+<!--<div class="row-item"-->
+<!--data-ng-click="env.row='claim_item_' + inputId + '.6'"-->
+<!--data-ng-class="{ 'highlighted': env.row=='claim_item_' + inputId + '.6',-->
+<!--'has-error': form['tempFile_' + inputId].$invalid && (!form['tempFile_' + inputId].$pristine || env.showValid)-->
+<!--}">-->
+<!--<input name="tempFile_{{inputId}}" type="hidden" data-ng-model="temps.fileRequire" required/>-->
+<!--<label class="description">Upload receipts and bills including supporting documentation with each claim item.<span class="is-required">*</span></label>-->
+<!--<div class="content">-->
+<!--<div class="row">-->
+<!--<div class="form-group col-xs-8">-->
+<!--<input id="file_element_{{ inputId }}" name="element_{{ inputId }}" class="element file" type="file"/>-->
+<!--<div id="file_element_{{ inputId }}_queue" class="file_queue"></div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->

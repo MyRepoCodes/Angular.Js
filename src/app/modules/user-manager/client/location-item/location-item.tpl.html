@@ -1,0 +1,43 @@
+<div class="dotted-bottom">
+  <div class="row-item">
+    <h3>Location {{ elementIndex }}</h3>
+  </div>
+  <div class="row-item" data-ng-click="env.row=prefix+'1'"
+       data-ng-class="{ 'highlighted': env.row==prefix+'1',
+                        'has-error': form['locationName_' + inputId].$invalid && (!form['locationName_' + inputId].$pristine || env.showValid)
+                      }">
+    <label class="description">Location Name</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': form['locationName_' + inputId].$invalid && (!form['locationName_' + inputId].$pristine || env.showValid) }">
+          <input name="locationName_{{ inputId }}" type="text" class="form-control"
+                 data-ng-model="params.locationName"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <name-input data-form="form" data-ng-params="params" data-control-label="Client Contact" data-env="env" data-row="{{ prefix }}2" data-tabindex="{{ tabindex }}" readonly="{{ readonly }}"></name-input>
+  <phone-input data-form="form" data-ng-model="params.phoneNumber" data-control-label="Contact Phone" data-env="env" data-row="{{ prefix }}3" data-tabindex="{{ tabindex }}" readonly="{{ readonly }}"></phone-input>
+  <div class="row-item" data-ng-click="env.row=prefix+'4'"
+       data-ng-class="{ 'highlighted': env.row==prefix+'4',
+                        'has-error': form['email_' + inputId].$invalid && (!form['email_' + inputId].$pristine || env.showValid)
+                      }">
+    <label class="description">Contact Email</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': form['email_' + inputId].$invalid && (!form['email_' + inputId].$pristine || env.showValid) }">
+          <input name="email_{{ inputId }}" type="email" class="form-control"
+                 data-ng-model="params.email"
+                 data-ng-pattern="patternRegexs.email"
+                 data-ng-disabled="readonly"
+                 tabindex="{{ tabindex }}"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <address-input data-form="form" data-ng-params="params" data-control-label="Location {{ elementIndex }} Address" data-env="env" data-row="{{ 'location_item_' + inputId + '.4' }}" data-tabindex="{{ tabindex }}" readonly="{{ readonly }}"></address-input>
+</div>

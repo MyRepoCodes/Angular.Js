@@ -1,0 +1,32 @@
+<div class="panel-manager-tool">
+    <div class="breadcrumb">
+        <span>{{ 'document.breadcrumb' | translate }}</span>
+        <span>></span>
+        <span>{{ currentName }}</span>
+    </div>
+    <div class="filter">
+        <div class="dropdown">
+            <button class="dropdown-toggle filter-dropdown-toggle">{{ currentFilter }} <i class="icon icon-filter"></i></button>
+            <ul class="dropdown-menu">
+                <li data-ng-hide="currentFilterKey == 'myDocuments'"
+                        data-ng-class="{ 'selected': currentFilterKey == 'myDocuments' }"
+                        onclick="$('.filter-dropdown-toggle').trigger('click');">
+                    <a data-ng-click="choiceFilter('myDocuments')">{{ filterPageName }}</a>
+                </li>
+                <!--<li data-ng-hide="currentFilterKey == 'participantDocuments'"-->
+                        <!--data-ng-class="{ 'selected': currentFilterKey == 'participantDocuments' }"-->
+                        <!--onclick="$('.filter-dropdown-toggle').trigger('click');">-->
+                    <!--<a data-ng-click="choiceFilter('participantDocuments')">Participant Documents</a>-->
+                <!--</li>-->
+                <li data-ng-hide="currentFilterKey == 'participantDocuments'"
+                        data-ng-class="{ 'selected': currentFilterKey == 'participantDocuments' }">
+                    <a data-ng-click="goParticipantList()">Participant Documents</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-content">
+    <div class="table-container" data-ng-include="'modules/imp-documents/list/list_document.tpl.html'"></div>
+</div>

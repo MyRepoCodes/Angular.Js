@@ -1,0 +1,416 @@
+<div class="panel panel-green">
+    <div class="panel-heading">
+        <h4 class="text-center">Health Topics</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-content">
+            <div class="panel panel-green panel-faqs">
+                <div class="panel-body">
+                    <form name="faqsAddForm" novalidate>
+                        <div class="form-description">
+                            <h2>Add Health Topics</h2>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Question <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.question.$invalid && (!faqsAddForm.question.$pristine || showValid) }">
+                                        <input type="text" name="question" class="form-control"
+                                               data-ng-model="params.question"
+                                               tabindex="1"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Order <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.index.$invalid && (!faqsAddForm.index.$pristine || showValid) }">
+                                        <input type="number" min="0" name="index" class="form-control"
+                                               data-ng-model="params.index"
+                                               tabindex="1"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Answer <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-12"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.answer.$invalid && (!faqsAddForm.answer.$pristine || showValid) }">
+
+                                        <div ng-cloak ng-hide="isReady" class="highlight">
+                                            Initialising ...
+                                        </div>
+
+                                        <div ng-cloak ng-show="isReady">
+                                            <textarea ckeditor="editorOptions" name="editor"
+                                                      ng-model="params.answer"
+                                                      ng-change="save()"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <label class="description">Category <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.categoryId.$invalid && (!faqsAddForm.categoryId.$pristine || showValid) }">
+                                        <div class="input-group">
+                                            <span class="form-control"
+                                                  data-ng-class="{ 'ng-valid ng-dirty': params.categoryId }"
+                                                  data-ng-click="toggleDropdown($event)">{{ categoryName }}</span>
+                                            <input name="categoryId" type="hidden"
+                                                   data-ng-model="params.categoryId" required>
+
+                                            <div class="input-group-btn" dropdown
+                                                 is-open="status.isOpen">
+                                                <button type="button"
+                                                        class="btn btn-info dropdown-toggle"><i
+                                                        class="caret"></i></button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li data-ng-repeat="item in categoriesList">
+                                                        <a data-ng-click="choiceCategory(item); status.isOpen=false;">{{
+                                                            item.categoryName }}</a></li>
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <a data-ng-click="categoryManager(); status.isOpen=false;">Category
+                                                            Manager</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item" data-ng-if="hasCreatedFor">
+                            <label class="description">Created For</label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.createdFor.$invalid && (!faqsAddForm.createdFor.$pristine || showValid) }">
+                                        <select name="createdFor"
+                                                class="form-control"
+                                                data-ng-model="params.nameRole"
+                                                data-ng-options="item.userRole as item.name for item in createdForList">
+                                            <option value="">Public</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-green" data-ng-click="add(faqsAddForm)"
+                                    tabindex="4">Add
+                            </button>
+                        </div>
+                    </form>
+                    <div class="distance-below"></div>
+                    <form name="faqsEditForm" novalidate data-ng-show="params2.id">
+                        <div class="form-description">
+                            <h2>Edit Health Topic<a class="close" data-ng-click="disableEdit()">X</a></h2>
+                        </div>
+                        <div class="row-item">
+                            <label class="description">Question <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsEditForm.question.$invalid && (!faqsEditForm.question.$pristine || showValid2) }">
+                                        <input type="text" name="question" class="form-control"
+                                               data-ng-model="params2.question"
+                                               tabindex="1"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Order <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.index.$invalid && (!faqsAddForm.index.$pristine || showValid) }">
+                                        <input type="number" min="0" name="index" class="form-control"
+                                               data-ng-model="params2.index"
+                                               tabindex="1"
+                                               required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Answer <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-12"
+                                         data-ng-class="{ 'has-error' : faqsEditForm.answer.$invalid && (!faqsEditForm.answer.$pristine || showValid2) }">
+                                        <!--<textarea name="answer" class="form-control"
+                                                  data-ng-model="params2.answer"
+                                                  tabindex="2"
+                                                  required></textarea>-->
+
+                                        <div ng-cloak ng-hide="isReady" class="highlight">
+                                            Initialising ...
+                                        </div>
+
+                                        <div ng-cloak ng-show="isReady">
+                                            <textarea ckeditor="editorOptions" name="editor"
+                                                      ng-model="params2.answer"
+                                                      ng-change="save()"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item">
+                            <label class="description">Category <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsEditForm.categoryId.$invalid && (!faqsEditForm.categoryId.$pristine || showValid) }">
+                                        <div class="input-group">
+                                            <!--<span class="form-control"-->
+                                            <!--data-ng-class="{ 'ng-valid ng-dirty': params2.categoryId }"-->
+                                            <!--data-ng-click="toggleDropdown2($event)">{{ categoryName2 }}</span>-->
+                                            <span class="form-control"
+                                                  data-ng-click="toggleDropdown2($event)">{{ categoryName2 }}</span>
+                                            <input name="categoryId" type="hidden"
+                                                   data-ng-model="params2.categoryId" required>
+
+                                            <div class="input-group-btn" dropdown
+                                                 is-open="status.isOpen2">
+                                                <button type="button"
+                                                        class="btn btn-info dropdown-toggle"><i
+                                                        class="caret"></i></button>
+                                                <ul class="dropdown-menu pull-right">
+                                                    <li data-ng-repeat="item in categoriesList">
+                                                        <a data-ng-click="choiceCategory2(item); status.isOpen2=false;">{{
+                                                            item.categoryName }}</a>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li>
+                                                        <a data-ng-click="categoryManager(); status.isOpen2=false;">Category
+                                                            Manager</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-item" data-ng-if="hasCreatedFor">
+                            <label class="description">Created For</label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsEditForm.createdFor.$invalid && (!faqsEditForm.nameRole.$pristine || showValid) }">
+                                        <select name="createdFor"
+                                                class="form-control"
+                                                data-ng-model="params2.nameRole"
+                                                data-ng-options="item.userRole as item.name for item in createdForList">
+                                            <option value="">Public</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-green" data-ng-click="change(faqsEditForm)"
+                                    tabindex="3">Change
+                            </button>
+
+                            <button class="btn btn-white" data-ng-click="disableEdit()"
+                                    tabindex="3.1">Cancel
+                            </button>
+                        </div>
+                    </form>
+                    <div class="distance-below"></div>
+
+                    <br/>
+
+                    <div class="box-filter">
+                        <div class="row">
+
+                            <div class="form-group col-xs-6">
+                                <div class="description">Filter by category:</div>
+
+                                <select ng-options="item.id as item.categoryName for item in categoriesList"
+                                        ng-model="filterHealthTopic.categoryId"
+                                        class="form-control">
+                                    <option value=""> All Health Topics</option>
+                                </select>
+
+                            </div>
+
+                            <div data-ng-if="hasCreatedFor" class="form-group col-xs-6">
+                                <label class="description">Filter by Created For</label>
+
+                                <select name="createdFor"
+                                        class="form-control"
+                                        data-ng-model="filterHealthTopic.nameRole"
+                                        data-ng-options="item.userRole as item.name for item in createdForListForFilter">
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="box-filter">
+                        <div class="input-group">
+                            <input class="form-control input-filter"
+                                   data-ng-model="filterHealthTopic.question"
+                                   placeholder="Search"
+                                    />
+                            <span class="input-group-addon"><i class="icon icon-search"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="faqs-manager">
+                        <div class="form-description">
+                            <h2>List Health Topics</h2>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-double"
+                                 data-ng-class="{'full-control' : tableParams.data.length > 0 && !loading}">
+                                <div class="table-double-content">
+                                    <div class="table-responsive table-responsive-pagination">
+                                        <table ng-table="tableParams" show-filter="false"
+                                               class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    <div>Question</div>
+                                                </th>
+                                                <!--<th>
+                                                    <div>Answer</div>
+                                                </th>-->
+                                                <th class="sortable" ng-class="{
+                                                        'sort-asc': tableParams.isSortBy('category.categoryName', 'asc'),
+                                                        'sort-desc': tableParams.isSortBy('category.categoryName', 'desc')
+                                                        }"
+                                                    ng-click="tableParams.sorting({'category.categoryName' : tableParams.isSortBy('category.categoryName', 'asc') ? 'desc' : 'asc'})">
+                                                    <div>Category</div>
+                                                </th>
+                                                <th data-ng-if="hasCreatedFor"
+                                                    class="sortable" ng-class="{
+                                                        'sort-asc': tableParams.isSortBy('nameRole', 'asc'),
+                                                        'sort-desc': tableParams.isSortBy('nameRole', 'desc')
+                                                        }"
+                                                    ng-click="tableParams.sorting({'nameRole' : tableParams.isSortBy('nameRole', 'asc') ? 'desc' : 'asc'})">
+                                                    <div>Created For</div>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="item in tableParams.data"
+                                                class="cursor-pointer"
+                                                faq-popup="item">
+                                                <td data-title="'Question'" sortable="'question'">
+                                                    {{item.question}}
+                                                </td>
+                                                <!--<td data-title="'Answer'" sortable="'answer'" ng-bind="item.answer">-->
+
+                                                </td>
+                                                <td data-title="'Answer'" sortable="'Answer'">
+                                                    {{item.category.categoryName}}
+                                                </td>
+                                                <td data-title="'Created For'"
+                                                    sortable="'Created For'"
+                                                    data-ng-if="hasCreatedFor">
+                                                    {{item.nameRole}}
+                                                </td>
+                                            </tr>
+                                            <tr class="empty" data-ng-if="loading">
+                                                <td colspan="3" class="text-center"
+                                                    data-ng-if="!hasCreatedFor">
+                                                    <div class="loading-indicator"></div>
+                                                </td>
+                                                <td colspan="4" class="text-center"
+                                                    data-ng-if="hasCreatedFor">
+                                                    <div class="loading-indicator"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="empty"
+                                                data-ng-if="tableParams.data.length == 0 && !loading">
+                                                <td colspan="3" class="text-center"
+                                                    data-ng-if="!hasCreatedFor">
+                                                    {{ 'faqs.empty' | translate }}
+                                                </td>
+                                                <td colspan="4" class="text-center"
+                                                    data-ng-if="hasCreatedFor">
+                                                    {{ 'faqs.empty' | translate }}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-double-action"
+                                     data-ng-if="tableParams.data.length > 0 && !loading">
+                                    <table class="table ng-table">
+                                        <thead>
+                                        <tr>
+                                            <th class="action">
+                                                <span class="button"></span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="item in tableParams.data">
+                                            <td class="action">
+                                                <span class="button action-remove"
+                                                      title="{{ 'buttons.remove' | translate }}"
+                                                      data-ng-click="remove(item)">
+                                                    <i class="icon"></i>
+                                                </span>
+                                                <span class="button action-edit"
+                                                      title="{{ 'buttons.edit' | translate }}"
+                                                      data-ng-click="edit(item)">
+                                                    <i class="icon"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

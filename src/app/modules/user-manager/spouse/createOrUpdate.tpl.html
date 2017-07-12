@@ -1,0 +1,53 @@
+<div class="modal-body modal-body-default">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title" data-ng-bind="spouseInfo?'Edit Spouse':'Add Spouse'"></h3>
+  <div class="form-content">
+    <div class="panel panel-modal-default">
+      <div class="panel-body">
+        <form name="form" novalidate autocomplete="off">
+          <div data-ng-if="maritalStatus == 'M'">
+            <name-input data-form="form" data-ng-params="params" data-control-label="Spouse Name" data-env="env" data-tabindex="1" required></name-input>
+
+            <ssn-input data-form="form" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="2"
+              data-tabindex="4" required></ssn-input>
+            <date-input data-form="form" data-ng-model="params.dateOfBirth" data-control-label="Spouse DOB" data-param-type="birthday"
+              data-values="env" data-tabindex="5" required></date-input>
+            <sex-input data-form="form" data-ng-model="params.gender" data-control-label="Spouse Sex" data-env="env" data-tabindex="4"
+              required></sex-input>
+          </div>
+          <div data-ng-if="maritalStatus == 'P'">
+            <name-input data-form="form" data-ng-params="params" data-control-label="Domestic Partner Name" data-env="env" data-tabindex="1"
+              required></name-input>
+            <date-input data-form="form" data-ng-model="params.dateOfBirth" data-control-label="Domestic Partner DOB" data-param-type="birthday"
+              data-values="env" data-tabindex="9" required></date-input>
+            <sex-input data-form="form" data-ng-model="params.gender" data-control-label="Domestic Partner Sex" data-env="env" data-tabindex="10"
+              required></sex-input>
+
+
+
+            <phone-input data-form="form" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="11"
+              data-tabindex="11"></phone-input>
+            <div class="row-item" data-ng-click="env.row=6" data-ng-class="{ 'highlighted': env.row==6,
+                      'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist
+                    }">
+              <label class="description">Email</label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist }">
+                    <input name="email" type="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                      tabindex="12" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="buttons" style="text-align: center;" data-ng-click="env.row=0">
+            <button class="btn btn-green" data-ng-click="submit(form.$valid)">{{ spouseInfo?'Edit':'Create' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

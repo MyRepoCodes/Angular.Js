@@ -1,0 +1,15 @@
+<div class="progress-item">
+    <div class="progress">
+        <div class="bar" data-ng-style="styleBar"></div>
+        <div class="label-range" style="left: 0%;margin: 0;width: initial;display: inline-block;">
+            {{ start | noFractionCurrency }}
+        </div>
+        <div class="label-range" style="right: 0;left: initial;margin: 0;display: inline-block;width: initial;">
+            {{ max | noFractionCurrency }}
+        </div>
+        <div class="popover" data-ng-style="styleValue">
+            <div class="popover-content">{{ end | noFractionCurrency }}</div>
+            <div class="popover-indicator" data-ng-style="styleIndicator"></div>
+        </div>
+    </div>
+</div>

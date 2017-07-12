@@ -1,0 +1,197 @@
+<!-- For upload Individual Participant -->
+
+<!-- select Client -->
+<div class="row-item">
+    Please select Client for participant to upload:
+    <div class="input-autocomplete">
+        <input type="text" ng-model="env.currentClient" placeholder="Client Name (Minimum 3 characters)" typeahead-editable="false"
+            typeahead-wait-ms="500" typeahead-min-length="3" typeahead-on-select="changeCurrentClient($item, $model, $label)"
+            typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5" class="form-control">
+    </div>
+</div>
+<!-- select benefit year -->
+<div class="row-item">
+    Please select benefit year:
+    <select style="min-width: 100px" data-ng-model="env.currentIncentive" data-ng-options="item as getLabelByIncentive(item) for item in incentiveList"
+        data-ng-change="changeCurrentIncentive(env.currentIncentive, userForm)">
+              </select>
+</div>
+
+
+<!-- File import -->
+<div class="row-item">
+    <!-- For Participant -->
+    <span class="btn btn-file" ng-if="env.currentClient && env.currentIncentive">
+          <input type="file"
+                 id="fileInput"
+                 class="btn-import" name="fileInput"
+                 onchange="angular.element(this).scope().importFilesParticipant(this)"
+                 multiple="false"
+                 accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+          <span class="pulse-icon-basic pulse-icon-upload">
+                    <span>Upload Excel File</span>
+    </span>
+    </span>
+
+
+    <!-- File download -->
+    <a href="{{ templateUrlImportIndividual }}" target="_blank" class="btn btn-file download">
+
+               <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File</span>
+                  </span> 
+              </a>
+</div>
+
+<!-- result import -->
+<div class="result_uploadFile" ng-if="resultUploadFileClient.length !== 0">
+    <p><b>Results upload files: </b></p>
+
+    <p class="create" ng-if="resultUploadFileClient.countCreate && resultUploadFileClient.countCreate !== 0">
+        Created Success: {{resultUploadFileClient.countCreate}} records</p>
+
+    <p class="update" ng-if="resultUploadFileClient.countUpdate && resultUploadFileClient.countUpdate !== 0">
+        Updated Success: {{resultUploadFileClient.countUpdate}} records</p>
+
+    <p class="error" ng-if="resultUploadFileClient.errors && resultUploadFileClient.errors.length !== 0">
+        List Errors:
+    </p>
+
+    <div class="listError" ng-if="resultUploadFileClient.errors">
+        <div ng-repeat="item in resultUploadFileClient.errors track by $index">
+            {{$index + 1}}. {{item}}
+        </div>
+    </div>
+
+    <!-- conflicts -->
+    <p class="error" ng-if="resultUploadFileClient.conflicts && resultUploadFileClient.conflicts.length !== 0">
+        List Conflicts:
+    </p>
+
+    <div class="listError" ng-if="resultUploadFileClient.conflicts">
+        <div ng-repeat="item in resultUploadFileClient.conflicts track by $index">
+            {{$index + 1}}. {{item}}
+        </div>
+    </div>
+
+    <!-- countDuplicateSsn -->
+    <p class="error" ng-if="resultUploadFileClient.countDuplicateSsn">
+        Count Duplicate SSN : {{resultUploadFileClient.countDuplicateSsn}} records</p>
+
+    </p>
+
+    <!-- countErrorRequired -->
+    <p class="error" ng-if="resultUploadFileClient.errorRequired.length > 0">
+        Count Error Required :
+        <b>{{resultUploadFileClient.errorRequired.length}}</b><br/> Row error:
+        <div class="listError" ng-if="resultUploadFileClient.errorRequired">
+            <div ng-repeat="item in resultUploadFileClient.errorRequired track by $index">
+                {{$index + 1}}. {{item}}
+            </div>
+        </div>
+    </p>
+
+    <button class="btn btn-file download" ng-click="clickHome(env.currentClient)">Go to USER
+            MANAGER
+          </button>
+</div>
+
+
+
+
+
+
+<!-- For upload Multiple Participant -->
+<div>
+    <div class="dotted-bottom"></div>
+    <div class="row-item"><b>Add Multiple Participant to Multiple Clients</b></div>
+
+    <!-- select Client -->
+    <!--<div class="row-item">
+        Select Client for participant to upload:
+        <div class="input-autocomplete">
+            <input type="text" ng-model="env.selectMultiClient" placeholder="Client Name (Minimum 3 characters)" typeahead-editable="false"
+                typeahead-wait-ms="500" typeahead-min-length="3" typeahead-on-select="selectMultiClient($item, $model, $label)"
+                typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5" class="form-control">
+        </div>
+
+        <div ng-if="env.listClientName">
+            <p></p>
+            <p> List Client: {{env.listClientName }} </p>
+        </div>
+    </div>-->
+
+
+    <!-- File import -->
+    <div class="row-item">
+        <span class="btn btn-file">
+          <input type="file"
+                 id="fileInputMulti"
+                 class="btn-import " name="fileInputMulti"
+                 onchange="angular.element(this).scope().importFilesParticipantForClients(this) "
+                 multiple="false "
+                 accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel ">
+                  <span class="pulse-icon-basic pulse-icon-upload">
+                    <span>Upload Excel File</span>
+        </span>
+        </span>
+        <a href="{{ templateUrlImportMultiple }} " target="_blank " class="btn btn-file download ">
+
+              <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File</span>
+                  </span> 
+
+            </a>
+    </div>
+
+    <!-- result import -->
+    <div class="row-item result_uploadFile " ng-if="resultUploadFileParForMultClients.length !==0 ">
+        <p><b>Results upload files: </b></p>
+
+        <p class="create " ng-if="resultUploadFileParForMultClients.countCreate && resultUploadFileParForMultClients.countCreate !==0 ">
+            Created Success: {{resultUploadFile.countCreate}} records</p>
+
+        <p class="update " ng-if="resultUploadFileParForMultClients.countUpdate && resultUploadFileParForMultClients.countUpdate !==0 ">
+            Updated Success: {{resultUploadFile.countUpdate}} records</p>
+
+        <p class="error " ng-if="resultUploadFileParForMultClients.errors && resultUploadFileParForMultClients.errors.length !==0 ">
+            List Errors:
+        </p>
+
+        <div class="listError " ng-if="resultUploadFileParForMultClients.errors ">
+            <div ng-repeat="item in resultUploadFileParForMultClients.errors track by $index ">
+                {{$index + 1}}. {{item}}
+            </div>
+        </div>
+
+        <!-- conflicts -->
+        <p class="error " ng-if="resultUploadFileParForMultClients.conflicts && resultUploadFileParForMultClients.conflicts.length !==0 ">
+            List Conflicts:
+        </p>
+
+        <div class="listError " ng-if="resultUploadFileParForMultClients.conflicts ">
+            <div ng-repeat="item in resultUploadFileParForMultClients.conflicts track by $index ">
+                {{$index + 1}}. {{item}}
+            </div>
+        </div>
+
+        <!-- countDuplicateSsn -->
+        <p class="error " ng-if="resultUploadFileParForMultClients.countDuplicateSsn ">
+            Count Duplicate SSN : {{resultUploadFileParForMultClients.countDuplicateSsn}} records</p>
+        </p>
+
+        <!-- countErrorRequired -->
+        <p class="error " ng-if="resultUploadFileParForMultClients.errorRequired.length> 0"> Count Error Required :
+            <b>{{resultUploadFileParForMultClients.errorRequired.length}}</b><br/> Row error:
+            <div class="listError" ng-if="resultUploadFileParForMultClients.errorRequired">
+                <div ng-repeat="item in resultUploadFileParForMultClients.errorRequired track by $index">
+                    {{$index + 1}}. {{item}}
+                </div>
+            </div>
+        </p>
+
+        <button class="btn btn-file download" ui-sref="loggedIn.modules.user-manager">Go to USER
+            MANAGER
+          </button>
+    </div>
+</div>

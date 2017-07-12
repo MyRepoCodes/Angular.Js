@@ -1,0 +1,296 @@
+<form name="hraForm" novalidate>
+  <div class="form-description">
+    <h2>Health Risk Appraisal</h2>
+
+    <div class="summary">
+      This risk appraisal survey is for informational purposes only.
+      <b>Results will not be reported to your employer.</b>
+      The intent is to provide a snapshot of your general overall health.
+      You may use the results of this survey when consulting with your health care provider.
+      This survey does not yield scientific data, nor is it intended to provide specific medical advice.
+      You should speak with your health care provider before acting on the information in this survey. Questions? Call 866-222-0102
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=1"
+       data-ng-class="{ 'highlighted' : row==1, 'has-error' : row!=1 && !isValidRow1() && showValid }">
+    <label class="description">Have you been diagnosed with any of the following (Select all that apply)<span class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="checkbox-line">
+            <input id="diabetes" name="diabetes" type="checkbox" data-ng-model="params.diabetes">
+            <label class="choice" for="diabetes">Diabetes</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="heartDisease" name="heartDisease" type="checkbox" data-ng-model="params.heartDisease">
+            <label class="choice" for="heartDisease">Heart Disease</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="cOPD" name="cOPD" type="checkbox" data-ng-model="params.cOPD">
+            <label class="choice" for="cOPD">COPD/Emphysema</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="condition" name="condition" type="checkbox" data-ng-model="params.condition">
+            <label class="choice" for="condition">Musculoskeletal Injury/Condition</label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="checkbox-line">
+            <input id="hypertension" name="hypertension" type="checkbox" data-ng-model="params.hypertension">
+            <label class="choice" for="hypertension">Hypertension</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="heartAttack" name="heartAttack" type="checkbox" data-ng-model="params.heartAttack">
+            <label class="choice" for="heartAttack">Heart Attack</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="sleepDisorder" name="sleepDisorder" type="checkbox" data-ng-model="params.sleepDisorder">
+            <label class="choice" for="sleepDisorder">Sleep Disorder</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="iHNBDWAOTA" name="iHNBDWAOTA" type="checkbox" data-ng-model="params.iHNBDWAOTA">
+            <label class="choice" for="iHNBDWAOTA">I have not been diagnosed with any of the above</label>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="checkbox-line">
+            <input id="highCholesterol" name="highCholesterol" type="checkbox"
+                   data-ng-model="params.highCholesterol">
+            <label class="choice" for="highCholesterol">High Cholesterol</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="stroke" name="stroke" type="checkbox" data-ng-model="params.stroke">
+            <label class="choice" for="stroke">Stroke</label>
+          </div>
+          <div class="checkbox-line">
+            <input id="thyroidDisease" name="thyroidDisease" type="checkbox"
+                   data-ng-model="params.thyroidDisease">
+            <label class="choice" for="thyroidDisease">Thyroid Disease</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=2"
+       data-ng-class="{ 'highlighted' : row==2 }"
+       data-ng-show="params.diabetes">
+    <label class="description">How is your diabetes being treated? Select all that apply.</label>
+
+    <div class="content">
+      <div class="checkbox-line">
+        <input id="diabetesOralMedicine" name="diabetesOralMedicine" type="checkbox"
+               data-ng-model="params.diabetesOralMedicine">
+        <label class="choice" for="diabetesOralMedicine">Oral medicine (Metformin, Januvia, etc.)</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="diabetesInsulin" name="diabetesInsulin" type="checkbox" data-ng-model="params.diabetesInsulin">
+        <label class="choice" for="diabetesInsulin">Insulin</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="diabetesCBDO" name="diabetesCBDO" type="checkbox" data-ng-model="params.diabetesCBDO">
+        <label class="choice" for="diabetesCBDO">Controlled by diet only</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="diabetesINRDATCMD" name="diabetesINRDATCMD" type="checkbox"
+               data-ng-model="params.diabetesINRDATCMD">
+        <label class="choice" for="diabetesINRDATCMD">I’m not really doing anything to control my diabetes</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="diabetesOther" name="diabetesOther" type="checkbox" data-ng-model="params.diabetesOther">
+        <label class="choice" for="diabetesOther">Other</label>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=3"
+       data-ng-class="{ 'highlighted' : row==3 }"
+       data-ng-show="params.hypertension">
+    <label class="description">Were you prescribed medication to control your hypertension? </label>
+
+    <div class="content">
+      <div class="radio-inline">
+        <input id="hypertensionYes" name="prescribedMedicationForHypertension" type="radio"
+               data-ng-model="params.prescribedMedicationForHypertension" data-ng-value="1">
+        <label class="choice" for="hypertensionYes">Yes</label>
+      </div>
+      <div class="radio-inline">
+        <input id="hypertensionNo" name="prescribedMedicationForHypertension" type="radio"
+               data-ng-model="prescribedMedicationForHypertension" data-ng-value="0">
+        <label class="choice" for="hypertensionNo">No</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=4"
+       data-ng-class="{ 'highlighted' : row==4 }"
+       data-ng-show="params.highCholesterol">
+    <label class="description">What was your physician’s recommendation for high cholesterol? </label>
+
+    <div class="content">
+      <div class="checkbox-line">
+        <input id="highCholesterolMMD" name="highCholesterolMMD" type="checkbox"
+               data-ng-model="params.highCholesterolMMD">
+        <label class="choice" for="highCholesterolMMD">Modify my diet</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="highCholesterolExercise" name="highCholesterolExercise" type="checkbox"
+               data-ng-model="params.highCholesterolExercise">
+        <label class="choice" for="highCholesterolExercise">Exercise</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="highCholesterolTM" name="highCholesterolTM" type="checkbox"
+               data-ng-model="params.highCholesterolTM">
+        <label class="choice" for="highCholesterolTM">Take medication</label>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=5"
+       data-ng-class="{ 'highlighted' : row==5, 'has-error' : row!=5 && !isValidRow5() && showValid }">
+    <label class="description">How long has it been since your last physical exam/check up with primary health care provider?<span class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="radio-inline">
+        <input id="lastPhysicalExamOrCheckup_1" name="lastPhysicalExamOrCheckup_1" type="radio"
+               data-ng-model="params.lastPhysicalExamOrCheckup"
+               data-ng-value="0">
+        <label class="choice" for="lastPhysicalExamOrCheckup_1">Less than 1 year</label>
+      </div>
+      <div class="radio-inline">
+        <input id="lastPhysicalExamOrCheckup_2" name="lastPhysicalExamOrCheckup_2" type="radio"
+               data-ng-model="params.lastPhysicalExamOrCheckup"
+               data-ng-value="1">
+        <label class="choice" for="lastPhysicalExamOrCheckup_2">1-2 years</label>
+      </div>
+      <div class="radio-inline">
+        <input id="lastPhysicalExamOrCheckup_3" name="lastPhysicalExamOrCheckup_3" type="radio"
+               data-ng-model="params.lastPhysicalExamOrCheckup"
+               data-ng-value="2">
+        <label class="choice" for="lastPhysicalExamOrCheckup_3">2-3 years</label>
+      </div>
+      <div class="radio-inline">
+        <input id="lastPhysicalExamOrCheckup_4" name="lastPhysicalExamOrCheckup_4" type="radio"
+               data-ng-model="params.lastPhysicalExamOrCheckup"
+               data-ng-value="3">
+        <label class="choice" for="lastPhysicalExamOrCheckup_4">3-4 years</label>
+      </div>
+      <div class="radio-inline">
+        <input id="lastPhysicalExamOrCheckup_5" name="lastPhysicalExamOrCheckup_5" type="radio"
+               data-ng-model="params.lastPhysicalExamOrCheckup"
+               data-ng-value="4">
+        <label class="choice" for="lastPhysicalExamOrCheckup_5">5 or more years</label>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=6"
+       data-ng-class="{ 'highlighted' : row==6, 'has-error' : row!=6 && !isValidRow6() && showValid }">
+    <label class="description">Do you visit your healthcare provider routinely as directed for management of a diagnosed condition?
+      (i.e. Diabetes, Hypertension, Thyroid Disease, Chronic back pain, etc.)<span class="is-required">*</span>
+    </label>
+
+    <div class="content">
+      <div class="radio-inline">
+        <input id="doYouY" name="visitHealthcareProviderRoutinely" type="radio"
+               data-ng-model="params.visitHealthcareProviderRoutinely" data-ng-value="1">
+        <label class="choice" for="doYouY">Yes</label>
+      </div>
+      <div class="radio-inline">
+        <input id="doYouN" name="visitHealthcareProviderRoutinely" type="radio"
+               data-ng-model="params.visitHealthcareProviderRoutinely" data-ng-value="0">
+        <label class="choice" for="doYouN">No</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=7"
+       data-ng-class="{ 'highlighted' : row==7 }"
+       data-ng-show="params.visitHealthcareProviderRoutinely==0">
+    <label class="description">Where do you go when you need medical care?</label>
+
+    <div class="content">
+      <div class="checkbox-line">
+        <input id="doYouNPCP" name="doYouNPCP" type="checkbox" data-ng-model="params.doYouNPCP">
+        <label class="choice" for="doYouNPCP">Primary care physician</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="doYouNUCC" name="doYouNUCC" type="checkbox" data-ng-model="params.doYouNUCC">
+        <label class="choice" for="doYouNUCC">Urgent Care Clinic</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="doYouNER" name="doYouNER" type="checkbox" data-ng-model="params.doYouNER">
+        <label class="choice" for="doYouNER">Emergency Room</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="doYouNS" name="doYouNS" type="checkbox" data-ng-model="params.doYouNS">
+        <label class="choice" for="doYouNS">Specialist</label>
+      </div>
+      <div class="checkbox-line">
+        <input id="doYouNNOTA" name="doYouNNOTA" type="checkbox" data-ng-model="params.doYouNNOTA">
+        <label class="choice" for="doYouNNOTA">None of the above</label>
+      </div>
+
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="row=8"
+       data-ng-class="{ 'highlighted' : row==8, 'has-error' : row!=8 && !isValidRow8() && showValid }">
+    <label class="description">How would you describe your overall physical health? </label>
+
+    <div class="content">
+      <div class="radio-inline">
+        <input id="overallPhysicalHealth_1" name="overallPhysicalHealth" type="radio"
+               data-ng-model="params.overallPhysicalHealth"
+               data-ng-value="0">
+        <label class="choice" for="overallPhysicalHealth_1">Poor</label>
+      </div>
+      <div class="radio-inline">
+        <input id="overallPhysicalHealth_2" name="overallPhysicalHealth" type="radio"
+               data-ng-model="params.overallPhysicalHealth"
+               data-ng-value="1">
+        <label class="choice" for="overallPhysicalHealth_2">Fair</label>
+      </div>
+      <div class="radio-inline">
+        <input id="overallPhysicalHealth_3" name="overallPhysicalHealth" type="radio"
+               data-ng-model="params.overallPhysicalHealth"
+               data-ng-value="2">
+        <label class="choice" for="overallPhysicalHealth_3">Good</label>
+      </div>
+      <div class="radio-inline">
+        <input id="overallPhysicalHealth_4" name="overallPhysicalHealth" type="radio"
+               data-ng-model="params.overallPhysicalHealth"
+               data-ng-value="3">
+        <label class="choice" for="overallPhysicalHealth_4">Very Good</label>
+      </div>
+      <div class="radio-inline">
+        <input id="overallPhysicalHealth_5" name="overallPhysicalHealth" type="radio"
+               data-ng-model="params.overallPhysicalHealth"
+               data-ng-value="4">
+        <label class="choice" for="overallPhysicalHealth_5">Excellent</label>
+      </div>
+    </div>
+  </div>
+  <div class="line-green"></div>
+  <div class="form-summary">
+    <h3>Summary</h3>
+
+    <p>By checking the box below you agree that the information you have supplied is True to the fullest extent of your knowledge. </p>
+
+    <p>Any person who knowingly and with intent to injure, defraud, or deceive any insurer files a statement of claim or an application containing any false,
+      incomplete, or misleading information will be subject to criminal penalties applicable to state laws.</p>
+  </div>
+  <div class="row-item"
+       data-ng-class="{ 'has-error' : hraForm.agree.$invalid && (!hraForm.agree.$pristine || showValid) }">
+    <label class="description">Agree to the terms by checking the box below <span
+        class="is-required">*</span></label>
+
+    <div class="content">
+      <div class="checkbox-line">
+        <input id="agree" type="checkbox" name="agree" data-ng-model="info.agree" required/>
+        <label class="choice" for="agree">I agree</label>
+      </div>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="btn btn-green" data-ng-click="submit(hraForm.$valid)">Submit</button>
+    <button data-ng-if="step === registrationStatus.editHra" class="btn btn-white" data-ng-click="cancel()">Cancel</button>
+  </div>
+  <!--<div data-ng-include="'notifications.tpl.html'" data-ng-if="notifications.getCurrent().length"></div>-->
+</form>

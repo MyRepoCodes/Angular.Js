@@ -1,0 +1,29 @@
+<div class="popup-panel contact-manager-popup">
+    <div class="popup-heading">
+        <a class="close" data-ng-click="close()">X</a>
+        <b class="popup-title">From : {{data.firstName}} {{data.lastName}} ({{data.email}})</b><br/>
+    </div>
+
+    <div class="popup-content">
+        <b class="popup-title"> Content: </b><br/>
+        <span data-ng-bind-html="data.content"></span>
+    </div>
+
+    <button class="btn btn-greenheader-result btn-reply" data-ng-click="showForm()">Reply</button>
+
+    <div class="popup-form" data-ng-if="params.showing">
+        <form name="replyForm" id="replyForm">
+            <b class="popup-title">Reply message subject:</b>
+            <span class="is-required">*</span>
+            <input name="replySubject" class="form-control" required type="text" ng-model="reply.subject" placeholder="Subject"/>
+            <b class="popup-title">Reply message content:</b>
+            <span class="is-required">*</span>
+            <textarea name="replyContent" class="form-control" required ng-model="reply.content" placeholder="Reply content" rows="5"/>
+            <button class="btn btn-greenheader-result" type="submit" data-ng-click="submit(replyForm.$valid, reply.subject, reply.content)">Send your reply</button>
+            <!--  <span ng-show="replyForm.replySubject.$touched && replyForm.replySubject.$error.required">Reply subject is required.<br/></span>
+            <span ng-show="replyForm.replyContent.$touched && replyForm.replyContent.$error.required">Reply content is required.<br/></span>
+            <span ng-if="statusSendMail === 'success'">Sending succeeded.<br/></span>
+            <span ng-if="statusSendMail === 'error'">Sending failed. Please try again.<br/></span>  -->
+        </form>
+    </div>
+</div>

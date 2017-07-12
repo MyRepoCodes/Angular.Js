@@ -1,0 +1,84 @@
+<div class="modal-body modal-body-default">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title">
+    <span data-ng-if="env.status==0">Manage Dependents</span>
+    <span data-ng-if="env.status==1">Add a Dependent</span>
+    <span data-ng-if="env.status==2">Edit Dependent</span>
+  </h3>
+  <div class="form-content">
+    <div class="panel panel-modal-default">
+      <div class="panel-body">
+        <div data-ng-if="env.status==0">
+          <div class="table-container">
+            <a data-ng-click="openCreateDependent()">Add Dependent</a>
+            <div class="table-double" data-ng-class="{ 'full-control':dependentList.length > 0 }">
+              <div class="table-double-content">
+                <div class="table-responsive">
+                  <table class="table ng-table">
+                    <thead>
+                      <tr>
+                        <th>Last name</th>
+                        <th>First name</th>
+                        <th>Birthday</th>
+                        <th>SSN</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-ng-repeat="item in dependentList">
+                        <td data-ng-bind="item.lastName"></td>
+                        <td data-ng-bind="item.firstName"></td>
+                        <td data-ng-bind="item.dateOfBirth | date:'MM/dd/yyyy'"></td>
+                        <td data-ng-bind="item.ssn | viewSSN"></td>
+                      </tr>
+                      <tr class="empty" data-ng-if="dependentList.length == 0">
+                        <td colspan="3" class="text-center"><span>{{ 'userManager.empty_2' | translate }}</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="table-double-action">
+                <table class="table ng-table">
+                  <thead>
+                    <tr>
+                      <th class="action">
+                        <span class="button"><i class="icon"></i></span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-ng-repeat="item in dependentList">
+                      <td class="action">
+                        <span class="button action-remove" title="Remove" data-ng-click="remove(item)"><i class="icon"></i></span>
+                        <span class="button action-edit" title="Edit" data-ng-click="edit(item)"><i class="icon"></i></span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <form name="form" novalidate autocomplete="off" data-ng-if="env.status==1 || env.status==2">
+          <name-input data-form="form" data-ng-params="params" data-control-label="Dependent Name" data-env="env" data-tabindex="101"
+            required></name-input>
+          <ssn-input data-form="form" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="102"
+            data-tabindex="102"></ssn-input>
+          <date-input data-form="form" data-ng-model="params.dateOfBirth" data-control-label="Dependent Date of Birth" data-param-type="birthday"
+            data-values="env" data-tabindex="103" required></date-input>
+          <sex-input data-form="form" data-ng-model="params.gender" data-control-label="Dependent Sex" data-env="env" data-tabindex="104"
+            required></sex-input>
+          <relation-to-participant data-form="form" data-ng-model="params.relationToParticipant" data-control-label="Relation To Participant"
+            data-env="env" data-tabindex="105" required></relation-to-participant>
+          <div class="group-buttons-modal" style="text-align: center;" data-ng-click="env.row=0">
+            <button class="btn btn-green" data-ng-click="submit(form.$valid)">
+              <span data-ng-if="env.status==1">Create</span>
+              <span data-ng-if="env.status==2">Edit</span>
+            </button>
+            <button class="btn btn-white" data-ng-click="goList()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

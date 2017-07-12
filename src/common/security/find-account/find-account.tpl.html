@@ -1,0 +1,90 @@
+<div class="guest-container">
+    <div class="verticalcenter">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="logo-small">
+                    <a href="#/">
+                        <img src="assets/images/logo1.png">
+                    </a>
+                </div>
+                <div class="content">
+
+                    <div data-ng-if="!error && !env.isAlreadyCreated">
+                        <div>Let's Get Started</div>
+                        <div class="step-name">Step 1: Find your account</div>
+                    </div>
+
+                    <div data-ng-if="error">
+                        <div class="text-red">Oops!</div>
+                        <div class="step-name">It seems we could not find your information.</div>
+                        <div class="step-name">Please give it another go.</div>
+                    </div>
+
+
+                    <div data-ng-if="env.isAlreadyCreated">
+                        <div>Sweet!</div>
+                        <div class="step-name">It seems you already have an account.</div>
+                        <div class="step-name">Click <a class="text-green" ui-sref="loginForm">HERE</a> to login.</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="panel-body login">
+                <form name="findAccountForm" novalidate>
+                    <div class="form-group" data-ng-class="{ 'has-error' : findAccountForm.lastName.$invalid &&  showValid }">
+                        <input type="text" name="lastName" class="form-control" placeholder="{{ 'placeholder.lastName' | translate }}" data-ng-model="params.lastname"
+                            tabindex="1" required/>
+                    </div>
+                    <div class="form-group">
+                        <p class="input-group">
+                            <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control datepicker" datepicker-popup="MM/dd/yyyy" datepicker-options="dateOptions"
+                                close-on-date-selection="false" ng-model="params.dateofbirth" is-open="opened" close-text="Close"
+                                placeholder="{{ 'placeholder.dateOfBirth' | translate }}" input-mask="birthday" tabindex="2"
+                                required/>
+                            <span class="input-group-btn">
+                                        <button type="button" class="btn btn-green btn-default" ng-click="open($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                        </p>
+                    </div>
+                    <div class="form-group" data-ng-class="{
+                                            'has-error' : (findAccountForm.socialSecurityNumber.$invalid  && showValid)
+                                        }">
+                        <input type="password" id="socialSecurityNumber" name="socialSecurityNumber" class="form-control" placeholder="Last 4 of Social Security #"
+                            data-ng-model="params.ssn" minlength="4" maxlength="4"  tabindex="3" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-green btn-width-100" data-ng-click="submit()" tabindex="4"> SUBMIT
+                        </button>
+                    </div>
+                    <!--<div class="alert alert-danger" data-ng-if="error">{{ error }}</div>-->
+                </form>
+                <!--<div class="form-group text-center">
+                    <div class="btn-note btn-lg register">
+                        If you are still unable to find your account please use our
+                        <a data-ng-click="goContact()" class="text-green">contact form</a> or call
+                        <span class="text-green text-phone">1-866-222-0102</span>.
+                    </div>
+                </div>-->
+
+
+
+
+                <div class="form-group text-center" data-ng-if="brand">
+                    <div class="text-center">
+                        <img class="logo-bank" data-ng-src="{{ brand }}" />
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="btn-note register">
+                        Still having trouble?
+                        <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

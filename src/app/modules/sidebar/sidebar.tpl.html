@@ -1,0 +1,37 @@
+<div class="panel panel-green navbar-collapse-overwrite collapse navbar-collapse navbar-menuleft-collapse">
+  <div class="panel-heading">
+    <h4 class="text-center" data-ng-if="!isEmployer">Welcome {{ currentUser.firstName }}!</h4>
+    <h4 class="text-center" data-ng-if="isEmployer">{{ currentUser.clientName }}</h4>
+  </div>
+  <div class="panel-body" data-ng-class="{ 'padding-top-zero' : isEmployer }">
+    <div class="text-center profile-photo" data-ng-if="!isEmployer">
+
+      <!--<remove-file 
+      data-class-name="'sidebar-main'"></remove-file>-->
+
+      <img id="avatar" class="avatar img-circle" src="assets/images/default-profile.png" data-ng-src="{{ avatar }}" />
+
+      <file-upload data-ng-model="uploadParams.file" data-class-name="'sidebar-edit-picture'" data-id-input="uploadParams.idInput" data-id-button="uploadParams.idButton"
+        file-types="uploadParams.fileTypes"></file-upload>
+        <!--<p><img id="btn-upload-avatar" ng-click="uploadAvatarCrop()" class="btn-upload-avatar" src="assets/images/camera.png"></p>-->
+
+    </div>
+    <div id="sidebar" data-ng-controller="SidebarItemController">
+      <div data-ng-if="isSpouse" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-spouse.tpl.html'"></div>
+      <div data-ng-if="isParticipant" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-participant.tpl.html'"></div>
+      <div data-ng-if="isEmployer" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-employer.tpl.html'"></div>
+      <div data-ng-if="isAgentTheAgent" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-agent.tpl.html'"></div>
+      <div data-ng-if="isHealthCoach" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoach.tpl.html'"></div>
+      <div data-ng-if="isHealthCoachManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoachmanager.tpl.html'"></div>
+      <div data-ng-if="isClientManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clientmanager.tpl.html'"></div>
+      <div data-ng-if="isClinicalDirector" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clinicaldirector.tpl.html'"></div>
+      <div data-ng-if="isAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-admin.tpl.html'"></div>
+      <div data-ng-if="isSuperAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-superadmin.tpl.html'"></div>
+    </div>
+    <div class="form-group logo-brad text-center" data-ng-if="brand">
+      <div class="text-center">
+        <img class="logo-bank" data-ng-src="{{ brand }}" />
+      </div>
+    </div>
+  </div>
+</div>

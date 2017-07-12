@@ -1,0 +1,24 @@
+<div data-ng-if="isParticipant"
+     data-ng-include="'modules/health-results/participant/participant.tpl.html'"
+     data-ng-controller="HealthResultsParticipantController"></div>
+
+<div data-ng-if="isEmployer" data-ng-include="'modules/health-results/client/client.tpl.html'"
+     data-ng-controller="HealthResultsClientController"></div>
+
+<div data-ng-if="isClinicalDirector"
+     data-ng-include="'modules/health-results/clinical-director/clinical-director.tpl.html'"
+     data-ng-controller="HealthClinicalDirectorController"></div>
+
+<div data-ng-if="isAdmin || isHealthCoachManager || isClientManager"
+     data-ng-include="'modules/health-results/admin/admin.tpl.html'"
+     data-ng-controller="HealthResultsAdminController"></div>
+
+<!--<div data-ng-if="isHealthCoachManager"
+     data-ng-include="'modules/health-results/health-coach-manager/health-coach-manager.tpl.html'"
+     data-ng-controller="HealthResultsHealthCoachManagerController"></div>-->
+
+<div data-ng-if="isHealthCoach"
+     data-ng-include="'modules/health-results/health-coach/health-coach.tpl.html'"
+     data-ng-controller="HealthResultsHealthCoachController"></div>
+
+

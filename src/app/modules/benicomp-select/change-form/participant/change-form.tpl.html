@@ -1,0 +1,66 @@
+<div class="panel panel-green" id="change_form_participant">
+  <div class="panel-heading">
+    <h4 class="text-center">BeniComp Select Change Form</h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-content">
+      <div class="form-content-summary">
+        <p>
+          Please fill out the form below to update your contact information, add or term dependents, or make changes to eligibility. For questions
+          please call customer service team at
+          <span class="text-green text-phone">888-797-3343</span>.
+        </p>
+      </div>
+
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+          <form name="form" novalidate autocomplete="off">
+
+            <!-- Name Change -->
+            <div data-ng-include="'modules/benicomp-select/change-form/participant/views/name-change/name-change.tpl.html'" data-ng-controller="BcsChangeFormNameChangeController">
+            </div>
+
+            <!-- Contact Information -->
+            <div data-ng-if="type !== 3" data-ng-include="'modules/benicomp-select/change-form/participant/views/contact-information/contact-information.tpl.html'"
+              data-ng-controller="BcsChangeFormContactInformationController">
+            </div>
+
+            <!-- Marital Status -->
+            <div data-ng-if="type === 1" data-ng-include="'modules/benicomp-select/change-form/participant/views/marital-status/marital-status.tpl.html'" data-ng-controller="BcsChangeFormMaritalStatusController">
+            </div>
+
+            <!-- Add Beneficiary -->
+            <div data-ng-if="type === 1" class="add_beneficiary" data-ng-include="'modules/benicomp-select/change-form/participant/views/add-beneficiary/add-beneficiary.tpl.html'"
+              data-ng-controller="BcsChangeFormAddBeneficiaryController">
+            </div>
+            <br/>
+            <div class="dotted-line"></div>
+            <br/>
+            <!-- Check box agree -->
+            <div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+              <div class="content">
+                <div class="checkbox-line">
+                  <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="20" />
+                  <label class="choice" for="checkBoxAgree">I understand that by checking this box I am confirming all information provided is correct and will be used
+by BeniComp Insurance Company moving forward.<span class="is-required"> *</span></label>
+                </div>
+
+              </div>
+
+            </div>
+
+            <date-input data-form="form" data-ng-model="params.signedDate" data-control-label="Signed Date" data-param-type="signedDate"
+              data-values="env" data-row="signedDate" data-tabindex="104" required></date-input>
+            <div class="buttons ng-scope">
+              <button class="btn btn-green" data-ng-click="updateInfo(form.$valid, params)" tabindex="998">Submit</button>
+              <button class="btn btn-default" ui-sref="init" tabindex="999">Cancel</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="userForm" novalidate autocomplete="off">
+      <div class="form-description">
+        <h2>Add Multiple Users</h2>
+
+        <!-- list User Types -->
+        <div class="row-item">
+          Please select User Type:
+          <select style="min-width: 100px" data-ng-model="env.userTypeSelected" data-ng-options="key as value for (key, value) in env.listUserTypes"
+            data-ng-change="selectUserType(env.userTypeSelected)">
+            </select>
+        </div>
+
+
+        <!-- For Participants -->
+        <div ng-if="env.userTypeSelected ==='participants'">
+          <div data-ng-include="'modules/user-manager/import/templates/participants.tpl.html'"></div>
+        </div>
+
+        <!-- For Agents -->
+        <div ng-if="env.userTypeSelected ==='agents'">
+          <!-- File -->
+          <div data-ng-include="'modules/user-manager/import/templates/agents.tpl.html'"></div>
+        </div>
+
+
+        <!-- For healthcoaches -->
+        <div ng-if="env.userTypeSelected ==='healthCoachs'">
+          <!-- File -->
+          <div data-ng-include="'modules/user-manager/import/templates/healthcoaches.tpl.html'"></div>
+        </div>
+
+        <!-- For clients -->
+        <div ng-if="env.userTypeSelected ==='clients'">
+          <!-- File -->
+          <div data-ng-include="'modules/user-manager/import/templates/clients.tpl.html'"></div>
+
+        </div>
+
+        <!-- result import -->
+        <div ng-if="env.userTypeSelected && env.userTypeSelected !=='participants'" data-ng-include="'modules/user-manager/import/templates/result-import.tpl.html'"></div>
+
+
+
+    </form>
+    </div>
+  </div>

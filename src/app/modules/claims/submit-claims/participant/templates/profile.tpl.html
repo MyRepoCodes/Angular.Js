@@ -1,0 +1,135 @@
+<div class="form-content">
+  <div class="panel panel-green warp-shadow">
+    <div class="panel-body">
+      <form name="claimsForm" novalidate>
+        <div class="dotted-bottom">
+          <div class="row-item"
+               data-ng-click="env.row=1"
+               data-ng-class="{ 'highlighted': env.row==1,
+                                'has-error': claimsForm.groupName.$invalid && (!claimsForm.groupName.$pristine || env.showValid)
+                              }">
+            <label class="description">Group Name</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-4"
+                     data-ng-class="{ 'has-error': claimsForm.groupName.$invalid && (!claimsForm.groupName.$pristine || env.showValid) }">
+                  <input name="groupName" type="text" id="groupName" class="form-control"
+                         data-ng-model="params.groupName"
+                         ng-disabled="true"
+                         tabindex="1"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-item"
+               data-ng-click="env.row=2"
+               data-ng-class="{ 'highlighted': env.row==2,
+                                'has-error': claimsForm.groupNumber.$invalid && (!claimsForm.groupNumber.$pristine || env.showValid)
+                              }">
+            <label class="description">Group #</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-4" data-ng-class="{ 'has-error': claimsForm.groupNumber.$invalid && (!claimsForm.groupNumber.$pristine || env.showValid) }">
+                  <input name="groupNumber" type="text" id="groupNumber" class="form-control"
+                         ng-disabled="true"
+                         data-ng-model="params.groupNumber"
+                         tabindex="2"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <name-input readonly data-form="claimsForm" data-ng-params="params" 
+        data-control-label="Insured's Name" data-env="env" data-row="3" data-tabindex="3" ></name-input>
+        <date-input data-form="claimsForm"
+                    data-ng-model="params.insuredBirthdate"
+                    data-control-label="Insured's Birthdate"
+                    data-param-type="birthday"
+                    data-values="env"
+                    data-row="4"
+                    readonly
+                    data-tabindex="4"
+                    required></date-input>
+        <div class="row-item"
+             data-ng-click="env.row=5"
+             data-ng-class="{ 'highlighted': env.row==5,
+                              'has-error': claimsForm.email.$invalid && (!claimsForm.email.$pristine || env.showValid)
+                            }">
+          <label class="description">Insured's Email</label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-4" data-ng-class="{ 'has-error': claimsForm.email.$invalid && (!claimsForm.email.$pristine || env.showValid) }">
+                <input name="email" type="email" class="form-control"
+                       data-ng-model="params.email"
+                       readonly
+                       data-ng-pattern="patternRegexs.email"
+                       tabindex="5" required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ssn-short-input readonly data-form="claimsForm" data-ng-model="params.ssn" 
+        data-control-label="Insured's Last 4 digits of SS#" data-env="env" data-row="row" data-tabindex="6"></ssn-short-input>
+        <div class="row-item"
+             data-ng-click="env.row='claimantName'"
+             data-ng-class="{ 'highlighted': env.row=='claimantName',
+                              'has-error': claimsForm.claimantName.$invalid && (!claimsForm.claimantName.$pristine || env.showValid)
+                            }">
+          <label class="description">Claimant's Name<span class="is-required">*</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-4" data-ng-class="{ 'has-error': claimsForm.claimantName.$invalid && (!claimsForm.claimantName.$pristine || env.showValid) }">
+                <select name="claimantName" class="form-control"
+                        data-ng-model="env.currentClaimant"
+                        data-ng-options="claimant as (claimant.name | fullName) for claimant in claimantList track by claimant.id"
+                        data-ng-change="selectClaimant(env.currentClaimant)"
+                        tabindex="7" required></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-item"
+             data-ng-click="env.row=8"
+             data-ng-class="{ 'highlighted': env.row==8,
+                              'has-error': claimsForm.relationship.$invalid && (!claimsForm.relationship.$pristine || env.showValid)
+                            }">
+          <label class="description">Relationship to Insured<span class="is-required">*</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-4" data-ng-class="{ 'has-error': claimsForm.relationship.$invalid && (!claimsForm.relationship.$pristine || env.showValid) }">
+                <select name="relationship" class="form-control" disabled data-ng-model="params.relationship" tabindex="8">
+                  <option value="1" selected="selected">Self</option>
+                  <option value="2">Spouse</option>
+                  <option value="3">Child</option>
+                  <option value="4">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <date-input data-form="claimsForm"
+                    data-ng-model="params.claimantBirthdate"
+                    data-control-label="Claimant's Birthdate"
+                    data-param-type="birthday"
+                    data-values="env"
+                    data-popup-placement="top-left"
+                    data-row="9"
+                    readonly
+                    data-tabindex="9"
+                    required></date-input>
+
+        <!--<div class="group_price">
+          <div class="price_show">
+            <div class="number_price">{{ env.amountTotal | currency }}</div>
+            <div class="title_price">TOTAL</div>
+          </div>
+        </div>-->
+        <div class="buttons" data-ng-click="env.row=0">
+          <button class="btn btn-green" data-ng-click="submitProfile(claimsForm.$valid)" tabindex="10">Continue <i class="fa fa-chevron-right"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

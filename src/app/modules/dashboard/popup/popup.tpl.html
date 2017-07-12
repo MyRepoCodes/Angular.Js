@@ -1,0 +1,37 @@
+<div class="popup-panel {{ info.classes }}">
+  <div class="popup-heading">
+    <span class="popup-login"></span>
+    <span class="span1">{{ name }}</span>
+    <span class="span2">Your result earned</span>
+    <!--<span class="span3"><strong><sup>$</sup>0 out of a possible <sup>$</sup>500</strong></span>-->
+    <span class="span3"><strong>{{ info.reward | noFractionCurrency }} out of a possible {{ info.rewardEmployer | noFractionCurrency }}</strong></span>
+    <a class="close"></a>
+  </div>
+  <div class="popup-content">
+    <p>{{ data.description }}</p>
+    <p ng-if="data.biomarker === 'Nicotine' || !chart" data-ng-bind-html="rangeDescription | safe_html"></p>
+
+    <table data-ng-if="chart" class="table table-chart">
+      <thead>
+      <tr data-ng-repeat="iheader in chart.list_header">
+        <th data-ng-repeat="itemHeader in iheader" colspan="{{itemHeader.colspan}}" class="{{itemHeader.class}}" data-ng-bind="itemHeader.label"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="icontent in chart.list_content">
+        <th class="{{icontent.class}}" data-ng-bind="icontent.name"></th>
+        <th data-ng-repeat="item in icontent.data" class="{{item.class}}" data-ng-bind-html="item.value | convertOperatorToString"></th>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+    <p data-ng-if="!passed">
+      <span class="text-alert"><strong>ALERT: </strong></span>
+      <!--{{ data.alert }}-->
+      Although this is not a diagnosis, your result may be associated with unusual and potentially dangerous or harmful health risks and you are encouraged to contact a BeniComp Health Coach or another qualified healthcare provider.
+    </p>
+    <button data-ng-if="!passed" class="btn btn-green btn-popup"> Contact a BeniComp<br>health coach at no cost to you</button>
+  </div>
+</div>

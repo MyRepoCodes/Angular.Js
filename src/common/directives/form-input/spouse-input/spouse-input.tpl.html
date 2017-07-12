@@ -1,0 +1,58 @@
+<div data-ng-if="status == 'M' || status == 'P'">
+
+  <div data-ng-if="spouseInfo">
+    <div data-ng-if="status == 'M'">
+
+      <name-input data-form="form" data-ng-params="spouseInfo" data-control-label="Spouse Name" data-env="env" readonly></name-input>
+      <div class="row-item">
+        <label class="description">Spouse's Pulse ID: <span class="text-green">{{ participantInfo.prefixPulseId + "-" + participantInfo.pulseId + "-01" }}</span></label>
+      </div>
+      <ssn-input data-form="form" data-ng-model="spouseInfo.ssn" data-control-label="Social Security Number" data-env="env" readonly></ssn-input>
+      <date-input data-form="form" data-ng-model="spouseInfo.dateOfBirth" data-control-label="Spouse DOB" data-values="env" readonly></date-input>
+      <sex-input data-form="form" data-ng-model="spouseInfo.gender" data-control-label="Spouse Sex" data-env="env" readonly></sex-input>
+    </div>
+    <div data-ng-if="status == 'P'">
+
+      <name-input data-form="form" data-ng-params="spouseInfo" data-control-label="Domestic Partner Name" data-env="env" readonly></name-input>
+      <div class="row-item">
+        <label class="description">Domestic Partner's Pulse ID: <span class="text-green">{{ participantInfo.prefixPulseId + "-" + participantInfo.pulseId + "-01" }}</span></label>
+      </div>
+      <!--<ssn-input data-form="form" data-ng-model="spouseInfo.ssn" data-control-label="Social Security Number" data-env="env" readonly></ssn-input>-->
+      <date-input data-form="form" data-ng-model="spouseInfo.dateOfBirth" data-control-label="Domestic Partner DOB" data-values="env"
+        readonly></date-input>
+      <sex-input data-form="form" data-ng-model="spouseInfo.gender" data-control-label="Domestic Partner Sex" data-env="env" readonly></sex-input>
+
+      <phone-input data-form="form" data-ng-model="spouseInfo.phoneNumber" data-control-label="Phone" data-env="env" data-row="5"
+        data-tabindex="8" readonly></phone-input>
+      <div class="row-item" data-ng-click="env.row=6" data-ng-class="{ 'highlighted': env.row==6,
+                      'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist
+                    }">
+        <label class="description">Email</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist }">
+              <input name="email" type="email" class="form-control" data-ng-model="spouseInfo.email" ng-disabled="true" data-ng-pattern="patternRegexs.email"
+                tabindex="9" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <div class="row-item">
+    <div class="content">
+      <a class="btn btn-green btn-small" ng-if="!readonly" data-ng-click="createOrUpdateSpouse()">
+        <span data-ng-bind="spouseInfo?'Edit':'Add'"></span>
+        <span>Spouse</span>
+      </a>
+
+      <a class="btn btn-green btn-small" ng-if="readonly" data-ng-click="openConfirm()">
+        <span data-ng-bind="spouseInfo?'Edit':'Add'"></span>
+        <span>Spouse</span>
+      </a>
+    </div>
+  </div>
+</div>

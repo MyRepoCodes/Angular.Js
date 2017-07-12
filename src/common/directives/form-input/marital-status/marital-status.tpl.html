@@ -1,0 +1,19 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['maritalStatus_' + inputId].$invalid && (!form['maritalStatus_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <select name="maritalStatus_{{ inputId }}" class="form-control"
+                data-ng-model="ngModel"
+                data-ng-options="k as v for (k, v) in maritalStatusList"
+                tabindex="{{ tabindex }}"
+                data-ng-disabled="readonly"
+                data-ng-required="required"></select>
+      </div>
+    </div>
+  </div>
+</div>

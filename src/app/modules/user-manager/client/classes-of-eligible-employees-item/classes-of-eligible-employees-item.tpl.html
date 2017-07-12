@@ -1,0 +1,44 @@
+<div class="row-item"
+     data-ng-click="env.row=prefix+'1'"
+     data-ng-class="{ 'highlighted': env.row==prefix+'1',
+                      'has-error': form['name_' + inputId].$invalid && (!form['name_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Name of Class {{ elementIndex }}</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6"
+           data-ng-class="{ 'has-error': form['name_' + inputId].$invalid && (!form['name_' + inputId].$pristine || env.showValid) }">
+        <input name="name_{{ inputId }}" type="text" class="form-control"
+               data-ng-model="params.name"
+               data-ng-disabled="readonly"
+               tabindex="{{ tabindex }}"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item"
+     data-ng-click="env.row=prefix+'2'"
+     data-ng-class="{ 'highlighted': env.row==prefix+'2',
+                      'has-error': form['currency_' + inputId].$invalid && (!form['currency_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">Class {{ elementIndex }} Maximum Medical Benefit Elected</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6"
+           data-ng-class="{ 'has-error': form['currency_' + inputId].$invalid && (!form['currency_' + inputId].$pristine || env.showValid) }">
+
+        <select tabindex="{{ tabindex }}"
+                name="currency_{{ inputId }}"
+                class="form-control"
+                ng-options="item.value as item.label for item in benicompSelectConstant.annualMaximum"
+                data-ng-model="params.currency"></select>
+
+        <!--<input name="currency_{{ inputId }}" type="text" class="form-control"-->
+               <!--data-ng-model="params.currency"-->
+               <!--filtered-input="number"-->
+               <!--data-ng-disabled="readonly"-->
+               <!--tabindex="{{ tabindex }}"/>-->
+      </div>
+    </div>
+  </div>
+</div>

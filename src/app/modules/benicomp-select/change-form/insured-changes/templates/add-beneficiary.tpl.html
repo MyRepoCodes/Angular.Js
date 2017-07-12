@@ -1,0 +1,172 @@
+<div class="dotted-line"></div>
+<div class="row-item">
+  <h3>AD&D Beneficiary</h3>
+</div>
+
+<!-- Changes to be Made -->
+<div class="row-item"
+     data-ng-click="env.row='ADDChangesToBeMade'"
+     data-ng-class="{ 'highlighted': env.row=='ADDChangesToBeMade',
+     'has-error': !addbeneficiaryChangesToBeMadeIsValid(params) && env.showValid}">
+  <label class="description">Changes to be Made <span class="is-required"> *</span></label>
+  <div class="content">
+
+    <div class="checkbox-line">
+      <input name="primaryBeneficiary" type="checkbox" id="primaryBeneficiary"
+             data-ng-model="params.addbChangesToBeMade.primaryBeneficiary"
+             tabindex="50"/>
+      <label class="choice" for="primaryBeneficiary">Primary Beneficiary</label>
+    </div>
+
+    <div class="checkbox-line">
+      <input name="contingentBeneficiary" type="checkbox" id="contingentBeneficiary"
+             data-ng-model="params.addbChangesToBeMade.contingentBeneficiary"
+             tabindex="51"/>
+      <label class="choice" for="contingentBeneficiary">Contingent Beneficiary</label>
+    </div>
+  </div>
+</div>
+
+<!---------------- Primary Beneficiary ---------------->
+<div ng-if="params.addbChangesToBeMade.primaryBeneficiary">
+
+  <div class="dotted-line"></div>
+  <div class="row-item">
+    <label class="fs-20">Primary Beneficiary</label>
+  </div>
+
+  <!-- Current Primary Beneficiary -->
+  <div class="row-item"
+       data-ng-click="env.row='addbCurrentPrimaryBeneficiary'"
+       data-ng-class="{ 'highlighted': env.row=='addbCurrentPrimaryBeneficiary',
+                      'has-error': icForm.addbCurrentPrimaryBeneficiary.$invalid && (!icForm.addbCurrentPrimaryBeneficiary.$pristine || env.showValid)
+                    }">
+    <label class="description">Current Primary Beneficiary<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': icForm.addbCurrentPrimaryBeneficiary.$invalid && (!icForm.addbCurrentPrimaryBeneficiary.$pristine || env.showValid) }">
+          <input name="addbCurrentPrimaryBeneficiary" type="text" class="form-control"
+                 data-ng-model="params.addbCurrentPrimaryBeneficiary" required
+                 tabindex="52"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Primary Beneficiary -->
+  <div class="row-item"
+       data-ng-click="env.row='addbNewPrimaryBeneficiary'"
+       data-ng-class="{ 'highlighted': env.row=='addbNewPrimaryBeneficiary',
+                      'has-error': icForm.addbNewPrimaryBeneficiary.$invalid && (!icForm.addbNewPrimaryBeneficiary.$pristine || env.showValid)
+                    }">
+    <label class="description">New Primary Beneficiary<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': icForm.addbNewPrimaryBeneficiary.$invalid && (!icForm.addbNewPrimaryBeneficiary.$pristine || env.showValid) }">
+          <input name="addbNewPrimaryBeneficiary" type="text" class="form-control"
+                 data-ng-model="params.addbNewPrimaryBeneficiary" required
+                 tabindex="53"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- addbNewPrimaryBeneficiaryDOB -->
+  <date-input data-form="icForm"
+              data-ng-model="params.addbNewPrimaryBeneficiaryDob"
+              data-control-label="New Primary Beneficiary DOB"
+              data-values="env"
+              data-row="NewPrimaryBeneficiaryDOB"
+              data-tabindex="54" required></date-input>
+
+  <!-- addbNewPrimaryBeneficiarySSN -->
+  <ssn-input data-form="icForm"
+             data-ng-model="params.addbNewPrimaryBeneficiarySsn"
+             data-control-label="New Primary Beneficiary SS#"
+             data-env="env" data-row="addbNewPrimaryBeneficiarySsn"
+             data-tabindex="55" required></ssn-input>
+
+  <!-- Effective Date -->
+  <date-input data-form="icForm"
+              data-ng-model="params.addbNewPrimaryBeneficiaryEffectiveDate"
+              data-control-label="Effective Date"
+              data-values="env"
+              data-row="NewPrimaryBeneficiaryEffectiveDate"
+              data-tabindex="56" required></date-input>
+
+</div>
+
+
+<!---------------- Contingent Beneficiary ---------------->
+<div ng-if="params.addbChangesToBeMade.contingentBeneficiary">
+
+  <div class="dotted-line"></div>
+  <div class="row-item">
+    <label class="fs-20">Contingent Beneficiary</label>
+  </div>
+
+  <!-- Current Primary Beneficiary -->
+  <div class="row-item"
+       data-ng-click="env.row='addbCurrentContingentBeneficiaryName'"
+       data-ng-class="{ 'highlighted': env.row=='addbCurrentContingentBeneficiaryName',
+                      'has-error': icForm.addbCurrentContingentBeneficiaryName.$invalid && (!icForm.addbCurrentContingentBeneficiaryName.$pristine || env.showValid)
+                    }">
+    <label class="description">Current Contingent Beneficiary<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': icForm.addbCurrentContingentBeneficiaryName.$invalid && (!icForm.addbCurrentContingentBeneficiaryName.$pristine || env.showValid) }">
+          <input name="addbCurrentContingentBeneficiaryName" type="text" class="form-control"
+                 data-ng-model="params.addbCurrentContingentBeneficiaryName" required
+                 tabindex="57"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Contingent Beneficiary -->
+  <div class="row-item"
+       data-ng-click="env.row='addbNewContingentBeneficiaryName'"
+       data-ng-class="{ 'highlighted': env.row=='addbNewContingentBeneficiaryName',
+                      'has-error': icForm.addbNewContingentBeneficiaryName.$invalid && (!icForm.addbNewContingentBeneficiaryName.$pristine || env.showValid)
+                    }">
+    <label class="description">New Contingent Beneficiary<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': icForm.addbNewContingentBeneficiaryName.$invalid && (!icForm.addbNewContingentBeneficiaryName.$pristine || env.showValid) }">
+          <input name="addbNewContingentBeneficiaryName" type="text" class="form-control"
+                 data-ng-model="params.addbNewContingentBeneficiaryName" required
+                 tabindex="58"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- New Contingent Beneficiary DOB -->
+  <date-input data-form="icForm"
+              data-ng-model="params.addbNewContingentBeneficiaryDob"
+              data-control-label="New Contingent Beneficiary DOB"
+              data-values="env"
+              data-row="NewContingentBeneficiaryDOB "
+              data-tabindex="59" required></date-input>
+
+  <!-- New Contingent Beneficiary SS# -->
+  <ssn-input data-form="icForm"
+             data-ng-model="params.addbNewContingentBeneficiarySsn"
+             data-control-label="New Contingent Beneficiary SS#"
+             data-env="env" data-row="addbNewContingentBeneficiarySsn"
+             data-tabindex="60" required></ssn-input>
+
+  <!-- Effective Date -->
+  <date-input data-form="icForm"
+              data-ng-model="params.addbNewContingentBeneficiaryEffectiveDate"
+              data-control-label="Effective Date"
+              data-values="env"
+              data-row="addbNewContingentBeneficiaryEffectiveDate"
+              data-tabindex="61" required></date-input>
+
+</div>

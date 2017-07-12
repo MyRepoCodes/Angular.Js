@@ -1,0 +1,16 @@
+<div class="panel panel-green">
+  <div class="panel-heading">
+    <h4 class="text-center">My Profile</h4>
+  </div>
+  <div class="panel-body" ng-class="{'participant-profile': isParticipant}">
+    <div class="form-content">
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+          <div data-ng-if="isParticipant" data-ng-controller="ProfileParticipantController" data-ng-include="'modules/profile/participant/participant.tpl.html'"></div>
+          <div data-ng-if="isSpouse" data-ng-controller="ProfileSpouseController" data-ng-include="'modules/profile/spouse/spouse.tpl.html'"></div>
+          <div data-ng-if="!isParticipant && !isSpouse" data-ng-controller="ProfileDefaultController" data-ng-include="'modules/profile/default/default.tpl.html'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

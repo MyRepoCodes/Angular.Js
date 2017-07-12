@@ -1,0 +1,74 @@
+<div class="table-dropdown">
+<!--<div class="table-filter">
+  <div class="input-group">
+    <input class="form-control input-filter" data-ng-model="filter.keyword" />
+    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+  </div>
+</div>-->
+  <!-- user name Filter status-->
+
+  <div class="pull-left position-relative" data-ng-if="filter.userId">
+    <input class="form-control username" readonly="readonly" data-ng-if="filter.name" type="text" placeholder="{{filter.name}}"/>
+    <span class="fa fa-times position-absolute cross" ng-click="clearUser()"></span>
+  </div>
+
+  <!-- Date Range Filter status-->
+  <div class="pull-right">
+    <div class="date-range-picker">
+      <input date-range-picker class="form-control date-picker" type="text" clearable="true" placeholder="start date - end date"
+        ng-model="dateRange" options="dateRangeOptions" />
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<div class="table-filter">
+    <div class="input-group">
+      <input class="form-control input-filter ng-pristine ng-valid ng-touched" ng-change="keySearch()" data-ng-model="filter.keyword">
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+</div>
+
+
+<div class="table-double login-logs" data-ng-class="">
+  <div class="table-double-content">
+    <div class="table-responsive table-responsive-pagination audit-data-table">
+      <table ng-table="tableParams" show-filter="false" class="table">
+        <thead>
+          <tr>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('loginDate', 'asc'), 'sort-desc': tableParams.isSortBy('loginDate', 'desc') }"
+              ng-click="tableParams.sorting({'loginDate' : tableParams.isSortBy('loginDate', 'asc') ? 'desc' : 'asc'})">
+              <div>Date</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('userName', 'asc'), 'sort-desc': tableParams.isSortBy('userName', 'desc') }"
+              ng-click="tableParams.sorting({'userName' : tableParams.isSortBy('userName', 'asc') ? 'desc' : 'asc'})">
+              <div>User</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('loginIPAddress', 'asc'), 'sort-desc': tableParams.isSortBy('loginIPAddress', 'desc') }"
+              ng-click="tableParams.sorting({'loginIPAddress' : tableParams.isSortBy('loginIPAddress', 'asc') ? 'desc' : 'asc'})">
+              <div>User IP Address</div>
+            </th>                     
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="{{item.rowNumber}}" class="row-clicked" ng-repeat="item in tableParams.data" ng-click="showContent(item,item.rowNumber)">
+            <td data-title="'Operation Date'" sortable="'operationDate'">{{item.loginDate | date:'MM-dd-yyyy hh:mm:ss'}}</td>
+            <td data-title="'User Name'" sortable="'userName'">{{item.userName}}</td>
+            <td data-title="'User IP Address'" sortable="'loginIPAddress'">{{item.loginIPAddress}}</td>
+            </tr>
+          <tr class="emp0ty" data-ng-if="loading">
+            <td colspan="3" class="text-center">
+              <div class="loading-indicator"></div>
+            </td>
+          </tr>
+          <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+            <td colspan="3" class="text-center">
+              <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+              <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

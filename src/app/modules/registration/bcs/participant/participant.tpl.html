@@ -1,0 +1,42 @@
+<div class="panel-heading">
+  <h4 class="text-center">
+    <span style="text-transform: capitalize">{{ clientName }}</span> {{ currentYear }} Registration
+  </h4>
+</div>
+<div class="panel-body introduction">
+  <!-- Close -->
+  <div class="form-content" data-ng-if="!env.opening">
+    <div class="form-content-summary">
+      <h1 style="color: #e94f4f;">Registration is now closed.</h1>
+      <div data-ng-include="'modules/registration/templates/closed-message.tpl.html'"></div>
+    </div>
+  </div>
+  <!-- Open -->
+  <div class="form-content" data-ng-if="env.opening">
+    <div class="form-content-summary">
+      <h1>Registration is open from
+        <span class="text-green text-nowrap">{{ currentBenefitYearBcs.registerStartDate | date:'MM/dd/yyyy'}}</span>.
+      </h1>
+      <p>
+        In order to be eligible, the steps below must be completed before registration closes. If you have any issue or concerns during registration,
+        please contact us through our <a class="text-green" data-ng-click="goContact()">contact form</a> or call
+        <span class="text-green text-phone">866-797-3343</span>.
+      </p>
+    </div>
+    <bcs-participant-breadcrumb class="form-content-breadcrumb" step="env.step"></bcs-participant-breadcrumb>
+    <div class="form-content-title" data-ng-if="env.step<=2">Please complete STEP {{ env.step+1 }} below</div>
+    <div class="panel panel-green warp-shadow">
+      <div class="panel-body">
+        <div data-ng-if="env.step == 0"
+             data-ng-include="'modules/registration/bcs/participant/enrollment-card/enrollment-card.tpl.html'"
+             data-ng-controller="EnrollmentEnrollmentCardController"></div>
+        <div data-ng-if="env.step == 1"
+             data-ng-include="'modules/registration/bcs/participant/direct-deposit/direct-deposit.tpl.html'"
+             data-ng-controller="EnrollmentDirectDepositController"></div>
+        <div data-ng-if="env.step == 2"
+             data-ng-include="'modules/registration/bcs/participant/privacy-authorization-form/privacy-authorization-form.tpl.html'"
+             data-ng-controller="EnrollmentPrivacyAuthorizationFormController"></div>
+      </div>
+    </div>
+  </div>
+</div>

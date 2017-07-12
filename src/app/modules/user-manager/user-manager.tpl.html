@@ -1,0 +1,166 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center" data-ng-bind="pageTitle"></h4>
+  </div>
+  <div class="panel-body">
+    <div class="panel-manager-tool">
+      <div class="toolbar">
+        <a class="btn" data-ng-click="goStateList()" data-ng-class="{ 'active': childState == 'manager' }">Manage Users <!--<span class="fa fa-angle-down"></span>--></a>
+        <div class="dropdown btn">
+          <button class="dropdown-toggle" data-ng-class="{ 'active': (childState == 'create' || childState == 'add-multiple') }">Add Users <i class="fa fa-angle-down"></i></button>
+          <ul class="dropdown-menu">
+            <li data-ng-if="isAdmin || isClientManager"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.import' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.import')">Add Multiple Users</a>
+            </li>
+
+            <li data-ng-if="isAdmin || isClientManager"
+                data-ng-class="{ 'selected': (currentState == 'loggedIn.modules.user-manager.participant.create' || currentState == 'loggedIn.modules.user-manager.participantClient.create') }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.participant.create')">Add Participant</a>
+            </li>
+            <li data-ng-if="isAdmin || isClientManager || isAgentTheAgent"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.client.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client.create')">Add Client</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.agent.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.agent.create')">Add Agent</a>
+            </li>
+            <li data-ng-if="isAdmin || isHealthCoachManager"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.health-coach.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach.create')">Add Health Coach</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.health-coach-manager.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach-manager.create')">Add Health Coach Manager</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.client-manager.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client-manager.create')">Add Client Manager</a>
+            </li>
+            <!--<li data-ng-if="isAdmin"
+                    data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.clinical-director.create' }">
+                <a data-ng-click="goState('loggedIn.modules.user-manager.clinical-director.create')">Add Clinical Director</a>
+            </li>-->
+            <li data-ng-if="isSuperAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.admin.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.admin.create')">Add Admin</a>
+            </li>
+
+            <li data-ng-if="isSuperAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.superadmins.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.superadmins.create')">Add Super Admin</a>
+            </li>
+
+            <li data-ng-if="isSuperAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.portfolio.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.portfolio.create')">Add Portfolio</a>
+            </li>
+
+            <!--<li data-ng-if="isAdmin || isClientManager"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.import' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.import')">Import Data</a>
+            </li>-->
+          </ul>
+        </div>
+        <div class="dropdown btn">
+          <button class="dropdown-toggle" data-ng-class="{ 'active': childState == 'download' }">Download Users <i class="fa fa-angle-down"></i></button>
+          <ul class="dropdown-menu">
+            <li data-ng-if="isAdmin || isClientManager"
+                data-ng-class="{ 'selected': (currentState == 'loggedIn.modules.user-manager.participant.download' || currentState == 'loggedIn.modules.user-manager.participantClient.download') }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.participant.download')">Download Participants</a>
+            </li>
+            <li data-ng-if="isAdmin || isClientManager || isAgentTheAgent"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.client.download' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client.download')">Download Clients</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.agent.download' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.agent.download')">Download Agents</a>
+            </li>
+            <li data-ng-if="isAdmin || isHealthCoachManager"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.health-coach.download' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach.download')">Download Health Coaches</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.health-coach-manager.download' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach-manager.download')">Download Health Coach Managers</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.client-manager.download' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client-manager.download')">Download Client Managers</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="dropdown">
+          <button class="dropdown-toggle">{{ getFilterName() }} <i
+              class="icon icon-filter"></i></button>
+          <ul class="dropdown-menu">
+            <li data-ng-if="!isSuperAdmin"
+                data-ng-hide="parentState == 'participant' "
+                data-ng-class="{ 'selected': parentState == 'participant' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.participant')">Participant</a>
+            </li>
+            <li data-ng-if="isAdmin || isClientManager || isAgentTheAgent || isHealthCoachManager"
+                data-ng-hide="parentState == 'spouse'"
+                data-ng-class="{ 'selected': parentState == 'spouse' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.spouse-list')">Spouse</a>
+            </li>
+
+            <li data-ng-if="isAdmin || isClientManager || isAgentTheAgent || isHealthCoachManager"
+                data-ng-hide="parentState == 'client'"
+                data-ng-class="{ 'selected': parentState == 'client' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client')">Client</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-hide="parentState == 'agent'"
+                data-ng-class="{ 'selected': parentState == 'agent' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.agent')">Agent</a>
+            </li>
+            <li data-ng-if="isAdmin || isHealthCoachManager"
+                data-ng-hide="parentState == 'health-coach'"
+                data-ng-class="{ 'selected': parentState == 'health-coach' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach')">Health Coach</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-hide="parentState == 'health-coach-manager'"
+                data-ng-class="{ 'selected': parentState == 'health-coach-manager' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.health-coach-manager')">Health Coach Manager</a>
+            </li>
+            <li data-ng-if="isAdmin"
+                data-ng-hide="parentState == 'client-manager'"
+                data-ng-class="{ 'selected': parentState == 'client-manager' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client-manager')">Client Manager</a>
+            </li>
+            <!--<li data-ng-if="isAdmin"
+                    data-ng-hide="parentState == 'clinical-director'"
+                    data-ng-class="{ 'selected': parentState == 'clinical-director' }">
+                <a data-ng-click="goState('loggedIn.modules.user-manager.clinical-director')">Clinical Director</a>
+            </li>-->
+            <li data-ng-if="isSuperAdmin"
+                data-ng-hide="parentState == 'admin'"
+                data-ng-class="{ 'selected': parentState == 'admin' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.admin')">Admin</a>
+            </li>
+
+            <li data-ng-if="isSuperAdmin"
+                data-ng-hide="parentState == 'superadmins'"
+                data-ng-class="{ 'selected': parentState == 'superadmins' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.superadmins')">Super Admin</a>
+            </li>
+
+            <li data-ng-if="isSuperAdmin"
+                data-ng-hide="parentState == 'portfolio'"
+                data-ng-class="{ 'selected': parentState == 'portfolio' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.portfolio')">Portfolios</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>   
+    <div class="form-content" data-ui-view="manager-content"></div>
+  </div>
+</div>

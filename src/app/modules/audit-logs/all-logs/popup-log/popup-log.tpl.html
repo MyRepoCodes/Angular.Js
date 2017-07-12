@@ -1,0 +1,37 @@
+  <div ng-init="try()">
+  <div class="modal-header" ng-if="auditLogDetail">        
+        <h4 class="modal-title">{{auditLogDetail.auditLogDetailTitle}}</h4>
+         <button type="button" class="close popup-close" data-dismiss="modal" data-ng-click="cancel()">&times;</button>
+        <p>{{auditLogDetail.auditLogDetailSubTitle}}</p>   
+      </div>
+      <div class="modal-body"  ng-if="auditLogDetail">
+        <div class="audit-log">
+            <table class="inner-table" >
+                <thead>
+                    <tr>
+                        <th>
+                          <div class="fieldName">Field Name</div>
+                        </th>
+                        <th>
+                          <div class="fieldName">New Value</div>
+                        </th>
+                        <th>
+                          <div class="fieldName">Old Value</div>
+                        </th>
+                      </tr>
+                 </thead>
+
+                 <tbody>   
+                      <tr ng-repeat="item in auditLogDetail.auditLogDetailList">
+                        <td>{{item.fieldName}}</td>
+                        <td>{{item.newValue}}</td>
+                        <td>{{item.oldValue}}</td>
+                      </tr>                               
+                  </tbody>
+               </table>
+            </div>
+      </div>
+      <div class="modal-footer" >
+        <p ng-if="error" class="text-red align-center">Unable to find data on Server</p>       
+      </div>
+  </div>

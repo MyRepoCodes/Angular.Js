@@ -1,0 +1,11 @@
+/.svn
+/.idea
+/build
+/deploy
+/doc
+/demo
+/node_modules
+/vendor
+/backup
+/.vscode
+/bin

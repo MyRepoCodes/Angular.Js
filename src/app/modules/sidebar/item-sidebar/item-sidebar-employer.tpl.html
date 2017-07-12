@@ -1,0 +1,62 @@
+<!-- Default menu -->
+<ul data-ng-show="!currentUser.products.beniCompSelect">
+  <!--<li data-ng-class="{'active': checkState == 'dashboard' }">
+    <a data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  </li>-->
+  <!--<li data-ng-class="{'active': checkState == 'registration' }">
+    <a data-ng-click="goRegistration()" class="registration-item">Registration Dashboard</a>
+  </li>-->
+  <li data-ng-class="{'active': checkState == 'participant' }">
+    <a data-ui-sref="loggedIn.modules.participant" class="user-item">User Manager</a>
+  </li>
+  <!--<li data-ng-class="{'active': checkState == 'health-results' }">
+    <a data-ui-sref="loggedIn.modules.health-results" class="health-results-item">Health Results</a>
+  </li>-->
+  <!--<li data-ng-class="{'active': checkState == 'health-coaching' }">
+      <a data-ui-sref="loggedIn.modules.health-coaching" class="health-coaching-item">Coaching</a>
+  </li>-->
+  <li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+    <a data-ui-sref="loggedIn.modules.imp-documents.clientDocumentList" class="imp-documents-item">
+      Important Documents <span class="badge badge-danger"
+                                tooltips
+                                tooltip-lazy="true"
+                                tooltip-side="right"
+                                tooltip-class="tooltip-notif"
+                                tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+    </a>
+  </li>
+  <!--<li data-ng-class="{'active': checkState == 'list-faqs' }">
+    <a data-ui-sref="loggedIn.modules.list-faqs" class="add-faqs-item">FAQs</a>
+  </li>-->
+  <!--<li data-ng-class="{'active': checkState == 'health-screening' }">
+    <a data-ui-sref="loggedIn.modules.health-screening" class="imp-documents-item">Health Screening</a>
+  </li>-->
+  <li data-ng-class="{'active': checkState == 'reports' }">
+    <a data-ui-sref="loggedIn.modules.reports" class="imp-documents-item">Reports</a>
+  </li>
+
+</ul>
+<!-- BeniCompSelect menu -->
+<ul data-ng-show="currentUser.products.beniCompSelect">
+  <!--<li data-ng-class="{'active': checkState == 'dashboard' }">
+    <a data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  </li>-->
+  <li data-ng-class="{'active': checkState == 'participant' }">
+    <a data-ui-sref="loggedIn.modules.participant" class="user-item">User Manager</a>
+  </li>
+  <!--<li>
+    <a class="benicomp-select-item">Claims</a>
+  </li>
+  <li>
+    <a class="benicomp-select-item">Invoices</a>
+  </li>-->
+  <li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+    <a data-ui-sref="loggedIn.modules.imp-documents.clientDocumentList" class="imp-documents-item">
+      Important Documents <span class="badge badge-danger" data-ng-if="!!badgeNotif">{{ badgeNotif }}</span>
+    </a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'reports' }">
+    <a data-ui-sref="loggedIn.modules.reports" class="imp-documents-item">Reports</a>
+  </li>
+
+</ul>

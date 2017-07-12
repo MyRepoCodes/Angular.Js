@@ -1,0 +1,189 @@
+<form name="userForm" novalidate autocomplete="off">
+
+  <div class="header-tab">
+    <tabset class="tab-set">
+      <!-- Profile -->
+      <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+        <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+        <div class="content-tab">
+
+          <!-- START: Password -->
+          <div class="row-item" data-ng-click="env.row=8" data-ng-class="{ 'highlighted': env.row==8 }">
+            <label class="description">Old Password</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6" data-ng-class="{ 'has-error' : userForm.oldPassword.$invalid && (!userForm.oldPassword.$pristine || env.showValid) }">
+                  <input type="password" name="oldPassword"
+                         class="form-control"
+                         data-ng-model="paramsChangePassword.oldPassword"
+                         tabindex="8"
+                         placeholder="*******"
+                         ng-if="currentUser.securityQuestions.length > 0"
+                         ng-required="updateRequired"
+                         autocomplete="off"/>
+                  <input type="password" name="oldPassword"
+                         class="form-control"
+                         data-ng-model="paramsChangePassword.oldPassword"
+                         ng-if="currentUser.securityQuestions.length === 0"
+                         tabindex="8"
+                         ng-required="userForm.password"
+                         autocomplete="off"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-item" data-ng-click="env.row=9" data-ng-class="{ 'highlighted': env.row==9 }">
+            <label class="description">New Password</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6" data-ng-class="{ 'has-error' : (userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)) || env.passwordExist }">
+                  <a style="display: block"
+                     tooltips
+                     tooltip-show-trigger="click"
+                     tooltip-hide-trigger="change"
+                     tooltip-lazy="false"
+                     tooltip-side="top"
+                     tooltip-class="tooltip-password"
+                     tooltip-content="{{ 'tooltip.password' | translate }}"
+                     tooltip-password="userForm.password"
+                     tooltip-show-box="{{ (userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)) || env.passwordExist  }}">
+                    <input id="password" type="password" name="password"
+                           class="form-control"
+                           data-ng-model="paramsChangePassword.password"
+                           data-ng-minlength="{{ configs.passwordMinLength }}"
+                           data-password-equal="[currentUser.username, params.firstName, params.lastName]"
+                           tabindex="9"
+                           data-ng-pattern="patternRegexs.password"
+                           autocomplete="off"
+                           onfocus="$(this).parent().trigger('click')"
+                           onblur="$(this).parent().trigger('change')"/>
+                  </a>
+                  <meter-password
+                      password="userForm.password"
+                      option="{ minLength: configs.passwordMinLength }">
+                  </meter-password>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-item" data-ng-click="env.row=10" data-ng-class="{ 'highlighted': env.row==10 }">
+            <label class="description">Confirm Password</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6"
+                     data-ng-class="{ 'has-error' : userForm.confirmPassword.$invalid && (!userForm.confirmPassword.$pristine || env.showValid) }">
+                  <input type="password" name="confirmPassword"
+                         class="form-control"
+                         data-ng-model="paramsChangePassword.confirmPassword"
+                         data-ng-minlength="{{ configs.passwordMinLength }}"
+                         data-ng-pattern="patternRegexs.password"
+                         data-password-verify="paramsChangePassword.password"
+                         tabindex="10"
+                         autocomplete="off"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END: Password -->
+
+          <!-- Question 1 -->
+          <div class="row-item" data-ng-click="env.row=11" data-ng-class="{ 'highlighted': env.row==11 }">
+            <label class="description">Password Recovery Question 1</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-12" data-ng-class="{ 'has-error' : userForm.question1.$invalid && (!userForm.question1.$pristine || env.showValid) }">
+                  <select name="question1"
+                          class="form-control"
+                          data-ng-change="change(1)" 
+                          ng-model="paramsQuestionSecurity.question1" tabindex="11">                        
+                         <option ng-selected="{{paramsQuestionSecurity.question1 === qus.questionID}}" ng-repeat="qus in questions1" value={{qus.questionID}}>{{qus.questionText}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Answer 1 -->
+          <div class="row-item" data-ng-click="env.row=12" data-ng-class="{ 'highlighted': env.row==12 }">
+            <label class="description">Answer 1</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-12" data-ng-class="{ 'has-error' : userForm.answer1.$invalid && (!userForm.answer1.$pristine || env.showValid) }">
+                  <input type="text"
+                         name="answer1"
+                         class="form-control"
+                         ng-if="currentUser.securityQuestions.length > 0"
+                         data-ng-model="paramsQuestionSecurity.answer1"
+                         placeholder="**********"
+                         tabindex="12"/>
+                  <input type="text"
+                         name="answer1"
+                         class="form-control"
+                         ng-if="currentUser.securityQuestions.length === 0"
+                         data-ng-model="paramsQuestionSecurity.answer1"
+                         placeholder="Answer Question 1"
+                         tabindex="12"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Question 2 -->
+          <div class="row-item" data-ng-click="env.row=13" data-ng-class="{ 'highlighted': env.row==13 }">
+            <label class="description">Password Recovery Question 2</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-12"
+                     data-ng-class="{ 'has-error' : userForm.question2.$invalid && (!userForm.question2.$pristine || env.showValid) }">
+                <select name="question2"
+                          class="form-control"
+                          data-ng-model="paramsQuestionSecurity.question2"
+                           data-ng-change="change(2)"   
+                          tabindex="13">
+               <option ng-selected="{{paramsQuestionSecurity.question2 === qus.questionID}}" ng-repeat="qus in questions2" value={{qus.questionID}}>{{qus.questionText}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Answer 2 -->
+          <div class="row-item" data-ng-click="env.row=14" data-ng-class="{ 'highlighted': env.row==14 }">
+            <label class="description">Answer 2</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-12"
+                     data-ng-class="{ 'has-error' : userForm.answer2.$invalid && (!userForm.answer2.$pristine || env.showValid) }">
+                  <input type="text"
+                         name="answer2"
+                         class="form-control"
+                         data-ng-model="paramsQuestionSecurity.answer2"
+                         ng-if="currentUser.securityQuestions.length > 0"
+                         placeholder="**********"
+                         tabindex="14"/>
+                  <input type="text"
+                         name="answer2"
+                         class="form-control"
+                         data-ng-model="paramsQuestionSecurity.answer2"
+                         ng-if="currentUser.securityQuestions.length === 0"
+                         placeholder="Answer Question 2"
+                         tabindex="14"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </tab>
+    </tabset>
+  </div>
+
+  <div class="content-footer">
+    <div class="buttons" data-ng-click="env.row=0">
+      <button class="btn btn-green" data-ng-click="update(userForm)" tabindex="100">Save changes</button>
+      <!--<button class="btn btn-green" data-ng-if="env.totalTab>env.currentTab" data-ng-click="continue(userForm.$valid)" tabindex="100">Continue</button>-->
+      <button class="btn btn-white" data-ng-click="cancel()" tabindex="101">Cancel</button>
+    </div>
+    <!--<div class="alert alert-danger" data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid">Entered invalid. Please check your data.</div>-->
+    <br data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid"/>
+    <div class="alert alert-danger" data-ng-if="env.error">{{ env.error }}</div>
+    <div class="alert alert-success" data-ng-if="env.success">{{ env.success }}</div>
+    <div class="alert alert-info" data-ng-if="env.inforChangePassword">{{ env.inforChangePassword }}</div>
+  </div>
+</form>

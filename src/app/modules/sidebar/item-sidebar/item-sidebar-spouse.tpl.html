@@ -1,0 +1,6 @@
+<ul data-ng-if="!isParticipantBeniCompSelect()"
+    data-ng-controller="SidebarParticipantController"
+    data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-spouse-bca.tpl.html'"></ul>
+<ul data-ng-if="isParticipantBeniCompSelect()"
+    data-ng-controller="SidebarParticipantController"
+    data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-spouse-bcs.tpl.html'"></ul>

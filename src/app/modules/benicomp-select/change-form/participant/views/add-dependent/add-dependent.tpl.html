@@ -1,0 +1,210 @@
+<div class="modal-body modal-body-default modal-add-dependent">
+    <div class="panel-body-modal">
+        <div class="form-content">
+            <div class="form-content-summary">
+                My Dependents
+            </div>
+
+            <div class="panel panel-green">
+                <div class="panel-body">
+                    <form name="form" novalidate autocomplete="off">
+
+                        <div class="row-item">
+                            <h3>Add Dependent</h3>
+                        </div>
+                        <!-- nameChangeDependentsCount -->
+                        <div class="row-item" data-ng-click="env.row='addTerminateDependentCount'" data-ng-class="{ 'highlighted': env.row=='addTerminateDependentCount' }">
+                            <label class="description">How Many Dependents?<span class="is-required"> *</span></label>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form.addTerminateDependentCount.$invalid && (!form.addTerminateDependentCount.$pristine || env.showValid) }">
+                                        <select name="addTerminateDependentCount" class="form-control" required="required" data-ng-model="params.addTerminateDependentCount"
+                                            data-ng-options="item.id as item.label for item in env.nameChangeDependentsCount"
+                                            tabindex="39">
+        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dependent list -->
+                        <div ng-repeat="indexDependent in getNumber(params.addTerminateDependentCount) track by $index">
+
+                            <div class="dotted-line"></div>
+                            <div class="row-item">
+                                <label class="fs-20">Dependent {{$index + 1}}</label>
+                            </div>
+
+                            <!-- target -->
+                            <div style="display:none;" class="row-item" data-ng-click="env.row='addTerminateDependentTarget' + $index" data-ng-class="{ 'highlighted': env.row=='addTerminateDependentTarget' + $index }">
+                                <label class="description">I would like to: <span class="is-required"> *</span></label>
+                                <div class="content">
+                                    <div class="row">
+
+                                        <input name="addTerminateDependentTarget{{$index}}" type="text" value="add" class="form-control" data-ng-model="params.addTerminateDependentList[$index].target"
+                                        />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- effectiveDate -->
+                            <date-input data-form="form" data-ng-model="params.addTerminateDependentList[$index].effectiveDate" data-control-label="Effective Date"
+                                data-values="env" data-row="effectiveDate{{$index + 1}}" data-tabindex="{{$index + 40 + 0.1}}"
+                                required></date-input>
+
+                            <!-- dependentName -->
+                     
+                            <name-input data-form="form" data-control-label="Name"
+                                data-ng-params="params.addTerminateDependentList[$index].dependentName" data-env="env" data-tabindex="{{$index + 40 + 0.2}}"
+                                required></name-input>
+
+                            <!-- dependentDOB -->
+                            <date-input data-form="form" data-ng-model="params.addTerminateDependentList[$index].dependentDob" data-control-label="DOB"
+                                data-values="env" data-row="dependentDOB{{$index + 1}}"
+                                data-tabindex="{{$index + 40 + 0.3}}" required></date-input>
+
+                            <!-- dependentSex -->
+                            <div class="row-item" data-ng-click="env.row='dependentSex' + $index" data-ng-class="{ 'highlighted': env.row=='dependentSex' + $index }">
+                                <label class="description">Sex <span class="is-required"> *</span></label>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['dependentSex' + $index].$invalid && (!form['dependentSex' + $index].$pristine || env.showValid) }">
+                                            <select name="dependentSex{{$index}}" class="form-control" 
+                                            required="required" 
+                                                data-ng-model="params.addTerminateDependentList[$index].dependentSex"
+                                                 data-ng-options="idx as choice for (idx, choice) in env.sexList"
+                                                tabindex="{{$index + 40 + 0.4}}">
+          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- relationship To Insured -->
+                            <div class="row-item" data-ng-click="env.row='relationshipToInsured' + $index" data-ng-class="{ 'highlighted': env.row=='relationshipToInsured' + $index }">
+                                <label class="description">Relationship to Insured <span class="is-required"> *</span></label>
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['relationshipToInsured' + $index].$invalid &&
+             (!form['relationshipToInsured' + $index].$pristine || env.showValid) }">
+                                            <select name="relationshipToInsured{{$index}}" class="form-control" required="required" data-ng-disabled="params.addTerminateDependentList[$index].target === 'term'"
+                                                data-ng-model="params.addTerminateDependentList[$index].relationshipToInsured"
+                                                data-ng-options="item.id as item.label for item in env.relationshipToInsured"
+                                                tabindex="{{$index + 40 + 0.5}}">
+          </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information if "Other" -->
+                            <div class="row-item" data-ng-if="params.addTerminateDependentList[$index].relationshipToInsured === 'other'" data-ng-click="env.row='relationshipToInsuredOther' + $index"
+                                data-ng-class="{ 'highlighted': env.row=='relationshipToInsuredOther' + $index,
+                      'has-error': form['relationshipToInsuredOther' + $index].$invalid &&
+                      (!form['relationshipToInsuredOther' + $index].$pristine || env.showValid)
+                    }">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['relationshipToInsuredOther' + $index].$invalid &&
+             (!form['relationshipToInsuredOther' + $index].$pristine || env.showValid) }">
+                                            <input name="relationshipToInsuredOther{{$index}}" type="text" required class="form-control" data-ng-model="params.addTerminateDependentList[$index].relationshipToInsuredOther"
+                                                tabindex="{{$index + 40 + 0.6}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- Termination -->
+
+                            <div ng-if="params.addTerminateDependentList[$index].target === 'term'">
+                                <!-- Reason for Termination  -->
+                                <div class="row-item" data-ng-click="env.row='terminateDependentReason' + $index" data-ng-class="{ 'highlighted': env.row=='terminateDependentReason' + $index }">
+                                    <label class="description">Reason for Termination <span class="is-required"> *</span></label>
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['terminateDependentReason' + $index].$invalid &&
+             (!form['terminateDependentReason' + $index].$pristine || env.showValid) }">
+                                                <select name="terminateDependentReason{{$index}}" class="form-control" required="required" data-ng-model="params.addTerminateDependentList[$index].reason"
+                                                    data-ng-options="item.id as item.label for item in env.terminateDependentReason"
+                                                    tabindex="{{$index + 40 + 0.7}}">
+            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- Addition -->
+                            <div>
+                                <!-- Reason for Termination  -->
+                                <div class="row-item" data-ng-click="env.row='addDependentReason' + $index" data-ng-class="{ 'highlighted': env.row=='addDependentReason' + $index }">
+                                    <label class="description">Reason for Addition <span class="is-required"> *</span></label>
+                                    <div class="content">
+                                        <div class="row">
+                                            <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['addDependentReason' + $index].$invalid &&
+             (!form['addDependentReason' + $index].$pristine || env.showValid) }">
+                                                <select name="addDependentReason{{$index}}" class="form-control" required="required" data-ng-model="params.addTerminateDependentList[$index].reason"
+                                                    data-ng-options="item.id as item.label for item in env.addDependentReason"
+                                                    tabindex="{{$index + 40 + 0.8}}">
+            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information if "Other" -->
+
+                            <div class="row-item" data-ng-if="params.addTerminateDependentList[$index].reason === 'other'" data-ng-click="env.row='reasonOther' + $index"
+                                data-ng-class="{ 'highlighted': env.row=='reasonOther' + $index,
+                      'has-error': form['reasonOther' + $index].$invalid && (!form['reasonOther' + $index].$pristine || env.showValid)
+                    }">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['reasonOther' + $index].$invalid &&
+             (!form['reasonOther' + $index].$pristine || env.showValid) }">
+                                            <input name="reasonOther{{$index}}" type="text" required class="form-control" data-ng-model="params.addTerminateDependentList[$index].reasonOther"
+                                                tabindex="{{$index + 40 + 0.9}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <!-- Check box agree -->
+                        <div class="dotted-line"></div>
+                        <div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+                            <div class="content">
+                                <div class="checkbox-line">
+                                    <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="996" />
+                                    <label class="choice" for="checkBoxAgree">I understand that by checking this box I am confirming all information provided is correct and will be used
+by BeniComp Insurance Company moving forward.<span class="is-required"> *</span></label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <date-input data-form="form" data-ng-model="params.signedDate" data-control-label="Signed Date" data-param-type="signedDate"
+                            data-values="env" data-row="signedDate" data-tabindex="997" readonly></date-input>
+                        <div class="group-buttons">
+                            <button class="btn btn-green margin-right-10" data-ng-click="addDependent(form.$valid, params)" tabindex="998">Submit</button>
+                            <button class="btn btn-default" data-ng-click="cancel()" tabindex="999">Cancel</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

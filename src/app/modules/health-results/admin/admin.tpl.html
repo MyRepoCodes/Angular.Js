@@ -1,0 +1,15 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Health Results</h4>
+  </div>
+  <div class="panel-body admin-health-results">
+    <div class="panel-manager-tool" ng-if="!isClientManager">
+      <div class="toolbar">
+        <a class="btn" data-ng-click="setCurrentPage(0)" data-ng-class="{ 'active': env.currentPage==0 }">Manage Health Results</a>
+        <a class="btn" data-ng-click="setCurrentPage(1)" data-ng-class="{ 'active': env.currentPage==1 }">Upload Health Results</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-content" data-ui-view="manager-content"></div>
+  </div>
+</div>

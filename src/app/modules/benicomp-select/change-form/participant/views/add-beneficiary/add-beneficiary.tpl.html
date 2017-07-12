@@ -1,0 +1,118 @@
+<div class="dotted-line"></div>
+<div class="row-item">
+  <h3>AD&D Beneficiary</h3>
+</div>
+
+
+<!---------------- Primary Beneficiary ---------------->
+<div ng-if="true">
+
+  <div class="row-item">
+    <label class="fs-15">Primary Beneficiary</label>
+  </div>
+
+  <!-- Current Primary Beneficiary -->
+  <div class="row">
+    <!-- Name-->
+    <div class="form-group col-xs-6">
+      <div class="row-item" data-ng-click="env.row='addbCurrentPrimaryBeneficiary'" data-ng-class="{ 'highlighted': env.row=='addbCurrentPrimaryBeneficiary',
+                      'has-error': form.addbCurrentPrimaryBeneficiary.$invalid && (!form.addbCurrentPrimaryBeneficiary.$pristine || env.showValid)
+                    }">
+        <label class="description">Name</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12" data-ng-class="{ 'has-error': form.addbCurrentPrimaryBeneficiary.$invalid && (!form.addbCurrentPrimaryBeneficiary.$pristine || env.showValid) }">
+              <input name="addbCurrentPrimaryBeneficiary" type="text" class="form-control" data-ng-model="params.addbCurrentPrimaryBeneficiary"
+                 tabindex="9" />
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- addbNewPrimaryBeneficiaryDOB -->
+    <div class="form-group col-xs-6">
+      <date-input data-form="form" data-ng-model="params.addbNewPrimaryBeneficiaryDob" data-control-label="DOB" data-values="env"
+        data-row="NewPrimaryBeneficiaryDOB" data-tabindex="10" ></date-input>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <!-- addbNewPrimaryBeneficiarySSN-->
+    <div class="form-group col-xs-6">
+      <ssn-input data-form="form" data-is-show-full="true" data-ng-model="params.addbNewPrimaryBeneficiarySsn" data-control-label="Social Security Number"
+        data-env="env" data-row="addbNewPrimaryBeneficiarySsn" data-tabindex="11" ></ssn-input>
+    </div>
+
+    <!-- Effective Date -->
+    <div class="form-group col-xs-6">
+      <date-input data-form="form" data-ng-model="params.addbNewPrimaryBeneficiaryEffectiveDate" data-control-label="Effective Date"
+        data-values="env" data-row="NewPrimaryBeneficiaryEffectiveDate" data-tabindex="12"></date-input>
+    </div>
+  </div>
+
+
+
+
+
+</div>
+
+
+<!---------------- Contingent Beneficiary ---------------->
+<div ng-if="true">
+
+  <div class="row-item">
+    <label class="fs-15">Contingent Beneficiary</label>
+  </div>
+  <div class="row">
+
+    <!-- Current Primary Beneficiary -->
+    <div class="form-group col-xs-6">
+      <div class="row-item" data-ng-click="env.row='addbCurrentContingentBeneficiaryName'" data-ng-class="{ 'highlighted': env.row=='addbCurrentContingentBeneficiaryName',
+                      'has-error': form.addbCurrentContingentBeneficiaryName.$invalid && (!form.addbCurrentContingentBeneficiaryName.$pristine || env.showValid)
+                    }">
+        <label class="description">Name</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-12" data-ng-class="{ 'has-error': form.addbCurrentContingentBeneficiaryName.$invalid && (!form.addbCurrentContingentBeneficiaryName.$pristine || env.showValid) }">
+              <input name="addbCurrentContingentBeneficiaryName" type="text" class="form-control" data-ng-model="params.addbCurrentContingentBeneficiaryName"
+                 tabindex="13" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <!-- New Contingent Beneficiary DOB -->
+    <div class="form-group col-xs-6">
+      <date-input data-form="form" data-ng-model="params.addbNewContingentBeneficiaryDob" data-control-label="DOB" data-values="env"
+        data-row="NewContingentBeneficiaryDOB " data-tabindex="14" ></date-input>
+    </div>
+
+
+  </div>
+
+
+  <div class="row">
+    <!-- New Contingent Beneficiary SS# -->
+    <div class="form-group col-xs-6">
+
+      <ssn-input data-form="form" data-is-show-full="true" data-ng-model="params.addbNewContingentBeneficiarySsn" data-control-label="Social Security Number"
+        data-env="env" data-row="addbNewContingentBeneficiarySsn" data-tabindex="15" ></ssn-input>
+    </div>
+
+    <!-- Effective Date -->
+    <div class="form-group col-xs-6">
+      <date-input data-form="form" data-ng-model="params.addbNewContingentBeneficiaryEffectiveDate" data-control-label="Effective Date"
+        data-values="env" data-row="addbNewContingentBeneficiaryEffectiveDate" data-tabindex="16" ></date-input>
+    </div>
+  </div>
+
+</div>

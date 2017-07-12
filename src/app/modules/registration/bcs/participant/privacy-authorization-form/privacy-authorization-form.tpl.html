@@ -1,0 +1,11 @@
+<form name="paForm" novalidate>
+  <div class="form-description">
+    <h2>Privacy Rule Authorization</h2>
+    <div class="summary">This form is the participant's signed permission to allow a covered entity to discuss or disclose the participant's protected health information (PHI) that is described below for the purpose(s) and to the recipient(s) stated in this Authorization.</div>
+  </div>
+  <div data-ng-include="'modules/benicomp-select/templates/privacy-authorization-form-input.tpl.html'"></div>
+  <div class="buttons">
+    <button class="btn btn-white" data-ng-click="previous()" tabindex="11"><i class="fa fa-chevron-left"></i> Previous</button>
+    <button class="btn btn-green" data-ng-click="submit(paForm.$valid)" tabindex="12">SUBMIT</button>
+  </div>
+</form>

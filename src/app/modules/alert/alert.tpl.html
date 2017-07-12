@@ -1,0 +1,19 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title text-center">{{ title }}</h3>
+    <div class="modal-summary" data-ng-if="summary">{{ summary }}</div>
+    <div class="form-group">
+        <strong ng-bind-html="message"></strong>
+    </div>
+    <div class="groupbuttons" style="text-align: center;" data-ng-if="style == 'ok'">
+        <button class="btn btn-green" data-ng-click="ok()">Ok</button>
+    </div>
+    <div class="groupbuttons" style="text-align: center;" data-ng-if="style == 'yesNo'">
+        <button class="btn btn-green" data-ng-click="ok()" ng-bind-html="title_button_ok"></button>
+        <button class="btn btn-default" data-ng-click="cancel()" ng-bind-html="title_button_cancel"></button>
+    </div>
+    <div class="groupbuttons" style="text-align: center;" data-ng-if="style == 'deleteCancel'">
+        <button class="btn btn-green" data-ng-click="ok()">Delete</button>
+        <button class="btn btn-green" data-ng-click="cancel()">Cancel</button>
+    </div>
+</div>

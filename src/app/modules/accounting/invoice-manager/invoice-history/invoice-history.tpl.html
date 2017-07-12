@@ -1,0 +1,127 @@
+<div class="panel panel-green panel-manager invoice-history">
+  <div class="panel-heading">
+    <h4 class="text-center">Invoice History</h4>
+  </div>
+  <div class="panel-body">
+
+
+    <!-- breadcrumb -->
+    <div class="panel-manager-tool ng-scope in">
+      <div class="pull-left">
+        <div class="breadcrumb">
+          <a data-ng-click="goParent()" class="ng-binding">Invoice History</a>
+          <span>&gt;</span>
+          <span class="" ng-bind="spoolerInfo.clientName"></span>
+        </div>
+      </div>
+
+      <div class="pull-right">
+
+        <div class="dropdown btn claims-label">
+          <span class="dropdown-toggle" ng-click="envLabelClaim.isOpen = !envLabelClaim.isOpen">Select Fields<i
+                    class="fa fa-angle-down"></i></span>
+
+          <div class="dropdownMenu" ng-if="envLabelClaim.isOpen">
+            <label ng-click="envLabelClaim.isOpen = !envLabelClaim.isOpen " class="close_filter"><a
+                href=""
+                title="close">X</a></label>
+
+            <label ng-repeat="item in listLabel" class="ui-checkbox">
+                <input type="checkbox"
+                       ng-change="selectedLabel(item)"
+                       ng-model="item.value">
+                <span ng-bind="item.label"></span>
+              </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+
+    <!-- icon-search -->
+    <div class="col-xs-12">
+      <div class="box-filter">
+        <div class="input-group">
+          <input class="form-control input-filter" data-ng-model="filterSurvey.answer" placeholder="Search" />
+          <span class="input-group-addon"><i class="icon icon-search"></i></span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="table-container panel-contactManger">
+          <div class="" data-ng-class="{'full-control' : tableParams.data.length > 0 && !loading}">
+            <div class="table-double-content">
+              <div class="table-responsive table-responsive-pagination">
+                <table ng-table="tableParams" show-filter="false" class="table">
+
+                  <thead>
+                    <tr>
+
+
+
+                      <th>
+                        <div class="padding-left-6">#</div>
+                      </th>
+
+                      <th class="sortable" ng-if="label.value" ng-repeat="(key,label) in  listLabel" ng-class="{
+                                    'sort-asc': tableParams.isSortBy(label.name, 'asc'),
+                                    'sort-desc': tableParams.isSortBy(label.name, 'desc')
+                                  }" ng-click="tableParams.sorting(label.name, tableParams.isSortBy(label.name, 'asc') ? 'desc' : 'asc')">
+                        <div>
+                          {{label.label}}
+                        </div>
+                      </th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr ng-repeat="(key,item) in tableParams.data" class="cursor-pointer">
+
+                      <td><div class="padding-left-6">{{key + 1}}</div</td>
+
+                      <td ng-if="label.value" ng-repeat="label in  listLabel">
+
+                        <span ng-if="label.name === 'charge'">{{ item.charge|invoiceCurrency:2:'$'}}</span>
+                        <span ng-if="label.name === 'payAmount'">{{item.payAmount|invoiceCurrency:2:'$'}}</span>
+                        <span ng-if="label.name === 'payee'">{{ item.payee }}</span>
+
+                        <span ng-if="label.name !== 'charge' &&
+                    label.name !== 'payAmount' &&
+                    label.name !== 'payee'">{{item[label.name]}}</span>
+
+                      </td>
+
+                    </tr>
+
+
+                    <tr class="empty" data-ng-if="loading">
+                      <td colspan="8" class="text-center">
+                        <div class="loading-indicator"></div>
+                      </td>
+                    </tr>
+                    <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                      <td colspan="8" class="text-center">
+                        {{ 'faqs.empty' | translate }}
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="">
+    <div class="progressbar" data-ng-class="{danger: isDanger()}">
+        <div class="progress-top">
+            <div class="progress-top-content">
+                <div class="progress-top-header" style="width: calc(100% - 190px) !important;">
+                    <span class="heading">{{ title }}</span>
+                    <span class="idea-range">Ideal range: <span data-ng-bind-html="rangeText"></span></span>
+                    <b>Your Result:&nbsp;{{resultText | safe_html}}
+                      <!--<span class="result-text" data-ng-bind-html="resultText | safe_html"></span>-->
+                    </b>
+                </div>
+                <div class="text-alert warning" data-ng-show="isDanger()">
+                    Click for more <span style="white-space: nowrap">information <span
+                        class="glyphicon glyphicon-warning-sign danger"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="progress-item">
+            <div class="progress">
+                <div class="bar" data-ng-style="styleBar"></div>
+                <div class="label-range" data-ng-style="styleStart">
+                    {{ start }}
+                </div>
+                <div class="label-range" data-ng-style="styleEnd">
+                    {{ end }}
+                </div>
+                <div class="label-value value top popover" data-ng-style="styleValue">
+                    <div class="arrow" data-ng-style="styleIndicator"></div>
+                    <div class="popover-inner">
+                        <div class="popover-content value-content">{{ value }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

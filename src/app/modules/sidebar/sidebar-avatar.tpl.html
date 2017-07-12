@@ -1,0 +1,26 @@
+<div class="modal-body modal-body-default uploadImageCrop">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title">Profile Photo</h3>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>Select another image file:
+                        <file-upload data-ng-model="uploadParams.file" 
+                        data-id-input="'avatar-input-upload'" 
+                        data-id-button="'avatar-button-upload'" file-types="uploadParams.fileTypes"></file-upload>
+                    </div>
+                    <p></p>
+                    <div class="cropArea">
+                        <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="buttons text-center">
+            <button class="btn btn-green" data-ng-click="submit(myCroppedImage)">Save</button>
+        </div>
+    </form>
+</div>

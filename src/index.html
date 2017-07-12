@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html scrolly data-ng-app="app" data-ng-controller="AppController">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title data-ng-bind="pageTitle"></title>
+
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico"/>
+  <link rel="apple-touch-icon" href="assets/images/pulse-icon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico"/>
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
+  <!--[if lt IE 9]>
+  <link rel="stylesheet" href="assets/css/ie8.css">
+  <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/misc/pceholdr.js"></script>
+  <![endif]-->
+
+  <!-- The following CSS are included as plugins and can be removed if unused-->
+  <!-- build -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,300,600,400" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" type="text/css" href="assets/css/angular-toggle-switch.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/plugins/form-multiselect/css/muli-select.min.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/css/daterangepicker.css"/>
+  <!--<link rel="stylesheet" type="text/css" href="assets/plugins/pines-notify/jquery.pnotify.default.css"/>-->
+  <link rel="stylesheet" type="text/css" href="assets/css/angular-tooltips.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/plugins/require/require.css"/>
+  <link rel="stylesheet" type="text/css" href="assets/plugins/add-to-homescreen/style/addtohomescreen.css"/>
+  <!-- endbuild -->
+
+  <!-- compiled CSS -->
+  <% styles.forEach(function(file) { %>
+  <link rel="stylesheet" type="text/css" href="<%= file %>"/>
+  <% }); %>
+
+  <script src="assets/plugins/jquery/jquery.min.js"></script>
+  <script src="assets/plugins/angular/angular.min.js"></script>
+  <script src="assets/plugins/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="assets/plugins/fixed-header-table/jquery.mousewheel.js"></script>
+  <script src="assets/plugins/fixed-header-table/jquery.fixedheadertable.js"></script>
+  <script src="assets/plugins/moment/moment.min.js"></script>
+  <script src="assets/plugins/underscore/underscore-min.js"></script>
+  <script src="assets/plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.js"></script>
+  <script src="assets/plugins/jquery.inputmask/dist/inputmask/jquery.inputmask.date.extensions.js"></script>
+  <script src="assets/plugins/jquery-autosize/jquery.autosize.min.js"></script>
+  <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="assets/plugins/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+  <script src="assets/plugins/spin.js/spin.js"></script>
+  <script src="assets/plugins/modernizr/modernizr.js"></script>
+  <script src="assets/plugins/file-saver.js/FileSaver.js"></script>
+  <script src="assets/plugins/angular-youtube-mb/src/angular-youtube-embed.js"></script>
+  <script src="assets/plugins/fullcalendar/dist/fullcalendar.js"></script>
+  <script src="assets/plugins/bootstrap3-timepicker/js/bootstrap-timepicker.min.js"></script>
+  <script src="assets/plugins/angular-ui-calendar/src/calendar.js"></script>
+  <script src="assets/plugins/fullcalendar/dist/fullcalendar.js"></script>
+
+  <script src="assets/plugins/signature_pad/signature_pad.min.js"></script>
+  <script src="assets/plugins/angular-signature/src/signature.js"></script>
+
+
+  <!-- Upload File -->
+  <script type="text/javascript" src="assets/plugins/uploadify/swfobject.js"></script>
+  <script type="text/javascript" src="assets/plugins/uploadify/jquery.uploadify.js"></script>
+  <script type="text/javascript" src="assets/plugins/uploadifive/jquery.uploadifive.js"></script>
+  <!--<script type="text/javascript" src="assets/plugins/jquery.jqplugin.min.js"></script>-->
+  <!-- End Upload File -->
+
+  <!-- compiled JavaScript -->
+  <% scripts.forEach(function(file) { %>
+  <script type="text/javascript" src="<%= file %>"></script>
+  <% }); %>
+
+  <!-- Include YT library and this directive -->
+  <!--<script src="https://www.youtube.com/iframe_api"></script>-->
+
+  <script type="text/javascript" src="assets/plugins/grids/grids.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/form-jasnyupload/fileinput.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/form-multiselect/js/jquery.multi-select.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/pines-notify/jquery.pnotify.min.js"></script>
+  <script type="text/javascript" src="assets/plugins/add-to-homescreen/src/addtohomescreen.js"></script>
+  <script type="text/javascript" src="assets/plugins/custom-js/menu.js"></script>
+</head>
+<body ng-class="{
+  'view-on-mobile': isUseMobile, 
+  'view-on-desktop': !isUseMobile, 
+  'is-authenticated': isAuthenticated, 
+  'not-login': !isAuthenticated, 
+  'cookieCreated':$state.includes('questionFrom'),
+  'loggin-as-participant': isParticipant}" 
+class="loggin-new-ui {{nameBrowser}} current-page-{{checkState}}" ng-mousemove="mouseMove()">
+
+<div class="loading-first">
+  <div class="loadingBSS">
+    <span>Loading</span>
+    <span class="l-1"></span>
+    <span class="l-2"></span>
+    <span class="l-3"></span>
+    <span class="l-4"></span>
+    <span class="l-5"></span>
+    <span class="l-6"></span>
+  </div>
+</div>
+
+<!--<span loading-spinner spinner-key="main-spinner"></span>-->
+<div class="spinner-background">
+  <div class="loading-indicator"></div>
+  <span loading-spinner spinner-key="main-spinner"></span>
+</div>
+
+<div data-ui-view="root" class="root" style="position: relative; min-height: 100%"></div>
+
+<!-- page-container -->
+<!--[if lt IE 9]>
+<script src="assets/es5-shim.js"></script>
+<script src="assets/json3.min.js"></script>
+<![endif]-->
+
+<!-- Add home screen -->
+<script>
+  addToHomescreen.removeSession();
+  addToHomescreen({
+    debug: false,           // activate debug mode in ios emulation
+    skipFirstVisit: false,	// show at first access
+    startDelay: 5,          // display the message right away
+    lifespan: 0,            // do not automatically kill the call out
+    displayPace: 0,         // do not obey the display pace
+    privateModeOverride: true,	// show the message in private mode
+    maxDisplayCount: 0      // do not obey the max display count
+  });
+</script>
+<!-- END: Add home screen -->
+
+</body>
+</html>

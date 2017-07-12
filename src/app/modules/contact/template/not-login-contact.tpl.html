@@ -1,0 +1,216 @@
+<div class="state-contact-not-login">
+
+  <div class="panel-body introduction">
+
+    <div class="row">
+      <!-- Content left-->
+      <div class="col-md-4 text-center" ng-class="{'have-content-error': authError}" data-ng-controller="LoginController">
+
+        <div class="">
+          <div class="logo-small">
+
+            <a href="#/">
+              <img src="assets/images/logo1.png">
+            </a>
+
+          </div>
+
+          <div ng-if="env.stickiesLogin && env.stickiesLogin.type ==='success'" class="content">
+            <div>Nailed it!</div>
+            <div class="step-name">Your account has been created. Please login to access your information</div>
+          </div>
+
+          <div ng-if="authError" class="content">
+            <div class="text-red">Oops!</div>
+            <div class="step-name" ng-if="authError === '1001'">Incorrect Password</div>
+            <div class="step-name" ng-if="authError === '1001'">You can click Forgot Password</div>
+
+            <div class="step-name" ng-if="authError === '1002'">Unrecognized User Name</div>
+            <div class="step-name" ng-if="authError === '1002'">You can click Forgot Username</div>
+
+            <div class="step-name" ng-if="authError !== '1002' && authError !== '1001'" ng-bind-html="authError"></div>
+          </div>
+
+        </div>
+
+        <div class="login">
+          <form ng-show="!env.isClickButtonLogin" name="loginForm" novalidate autocomplete="off">
+            <div class="form-group" data-ng-class="{ 'has-error' : loginForm.username.$invalid && (!loginForm.username.$pristine || showValid) }">
+              <input type="text" name="username" class="form-control" placeholder="Username" data-ng-model="user.username" autofocus="autofocus"
+                tabindex="1" required/>
+            </div>
+            <div class="form-group text-right">
+              <a class="btn-link" data-ng-click="goForgotUsername()">Forgot Username</a>
+            </div>
+            <div class="form-group" data-ng-class="{ 'has-error' : loginForm.password.$invalid && (!loginForm.password.$pristine || showValid) }">
+              <input type="password" name="password" class="form-control" placeholder="Password" data-ng-model="user.password" tabindex="2"
+                required/>
+            </div>
+            <div class="form-group text-right">
+              <a class="btn-link" data-ng-click="goForgotPassword()">Forgot Password</a>
+            </div>
+            <div class="form-group text-center" data-ng-if="!env.isClickButtonLogin">
+              <button class="btn btn-green btn-width-100" data-ng-click="login(loginForm.$valid)" tabindex="3">LOGIN</button>
+            </div>
+
+            <div class="alert alert-warning" data-ng-if="authReason">{{ authReason }}</div>
+          </form>
+
+
+
+          <div ng-if="!env.isClickButtonLogin && !env.stickiesLogin || (env.stickiesLogin && env.stickiesLogin.type !=='success')"
+            class="form-group text-center content-login-form">
+            Don't have an account?
+            <a data-ng-click="goFindAccount()" class="text-green">GET STARTED</a>
+
+          </div>
+          <div class="form-group text-center" data-ng-if="brand">
+            <div class="text-center">
+              <img class="logo-bank" data-ng-src="{{ brand }}" />
+            </div>
+          </div>
+
+          <div ng-show="env.isClickButtonLogin">
+
+            <div class="content-loading">
+              <div class="title">Loading</div>
+              <div id="fountainG">
+                <div id="fountainG_1" class="fountainG"></div>
+                <div id="fountainG_2" class="fountainG"></div>
+                <div id="fountainG_3" class="fountainG"></div>
+                <div id="fountainG_4" class="fountainG"></div>
+                <div id="fountainG_5" class="fountainG"></div>
+                <div id="fountainG_6" class="fountainG"></div>
+                <div id="fountainG_7" class="fountainG"></div>
+                <div id="fountainG_8" class="fountainG"></div>
+              </div>
+              <div class="content">Please don't touch the screen!</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Content right-->
+      <div class="col-md-8" data-ng-controller="ContactController">
+        <div class="form-contact-not-login">
+          <div class="alert alert-success" data-ng-if="env.success">
+            <div class="alert-header fs-16" translate="contact.alert.success.title"></div>
+            <div class="alert-body fs-16" translate="contact.alert.success.text"></div>
+          </div>
+
+          <form name="contactForm" novalidate autocomplete="off">
+            <div class="form-description">
+              <div class="fs-27">We're Here to Help!</div>
+
+              <p>Please fill out the information below to the best of your ability so we can help you as fast as humanly possible!
+                If you would like to speak with someone please call our customer service team at <span class="fontWeight text-green">1-866-222-0101</span>.
+              </p>
+
+            </div>
+
+            <div class="form-content-contact">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="row-item" data-ng-click="env.row=1" data-ng-class="{ 'highlighted': env.row==1,
+                                  'has-error': contactForm.firstName.$invalid && (!contactForm.firstName.$pristine || env.showValid) ||
+                                               contactForm.lastName.$invalid && (!contactForm.lastName.$pristine || env.showValid)
+                                }">
+                    <label class="description">Name<span class="is-required">*</span></label>
+                    <div class="content">
+                      <div class="row">
+                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': contactForm.firstName.$invalid && (!contactForm.firstName.$pristine || env.showValid) }">
+                          <input type="text" name="firstName" class="form-control" data-ng-model="params.firstName" tabindex="11" required/>
+                          <small class="control-label">First</small>
+                        </div>
+                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': contactForm.lastName.$invalid && (!contactForm.lastName.$pristine || env.showValid) }">
+                          <input type="text" name="lastName" class="form-control" data-ng-model="params.lastName" tabindex="12" required/>
+                          <small class="control-label">Last</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="row-item" data-ng-click="env.row=4" data-ng-class="{ 'highlighted': env.row==4,
+                                  'has-error': contactForm.email.$invalid && (!contactForm.email.$pristine || env.showValid)
+                                }">
+                    <label class="description">Email<span class="is-required">*</span></label>
+
+                    <div class="content">
+                      <div class="row">
+                        <div class="form-group col-xs-12" data-ng-class="{ 'has-error': contactForm.email.$invalid && (!contactForm.email.$pristine || env.showValid) }">
+                          <input type="email" name="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                            tabindex="17" required/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-ng-if="params.contactType == 0">
+                    <phone-input is-show-full="true" data-form="contactForm" data-ng-model="params.telephone" data-control-label="Phone" data-env="env"
+                      data-row="5" data-tabindex="18" required></phone-input>
+                  </div>
+
+                  <div data-ng-if="params.contactType != 0">
+                    <phone-input is-show-full="true" data-form="contactForm" data-ng-model="params.telephone" data-control-label="Phone" data-env="env"
+                      data-row="5" data-tabindex="18"></phone-input>
+                  </div>
+
+
+                  <div class="row-item" data-ng-click="env.row=8" data-ng-class="{ 'highlighted': env.row==8 }">
+                    <label class="description">What is your contact Preference?</label>
+                    <div class="content">
+
+                      <div class="radio-inline">
+                        <input id="contact_1" type="radio" name="contact" data-ng-value="1" data-ng-model="params.contactType" tabindex="26">
+                        <label class="choice" for="contact_1">Email</label>
+                      </div>
+                      <div class="radio-inline">
+                        <input id="contact_2" type="radio" name="contact" data-ng-value="0" data-ng-model="params.contactType" tabindex="27">
+                        <label class="choice" for="contact_2">Phone</label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-6">
+
+                  <div class="row-item" data-ng-click="env.row=9" data-ng-class="{ 'highlighted': env.row==9,
+                                  'has-error': contactForm.content.$invalid && (!contactForm.content.$pristine || env.showValid)
+                                }">
+                    <label class="description">Message</label>
+                    <div class="content">
+                      <div class="form-group" data-ng-class="{ 'has-error': contactForm.content.$invalid && (!contactForm.content.$pristine || env.showValid) }">
+                        <textarea class="form-control" id="content" name="content" rows="10" data-ng-model="params.content" tabindex="28" required/>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="buttons text-right" data-ng-click="env.row=0">
+                    <a class="btn btn-danger" href="#/" tabindex="29">CANCEL</a>
+                    <button class="btn btn-green" data-ng-click="submit(contactForm)" tabindex="29">SUBMIT</button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>

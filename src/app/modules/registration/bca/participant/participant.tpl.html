@@ -1,0 +1,45 @@
+<div class="panel-heading">
+  <h4 class="text-center">
+    <span style="text-transform: capitalize">{{ clientName }}</span> {{ currentYear }} Registration
+  </h4>
+</div>
+<div class="panel-body introduction">
+  <!-- Close -->
+  <div class="form-content" data-ng-if="!env.opening">
+    <div class="form-content-summary">
+      <h1 style="color: #e94f4f;">Registration is now closed.</h1>
+      <div data-ng-include="'modules/registration/templates/closed-message.tpl.html'"></div>
+    </div>
+  </div>
+  <!-- Open -->
+  <div class="form-content" data-ng-if="env.opening">
+    <div class="form-content-summary">
+      <h1>Registration is open from
+        <span class="text-green text-nowrap">{{ env.registerStartDate | date:'MM/dd/yyyy'}} - {{ env.registerEndDate | date:'MM/dd/yyyy'}}</span>.
+      </h1>
+      <p>
+        In order to be eligible, the steps below must be completed before registration closes. If you have any issues or concerns during registration,
+        please contact us through our <a class="text-green" data-ng-click="goContact()">contact form</a> or call
+        <span class="text-green text-phone">1-866-222-0102</span>.
+      </p>
+    </div>
+    <breadcrumb-tabs class="form-content-breadcrumb" step="step"></breadcrumb-tabs>
+    <div class="form-content-title" data-ng-if="step<3">Please complete STEP {{ step+1 }} below</div>
+    <div class="panel panel-green warp-shadow">
+      <div class="panel-body">
+        <div data-ng-if="step == registrationStatus.register || step == registrationStatus.editRegister"
+             data-ng-include="'modules/registration/bca/participant/register/register.tpl.html'"
+             data-ng-controller="RegistrationBCAParticipantRegisterController"></div>
+        <div data-ng-if="step == registrationStatus.hra || step == registrationStatus.editHra"
+             data-ng-include="'modules/registration/bca/participant/hra/hra.tpl.html'"
+             data-ng-controller="RegistrationBCAParticipantHraController"></div>
+        <div data-ng-if="step == registrationStatus.schedule"
+             data-ng-include="'modules/registration/bca/participant/schedule/schedule.tpl.html'"
+             data-ng-controller="RegistrationBCAParticipantScheduleController"></div>
+        <div data-ng-if="step == registrationStatus.completed"
+             data-ng-include="'modules/registration/bca/participant/complete/complete.tpl.html'"
+             data-ng-controller="RegistrationBCAParticipantCompleteController"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,171 @@
+<div class="panel panel-green state-contact">
+  <div class="panel-heading">
+    <h4 class="text-center">Contact Form</h4>
+  </div>
+  <div class="panel-body introduction">
+    <div class="form-content form">
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+          <div class="alert alert-success" data-ng-if="env.success">
+            <div class="alert-header fs-16" translate="contact.alert.success.title"></div>
+            <div class="alert-body fs-16" translate="contact.alert.success.text"></div>
+          </div>
+          <form name="contactForm" novalidate autocomplete="off">
+            <div class="form-description">
+              <h2>Need something? We're here to help.</h2>
+
+              <p>Please fill out the details below to the best of your ability so we can find your account and assist you quickly.
+                If you have questions you may also call <span class="fontWeight colorBlack text-phone">1-866-222-0102</span>.
+              </p>
+            </div>
+            <div class="row-item" data-ng-click="env.row=1" data-ng-class="{ 'highlighted': env.row==1,
+                                  'has-error': contactForm.firstName.$invalid && (!contactForm.firstName.$pristine || env.showValid) ||
+                                               contactForm.lastName.$invalid && (!contactForm.lastName.$pristine || env.showValid)
+                                }">
+              <label class="description">Name<span class="is-required">*</span></label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6" data-ng-class="{ 'has-error': contactForm.firstName.$invalid && (!contactForm.firstName.$pristine || env.showValid) }">
+                    <input type="text" name="firstName" class="form-control" data-ng-model="params.firstName" tabindex="11" required/>
+                    <label class="control-label">First</label>
+                  </div>
+                  <div class="form-group col-xs-6" data-ng-class="{ 'has-error': contactForm.lastName.$invalid && (!contactForm.lastName.$pristine || env.showValid) }">
+                    <input type="text" name="lastName" class="form-control" data-ng-model="params.lastName" tabindex="12" required/>
+                    <label class="control-label">Last</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row-item" data-ng-click="env.row=2" data-ng-class="{ 'highlighted': env.row==2 }">
+              <label class="description">Company</label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6">
+                    <input type="text" name="company" class="form-control" data-ng-model="params.company" tabindex="13" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--<date-input data-control-label="Date of Birth"
+                        data-form="contactForm"
+                        data-ng-model="params.dateOfBirth"
+                        data-values="env"
+                        data-date-options="dateOptions"
+                        data-param-type="birthday"
+                        data-row="3"
+                        data-tabindex="14" required></date-input>-->
+            <div class="row-item" data-ng-click="env.row=4" data-ng-class="{ 'highlighted': env.row==4,
+                                  'has-error': contactForm.email.$invalid && (!contactForm.email.$pristine || env.showValid)
+                                }">
+              <label class="description">Email<span class="is-required">*</span></label>
+
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6" data-ng-class="{ 'has-error': contactForm.email.$invalid && (!contactForm.email.$pristine || env.showValid) }">
+                    <input type="email" name="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                      tabindex="17" required/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div data-ng-if="params.contactType == 0">
+              <phone-input data-form="contactForm" data-ng-model="params.telephone" data-control-label="Phone" data-env="env" data-row="5"
+                data-tabindex="18" required></phone-input>
+            </div>
+            <div data-ng-if="params.contactType != 0">
+              <phone-input data-form="contactForm" data-ng-model="params.telephone" data-control-label="Phone" data-env="env" data-row="5"
+                data-tabindex="18"></phone-input>
+            </div>
+
+            <!--<div class="row-item" data-ng-click="env.row=6" data-ng-class="{ 'highlighted': env.row==6 }">
+              <label class="description">Who would you like to contact?</label>
+
+              <div class="content">
+                <div class="radio-inline">
+                  <input id="contact_like_1" type="radio"
+                         name="contact_like"
+                         data-ng-value="0"
+                         data-ng-model="params.contactTo"
+                         tabindex="19">
+                  <label class="choice" for="contact_like_1">Health Coach</label>
+                </div>
+                <div class="radio-inline">
+                  <input id="contact_like_2" type="radio"
+                         name="contact_like"
+                         data-ng-value="1"
+                         data-ng-model="params.contactTo"
+                         tabindex="20">
+                  <label class="choice" for="contact_like_2">Customer Service</label>
+                </div>
+                <div class="radio-inline" data-ng-if="isEmployer">
+                  <input id="contact_like_3" type="radio"
+                         name="contact_like"
+                         data-ng-value="2"
+                         data-ng-model="params.contactTo"
+                         tabindex="21">
+                  <label class="choice" for="contact_like_3">Client Account Manager</label>
+                </div>
+
+              </div>
+            </div>-->
+
+            <div class="row-item" data-ng-if="params.contactTo=== 0" data-ng-click="env.row=7" data-ng-class="{ 'highlighted': env.row==7 ,'has-error': !validReasonForRequest() && env.showValid}">
+              <label class="description">Reason for requesting a BeniComp heath coach</label>
+
+              <div class="content">
+                <div class="checkbox-line">
+                  <input id="reason_1" type="checkbox" name="reason" data-ng-value="0" data-ng-model="params.reasons.nutritionCoaching" tabindex="22">
+                  <label class="choice" for="reason_1">Nutrition coaching</label>
+                </div>
+                <div class="checkbox-line">
+                  <input id="reason_2" type="checkbox" name="reason" data-ng-value="1" data-ng-model="params.reasons.fitnessCoaching" tabindex="23">
+                  <label class="choice" for="reason_2">Fitness coaching</label>
+                </div>
+                <div class="checkbox-line">
+                  <input id="reason_3" type="checkbox" name="reason" data-ng-value="2" data-ng-model="params.reasons.healthResultsExplanation"
+                    tabindex="24">
+                  <label class="choice" for="reason_3">Health results explanation</label>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="row-item" data-ng-click="env.row=8" data-ng-class="{ 'highlighted': env.row==8 }">
+              <label class="description">Contact Preference</label>
+              <div class="content">
+                <div class="radio-inline" ng-if="!isParticipant">
+                  <input id="contact_3" type="radio" name="contact" data-ng-value="2" data-ng-model="params.contactType" tabindex="25">
+                  <label class="choice" for="contact_3">Portal</label>
+                </div>
+
+                <div class="radio-inline">
+                  <input id="contact_1" type="radio" name="contact" data-ng-value="1" data-ng-model="params.contactType" tabindex="26">
+                  <label class="choice" for="contact_1">Email</label>
+                </div>
+                <div class="radio-inline">
+                  <input id="contact_2" type="radio" name="contact" data-ng-value="0" data-ng-model="params.contactType" tabindex="27">
+                  <label class="choice" for="contact_2">Phone</label>
+                </div>
+              </div>
+            </div>
+            <div class="row-item" data-ng-click="env.row=9" data-ng-class="{ 'highlighted': env.row==9,
+                                  'has-error': contactForm.content.$invalid && (!contactForm.content.$pristine || env.showValid)
+                                }">
+              <label class="description">Please include a detailed request in the box below. We will do our best to resolve your issue quickly.<span class="is-required">*</span></label>
+              <div class="content">
+                <div class="form-group" data-ng-class="{ 'has-error': contactForm.content.$invalid && (!contactForm.content.$pristine || env.showValid) }">
+                  <textarea class="form-control" id="content" name="content" rows="10" data-ng-model="params.content" tabindex="28" required/>
+                </div>
+              </div>
+            </div>
+            <div class="buttons" data-ng-click="env.row=0">
+              <button class="btn btn-green" data-ng-click="submit(contactForm)" tabindex="29">Submit</button>
+              <a class="btn btn-white" href="#/" tabindex="30">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

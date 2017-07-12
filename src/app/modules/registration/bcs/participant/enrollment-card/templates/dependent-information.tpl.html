@@ -1,0 +1,143 @@
+<!-- Marital Status -->
+<marital-status data-form="ecForm" data-ng-model="params.maritalStatus" data-control-label="Marital Status" data-env="env" data-row="'maritalStatus'" data-tabindex="1" required></marital-status>
+<spouse-input data-form="ecForm" data-participant-info="currentUser" data-status="params.maritalStatus" data-spouse-info="spouseInfo" data-callback="spouseCallback" data-env="env"></spouse-input>
+<!-- End Marital Status -->
+<!-- Start Dependents -->
+<div class="row-item"
+     data-ng-click="env.row='numberOfDependents'"
+     data-ng-class="{ 'highlighted': env.row=='numberOfDependents',
+                      'has-error': ecForm.numberOfDependents.$invalid && (!ecForm.numberOfDependents.$pristine || env.showValid)
+                    }">
+  <label class="description">Number of Dependents<span class="is-required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4" data-ng-class="{ 'has-error': ecForm.numberOfDependents.$invalid && (!ecForm.numberOfDependents.$pristine || env.showValid) }">
+        <input name="numberOfDependents" type="text" class="form-control"
+               data-ng-model="params.numberOfDependents"
+               readonly/>
+      </div>
+    </div>
+  </div>
+</div>
+<dependent-input data-form="ecForm" data-participant-info="currentUser" data-dependent-List="dependentList" data-callback="dependentCallback" data-env="env"></dependent-input>
+<!-- End Dependents -->
+<div class="row-item"
+     data-ng-click="env.row='primaryBeneficiaryForAdd'"
+     data-ng-class="{ 'highlighted': env.row=='primaryBeneficiaryForAdd',
+                      'has-error': ecForm.primaryBeneficiaryForAdd.$invalid && (!ecForm.primaryBeneficiaryForAdd.$pristine || env.showValid)
+                    }">
+  <label class="description">Primary Beneficiary for AD&D</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ecForm.primaryBeneficiaryForAdd.$invalid && (!ecForm.primaryBeneficiaryForAdd.$pristine || env.showValid) }">
+        <input name="primaryBeneficiaryForAdd" type="text" class="form-control"
+               data-ng-model="params.primaryBeneficiaryForAdd"
+               tabindex="2"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item"
+     data-ng-click="env.row='primaryBeneficiaryRelationship'"
+     data-ng-class="{ 'highlighted': env.row=='primaryBeneficiaryRelationship',
+                      'has-error': ecForm.primaryBeneficiaryRelationship.$invalid && (!ecForm.primaryBeneficiaryRelationship.$pristine || env.showValid)
+                    }">
+  <label class="description">Primary Beneficiary Relationship</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ecForm.primaryBeneficiaryRelationship.$invalid && (!ecForm.primaryBeneficiaryRelationship.$pristine || env.showValid) }">
+        <input name="primaryBeneficiaryRelationship" type="text" class="form-control"
+               data-ng-model="params.primaryBeneficiaryRelationship"
+               tabindex="3"/>
+      </div>
+    </div>
+  </div>
+</div>
+<ssn-input data-form="ecForm"
+           data-ng-model="params.primaryBeneficiarySsn"
+           data-control-label="Primary Beneficiary Social Security Number"
+           data-env="env"
+           data-row="'primaryBeneficiarySsn'"
+           data-tabindex="4"></ssn-input>
+<address-input data-form="ecForm"
+               data-control-label="Primary Beneficiary Address"
+               data-ng-params="params.primaryBeneficiaryAddress"
+               data-env="env"
+               data-row="'primaryBeneficiaryAddress'"
+               data-tabindex="5"></address-input>
+<div class="row-item"
+     data-ng-click="env.row='contingentBeneficiaryForAdd'"
+     data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryForAdd',
+                      'has-error': ecForm.contingentBeneficiaryForAdd.$invalid && (!ecForm.contingentBeneficiaryForAdd.$pristine || env.showValid)
+                    }">
+  <label class="description">Contingent Beneficiary for AD&D</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ecForm.contingentBeneficiaryForAdd.$invalid && (!ecForm.contingentBeneficiaryForAdd.$pristine || env.showValid) }">
+        <input name="contingentBeneficiaryForAdd" type="text" class="form-control"
+               data-ng-model="params.contingentBeneficiaryForAdd"
+               tabindex="6"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item"
+     data-ng-click="env.row='contingentBeneficiaryRelationship'"
+     data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryRelationship',
+                      'has-error': ecForm.contingentBeneficiaryRelationship.$invalid && (!ecForm.contingentBeneficiaryRelationship.$pristine || env.showValid)
+                    }">
+  <label class="description">Contingent Beneficiary Relationship</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ecForm.contingentBeneficiaryRelationship.$invalid && (!ecForm.contingentBeneficiaryRelationship.$pristine || env.showValid) }">
+        <input name="contingentBeneficiaryRelationship" type="text" class="form-control"
+               data-ng-model="params.contingentBeneficiaryRelationship"
+               tabindex="7"/>
+      </div>
+    </div>
+  </div>
+</div>
+<ssn-input data-form="ecForm"
+           data-ng-model="params.contingentBeneficiarySsn"
+           data-control-label="Contingent Beneficiary Social Security Number"
+           data-env="env"
+           data-row="'contingentBeneficiarySsn'"
+           data-tabindex="8"></ssn-input>
+<address-input data-form="ecForm"
+               data-control-label="Contingent Beneficiary Address"
+               data-ng-params="params.contingentBeneficiaryAddress"
+               data-env="env"
+               data-row="'contingentBeneficiaryAddress'"
+               data-tabindex="9"></address-input>
+<div class="dotted-bottom"></div>
+<div class="row-item">
+  <small>I certify that my eligible dependents and I are covered by a Base Health Plan as defined in the Employer's Participation Agreement and I Hereby request to be insured under the group
+    policy(ies) issued.
+  </small>
+</div>
+<div class="dotted-bottom"></div>
+<div class="row-item">
+  <small>Warning: Any person who knowingly presents a false or fraudulent claim for payment of a loss or benefit or who knowingly presents false information in an application for insurance is guilty
+    of a crime and may be subject to restitution fines or confinement in prison, or any combination thereof.
+  </small>
+</div>
+<div class="row-item"
+     data-ng-click="env.row='signature'"
+     data-ng-class="{ 'highlighted': env.row=='signature',
+                      'has-error': accept().isEmpty && env.showValid
+                    }">
+  <label class="description">Participant Signature<span class="is-required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-12" data-ng-class="{ 'has-error': accept().isEmpty && env.showValid }">
+        <signature-pad dataurl="params.signature" accept="accept" clear="clear" height="130" width="309"></signature-pad>
+        <div style="width: 309px"><a ng-click="clear()" class="sigpad_clear text-underline pull-right">Clear</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<date-input data-form="ecForm" data-ng-model="params.signedDate" data-control-label="Signed Date" data-param-type="signedDate" data-values="env" data-row="'signedDate'" data-tabindex="10" required></date-input>
+<div class="buttons" data-ng-click="env.row=0">
+  <button class="btn btn-white" data-ng-click="previous(accept())" tabindex="11"><i class="fa fa-chevron-left"></i> Previous</button>
+  <button class="btn btn-green" data-ng-click="submitDependent(accept(), ecForm)" tabindex="12">Continue <i class="fa fa-chevron-right"></i></button>
+</div>

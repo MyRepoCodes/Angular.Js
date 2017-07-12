@@ -1,0 +1,49 @@
+<!--<li data-ng-class="{'active': checkState == 'dashboard' }">
+  <a data-ng-if="!isUseMobile" data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.dashboard" class="dashboard-item">Dashboard</a>
+</li>-->
+<li data-ng-if="!hasRegistrationDisable" data-ng-class="{'active': checkState == 'registration' }">
+  <a data-ng-if="!isUseMobile" data-ng-click="goRegistration()" class="registration-item">Registration</a>
+  <a data-ng-if="isUseMobile" data-ui-sref="loggedIn.modules.registration" class="registration-item">Registration</a>
+</li>
+
+<li data-ng-class="{'active': checkState == 'bcs-par-claims' }">
+  <a data-ui-sref="loggedIn.modules.bcs-par-claims" class="new-claims-item">Claims</a>
+</li>
+
+<!--<li class="has-sub" data-ng-class="{'open': isUseMobile}">-->
+  <!--<a onclick="angular.element(this).scope().openSubMenu(this, event)" class="benicomp-select-item">Claims</a>-->
+  <!--<ul>-->
+    <!--&lt;!&ndash;<li data-ng-class="{'active': checkState == 'submit-claims' }"><a data-ui-sref="loggedIn.modules.submit-claims" class="new-claims-item">Submit a Claim</a></li>&ndash;&gt;-->
+    <!--<li data-ng-class="{'active': checkState == 'status-claims' }"><a data-ui-sref="loggedIn.modules.status-claims" class="biomarkers-item">Claim Status</a></li>-->
+    <!--<li data-ng-class="{'active': checkState == 'history-claims' || checkState == 'submit-claims' }"><a data-ui-sref="loggedIn.modules.history-claims" class="biomarkers-item">Claim History</a></li>-->
+  <!--</ul>-->
+<!--</li>-->
+<!--Client Documents-->
+<li class="has-sub" data-ng-class="{ 'closeSubMenu': isUseMobile }">
+  <a onclick="angular.element(this).scope().openSubMenu(this, event)"
+   class="imp-documents-item"><span class="text-green icon-bss-plus-minus">+</span>Client Documents</a>
+  <ul style="display: none;">
+    <li data-ng-class="{ 'active': checkState == 'directDeposit' }"><a data-ui-sref="loggedIn.modules.directDeposit" class="registration-item">Direct Deposit</a></li>
+    <li data-ng-class="{ 'active': checkState == 'privacyAuthorizationForm' }"><a data-ui-sref="loggedIn.modules.privacyAuthorizationForm" class="registration-item">Privacy Authorization Form</a></li>
+    <!--<li data-ng-class="{ 'active': checkState == 'changeForm' }"><a data-ui-sref="loggedIn.modules.changeForm" class="registration-item">Change Form</a></li>-->
+  </ul>
+</li>
+<li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+  <a class="imp-documents-item" data-ng-if="!clientUrl" data-ui-sref="loggedIn.modules.imp-documents.list">
+    Important Documents <span class="badge badge-danger"
+                              tooltips
+                              tooltip-lazy="true"
+                              tooltip-side="right"
+                              tooltip-class="tooltip-notif"
+                              tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+  </a>
+  <a class="imp-documents-item" data-ng-if="clientUrl" data-ui-sref="loggedIn.modules.imp-documentsClientUrl.list({clientUrl:clientUrl})">
+    Important Documents <span class="badge badge-danger"
+                              tooltips
+                              tooltip-lazy="true"
+                              tooltip-side="right"
+                              tooltip-class="tooltip-notif"
+                              tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+  </a>
+</li>

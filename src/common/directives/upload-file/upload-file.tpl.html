@@ -1,0 +1,15 @@
+<!--<span class="upload-profile">
+    <input type="file" id="{{idInput}}" multiple="true" class="input-file" onchange="angular.element(this).scope().setFiles(this)" />
+    <img id="{{idButton}}" onclick="angular.element(this).scope().clickIcon(this)" class="btn-upload-file" src="assets/images/camera.png" />
+</span>-->
+<div class="upload-profile-wrap">
+    <div class="upload-profile-content" onclick="angular.element(this).scope().clickIcon(this)">
+        <div class="upload-profile {{className}}">
+            <input type="file" id="{{idInput}}" multiple="true" class="input-file" onchange="angular.element(this).scope().setFiles(this)"
+            />
+            <span class="text-edit-picture">Edit Picture</span>
+        </div>
+    </div>
+
+
+</div>

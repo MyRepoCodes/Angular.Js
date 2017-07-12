@@ -1,0 +1,56 @@
+<ul>
+  <li data-ng-class="{'active': checkState == 'user-manager' }">
+    <a data-ui-sref="loggedIn.modules.user-manager" class="user-item">User Manager</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'health-results' }">
+    <a data-ui-sref="loggedIn.modules.health-results.list" class="health-results-item">Health Results</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+    <a data-ui-sref="loggedIn.modules.imp-documents.client"
+       class="imp-documents-item">Important Documents
+      <span class="badge badge-danger"
+            tooltips
+            tooltip-lazy="true"
+            tooltip-side="right"
+            tooltip-class="tooltip-notif"
+            tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+
+    </a>
+  </li>
+
+  <li class="has-sub forms-admin" ng-class="{'closeSubMenu' : isUseMobile}">
+    <a onclick="angular.element(this).scope().openSubMenu(this, event)"
+       class="registration-item"><span class="text-green icon-bss-plus-minus">+</span>Forms
+      <span class="exclamation" data-ng-if="countContact> 0">!</span>
+    </a>
+    <ul style="display: none;">
+      <li data-ng-class="{'active': checkState == 'list-contact' }">
+        <a data-ui-sref="loggedIn.modules.list-contact" class="participantsurveys">Contact
+          Form <span class="badge badge-danger" data-ng-if="countContact> 0">{{ countContact }}</span></a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'list-participantsurveys' }">
+        <a data-ui-sref="loggedIn.modules.list-participantsurveys"
+           class="participantsurveys">Surveys</a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'direct-deposit-manager' }">
+        <a data-ui-sref="loggedIn.modules.direct-deposit-manager"
+           class="participantsurveys">Direct Deposit</a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'privacy-authorization-form-manager' }">
+        <a data-ui-sref="loggedIn.modules.privacy-authorization-form-manager"
+           class="participantsurveys">Privacy Authorization Form</a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'change-form-manager' }">
+        <a data-ui-sref="loggedIn.modules.change-form-manager"
+           class="participantsurveys">Change Form</a>
+      </li>
+    </ul>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'manager-claims' }">
+    <a data-ui-sref="loggedIn.modules.manager-claims" class="new-claims-item">Claims</a>
+  </li>
+
+</ul>

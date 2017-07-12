@@ -1,0 +1,186 @@
+<div class="form-content">
+  <div class="panel panel-green warp-shadow">
+    <div class="panel-body">
+      <form name="pForm" novalidate autocomplete="off">
+        <div class="row-item"
+             data-ng-click="env.row=1"
+             data-ng-class="{ 'highlighted': env.row==1,
+                              'has-error': pForm.state.$invalid && (!pForm.state.$pristine || env.showValid)
+                            }">
+          <label class="description">State<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': pForm.state.$invalid && (!pForm.state.$pristine || env.showValid) }">
+                <select name="state" class="form-control"
+                        data-ng-model="params.state"
+                        data-ng-options="state.abbreviation as state.name for state in stateList"
+                        data-ng-disabled="true"
+                        tabindex="1"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item"
+             data-ng-click="env.row=2"
+             data-ng-class="{ 'highlighted': env.row==2,
+                              'has-error': pForm.groupNumber.$invalid && (!pForm.groupNumber.$pristine || env.showValid)
+                            }">
+          <label class="description">Group #<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': pForm.groupNumber.$invalid && (!pForm.groupNumber.$pristine || env.showValid) }">
+                <input name="groupNumber" type="text" class="form-control"
+                       data-ng-model="params.groupNumber"
+                       data-ng-disabled="true"
+                       tabindex="2"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item"
+             data-ng-click="env.row=3"
+             data-ng-class="{ 'highlighted': env.row==3,
+                              'has-error': pForm.groupName.$invalid && (!pForm.groupName.$pristine || env.showValid)
+                            }">
+          <label class="description">Name of Employer<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': pForm.groupName.$invalid && (!pForm.groupName.$pristine || env.showValid) }">
+                <input name="groupName" type="text" class="form-control"
+                       data-ng-model="params.groupName"
+                       data-ng-disabled="true"
+                       tabindex="3"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <date-input form="pForm" data-ng-model="params.employmentDate" values="env" control-label="Employment Date" row="4" tabindex="4" required></date-input>
+        <date-input form="pForm" data-ng-model="params.effectiveDate" values="env" control-label="Effective Date" row="5" tabindex="7" readonly></date-input>
+        <div class="row-item"
+             data-ng-click="env.row=6"
+             data-ng-class="{ 'highlighted': env.row==6,
+                              'has-error': pForm.annualMaximum.$invalid && (!pForm.annualMaximum.$pristine || env.showValid)
+                            }">
+          <label class="description">Annual Maximum<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': pForm.annualMaximum.$invalid && (!pForm.annualMaximum.$pristine || env.showValid) }">
+                <select name="annualMaximum" class="form-control"
+                        data-ng-model="params.annualMaximum"
+                        data-ng-options="k as v for (k, v) in annualMaximumList"
+                        data-ng-disabled="true"
+                        tabindex="10">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item"
+             data-ng-click="env.row=7"
+             data-ng-class="{ 'highlighted': env.row==7,
+                              'has-error': pForm.firstNameOfInsured.$invalid && (!pForm.firstNameOfInsured.$pristine || env.showValid) ||
+                                            pForm.lastNameOfInsured.$invalid && (!pForm.lastNameOfInsured.$pristine || env.showValid)
+                            }">
+          <label class="description">Name of Insured<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="row">
+                  <div class="form-group col-xs-5" data-ng-class="{ 'has-error': pForm.firstNameOfInsured.$invalid && (!pForm.firstNameOfInsured.$pristine || env.showValid) }">
+                    <input type="text" name="firstNameOfInsured" class="form-control"
+                           data-ng-model="params.firstNameOfInsured"
+                           tabindex="11" required/>
+                    <label class="control-label">First</label>
+                  </div>
+                  <div class="form-group col-xs-7"
+                       data-ng-class="{ 'has-error': pForm.lastNameOfInsured.$invalid && (!pForm.lastNameOfInsured.$pristine || env.showValid) }">
+                    <input name="lastNameOfInsured" type="text" class="form-control"
+                           data-ng-model="params.lastNameOfInsured"
+                           tabindex="12" required/>
+                    <label class="control-label">Last</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <date-input data-form="pForm" data-ng-model="params.dateOfBirth" data-control-label="Date of Birth" data-values="env" data-param-type="birthday" data-row="birthday" data-tabindex="13" required></date-input>
+        <sex-input data-form="pForm" data-ng-model="params.gender" data-control-label="Sex" data-env="env" data-tabindex="3" required></sex-input>
+        <ssn-input data-form="pForm" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="ssn" data-tabindex="4" required></ssn-input>
+        <div class="row-item"
+             data-ng-click="env.row=10"
+             data-ng-class="{ 'highlighted': env.row==10,
+                              'has-error': pForm.email.$invalid && (!pForm.email.$pristine || env.showValid)
+                            }">
+          <label class="description">Email<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6"
+                   data-ng-class="{'has-error': pForm.email.$invalid && (!pForm.email.$pristine || env.showValid)}">
+                <input name="email" type="email" class="form-control"
+                       data-ng-pattern="patternRegexs.email"
+                       data-ng-model="params.email"
+                       tabindex="18" required/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item"
+             data-ng-click="env.row=11"
+             data-ng-class="{ 'highlighted': env.row==11,
+                              'has-error': pForm.emailConsent.$invalid && (!pForm.emailConsent.$pristine || env.showValid)
+                            }">
+          <label class="description">Agree to the terms by checking the box below. <span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="checkbox-line">
+              <input name="emailConsent" type="checkbox" id="emailConsent"
+                     data-ng-model="params.emailConsent"
+                     tabindex="19" required/>
+              <label class="choice" for="emailConsent">I authorize email communications between myself and BeniComp regarding BeniComp policies such as application, enrollment, and claims
+                communications. I also understand that I may withdraw my consent to communicate via email at any time.</label>
+            </div>
+          </div>
+        </div>
+        <div class="row-item"
+             data-ng-click="env.row=12"
+             data-ng-class="{ 'highlighted': env.row==12,
+                              'has-error': pForm.typeOfParticipant.$invalid && (!pForm.typeOfParticipant.$pristine || env.showValid)
+                            }">
+          <label class="description">Type of Participant<span class="is-required"> *</span></label>
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': pForm.typeOfParticipant.$invalid && (!pForm.typeOfParticipant.$pristine || env.showValid) }">
+                <select name="typeOfParticipant" class="form-control"
+                        data-ng-model="params.typeOfParticipant"
+                        data-ng-options="k as v for (k, v) in typeOfParticipantList"
+                        tabindex="20" required>
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dotted-bottom"></div>
+        <div class="row-item"
+             data-ng-click="env.row=13"
+             data-ng-class="{ 'highlighted': env.row==13,
+                              'has-error': pForm.saveAndResume.$invalid && (!pForm.saveAndResume.$pristine || env.showValid)
+                            }">
+          <label class="description small">GRP BCS 2013 ENR-AL 12/2013</label>
+          <div class="content">
+            <div class="checkbox-line">
+              <input name="saveAndResume" type="checkbox" id="saveAndResume"
+                     data-ng-model="params.saveAndResume"
+                     tabindex="21"/>
+              <label class="choice" for="saveAndResume">Save my progress and resume later</label>
+            </div>
+          </div>
+        </div>
+        <div class="buttons" data-ng-click="env.row=0">
+          <a class="btn btn-green" data-ng-click="continue(pForm.$valid)">Continue <i class="fa fa-chevron-right"></i></a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

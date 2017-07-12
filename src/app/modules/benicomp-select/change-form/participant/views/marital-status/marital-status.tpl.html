@@ -1,0 +1,30 @@
+<div class="dotted-line"></div>
+<div class="row-item">
+  <h3>Marital Status</h3>
+</div>
+
+<div class="row-item" data-ng-click="env.row='reasonForChange'" data-ng-class="{ 'highlighted': env.row=='reasonForChange' }">
+  <label class="description">Reason for Change</label>
+  <div class="content">
+    <div class="radio-line" ng-repeat="(key,item) in nameChangeConstants.maritalStatusList">
+      <input name="ms{{key}}" type="radio" id="ms{{key}}" data-ng-model="params.maritalStatus" value="{{key}}" tabindex="7" />
+      <label class="choice" for="ms{{key}}">{{item}}</label>
+    </div>
+
+  </div>
+</div>
+
+<div class="row-item" data-ng-if="params.maritalStatus === 'other'" data-ng-click="env.row='maritalStatusOther'" data-ng-class="{ 'highlighted': env.row=='maritalStatusOther',
+                      'has-error': form.maritalStatusOther.$invalid &&
+                      (!form.maritalStatusOther.$pristine || env.showValid)
+                    }">
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form.maritalStatusOther.$invalid &&
+             (!form.maritalStatusOther.$pristine || env.showValid) }">
+        <input name="maritalStatusOther" type="text" class="form-control" data-ng-model="params.maritalStatusOther" tabindex="8"
+        />
+      </div>
+    </div>
+  </div>
+</div>

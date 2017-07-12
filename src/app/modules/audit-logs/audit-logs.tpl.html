@@ -1,0 +1,32 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center" data-ng-bind="pageTitle"></h4>
+  </div>
+
+  <div class="panel-body" id="top-hack">
+    <div class="panel-manager-tool margin-rpx">
+      <!--<div class="toolbar">
+
+        <div class="dropdown btn">
+          <button class="dropdown-toggle" data-ng-class="{ 'active': (childState == 'create' || childState == 'add-multiple') }">User<i class="fa fa-angle-down"></i></button>
+          <ul class="dropdown-menu">
+            <li data-ng-if="isAdmin" data-ng-class="{ 'selected': currentState == 'loggedIn.modules.audit-logs.client-manager' }">
+              <a data-ng-click="goState('loggedIn.modules.audit-logs.client-manager')">Client Manager</a>
+            </li>
+
+            <li data-ng-if="isAdmin || isClientManager" data-ng-class="{ 'selected': (currentState == 'loggedIn.modules.user-manager.participant.create' || currentState == 'loggedIn.modules.user-manager.participantClient.create') }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.participant.create')">Health Coach Manager</a>
+            </li>
+            <li data-ng-if="isAdmin || isClientManager || isAgentTheAgent" data-ng-class="{ 'selected': currentState == 'loggedIn.modules.user-manager.client.create' }">
+              <a data-ng-click="goState('loggedIn.modules.user-manager.client.create')">Health Coach</a>
+            </li>
+          </ul>
+        </div>
+      </div>     -->
+      <div class="clearfix"></div>
+      <div class="table-container">
+        <div class="" data-ui-view="manager-content"></div>
+      </div>
+    </div>
+  </div>
+</div>

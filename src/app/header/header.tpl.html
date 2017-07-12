@@ -1,0 +1,7 @@
+<div data-ng-if="isAuthenticated && !$state.includes('questionFrom')">
+    <!--<div data-ng-if="isParticipant" data-ng-include="'header/template/participant.tpl.html'"></div>-->
+    <div data-ng-include="'header/template/default.tpl.html'"></div>
+
+</div>
+
+<div data-ng-if="!isAuthenticated || $state.includes('questionFrom')" data-ng-include="'header/template/not-authenticated-default.tpl.html'"></div>

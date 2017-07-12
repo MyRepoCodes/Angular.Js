@@ -1,0 +1,91 @@
+<div class="panel page-listFaqs panel-green panel-manager">
+    <div class="panel-heading">
+        <h4 class="text-center">FAQs</h4>
+    </div>
+    <div class="page-about">
+        <div class="container">
+            <div class="form-faqs">
+                <div class="box-filter">
+                    <div class="input-group">
+                        <input class="form-control input-filter"
+                               data-ng-model="params.q"
+                               placeholder="Search for FAQs"
+                                />
+                        <span class="input-group-addon"><i class="icon icon-search"></i></span>
+                    </div>
+                </div>
+                <p class="font-size-14" ng-if="params.q">
+                    Share link : <a href="{{linkShare}}" target="_blank"><span ng-bind="linkShare"></span></a>
+                </p>
+                <h4 class="faqs-heading">FREQUENTLY ASKED QUESTIONS</h4>
+
+                <!--<div class="sort">
+                    <span class="font-size-14">Sort Category: </span>
+                    <span class="cursor-pointer glyphicon glyphicon-sort-by-alphabet"
+                          ng-if="sort.isSortCategoryASC"
+                          ng-click="sortCategory('desc')"
+                          data-ng-model="sort.category"></span>
+                    <span class="cursor-pointer glyphicon glyphicon-sort-by-alphabet-alt"
+                          ng-if="!sort.isSortCategoryASC"
+                          ng-click="sortCategory('asc')"
+                          data-ng-model="sort.category"></span>
+                </div>-->
+
+                <div data-ng-if="!loading">
+
+                    <div class="faqs-group listFaqs-group">
+                        <div class="faqs-item"
+                             data-ng-repeat="items in faqsLists track by $index"
+                             data-ng-if="items.length>0">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <h4 class="color-blue-light">
+                                        <span>{{items[0].category.categoryName}}</span>
+
+                                        <span class="cursor-pointer fa fa-chevron-down"
+                                              ng-if="sort['category'+ $index] ==='asc'"
+                                              ng-click="sortQuestion('category'+ $index,items[0].category.id)"
+                                              data-ng-model="sort.category"></span>
+                                        <span class="cursor-pointer fa fa-chevron-up"
+                                              ng-if="sort['category'+ $index] ==='desc'"
+                                              ng-click="sortQuestion('category'+ $index,items[0].category.id)"
+                                              data-ng-model="sort.category"></span>
+                                    </h4>
+                                </div>
+                            </div>
+
+                            <accordion class="faqs-list">
+                                <accordion-group data-ng-repeat="item in items"
+                                                 is-open="item.open">
+                                    <accordion-heading>
+                                        <span ng-class="{ 'active': item.open }">{{ item.question }}</span>
+                                    </accordion-heading>
+                                    <span data-ng-bind-html="item.answer"></span>
+                                </accordion-group>
+                            </accordion>
+                        </div>
+                    </div>
+
+
+                    <pagination class="pagination-sm" data-ng-if="totalCount > params.pageSize"
+                                boundary-links="true"
+                                total-items="totalCount"
+                                items-per-page="params.pageSize"
+                                ng-model="params.page"
+                                ng-change="pageChanged()"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                first-text="&laquo;"
+                                last-text="&raquo;">
+                    </pagination>
+
+
+                    <div data-ng-if="faqsList.length == 0">{{ 'faqs.empty' | translate }}</div>
+                </div>
+                <div data-ng-if="loading" class="text-center">
+                    <div class="loading-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

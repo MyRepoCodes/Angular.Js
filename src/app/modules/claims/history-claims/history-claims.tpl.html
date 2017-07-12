@@ -1,0 +1,52 @@
+<div class="panel panel-green claims-history">
+  <div class="panel-heading">
+    <h4 class="text-center">Claims History</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box-filter">
+          <div class="input-group">
+            <input class="form-control input-filter"
+                   data-ng-model="filterSurvey.answer"
+                   placeholder="Search"
+            />
+            <span class="input-group-addon"><i class="icon icon-search"></i></span>
+          </div>
+
+          <div class="btn-submit-claim">
+            <a ui-sref="loggedIn.modules.submit-claims">
+              <button class="btn btn-success">Submit a Claim</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <div class="table-container">
+          <div class="table-double-content">
+            <div class="table-responsive table-responsive-pagination">
+              <table ng-table="tableParams" show-filter="false" class="table">
+                <tr class="cursor-pointer" data-ng-repeat="item in tableParams.data" data-ng-click="viewResult(item)">
+                  <td data-title="'Created Date'" sortable="'createdDate'" data-ng-bind="item.createdDate | date:'MM/dd/yyyy'"></td>
+                  <td data-title="'Claimant First Name'" sortable="'participant.firstname'" data-ng-bind="item.claimData.firstName"></td>
+                  <td data-title="'Claimant Last Name'" sortable="'participant.lastname'" data-ng-bind="item.claimData.lastName"></td>
+                  <td data-title="'Status'" data-ng-bind="item.status | claimStatus:item.modifiedDate"></td>
+                </tr>
+                <tr class="empty" data-ng-if="loading">
+                  <td colspan="4" class="text-center">
+                    <div class="loading-indicator"></div>
+                  </td>
+                </tr>
+                <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                  <td colspan="4" class="text-center">{{ 'faqs.empty' | translate }}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

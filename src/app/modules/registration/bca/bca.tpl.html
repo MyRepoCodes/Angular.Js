@@ -1,0 +1,8 @@
+<div class="panel panel-green registration"
+        data-ng-if="isParticipant"
+        data-ng-include="'modules/registration/bca/participant/participant.tpl.html'"
+        data-ng-controller="RegistrationBCAParticipantController"></div>
+<div class="panel panel-green registration"
+        data-ng-if="isEmployer"
+        data-ng-include="'modules/registration/bca/client/client.tpl.html'"
+        data-ng-controller="RegistrationBCAClientController"></div>

@@ -1,0 +1,55 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="userForm" novalidate autocomplete="off">
+      <div class="row form-description">
+        <div class="col-md-4">
+          <h2>Edit Participant</h2>
+        </div>
+        <div class="col-md-8 row-item">
+          <label class="description">Participant ID: <span class="text-green">{{params.customerId}}</span> </label>
+          <label class="description">Client ID: <span class="text-green">{{participantInfo.parentPrefixPulseId}}-{{env.currentEmployer.pulseId}}</span> </label>
+          <label class="description">PULSE ID: <span class="text-green">{{ participantInfo.prefixPulseId + "-" + participantInfo.pulseId + "-00" }}</span> </label>
+        </div>
+      </div>
+      <div class="header-tab">
+        <tabset class="tab-set">
+          <!-- Profile -->
+          <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+            <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/participant/templates/edit-profile.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Advantage -->
+          <tab select="selectTab(tabsets.beniCompAdvantage.tabindex)" active="tabsets.beniCompAdvantage.active" disabled="tabsets.beniCompAdvantage.disabled" data-ng-if="!tabsets.beniCompAdvantage.disabled">
+            <tab-heading class="tab-beniCompAdvantage">{{ tabsets.beniCompAdvantage.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/participant/templates/benicomp-advantage.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Select -->
+          <tab select="selectTab(tabsets.beniCompSelect.tabindex)" active="tabsets.beniCompSelect.active" disabled="tabsets.beniCompSelect.disabled" data-ng-if="!tabsets.beniCompSelect.disabled">
+            <tab-heading class="tab-beniCompSelect">{{ tabsets.beniCompSelect.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/participant/templates/benicomp-select.tpl.html'"></div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+      <div class="content-footer" data-ng-click="env.row=0">
+        <div class="buttons">
+          <!--<button class="btn btn-green" data-ng-if="env.totalTab<=env.currentTab" data-ng-click="update(userForm.$valid)" tabindex="18">Save</button>-->
+          <!--<button class="btn btn-green" data-ng-if="env.totalTab>env.currentTab" data-ng-click="continue(userForm.$valid)" tabindex="18">Continue</button>-->
+          <button class="btn btn-green" data-ng-click="update(userForm.$valid)" tabindex="18">Save</button>
+          <button class="btn btn-green" data-ng-click="update(userForm.$valid, 'close')" tabindex="18.1">Save and Close</button>
+          <a class="btn btn-white" data-ng-click="cancelEdit()" tabindex="25">Cancel</a>
+        </div>
+        <div class="alert alert-danger" data-ng-if="!userForm.$valid && !env.error && env.showValid">Entered invalid. Please check your data on all tab.</div>
+        <br data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid"/>
+        <div class="alert alert-danger" data-ng-if="env.error">{{ env.error }}</div>
+        <br data-ng-if="env.error"/>
+        <div class="alert alert-success" data-ng-if="env.successMessage">{{ env.successMessage }}</div>
+      </div>
+    </form>
+  </div>
+</div>

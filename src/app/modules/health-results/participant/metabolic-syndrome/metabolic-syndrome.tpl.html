@@ -1,0 +1,59 @@
+<div class="panel panel-green">
+    <div class="panel-heading">
+        <h4 class="text-center">Metabolic Syndrome</h4>
+    </div>
+    <div class="panel panel-green panel-dashboard">
+        <div class="panel-body">
+
+            <div class="info" ng-if="!isGettingMyReward">
+                <div class="heading-title">
+                    Metabolic Syndrome
+                </div>
+                <div class="info-content">
+                    <div class="pull-left">
+                        <div class="easy-pie-chart" options="options" percent="percent"><span class="value">{{ totalPassed }}/{{ totalCount }}</span>
+                        </div>
+                    </div>
+                    <div class="info-des">
+                        <div>
+                            Based on your screening results you have passed {{ totalPassed }} out of {{ totalCount }}
+                            metabolic syndrome criteria which means <span class="text-alert">you are at a higher risk for heart disease,
+                        diabetes and stroke</span> than someone passing 3 out of {{ totalCount }}.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reward-result-metabolic-Syndrome">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <th>Metabolic Syndrome Risk Factor</th>
+                        <th>Your Target</th>
+                        <th>Your Value</th>
+                        <th>What Does It Mean</th>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="item in tableList">
+                            <td><span class="circle circle-green"
+                                      data-ng-class="{ 'circle-green-passed' : item.passed, 'circle-danger-fail' : !item.passed }"></span>
+                            <td data-ng-bind="item.target"></td>
+                            <td>{{ item.result }}</td>
+                            <td data-ng-bind="item.mean"></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>
+                    <b>ALERT:</b> You are at risk for Metabolic Syndrome, you may be more likely to develop diabetes,
+                    heart disease or stroke. If you have questions about your results, be sure to follow up with your
+                    doctor. Your Doctor can help you improve those risk factors so you can prevent Metabolic Syndrome in
+                    the future.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

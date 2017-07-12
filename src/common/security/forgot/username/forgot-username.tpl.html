@@ -1,0 +1,54 @@
+<div class="guest-container">
+    <div class="verticalcenter">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="logo-small">
+
+                    <a href="#/">
+                        <img src="assets/images/logo1.png">
+                    </a>
+
+                </div>
+
+                <div ng-if="!success && !error" class="content">
+                    <div class="text-red">Oops!</div>
+                    <div class="step-name">Forgot your username? Let us help!</div>
+                </div>
+
+                <div class="content" ng-if="success">
+                    <div>Sweet!</div>
+                    <div class="step-name">{{success}}</div>
+                </div>
+
+                <div class="content" ng-if="error">
+                    <div class="text-red">Oops!</div>
+                    <div class="step-name">{{error}}</div>
+                </div>
+
+            </div>
+            <div class="panel-body login">
+                <form name="forgotUsernameForm" novalidate>
+                    <div class="form-group" data-ng-class="{ 'has-error' : !validEmail() && (!forgotUsernameForm.email.$pristine || showValid) }">
+                        <input type="email" name="email" class="form-control" placeholder="Enter Your Email" data-ng-model="info.email" required/>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-green btn-width-100" data-ng-click="submit()">Submit</button>
+                    </div>
+
+                </form>
+                <div class="form-group text-center" data-ng-if="brand">
+                    <div class="text-center">
+                        <img class="logo-bank" data-ng-src="{{ brand }}" />
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="btn-note register">
+                        Still having trouble?
+                        <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

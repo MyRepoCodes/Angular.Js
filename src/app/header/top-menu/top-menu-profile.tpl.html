@@ -1,0 +1,15 @@
+<ul class="nav navbar-nav navbar-right menu-on-mobile">
+
+  <li>
+    <a data-ui-sref="loggedIn.modules.profile" data-ng-class="{ 'active' : checkState == 'profile' }">My Profile</a>
+  </li>
+
+  <li>
+    <a data-ui-sref="loggedIn.modules.settings" data-ng-class="{ 'active' : checkState == 'settings' }">My Settings</a>
+  </li>
+
+  <li data-ng-show="isAuthenticated">
+    <a data-ng-click="logout()">Logout</a>
+  </li>
+
+</ul>

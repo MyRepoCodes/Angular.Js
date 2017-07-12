@@ -1,0 +1,74 @@
+<div class="panel-manager-tool">
+    <div class="breadcrumb">
+        <span data-ng-click="goStateList()">{{ 'document.breadcrumb' | translate }}</span>
+    </div>
+    <div class="filter">
+        <div class="dropdown">
+            <button class="dropdown-toggle">{{ getFilterName() }} <i class="icon icon-filter"></i></button>
+            <ul class="dropdown-menu">
+                <!--<li data-ng-hide="parentState == 'client'"
+                        data-ng-class="{ 'selected': parentState == 'client' }">
+                    <a data-ng-click="goState('loggedIn.modules.imp-documents.client')">Client</a>
+                </li>-->
+                <li>
+                    <a data-ng-click="goState('loggedIn.modules.imp-documents.healthcoach')">Health Coach</a>
+                </li>
+                <li>
+                    <a data-ng-click="goState('loggedIn.modules.imp-documents.participant')">Participant</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-content">
+    <div class="table-container">
+        <div class="table-filter">
+            <div class="input-group">
+                <input class="form-control input-filter" data-ng-model="filter.keyword"/>
+                <span class="input-group-addon"><i class="icon icon-search"></i></span>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-pagination">
+            <table ng-table="tableParams" show-filter="false" class="table">
+                <thead>
+                <tr>
+                    <th class="sortable" ng-class="{
+                            'sort-asc': tableParams.isSortBy('name', 'asc'),
+                            'sort-desc': tableParams.isSortBy('name', 'desc')
+                          }"
+                        ng-click="tableParams.sorting({'name' : tableParams.isSortBy('name', 'asc') ? 'desc' : 'asc'})">
+                        <div>Client Name</div>
+                    </th>
+                    <th class="sortable" ng-class="{
+                            'sort-asc': tableParams.isSortBy('documents', 'asc'),
+                            'sort-desc': tableParams.isSortBy('documents', 'desc')
+                          }"
+                        ng-click="tableParams.sorting({'documents' : tableParams.isSortBy('documents', 'asc') ? 'desc' : 'asc'})">
+                        <div>Documents</div>
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in tableParams.data" class="cursor-pointer" data-ng-click="goClientDetail(item)">
+                    <td data-title="'Client Name'" sortable="'name'" ng-bind-html="item.name"></td>
+                    <td data-title="'Documents'" sortable="'documents'">
+                        {{ item.documents }}
+                    </td>
+                </tr>
+                <tr data-ng-if="loading">
+                    <td colspan="2" class="text-center">
+                        <div class="loading-indicator"></div>
+                    </td>
+                </tr>
+                <tr data-ng-if="tableParams.data.length == 0 && !loading">
+                    <td colspan="2" class="text-center">
+                        {{ 'document.empty_1' | translate }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

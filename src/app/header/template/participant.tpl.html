@@ -1,0 +1,138 @@
+<div data-ng-controller="HeaderController">
+  <div id="wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8">
+
+          <div class="logo">
+            <a href="#/">
+              <img src="assets/images/logo1.png" style="max-height: 35px;" />
+            </a>
+
+            <div class="input-group" ng-if="false">
+              <input class="form-control input-filter ng-pristine ng-valid ng-touched" placeholder="">
+              <span class="input-group-addon"><i class="icon icon-search"></i></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-4">
+          <div class="group-right">
+            <div class="avatar-mark">
+              <a href="">
+                <img class="img-circle img-icon-2" data-ng-src="{{ avatar }}" src="assets/images/default-profile.png" />
+              </a>
+
+              <div class="group-profile">
+                <ul>
+
+
+                  <li data-ng-class="{ 'active' : checkState == 'profile' }" data-ui-sref="loggedIn.modules.profile">
+
+                    <div class="pulse-icon-profile">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">My Profile</div>
+
+                  </li>
+
+                  <li data-ng-class="{ 'active' : checkState == 'settings' }" data-ui-sref="loggedIn.modules.settings">
+
+                    <div class="pulse-icon-setting">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">My Settings</div>
+
+                  </li>
+
+                  <li data-ng-click="logout()">
+
+                    <div class="pulse-icon-auth">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">Logout</div>
+
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="question-mark">
+              <a href="">
+                <img class="img-circle img-icon-2" data-err-src="assets/images/question-mark.png" src="assets/images/question-mark.png" />
+              </a>
+
+              <div class="group-question">
+                <ul>
+
+
+
+                  <li data-ng-if="isAuthenticated" data-ui-sref="loggedIn.modules.faqs" data-ng-class="{ 'active' : checkState == 'faqs' }">
+
+                    <div class="pulse-icon-faq">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">FAQs</div>
+
+                  </li>
+                  <li data-ng-if="!isAuthenticated" data-ui-sref="public.listFaqs" data-ng-class="{ 'active' : checkState == 'listFaqs' }">
+                    <div class="pulse-icon-faq">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">FAQs</div>
+
+                  </li>
+
+                  <li data-ng-class="{ 'active' : checkState == 'about' }" data-ui-sref="public.pagesAbout">
+                    <div class="pulse-icon-about">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">About Us</div>
+                  </li>
+
+                  <li data-ui-sref="modules.contact" data-ng-class="{ 'active' : checkState == 'contact' }">
+                    <div class="pulse-icon-contact">
+                      <i class="pulse-icons"></i>
+                    </div>
+                    <div class="pulse-content">Contact Us</div>
+                  </li>
+
+
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="line-green"></div>
+</div>
+
+<!-- View On Mobile-->
+<div ng-if="isUseMobile">
+  <div id="menu-mobile-right" onblur="toggleMenuOnMobile()" ng-click="toggleMenuOnMobile()" class="mobile-nav-flyout" ng-class="{hide:!showMenuOnMobile,slide:showMenuOnMobile}">
+
+    <div ng-if="isAuthenticated" data-ng-controller="SidebarItemController">
+      <div data-ng-if="isParticipant" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-participant.tpl.html'"></div>
+      <div data-ng-if="isEmployer" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-employer.tpl.html'"></div>
+      <div data-ng-if="isAgentTheAgent" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-agent.tpl.html'"></div>
+      <div data-ng-if="isHealthCoach" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoach.tpl.html'"></div>
+      <div data-ng-if="isHealthCoachManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoachmanager.tpl.html'"></div>
+      <div data-ng-if="isClientManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clientmanager.tpl.html'"></div>
+      <div data-ng-if="isClinicalDirector" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clinicaldirector.tpl.html'"></div>
+      <div data-ng-if="isAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-admin.tpl.html'"></div>
+      <div data-ng-if="isSuperAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-superadmin.tpl.html'"></div>
+    </div>
+
+    <ul ng-if="isAuthenticated">
+      <li class="separator"></li>
+    </ul>
+
+    <div data-ng-include="'header/top-menu/top-menu.tpl.html'" data-ng-controller="HeaderTopMenuController">
+    </div>
+  </div>
+</div>

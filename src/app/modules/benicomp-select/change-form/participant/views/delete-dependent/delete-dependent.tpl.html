@@ -1,0 +1,43 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+
+    <div class="panel-body-modal">
+        <div class="form-content">
+            <div class="form-content-summary">
+                <p>
+                    Are you sure you want to delete this {{(data.typeUser === 'Child') ? "dependent" : data.typeUser.toLowerCase() }}?
+                </p>
+            </div>
+
+            <div class="panel panel-green">
+                <div class="panel-body">
+                    <form name="form" novalidate autocomplete="off">
+
+                        <!-- Check box agree -->
+                        <div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+                            <div class="content">
+                                <div class="checkbox-line">
+                                    <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="20" />
+                                    <label class="choice" for="checkBoxAgree">I understand that by checking this box I am confirming all information provided is correct and will be used
+by BeniComp Insurance Company moving forward.<span class="is-required"> *</span></label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <date-input data-form="form" data-ng-model="params.signedDate" data-control-label="Signed Date" data-param-type="signedDate"
+                            data-values="env" data-row="signedDate" data-tabindex="104" required></date-input>
+                        <div class="group-buttons">
+                            <button class="btn btn-danger margin-right-10" data-ng-click="deleteDependent(form.$valid, data)" tabindex="998">Delete</button>
+                            <button class="btn btn-default" data-ng-click="cancel()" tabindex="999">Cancel</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

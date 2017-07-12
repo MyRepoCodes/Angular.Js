@@ -1,0 +1,116 @@
+<div class="form-content">
+  <div class="panel panel-green warp-shadow">
+    <div class="panel-body">
+      <form name="addClaimForm" novalidate autocomplete="off">
+
+        <div class="row-item">
+          <div class="form-description">
+            <h3>Important! Please read:</h3>
+            <div class="summary">Use separate forms for each claimant and dependent. Attach receipts and bills using the button below, and include
+              supporting documentation with each claim item.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <claim-item data-form="addClaimForm" data-ng-repeat="claim in claimItemList" data-ng-model="claim.model" data-remove="removeClaimItem"
+            data-index="{{ $index+1 }}" data-env="env" data-tabindex="2"></claim-item>
+        </div>
+
+        <div class="row-item">
+          <button class="btn btn-success" ng-click="addRemoveClaim('add')">Add A Claim</button>
+        </div>
+
+        <div class="dotted-bottom"></div>
+        <div class="row-item">
+          <div class="content">
+            <div class="mf_section_title">Supporting Documentation Upload</div>
+            <br/>
+            <div class="mf_section_content">NOTE: If the receipts and bills are all on one supporting document then please only upload the document once.
+              You can choose or take a photo with your smartphone or tablet or upload files from your computer.</div>
+          </div>
+        </div>
+
+        <div class="row-item" data-ng-click="env.row='claim_item_' + key" data-ng-class="{ 'highlighted': env.row=='claim_item_' + key,
+        'has-error': (key === 0 && params.fileUploadReceipts[0].listFiles.length <= 0) && env.showValid
+        }" ng-repeat="(key, file) in params.fileUploadReceipts">
+          <input name="tempFile_{{key}}" type="hidden" data-ng-model="file.listFiles" ng-required="key === 0" />
+          <label class="description">
+            <span ng-if="key === 0">Upload receipts and bills including supporting documentation with each claim item. <span class="is-required">*</span></span>
+            <span ng-if="key !== 0">Upload a {{key+1}}nd set of files </span>
+          </label>
+
+          <!--<div class="remove-file-upload-receipts">
+            <i title="Remove Upload a {{ key +1 }}nd set of files" ng-click="removeGroupFileUploadReceipts(file, key)" class="glyphicon glyphicon-remove"></i>
+          </div>-->
+          <div class="content">
+            <div class="row">
+              <div class="form-group col-xs-6" ng-click="uploadAnotherFile('selected', key)">
+                <input id="file_element_{{ key }}" name="element_{{ key }}" class="element file" type="file" />
+                <div id="file_element_{{ key }}_queue" class="file_queue"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--<div class="row-item">
+      <button class="btn btn-success" ng-click="uploadAnotherFile('add')">Upload Another File</button>
+    </div>-->
+
+        <div class="dotted-bottom"></div>
+        <div class="row-item">
+          <div class="content">I certify that the above statements are true and hereby authorize any physician, hospital, employer, union, HMO,
+            insurance company or prepayment organization to give the claims administrator any additional information required
+            in connection with this Claim for Medical Reimbursement Insurance Benefits. A photocopy of this authorization
+            shall be as valid as the original.For your protection California law requires the following to appear on this
+            form. Any person who knowingly presents a false or fraudulent claim for the payment of a loss is guilty of a
+            crime and may be subject to fines and confinement in state prison.
+            <br/>
+            <br/> WARNING: FOR YOUR PROTECTION CALIFORNIA LAW REQUIRES THE FOLLOWING TO APPEAR ON THIS FORM. ANY PERSON WHO
+            KNOWINGLY PRESENTS A FALSE OR FRAUDULENT CLAIM FOR THE PAYMENT OF A LOSS IS GUILTY OF A CRIME AND MAY BE SUBJECT
+            TO FINES AND CONFINEMENT IN STATE PRISON.
+          </div>
+        </div>
+        <date-input data-form="addClaimForm" data-ng-model="params.dateTemp" data-control-label="Date" data-date-options="dateOptions"
+          data-values="env" data-row="'dateTemp'" readonly data-tabindex="3" data-is-show-calendar="false" ng-if="!env.isAdminEdit"
+          required></date-input>
+
+        <date-input data-form="addClaimForm" data-ng-model="paramEdit.date" data-control-label="Date" data-date-options="dateOptions"
+          data-values="env" ng-if="env.isAdminEdit" data-row="'dateTemp'" data-tabindex="3" required></date-input>
+
+        <div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+          <div class="content">
+            <div class="checkbox-line">
+              <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="20" />
+              <label class="choice" for="checkBoxAgree">I understand that checking this box constitutes as my legal signature.<span class="is-required"> *</span></label>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="dotted-bottom"></div>
+        <div class="row-item">
+          <div class="content">Administered by: BeniComp, Inc., 8310 Clinton Park Drive, Fort Wayne, IN 46825 - Phone: (260) 482-7400 Fax: (260)
+            483-6255
+          </div>
+        </div>
+        <div class="group_price">
+          <div class="price_show">
+            <div class="number_price">{{ env.amountTotal | currency }}</div>
+            <div class="title_price">TOTAL</div>
+          </div>
+        </div>
+        <div class="buttons" data-ng-click="env.row=0">
+          <button class="btn btn-white" data-ng-click="previous(0)" tabindex="6"><i class="fa fa-chevron-left"></i> Previous</button>
+          <button class="btn btn-green" data-ng-click="submitAddClaims(addClaimForm.$valid)" tabindex="5">Continue <i class="fa fa-chevron-right"></i></button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>

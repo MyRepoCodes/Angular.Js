@@ -1,0 +1,89 @@
+<div class="row-item">
+  <label class="description">Client Contact</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="clientLocation_firstName" type="text" class="form-control"
+               data-ng-model="clientLocation.firstName" data-ng-disabled="true"/>
+        <label class="control-label">First</label>
+      </div>
+      <div class="form-group col-xs-6">
+        <input type="text" name="clientLocation_lastName" class="form-control"
+               data-ng-model="clientLocation.lastName" data-ng-disabled="true"/>
+        <label class="control-label">Last</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item">
+  <label class="description">Contact Phone</label>
+  <div class="content">
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group">
+          <input name="clientLocation_phoneNumber" type="text" class="form-control"
+                 data-ng-model="clientLocation.phoneNumber" data-ng-disabled="true"/>
+          <label class="control-label">(###) ###-####</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item">
+  <label class="description">Contact Email</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="clientLocation_email" type="email" class="form-control"
+               data-ng-model="clientLocation.email" data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item">
+  <label class="description">Location Address</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <input name="clientLocation_streetAddress" type="text" class="form-control"
+               data-ng-model="clientLocation.streetAddress" data-ng-disabled="true"/>
+        <label class="control-label">Street Address</label>
+      </div>
+      <div class="form-group col-xs-12">
+        <input name="clientLocation_addressLine2" type="text" class="form-control"
+               data-ng-model="clientLocation.addressLine2" data-ng-disabled="true"/>
+        <label class="control-label">Address Line 2</label>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <input name="clientLocation_city" type="text" class="form-control"
+                 data-ng-model="clientLocation.city" data-ng-disabled="true"/>
+          <label class="control-label">City</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <select name="clientLocation_state" class="form-control"
+                  data-ng-model="clientLocation.state"
+                  data-ng-options="item.abbreviation as item.name for item in statesList" data-ng-disabled="true">
+            <option value="" selected>Select a State</option>
+          </select>
+          <label class="control-label">State / Province / Region</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <input name="clientLocation_postalCode" type="text" class="form-control"
+                 data-ng-model="clientLocation.postalCode" data-ng-disabled="true"/>
+          <label class="control-label">Postal / Zip Code</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <div class="form-control" disabled="disabled">{{ countries[0] }}</div>
+          <label class="control-label">Country</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

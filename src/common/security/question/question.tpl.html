@@ -1,0 +1,60 @@
+<div class="guest-container">
+    <div class="verticalcenter">
+        <div class="panel panel-green">
+          
+            <div class="panel-heading">
+                <div class="logo-small">
+                    <a href="#/">
+                        <img src="assets/images/logo1.png">
+                    </a>
+                </div>
+                <div class="content">
+
+                    <div data-ng-if="!error && !env.isAlreadyCreated">
+                        <div class="text-danger text-error">Pop Quiz!</div>
+                        <div class="step-name">Let's test your memory skills</div>
+                    </div>
+
+                    <div data-ng-if="error">
+                        <div class="text-red">Oops!</div>
+                        <div class="step-name">Answer is not correct.</div>
+                        <div class="step-name">Please try again.</div>
+                    </div>
+                </div>
+
+            </div>
+
+        <div class="panel-body login">
+
+             <div class="top-buffer">
+                     <span>  {{question}} </span>
+             </div>
+
+                <form name="findAccountForm" novalidate>
+                    <div class="form-group" data-ng-class="{ 'has-error' : findAccountForm.lastName.$invalid &&  showValid }">
+                     <input type="text" name="answer"  data-ng-model="user.answer" class="form-control" placeholder="Enter answer here" required/> 
+                    </div>     
+                    <div class="form-group">
+                        <button class="btn btn-green btn-width-100" data-ng-click="submit()" tabindex="4"> SUBMIT
+                        </button>
+                    </div>
+                  
+                </form>  
+
+                <div class="form-group text-center" data-ng-if="brand">
+                    <div class="text-center">
+                        <img class="logo-bank" data-ng-src="{{ brand }}" />
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="btn-note register">
+                        Still having trouble?
+                        <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

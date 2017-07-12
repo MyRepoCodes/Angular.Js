@@ -1,0 +1,82 @@
+<div class="table-container">
+  <!-- Search -->
+  <div class="table-filter">
+    <div class="input-group">
+      <input class="form-control input-filter" data-ng-model="filter.keyword"/>
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+  </div>
+  <!-- Show data -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-double">
+        <div class="table-responsive table-responsive-pagination">
+          <div class="table-double-content">
+            <table ng-table="tableParams" show-filter="false" class="table">
+              <thead>
+              <tr>
+                <th>
+                  <span>Total</span>
+                </th>
+                <th class="sortable"
+                    ng-class="{
+                              'sort-asc': tableParams.isSortBy('clientName', 'asc'),
+                              'sort-desc': tableParams.isSortBy('clientName', 'desc')
+                            }"
+                    ng-click="tableParams.sorting({'clientName' : tableParams.isSortBy('clientName', 'asc') ? 'desc' : 'asc'})">
+                  <div>Client Name</div>
+                </th>
+                <th class="sortable"
+                    ng-class="{
+                              'sort-asc': tableParams.isSortBy('lastName', 'asc'),
+                              'sort-desc': tableParams.isSortBy('lastName', 'desc')
+                            }"
+                    ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+                  <div>Last Name</div>
+                </th>
+                <th class="sortable"
+                    ng-class="{
+                              'sort-asc': tableParams.isSortBy('firstName', 'asc'),
+                              'sort-desc': tableParams.isSortBy('firstName', 'desc')
+                            }"
+                    ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+                  <div>First Name</div>
+                </th>
+                <th class="sortable"
+                    ng-class="{
+                              'sort-asc': tableParams.isSortBy('email', 'asc'),
+                              'sort-desc': tableParams.isSortBy('email', 'desc')
+                            }"
+                    ng-click="tableParams.sorting({'email' : tableParams.isSortBy('email', 'asc') ? 'desc' : 'asc'})">
+                  <div>Email</div>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="item in tableParams.data">
+                <td data-title="'Total'" ng-click="viewHeathResult(item)" ng-bind-html="item.totalHealthResult"></td>
+                <td data-title="'Client Name'" ng-click="viewHeathResult(item)" sortable="'clientName'" ng-bind-html="item.clientName"></td>
+                <td data-title="'Last Name'" ng-click="viewHeathResult(item)" sortable="'lastName'" ng-bind-html="item.lastName"></td>
+                <td data-title="'First Name'" ng-click="viewHeathResult(item)" sortable="'firstName'" ng-bind-html="item.firstName"></td>
+                <td data-title="'Email'" ng-click="viewHeathResult(item)" sortable="'email'" ng-bind-html="item.email"></td>
+              </tr>
+              <tr class="empty" data-ng-if="loading">
+                <td colspan="5" class="text-center">
+                  <div class="loading-indicator"></div>
+                </td>
+              </tr>
+              <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                <td colspan="5" class="text-center">
+                  <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+                  <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-double-action"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+<div data-ng-if="isParticipantHaveBeniCompAdvantage() && currentType==='bca'" data-ng-include="'modules/dashboard/participant/bca/bca.tpl.html'" data-ng-controller="DashboardParticipantBCAController"></div>
+<div data-ng-if="isParticipantHaveBeniCompSelect() && currentType==='bcs'" data-ng-include="'modules/dashboard/participant/bcs/bcs.tpl.html'" data-ng-controller="DashboardParticipantBCSController"></div>
+<div data-ng-if="!isParticipantHaveBeniCompSelect() && !isParticipantHaveBeniCompAdvantage()" data-ng-include="'modules/dashboard/participant/empty/empty.tpl.html'" data-ng-controller="DashboardParticipantEmptyController"></div>

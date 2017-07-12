@@ -1,0 +1,23 @@
+<div class="row-item">
+    <!-- For Agents -->
+    <span class="btn btn-file">
+          <input type="file"
+                 id="fileInput"
+                 class="btn-import" name="fileInput"
+                 onchange="angular.element(this).scope().importFilesExcel(this, 'healthCoachs')"
+                 multiple="false"
+                 accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <span class="pulse-icon-basic pulse-icon-upload">
+                    <span>Upload Excel File</span>
+    </span>
+    </span>
+
+
+    <!-- File download -->
+    <a href="{{ templateUrlImportIndividual }}" target="_blank" class="btn btn-file download">
+
+        <span class="pulse-icon-basic pulse-icon-download">
+            <span>Download Sample File</span>
+        </span> 
+    </a>
+</div>

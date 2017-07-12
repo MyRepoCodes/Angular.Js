@@ -1,0 +1,74 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Health Results</h4>
+  </div>
+  <div class="panel-body admin-health-results">
+    <div class="table-container">
+      <div class="table-responsive table-responsive-pagination">
+        <table ng-table="tableParams" show-filter="false" class="table">
+          <thead>
+          <tr>
+            <th>
+              <span>Total</span>
+            </th>
+            <th class="sortable"
+                ng-class="{
+                            'sort-asc': tableParams.isSortBy('clientName', 'asc'),
+                            'sort-desc': tableParams.isSortBy('clientName', 'desc')
+                          }"
+                ng-click="tableParams.sorting({'clientName' : tableParams.isSortBy('clientName', 'asc') ? 'desc' : 'asc'})">
+              <div>Client Name</div>
+            </th>
+            <th class="sortable"
+                ng-class="{
+                            'sort-asc': tableParams.isSortBy('lastName', 'asc'),
+                            'sort-desc': tableParams.isSortBy('lastName', 'desc')
+                          }"
+                ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+              <div>Last Name</div>
+            </th>
+            <th class="sortable"
+                ng-class="{
+                            'sort-asc': tableParams.isSortBy('firstName', 'asc'),
+                            'sort-desc': tableParams.isSortBy('firstName', 'desc')
+                          }"
+                ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+              <div>First Name</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in tableParams.data">
+            <td data-title="'Total'" ng-click="viewHeathResult(item)">
+              {{item.countParticipant}}
+            </td>
+            <td data-title="'Client Name'" ng-click="viewHeathResult(item)" sortable="'clientName'">
+              <span ng-if="item.clientName">{{item.clientName}}</span>
+              <span ng-if="!item.clientName">NULL</span>
+            </td>
+            <td data-title="'Last Name'" ng-click="viewHeathResult(item)" sortable="'lastName'">
+              <span ng-if="item.lastName">{{item.lastName}}</span>
+              <span ng-if="!item.lastName">NULL</span>
+            </td>
+            <td data-title="'First Name'" ng-click="viewHeathResult(item)" sortable="'firstName'">
+              <span ng-if="item.firstName">{{item.firstName}}</span>
+              <span ng-if="!item.firstName">NULL</span>
+            </td>
+          </tr>
+          <tr class="empty" data-ng-if="loading">
+            <td colspan="4" class="text-center">
+              <div class="loading-indicator"></div>
+            </td>
+          </tr>
+          <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+            <td colspan="5" class="text-center">
+              <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+              <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

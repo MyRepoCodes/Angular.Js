@@ -1,0 +1,139 @@
+<div class="row-item" data-ng-click="env.row='groupNumber'" data-ng-class="{ 'highlighted': env.row=='groupNumber' }">
+  <label class="description">Group Number</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6"
+           data-ng-class="{ 'has-error': userForm.groupNumber.$invalid && (!userForm.groupNumber.$pristine || env.showValid) }">
+        <input type="text" name="groupNumber" class="form-control"
+               data-ng-model="params.groupNumber"
+               tabindex="1"
+               data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<date-input data-form="userForm" data-ng-model="params.employmentDate" data-control-label="Employment Date" data-values="env" data-row="employmentDate" data-tabindex="2"></date-input>
+<date-input data-form="userForm" data-ng-model="params.effectiveDate" data-control-label="Effective Date" data-values="env" data-row="effectiveDate" data-tabindex="3"></date-input>
+<div class="row-item" data-ng-click="env.row='benefitYearBcsId'" data-ng-class="{ 'highlighted': env.row=='benefitYearBcsId' }">
+  <label class="description">Plan Benefit Year</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <select name="benefitYearBcsId" class="form-control"
+                data-ng-model="params.benefitYearBcsId"
+                data-ng-options="item.id as getLabelByIncentive(item) for item in benefitYearBcsList"
+                data-ng-change="selectBenefitYearBcs(params.benefitYearBcsId)"
+                tabindex="4">
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-ng-if="env.currentEmployer && env.currentEmployer.classesOfEligibleEmployees.length>0">
+  <div class="dotted-line"></div>
+  <div class="row-item" data-ng-click="env.row='nameClass'" data-ng-class="{ 'highlighted': env.row=='nameClass' }">
+    <label class="description">Name of Class</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': userForm.nameClass.$invalid && (!userForm.nameClass.$pristine || env.showValid) }">
+          <select name="nameClass" class="form-control"
+                  data-ng-model="params.indexClassesOfEligibleEmployees"
+                  data-ng-options="env.currentEmployer.classesOfEligibleEmployees.indexOf(classes) as classes.name for classes in env.currentEmployer.classesOfEligibleEmployees"
+                  tabindex="4">
+            <option></option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="env.row='annualMaximum'" data-ng-class="{ 'highlighted': env.row=='annualMaximum' }">
+    <label class="description">Annual Maximum Medical Benefit</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <!--<input name="annualMaximum" type="text" class="form-control"-->
+                 <!--data-ng-model="params.annualClassesOfEligibleEmployees"-->
+                 <!--tabindex="5"-->
+                 <!--data-ng-disabled="!isAdmin"/>-->
+
+          <select tabindex="5"
+                  name="annualMaximum"
+                  class="form-control"
+                  data-ng-disabled="true"
+                  ng-options="item.value as item.label for item in benicompSelectConstant.annualMaximum"
+                  data-ng-model="params.annualClassesOfEligibleEmployees"></select>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- START: AD&D Beneficiary -->
+<div class="dotted-line"></div>
+<div class="row-item" data-ng-click="env.row='primaryBeneficiaryForAdd'"
+     data-ng-class="{
+        'highlighted': env.row=='primaryBeneficiaryForAdd',
+        'has-error': userForm.primaryBeneficiaryForAdd.$invalid && (!userForm.primaryBeneficiaryForAdd.$pristine || env.showValid)
+    }">
+  <label class="description">Primary Beneficiary for AD&D </label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="primaryBeneficiaryForAdd" type="text" class="form-control"
+               data-ng-model="params.primaryBeneficiaryForAdd"
+               tabindex="6"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-item" data-ng-click="env.row='primaryBeneficiaryRelationship'"
+     data-ng-class="{ 'highlighted': env.row=='primaryBeneficiaryRelationship' ,
+        'has-error': userForm.primaryBeneficiaryRelationship.$invalid && (!userForm.primaryBeneficiaryRelationship.$pristine || env.showValid)}">
+  <label class="description">Primary Beneficiary Relationship</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="primaryBeneficiaryRelationship" type="text" class="form-control"
+               data-ng-model="params.primaryBeneficiaryRelationship"
+               tabindex="7"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-item" data-ng-click="env.row='contingentBeneficiaryForAdd'"
+     data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryForAdd' ,
+        'has-error': userForm.contingentBeneficiaryForAdd.$invalid && (!userForm.contingentBeneficiaryForAdd.$pristine || env.showValid)}">
+  <label class="description">Contingent Beneficiary for AD&D</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="contingentBeneficiaryForAdd" type="text" class="form-control"
+               data-ng-model="params.contingentBeneficiaryForAdd"
+               tabindex="8"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-item" data-ng-click="env.row='contingentBeneficiaryRelationship'"
+     data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryRelationship' ,
+        'has-error': userForm.contingentBeneficiaryRelationship.$invalid && (!userForm.contingentBeneficiaryRelationship.$pristine || env.showValid)}">
+  <label class="description">Contingent Beneficiary Relationship</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input name="contingentBeneficiaryRelationship" type="text" class="form-control"
+               data-ng-model="params.contingentBeneficiaryRelationship"
+               tabindex="9"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dotted-line"></div>
+<!-- END: AD&D Beneficiary -->

@@ -1,0 +1,21 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['annual_max_' + inputId].$invalid && (!form['annual_max_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': form['annual_max_' + inputId].$invalid && (!form['annual_max_' + inputId].$pristine || env.showValid) }">
+        <select name="annual_max_{{ inputId }}" class="form-control"
+                data-ng-model="ngModel"
+                data-ng-options="item as (item | currency:'$':0) for item in annualMaxList"
+                data-ng-disabled="readonly"
+                data-ng-required="required"
+                tabindex="{{ tabindex }}">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

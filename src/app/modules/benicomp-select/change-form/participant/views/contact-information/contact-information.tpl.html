@@ -1,0 +1,25 @@
+<div class="dotted-line"></div>
+<div class="row-item">
+  <h3>Contact Information</h3>
+</div>
+
+<address-input data-ng-if="type === 1" data-form="form" data-ng-params="params" data-control-label="Address:" data-env="env" data-row="address" data-tabindex="4"
+  ></address-input>
+
+<phone-input data-form="form" data-ng-model="params.phoneNumber" data-control-label="Change Phone Number To: " data-env="env"
+  data-row="'phoneNumber'" data-tabindex="5" ></phone-input>
+<div class="row-item" data-ng-click="env.row='email'" data-ng-class="{ 'highlighted': env.row=='email',
+                        'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || (env.isEmailExists && env.showValid)
+                      }">
+  <label class="description">Change Email Address to:</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{'has-error': form.email.$invalid && (!form.email.$pristine || env.showValid)}">
+        <input name="email" type="email" class="form-control" data-ng-pattern="patternRegexs.email" data-ng-model="params.email"
+          tabindex="6" />
+        <div ng-if="env.isEmailExists && env.showValid">This email already exists.</div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<div class="panel panel-green panel-dashboard">
+  <div class="panel-heading-above">
+    <h1>My Dashboard</h1>
+    <div class="info">Welcome to your personal dashboard. Here you can find your confidential health screening results, view your rewards, explore resources and access a Registered Nurse Health Coach.
+    </div>
+  </div>
+  <div class="panel-heading">
+    <h1>{{ currentUser.firstName }}, you earned
+      <span class="text-green2">{{ totalReward |  noFractionCurrency}}</span>
+      <br>out of a possible
+      <span class="text-green2">{{ totalReal | noFractionCurrency }}</span> in rewards.
+    </h1>
+    <!--<h1 class="you-earned">Cynthia, you earned <span class="text-green2">$1,200</span><br>out of a possible
+        <span class="text-green2">$2,000</span> in rewards.</h1>-->
+    <div class="info">Your company’s insurance plan allows you to earn significant financial rewards for choosing a healthy lifestyle.
+      Rewards are based on your screening results below.
+    </div>
+    <!--<div class="buttons align-right">
+      <a class="btn btn-green" ng-click="openImprovementTestimonialForm()">Survey</a>
+    </div>-->
+  </div>
+  <div class="panel-body" ng-if="!isGettingMyReward">
+    <div class="reward">
+      <div class="heading-title">
+        {{ totalReward | noFractionCurrency }} Total Rewards Earned
+      </div>
+      <div class="reward-progress">
+        <progress-bar-default min="0" max="{{ totalReal }}" start="0" end="{{ totalReward }}"></progress-bar-default>
+      </div>
+      <div class="line-green"></div>
+      <div class="reward-result">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <th></th>
+            <th>Goal</th>
+            <th>Your result</th>
+            <th class="align-right">Your reward</th>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in tableList" class="cursor-pointer {{ item.classes }}" dashboard-popup="item">
+              <td><span>{{ item.name }}</span></td>
+              <td data-ng-bind-html="item.goal"></td>
+              <td>
+                <span class="circle circle-green" data-ng-class="{ 'circle-green' : item.passed, 'circle-danger' : !item.passed }">{{ item.result }}</span>
+              </td>
+              <td class="align-right">
+                <span data-ng-class="{ 'text-green2' : item.reward > 0, 'text-black':  item.reward == 0 }">{{ item.reward | noFractionCurrency }}</span>
+              </td>
+            </tr>
+            <tr class="total">
+              <td colspan="4">
+                <a class="click-open-popup" data-ui-sref="loggedIn.modules.health-results.biomarkers">Click here to see all health results.</a>
+                <div class="align-right pull-right">TOTAL REWARD <span class="text-green2">{{ totalReward | noFractionCurrency }}</span></div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="line-green"></div>
+    </div>
+    <!--<div class="info" ng-if="!isGettingMyReward">
+      <div class="heading-title">
+        Metabolic Syndrome
+      </div>
+      <div class="info-content">
+        <div class="pull-left">
+          <div class="easy-pie-chart" options="options" percent="percent"><span class="value">{{ totalPassedReward }}/{{ totalCount }}</span>
+          </div>
+        </div>
+        <div class="info-des">
+          <div ng-if="totalPassedReward !== 5">
+            Based on your screening results you have passed {{ totalPassedReward }} out of {{ totalCount }}
+            metabolic syndrome criteria which means <span class="text-alert">you are at a higher risk for heart disease,
+                    diabetes and stroke</span> than someone passing {{totalPassedReward + 1}} out of {{ totalCount }}.
+          </div>
+          <div ng-if="totalPassedReward === 5">
+            (we use the word LOWER instead of HIGHER in this case) Based on your screening results you have
+            passed 5 out of 5 metabolic syndrome criteria which means you are at a lower risk for heart
+            disease, diabetes, and stroke than someone passing 4 out of 5
+          </div>
+          <div class="buttons align-right">
+            <a class="btn btn-green" data-ui-sref="loggedIn.modules.health-results.metabolic-syndrome">Learn
+              More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>-->
+    <div class="info" ng-if="!isGettingMyReward">
+      <div class="heading-title">Metabolic Syndrome</div>
+      <div class="info-content">
+        <div class="pull-left">
+          <!--<div class="easy-pie-chart" options="optionsSyndrome" percent="percentSyndrome"><span class="value">{{ totalPassed }}/{{ totalCount }}</span>
+          </div>-->
+          <nvd3 options="optionsChartSyndrome"
+                data="dataChartSyndrome">
+          </nvd3>
+          <span class="chart-syndrome-title">{{ totalPassed }}/{{ totalCount }}</span>
+        </div>
+        <div class="info-des">
+          <!--<div ng-if="totalPassed !== 5">
+            Based on your screening results you have passed {{ totalPassed }} out of {{ totalCount }}
+            metabolic syndrome criteria which means <span class="text-alert">you are at a higher risk for heart disease,
+                        diabetes and stroke</span> than someone passing {{totalPassed + 1}} out of {{ totalCount }}.
+          </div>
+          <div ng-if="totalPassed === 5">
+            Metabolic syndrome is the name for a group of risk factors that increases your risk for heart disease and other health problems, such as diabetes and stroke. The five conditions described below are the metabolic risk factors. You can have any one of these risk factors by itself, but they tend to occur together. You must have three or more risk factors to be associated with metabolic syndrome.
+          </div>-->
+
+          Metabolic syndrome is the name for a group of risk factors that increases your risk for heart disease and other health problems, such as diabetes and stroke. The five conditions described below are the metabolic risk factors. You can have any one of these risk factors by itself, but they tend to occur together. You must have three or more risk factors to be associated with metabolic syndrome.
+        </div>
+      </div>
+    </div>
+    <div class="reward-result-metabolic-Syndrome" ng-if="!isGettingMyReward">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <th>Risk Factor</th>
+          <th>Your Target</th>
+          <th>Your Value</th>
+          <th>What Does It Mean</th>
+          </thead>
+          <tbody>
+          <tr data-ng-repeat="(key,item) in tableListMean" ng-if="key <5">
+            <td><span class="circle circle-green"
+                      data-ng-class="{
+                      'circle-green-passed' : item.passed === true,
+                      'circle-danger-fail' : item.passed === false,
+                      'circle-danger-null' : item.passed === null
+                      }"></span>
+            <td data-ng-bind="item.target"></td>
+            <td>{{ item.result ? item.result : 'N/A' }}</td>
+            <td data-ng-bind="item.mean"></td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <p ng-if="totalPassed !== 5">
+        <b>ALERT:</b>
+        <span ng-if="dataChartSyndrome[1].y === 0">
+          You are at risk for Metabolic Syndrome, you may be more likely to develop diabetes,
+        heart disease or stroke. If you have questions about your results, be sure to follow up with your
+        doctor. Your Doctor can help you improve those risk factors so you can prevent Metabolic Syndrome in
+        the future.
+        </span>
+        <span ng-if="dataChartSyndrome[1].y !== 0">
+        Based on your screening results one or more of your biomarker values are pending at this time.
+        </span>
+      </p>
+    </div>
+    <!--<div class="video">
+      <div class="embed-responsive embed-responsive-16by9">
+        <youtube-video class="embed-responsive-item" video-id="theBestVideo"></youtube-video>
+      </div>
+    </div>-->
+    <div class="form-group logo-brad-dashboard text-center" data-ng-if="brand">
+      <div class="text-center">
+        <img class="logo-bank" data-ng-src="{{ brand }}"/>
+      </div>
+    </div>
+  </div>
+</div>

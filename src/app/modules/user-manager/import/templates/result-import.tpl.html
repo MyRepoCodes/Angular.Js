@@ -1,0 +1,49 @@
+<div class="row-item result_uploadFile" ng-if="resultUploadFileClient.length !== 0">
+    <p><b>Results upload files: </b></p>
+
+    <p class="create" ng-if="resultUploadFileClient.countCreate && resultUploadFileClient.countCreate !== 0">
+        Created Success: {{resultUploadFileClient.countCreate}} records</p>
+
+    <p class="update" ng-if="resultUploadFileClient.countUpdate && resultUploadFileClient.countUpdate !== 0">
+        Updated Success: {{resultUploadFileClient.countUpdate}} records</p>
+
+    <p class="error" ng-if="resultUploadFileClient.errors && resultUploadFileClient.errors.length !== 0">
+        List Errors:
+    </p>
+
+    <div class="listError" ng-if="resultUploadFileClient.errors">
+        <div ng-repeat="item in resultUploadFileClient.errors track by $index">
+            {{$index + 1}}. {{item}}
+        </div>
+    </div>
+
+    <!-- conflicts -->
+    <p class="error" ng-if="resultUploadFileClient.conflicts && resultUploadFileClient.conflicts.length !== 0">
+        List Conflicts:
+    </p>
+
+    <div class="listError" ng-if="resultUploadFileClient.conflicts">
+        <div ng-repeat="item in resultUploadFileClient.conflicts track by $index">
+            {{$index + 1}}. {{item}}
+        </div>
+    </div>
+
+    <!-- countDuplicateSsn -->
+    <p class="error" ng-if="resultUploadFileClient.countDuplicateSsn">
+        Count Duplicate SSN : {{resultUploadFileClient.countDuplicateSsn}} records</p>
+
+    </p>
+
+    <!-- countErrorRequired -->
+    <p class="error" ng-if="resultUploadFileClient.errorRequired.length > 0">
+        Count Error Required :
+        <b>{{resultUploadFileClient.errorRequired.length}}</b><br/> Row error:
+        <div class="listError" ng-if="resultUploadFileClient.errorRequired">
+            <div ng-repeat="item in resultUploadFileClient.errorRequired track by $index">
+                {{$index + 1}}. {{item}}
+            </div>
+        </div>
+    </p>
+
+
+</div>

@@ -1,0 +1,540 @@
+@media (min-width: @screen-tablet) {
+  .navbar-collapse {
+    max-height: 100% !important;
+  }
+}
+
+@media (max-width: @screen-xs-min) {
+  body.view-on-mobile {
+    background: @white;
+  }
+
+  .view-on-mobile {
+    footer {
+      background: @white;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+
+}
+
+@media (min-width: @screen-sm-min) {
+  header {
+    height: 125px;
+    overflow: hidden;
+    border-bottom: 1px solid @primary;
+
+    .logo + nav.navbar {
+      height: 60px;
+      margin-top: -66px;
+      z-index: 100;
+      display: inline-block;
+      float: right;
+      .navbar-nav > li {
+        height: 60px;
+        &.avatar {
+          display: inherit;
+          display: inherit;
+          height: 60px;
+          width: 50px;
+          img {
+            max-width: 100%;
+          }
+        }
+        > a {
+          padding: 0 10px;
+          line-height: 60px;
+          height: 60px;
+        }
+        &.avatar {
+          a {
+            float: right;
+            padding: 0;
+          }
+        }
+
+      }
+    }
+
+    .line-green {
+      display: none;
+    }
+  }
+
+  .form-content {
+    .container {
+      width: 640px;
+    }
+  }
+
+  .logo-brad-dashboard {
+    display: none;
+  }
+
+}
+
+@media (min-width: @screen-md-min) {
+  .container {
+    .left-sidebar + div:not([class*="left-sidebar"]) {
+      padding-left: 25px;
+    }
+    .main-content {
+
+    }
+  }
+
+}
+
+@media (min-width: @screen-lg-min) {
+  .container {
+    width: @screen-lg-min;
+  }
+}
+
+/* Fix responsive */
+@media (max-width: @screen-xs-max) {
+  header {
+    min-height: inherit;
+    margin-bottom: 10px;
+    #wrap > .container {
+      padding: 10px 10px 0 10px;
+    }
+    .logo {
+      img {
+        min-height: inherit;
+        max-height: 40px;
+      }
+      .slogan {
+        text-align: left;
+      }
+    }
+    .logo + nav.navbar {
+      margin-top: -50px;
+      z-index: 100;
+      background: transparent;
+      .navbar-header {
+        margin-bottom: 20px;
+        .navbar-toggle {
+          background-color: transparent !important;
+          padding: 0;
+          margin: 0;
+          display: inline-block;
+          .fa-reorder {
+            font-size: 35px;
+            line-height: 35px;
+            color: @brand-success;
+            &:before {
+              content: "\f0c9";
+            }
+          }
+        }
+      }
+      .navbar-collapse {
+        border-top-color: @primary;
+      }
+    }
+  }
+
+  .page-container.state-login {
+    background-color: #ffffff;
+  }
+
+  #sidebar {
+    position: inherit;
+    width: inherit;
+    top: inherit;
+    bottom: inherit;
+    overflow-x: inherit !important;
+  }
+
+  #wrap > .container {
+    padding: 10px;
+  }
+
+  [class*="panel-"].panel {
+    .panel-body {
+      min-height: initial;
+    }
+  }
+
+  .navbar {
+    .navbar-header {
+      button {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .panel {
+    margin-bottom: 20px;
+  }
+
+  .form-content {
+    .datepicker-box {
+      .dropdown-menu {
+        left: inherit !important;
+        right: 0 !important;
+      }
+    }
+  }
+
+  .datepicker-dropdown.datepicker-orient-top:before {
+    display: none;
+  }
+
+  /*header avatar profile*/
+  .panel .panel-body .profile-photo {
+    display: none;
+  }
+
+  /* Over wirte navbar collapse */
+  .navbar-collapse-overwrite {
+    max-height: 750px;
+    overflow-x: visible;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .you-earned {
+    font-size: 20px !important;
+  }
+}
+
+/** Medium screen / ipad **/
+@media (max-width: @screen-ipad) {
+  .form-content {
+    padding: 15px 20px;
+    [class*="panel-"].panel .panel-body {
+      padding: 10px 15px 20px;
+    }
+  }
+
+  [class*="panel-"].panel-manager {
+    .form-content {
+      > .table-container {
+        margin: -15px -20px;
+      }
+      > .form-footer-tools {
+        margin: 0 -10px;
+      }
+    }
+  }
+
+  .header-tab {
+    margin: 0 -15px;
+  }
+}
+
+/** Tablet ***/
+@media (max-width: @screen-tablet) {
+  .form-content {
+    padding: 15px 0px;
+    [class*="panel-"].panel .panel-body {
+      padding: 10px 15px;
+      .row-item {
+        .content {
+          &.date-of-birth {
+            .datepicker-box {
+              .dropdown-menu {
+                left: -100px !important;
+                right: inherit !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  [class*="panel-"].panel-manager {
+    .form-content {
+      > .table-container {
+        margin: -15px 0px;
+      }
+      > .form-footer-tools {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  .logo-brad {
+    display: none;
+  }
+
+  .logo-brad-dashboard {
+    display: block;
+  }
+
+}
+
+@media (max-width: 639px) {
+  .form-content {
+    .container {
+      width: 100%;
+    }
+
+    form[name="hraForm"] {
+      [class*="col-xs"] {
+        width: calc(100% - 20px);
+      }
+      .radio-inline, .radio-inline {
+        display: block;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 580px) {
+  .panel.panel-health {
+    white-space: initial;
+
+    .panel-heading {
+      white-space: initial;
+      [class*="pull"] {
+        display: block !important;
+        float: initial !important;
+        margin-bottom: 0;
+      }
+      .line-green {
+        margin-top: 5px;
+      }
+    }
+    .panel-body {
+      [class*="pull"] {
+        display: block !important;
+        float: initial !important;
+        margin-bottom: 0;
+      }
+      .controls {
+        line-height: 25px;
+        .filter-control {
+          line-height: 20px;
+          > * {
+            white-space: nowrap;
+          }
+        }
+      }
+      .progress-items {
+        .progress-control {
+          .progressbar {
+            padding: 5px 10px;
+            .progress-top {
+              line-height: 25px;
+            }
+            .progress-item {
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/** Mobile ***/
+@media (max-width: @screen-phone) {
+
+  .modal-body {
+    .buttons {
+      .btn {
+        height: 50px;
+        font-size: 20px !important;
+      }
+    }
+  }
+
+  header .logo img {
+    max-height: 30px;
+  }
+
+  #wrap > .container {
+    padding: 5px 10px;
+  }
+
+  [class*="panel-"].panel {
+    .panel-body {
+      padding: 10px;
+      padding-bottom: 0px;
+    }
+    &.panel-dashboard {
+      .panel-body {
+        .reward {
+          .line-green {
+            margin: 0 -10px;
+          }
+        }
+        .info {
+          margin: 0 -10px;
+          padding: 0 10px;
+          .info-content {
+            padding: 10px 0;
+          }
+        }
+      }
+    }
+  }
+
+  #sidebar ul {
+    margin: 0 -10px;
+    margin-bottom: -1px;
+  }
+
+  .form-control:not([class*="datepicker"]) {
+    width: 100% !important;
+  }
+
+  .input-group {
+    .input-group-btn {
+      min-width: 45px !important;
+    }
+  }
+
+  .panel.panel-health {
+    .panel-body {
+      .controls {
+        .filter-control {
+          span {
+            display: block;
+            position: relative;
+            &.separate {
+              display: none;
+            }
+            &:not([class*="separate"]) {
+              margin-left: 10px;
+              &:before {
+                content: "-";
+                text-decoration: none;
+                position: absolute;
+                left: -9px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  button.btn, a.btn[class*="btn-"] {
+    width: 100% !important;
+    margin: 0 !important;
+    overflow: hidden;
+    + .btn {
+      margin-top: 10px !important;
+    }
+  }
+
+  .form-content {
+    padding: 15px 0px;
+    > .table-container {
+      margin: -15px 0px !important;
+    }
+    [class*="panel-"].panel .panel-body {
+      padding: 10px 15px;
+      .row-item {
+        .content {
+          position: relative;
+          &.date-of-birth {
+            .checkbox-inline:last-child {
+              position: initial;
+              .datepicker-box {
+                .dropdown-menu {
+                  right: -10px !important;
+                  left: inherit !important
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .datepicker-box, [datepicker-popup-wrap] {
+    .btn-group {
+      width: 100% !important;
+      margin-bottom: 10px;
+    }
+  }
+
+  [ng-table-pagination] {
+    .ng-table-pager {
+      padding: 0;
+      .ng-table-counts {
+        display: none;
+      }
+    }
+  }
+
+  [class*="panel-"].panel-manager {
+    .panel-manager-tool {
+      padding: 0 0 5px;
+      .filter {
+        right: 0;
+      }
+    }
+    .form-content {
+      > .table-container {
+        margin: -15px 0px;
+        .table-filter {
+          padding: 0;
+        }
+        .table-responsive-pagination {
+          margin-bottom: 20px;
+        }
+      }
+      > .form-footer-tools {
+        margin: 0;
+      }
+    }
+  }
+
+  footer {
+    height: 160px;
+    &.state-login, &.state-find-account, &.state-forgot-username, &.state-forgot-password, &.state-about {
+      background-size: 70%;
+    }
+  }
+
+  .page-container {
+    padding-bottom: 140px;
+  }
+}
+
+/*** between ***/
+/* Fix 768-991 */
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  .container {
+    width: 100%;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .form-content {
+    form[name="hraForm"] {
+      [class*="col-xs"] {
+        width: calc(100% - 20px);
+      }
+    }
+  }
+}
+
+/* Fix 768-912 */
+@media (min-width: @screen-sm-min) and (max-width: 912px) {
+  .page-container {
+    .left-sidebar {
+      .panel {
+        .panel-heading {
+          white-space: inherit;
+        }
+      }
+    }
+  }
+}
+

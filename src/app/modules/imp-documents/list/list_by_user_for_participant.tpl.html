@@ -1,0 +1,65 @@
+<div class="panel-manager-tool">
+    <div class="breadcrumb">
+        <a data-ui-sref="loggedIn.modules.imp-documents.participant">{{ 'document.breadcrumb' | translate }}</a>
+        <span data-ng-if="isEmployer">
+            <span>></span>
+        <a data-ui-sref="loggedIn.modules.imp-documents.participantForUser">{{ currentUser.clientName }}</a>
+        </span>
+        <span data-ng-if="isHealthCoach">
+            <span>></span>
+        <a data-ui-sref="loggedIn.modules.imp-documents.participantForUser">{{ currentUser.firstName + ' ' + currentUser.lastName }}</a>
+        </span>
+        <span>></span>
+        <span>{{ currentName }}</span>
+    </div>
+    <div class="filter" data-ng-if="isClientManager || isAdmin">
+        <div class="dropdown">
+            <button class="dropdown-toggle filter-dropdown-toggle">{{ currentFilter }} <i class="icon icon-filter"></i></button>
+            <ul class="dropdown-menu">
+                <li data-ng-hide="currentFilterKey == 'clientDocuments'" data-ng-class="{ 'selected': currentFilterKey == 'clientDocuments' }"
+                    onclick="$('.filter-dropdown-toggle').trigger('click');">
+                    <a data-ng-click="choiceFilter('clientDocuments')">Client Documents</a>
+                </li>
+                <li data-ng-hide="currentFilterKey == 'heathCoachDocuments'" data-ng-class="{ 'selected': currentFilterKey == 'heathCoachDocuments' }"
+                    onclick="$('.filter-dropdown-toggle').trigger('click');">
+                    <a data-ng-click="choiceFilter('heathCoachDocuments')">Health Coach Documents</a>
+                </li>
+                <li data-ng-hide="currentFilterKey == 'participantDocuments'" data-ng-class="{ 'selected': currentFilterKey == 'participantDocuments' }"
+                    onclick="$('.filter-dropdown-toggle').trigger('click');">
+                    <a data-ng-click="choiceFilter('participantDocuments')">Participant Documents</a>
+                </li>
+                <li data-ng-hide="currentFilterKey == 'allDocuments'" data-ng-class="{ 'selected': currentFilterKey == 'allDocuments' }"
+                    onclick="$('.filter-dropdown-toggle').trigger('click');">
+                    <a data-ng-click="choiceFilter('allDocuments')">All Documents</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="filter" data-ng-if="isEmployer || isHealthCoach">
+        <div class="dropdown">
+            <button class="dropdown-toggle filter-dropdown-toggle">Participant Documents <i class="icon icon-filter"></i></button>
+            <ul class="dropdown-menu">
+                <li data-ng-if="isEmployer">
+                    <a data-ng-click="goListForUser()">Client Documents</a>
+                </li>
+                <li data-ng-if="isHealthCoach">
+                    <a data-ng-click="goListForUser()">Health Coach Documents</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="form-content">
+    <div class="table-container" data-ng-include="'modules/imp-documents/list/list_document.tpl.html'"></div>
+    <div class="form-footer-tools">
+        <span class="btn btn-file">
+            <input type="file" class="btn-import" name="file"
+                    onchange="angular.element(this).scope().uploadFiles(this)"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.csv">
+                <span class="pulse-icon-basic pulse-icon-upload">
+              <span>Upload File</span>
+        </span>
+        </span>
+    </div>
+</div>

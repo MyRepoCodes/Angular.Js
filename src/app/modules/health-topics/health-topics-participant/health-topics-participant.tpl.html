@@ -1,0 +1,62 @@
+<div class="panel panel-green panel-manager">
+    <div class="panel-heading">
+        <h4 class="text-center">Health Topics</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-faqs">
+            <div class="box-filter">
+                <div class="input-group">
+                    <input class="form-control input-filter"
+                            data-ng-model="params.q"
+                            placeholder="Search"
+                            />
+                    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+                </div>
+            </div>
+            <h4 class="faqs-heading">FREQUENTLY ASKED QUESTIONS</h4>
+
+            <div data-ng-if="!loading">
+                <!--<accordion class="faqs-list">-->
+                    <!--<accordion-group data-ng-repeat="item in faqsList" is-open="item.open">-->
+                        <!--<accordion-heading>-->
+                            <!--<span ng-class="{ 'active': item.open }">{{ item.question }}</span>-->
+                        <!--</accordion-heading>-->
+                        <!--{{ item.answer }}-->
+                    <!--</accordion-group>-->
+                <!--</accordion>-->
+                <div class="faqs-group">
+                    <div class="faqs-item" data-ng-repeat="items in healthTopicsLists" data-ng-if="items.length>0">
+                        <h4 class="color-blue-light" data-ng-bind="items[0].category.categoryName"></h4>
+                        <accordion class="faqs-list">
+                            <accordion-group data-ng-repeat="item in items" is-open="item.open">
+                                <accordion-heading>
+                                    <span ng-class="{ 'active': item.open }">{{ item.question }}</span>
+                                </accordion-heading>
+                                <span data-ng-bind-html="item.answer"></span>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+
+
+                <pagination class="pagination-sm" data-ng-if="totalCount > params.pageSize"
+                            boundary-links="true"
+                            total-items="totalCount"
+                            items-per-page="params.pageSize"
+                            ng-model="params.page"
+                            ng-change="pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;"
+                            first-text="&laquo;"
+                            last-text="&raquo;">
+                </pagination>
+
+
+                <div data-ng-if="healthTopicsLis.length == 0">{{ 'faqs.empty' | translate }}</div>
+            </div>
+            <div data-ng-if="loading" class="text-center">
+                <div class="loading-indicator"></div>
+            </div>
+        </div>
+    </div>
+</div>

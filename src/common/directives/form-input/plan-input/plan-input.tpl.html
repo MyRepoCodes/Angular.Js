@@ -1,0 +1,184 @@
+<!-- Benefit Plan Options -->
+<div class="row-item" data-ng-click="env.row='plan_' + inputId" data-ng-class="{ 'highlighted': env.row=='plan_' + inputId }">
+  <label class="description">{{ controlLabel }}</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group item-reward-option col-xs-3">
+        <input name="plan_{{ inputId }}_1" type="checkbox" id="plan1"
+               data-ng-model="plans.plan1.isSelected"
+               data-ng-disabled="readonly"
+               value="plan1"
+               tabindex="{{ tabindex }}"/>
+        <label class="choice" for="plan1">Plan 1</label>
+      </div>
+      <div class="form-group item-reward-option col-xs-3">
+        <input name="plan_{{ inputId }}_2" type="checkbox" id="plan2"
+               data-ng-model="plans.plan2.isSelected"
+               data-ng-disabled="readonly"
+               value="plan2"
+               tabindex="{{ tabindex }}"/>
+        <label class="choice" for="plan2">Plan 2</label>
+      </div>
+      <div class="form-group item-reward-option col-xs-3">
+        <input name="plan_{{ inputId }}_3" type="checkbox" id="plan3"
+               data-ng-model="plans.plan3.isSelected"
+               data-ng-disabled="readonly"
+               value="plan3"
+               tabindex="{{ tabindex }}"/>
+        <label class="choice" for="plan3">Plan 3</label>
+      </div>
+      <div class="form-group item-reward-option col-xs-3">
+        <input name="plan_{{ inputId }}_4" type="checkbox" id="plan4"
+               data-ng-model="plans.plan4.isSelected"
+               data-ng-disabled="readonly"
+               value="plan4"
+               tabindex="{{ tabindex }}"/>
+        <label class="choice" for="plan4">Plan 4</label>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Plan 1 Deductibles Being Supplemented -->
+<div class="row row-plan" data-ng-if="plans.plan1.isSelected">
+  <h3 class="description-plan">Plan 1 Deductibles Being Supplemented</h3>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_1_0'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_1_0' }">
+      <label class="description">Single - Plan 1 </label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_1_0" type="text" class="form-control"
+                   data-ng-model="plans.plan1.singleAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_1_1'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_1_1' }">
+      <label class="description">Family - Plan 1</label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_1_1" type="text" class="form-control"
+                   data-ng-model="plans.plan1.familyAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Plan 2 Deductibles Being Supplemented -->
+<div class="row row-plan" data-ng-if="plans.plan2.isSelected">
+  <h3 class="description-plan">Plan 2 Deductibles Being Supplemented</h3>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_2_0'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_2_0' }">
+      <label class="description">Single - Plan 2 </label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_2_0" type="text" class="form-control"
+                   data-ng-model="plans.plan2.singleAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_2_1'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_2_1' }">
+      <label class="description">Family - Plan 2</label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_2_1" type="text" class="form-control"
+                   data-ng-model="plans.plan2.familyAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Plan 3 Deductibles Being Supplemented -->
+<div class="row row-plan" data-ng-if="plans.plan3.isSelected">
+  <h3 class="description-plan">Plan 3 Deductibles Being Supplemented</h3>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_3_0'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_3_0' }">
+      <label class="description">Single - Plan 3 </label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_3_0" type="text" class="form-control"
+                   data-ng-model="plans.plan3.singleAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_3_1'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_3_1' }">
+      <label class="description">Family - Plan 3</label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_3_1" type="text" class="form-control"
+                   data-ng-model="plans.plan3.familyAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Plan 4 Deductibles Being Supplemented -->
+<div class="row row-plan" data-ng-if="plans.plan4.isSelected">
+  <h3 class="description-plan">Plan 4 Deductibles Being Supplemented</h3>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_4_0'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_4_0' }">
+      <label class="description">Single - Plan 4 </label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_4_0" type="text" class="form-control"
+                   data-ng-model="plans.plan4.singleAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="row-item" data-ng-click="env.row='plan_'+inputId+'_4_1'" data-ng-class="{ 'highlighted': env.row=='plan_'+inputId+'_4_1' }">
+      <label class="description">Family - Plan 4</label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-8">
+            <input name="plan_{{ inputId }}_4_1" type="text" class="form-control"
+                   data-ng-model="plans.plan4.familyAmount"
+                   filtered-input="number"
+                   data-ng-disabled="readonly"
+                   tabindex="{{ tabindex }}"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,130 @@
+<div class="dotted-bottom">
+  <div class="row-item" data-ng-click="env.row=1" data-ng-class="{ 'highlighted': env.row==1 }">
+    <label class="description">Client Name</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="clientName" class="form-control"
+                 data-ng-model="params.clientName"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <name-input data-form="userForm" data-ng-params="params" data-control-label="Contact Name" data-env="env" data-row="2" readonly></name-input>
+  <div class="row-item" data-ng-click="env.row=3" data-ng-class="{ 'highlighted': env.row==3 }">
+    <label class="description">Contact Position</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="position" class="form-control"
+                 data-ng-model="params.position"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <phone-input data-form="userForm" data-ng-model="params.phoneNumber" data-control-label="Contact Phone" data-env="env" data-row="4" readonly></phone-input>
+  <div class="row-item" data-ng-click="env.row=5" data-ng-class="{ 'highlighted': env.row==5 }">
+    <label class="description">Contact Email</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input name="email" type="email" class="form-control"
+                 data-ng-model="params.email"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="env.row=5.1" data-ng-class="{ 'highlighted': env.row==5.1 }">
+    <label class="description">Customer ID</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input name="customerId" type="text" class="form-control"
+                 data-ng-model="params.customerId"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <address-input data-form="userForm" data-ng-params="params" data-control-label="Company Mailing Address" data-env="env" data-row="6" readonly></address-input>
+</div>
+<!-- Start Locations -->
+<div class="dotted-bottom">
+  <div class="row-item" data-ng-click="env.row='numberOfLocations'" data-ng-class="{ 'highlighted' : env.row=='numberOfLocations' }">
+    <label class="description">Number of Locations</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-4">
+          <select name="numberOfLocations" class="form-control"
+                  data-ng-model="env.numberOfLocations"
+                  data-ng-options="n for n in [] | range:1:6"
+                  data-ng-disabled="true">
+            <option></option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<location-item data-ng-repeat="n in [] | range:0:env.numberOfLocations" data-form="userForm" data-params="params" data-index="{{ $index+1 }}" data-env="env" readonly></location-item>
+<!-- End Locations -->
+<div class="dotted-bottom">
+  <div class="row-item" data-ng-click="env.row=7" data-ng-class="{ 'highlighted': env.row==7 }">
+    <label class="description">Client URL</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="clientUrl" class="form-control"
+                 data-ng-model="params.clientUrl"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Client Logo-->
+  <div class="row-item" data-ng-click="env.row=7.1" data-ng-class="{ 'highlighted': env.row==7.1 }">
+    <label class="description">Client Logo</label>
+    <div class="content">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="form-upload">
+            <img data-ng-if="preview" data-ng-src="{{ preview }}" height="100px"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="env.row=8" data-ng-class="{ 'highlighted': env.row==8 }">
+    <label class="description">Client Username</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="username" class="form-control"
+                 data-ng-model="params.username"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='products'" data-ng-class="{ 'highlighted': env.row=='products' }">
+  <label class="description">Products</label>
+  <div class="content">
+    <div class="checkbox-line">
+      <input name="beniCompAdvantage" type="checkbox" id="beniCompAdvantage"
+             data-ng-model="params.products.beniCompAdvantage"
+             data-ng-disabled="true"/>
+      <label class="choice" for="beniCompAdvantage">BeniComp Advantage</label>
+    </div>
+    <div class="checkbox-line">
+      <input name="beniCompSelect" type="checkbox" id="beniCompSelect"
+             data-ng-model="params.products.beniCompSelect"
+             data-ng-disabled="true"/>
+      <label class="choice" for="beniCompSelect">BeniComp Select</label>
+    </div>
+  </div>
+</div>

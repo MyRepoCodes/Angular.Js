@@ -1,0 +1,130 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['enrollmentLevelDetail_' + enrollmentLevelInputDetailId].$invalid && (!form['enrollmentLevelDetail_' + enrollmentLevelInputDetailId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content" data-ng-if="option==0">
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_0"
+             data-ng-model="params.ngModel0"
+             data-ng-value="0"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_0" class="choice">Employee</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_1"
+             data-ng-model="params.ngModel0"
+             data-ng-value="1"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_1" class="choice">Employee + Child</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_2"
+             data-ng-model="params.ngModel0"
+             data-ng-value="2"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_2" class="choice">Employee + Children</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_3"
+             data-ng-model="params.ngModel0"
+             data-ng-value="3"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_3" class="choice">Employee + Spouse</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_4"
+             data-ng-model="params.ngModel0"
+             data-ng-value="4"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_0_4" class="choice">Family</label>
+    </div>
+  </div>
+
+  <div class="content" data-ng-if="option==1">
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_0"
+             data-ng-model="params.ngModel1"
+             data-ng-value="0"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_0" class="choice">Employee</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_1"
+             data-ng-model="params.ngModel1"
+             data-ng-value="1"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_1" class="choice">Employee + 1</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_2"
+             data-ng-model="params.ngModel1"
+             data-ng-value="2"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_2" class="choice">Employee + 2</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_3"
+             data-ng-model="params.ngModel1"
+             data-ng-value="3"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_1_3" class="choice">Family</label>
+    </div>
+  </div>
+
+  <div class="content" data-ng-if="option==2">
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_0"
+             data-ng-model="params.ngModel2"
+             data-ng-value="0"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_0" class="choice">Employee</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_1"
+             data-ng-model="params.ngModel2"
+             data-ng-value="1"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_1" class="choice">Employee + Spouse</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_2"
+             data-ng-model="params.ngModel2"
+             data-ng-value="2"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_2_2" class="choice">Family</label>
+    </div>
+  </div>
+
+  <div class="content" data-ng-if="option==3">
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_3_0"
+             data-ng-model="params.ngModel3"
+             data-ng-value="0"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_3_0" class="choice">Employee</label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}" type="radio" id="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_3_1"
+             data-ng-model="params.ngModel3"
+             data-ng-value="1"
+             tabindex="{{ tabindex }}"
+             data-ng-disabled="disabled"/>
+      <label for="enrollmentLevelDetail_{{ enrollmentLevelInputDetailId }}_3_1" class="choice">Family</label>
+    </div>
+  </div>
+</div>

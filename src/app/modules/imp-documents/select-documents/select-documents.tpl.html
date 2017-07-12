@@ -1,0 +1,42 @@
+<div class="modal-body modal-body-default">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title">
+    <span data-ng-if="type=='download'">Download Multiple Documents</span>
+    <span data-ng-if="type=='delete'">Delete Multiple Documents</span>
+  </h3>
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Select the documents you would like to download</label>
+      <div class="col-sm-8">
+        <div class="ms-container">
+          <div class="ms-selectable">
+            <div class="ms-title">List of Documents</div>
+            <ul class="ms-list">
+              <li class="ms-elem-selectable" data-ng-repeat="document in documentList"
+                  data-ng-click="onSelected(document)">
+                <span ng-bind-html="document.displayName ? document.displayName : document.documentFilename" ></span>
+              </li>
+            </ul>
+          </div>
+          <div class="ms-selection">
+            <div class="ms-title">
+              Documents to
+              <span data-ng-if="type=='download'">Download</span>
+              <span data-ng-if="type=='delete'">Delete</span>
+            </div>
+            <ul class="ms-list" data-ng-class="{ 'has-error' : selectedList.length == 0 && showValid }">
+              <li class="ms-elem-selection" data-ng-repeat="document in selectedList"
+                  data-ng-click="onUnselected(document)">
+                <span ng-bind-html="document.displayName ? document.displayName : document.documentFilename"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons" style="text-align: center;">
+      <a data-ng-if="type=='download'" class="btn btn-green" href="{{url}}" target="_blank">Download</a>
+      <a data-ng-if="type=='delete'" class="btn btn-green" data-ng-click="submit()">Delete</a>
+    </div>
+  </form>
+</div>

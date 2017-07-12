@@ -1,0 +1,15 @@
+<div class="row-item"
+     data-ng-click="objectValues.row=currentRow"
+     data-ng-class="{ 'highlighted' : objectValues.row==currentRow,
+                      'has-error' : form['tempFile_' + selectFileId].$invalid && (!form['tempFile_' + selectFileId].$pristine || objectValues.showValid)
+                    }">
+  <input data-ng-if="required" name="tempFile_{{selectFileId}}" type="hidden" data-ng-model="temps.fileRequire" required/>
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-8">
+        <select-files-upload data-ng-model="ngModel" data-upload-url="uploadUrl"></select-files-upload>
+      </div>
+    </div>
+  </div>
+</div>

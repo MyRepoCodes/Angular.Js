@@ -1,0 +1,42 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['firstName_' + inputId].$invalid && (!form['firstName_' + inputId].$pristine || env.showValid) ||
+                                   form['middleName_' + inputId].$invalid && (!form['middleName_' + inputId].$pristine || env.showValid) ||
+                                   form['lastName_' + inputId].$invalid && (!form['lastName_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4"
+           data-ng-class="{ 'has-error': form['firstName_' + inputId].$invalid && (!form['firstName_' + inputId].$pristine || env.showValid) }">
+        <input type="text" name="firstName_{{ inputId }}" class="form-control"
+               data-ng-model="params.firstName"
+               data-ng-required="required"
+               maxlength="15"
+               data-ng-disabled="readonly"
+               tabindex="{{ tabindex }}"/>
+        <label class="control-label">First</label>
+      </div>
+      <div class="form-group col-xs-4"
+           data-ng-class="{ 'has-error': form['middleName_' + inputId].$invalid && (!form['middleName_' + inputId].$pristine || env.showValid) }">
+        <input type="text" name="middleName_{{ inputId }}" class="form-control"
+               data-ng-model="params.middleName"
+               maxlength="1"
+               data-ng-disabled="readonly"
+               tabindex="{{ tabindex }}"/>
+        <label class="control-label">Middle</label>
+      </div>
+      <div class="form-group col-xs-4"
+           data-ng-class="{ 'has-error': form['lastName_' + inputId].$invalid && (!form['lastName_' + inputId].$pristine || env.showValid) }">
+        <input type="text" name="lastName_{{ inputId }}" class="form-control"
+               data-ng-model="params.lastName"
+               maxlength="15"
+               data-ng-disabled="readonly"
+               data-ng-required="required"
+               tabindex="{{ tabindex }}"/>
+        <label class="control-label">Last</label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1459 @@
+<div class="panel page-listFaqs panel-green panel-manager">
+  <div class="page-about heathResult">
+    <div class="" ng-class="{
+    'healthcoach-login' : isHealthCoach,
+    'health-result-small-size': participantList.length < 1}">
+      <div class="form-faqs">
+        <!-- Info -->
+        <div class="row controller-header">
+          <div class="col-md-12">
+            <h4 class="header">
+              <a class="title" data-ui-sref="loggedIn.modules.health-results">Health
+                Results</a>
+              <span class="info">
+                  <!-- Filter client -->
+                <!-- <span class="title_name" ng-if="infoEmployer.clientName">{{infoEmployer.clientName}}</span>
+                 <span class="title_name" ng-if="!infoEmployer.clientName">NULL</span>
+                 <span class="title_number" ng-if=""> (0012-{{infoEmployer.customerId}})</span>-->
+
+                  <span class="dropdown">
+                      <button class="dropdown-toggle filter-participant-client" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient">
+                        <span data-ng-if="!infoEmployer.clientName"
+                              class="title_label">SELECT CLIENT</span>
+                        <span data-ng-if="infoEmployer.clientName"><span ng-bind-html="infoEmployer.clientName"></span> ({{infoEmployer.prefixPulseId}}-{{infoEmployer.pulseId}})</span>
+                        <span class="fa fa-angle-down"></span>
+                      </button>
+
+                      <!--<ul class="dropdown-menu">-->
+                    <!--<li data-ng-repeat="employer in employerList"-->
+                    <!--data-ng-class="{ 'selected': employer == currEmployer }">-->
+                    <!--<a data-ng-click="choiceEmployer(employer)"-->
+                    <!--onclick="$('.filter-participant-client').trigger('click');">-->
+                    <!--<span ng-if="employer.clientName">-->
+                    <!--{{employer.clientName}}-->
+                    <!--</span>-->
+                    <!--<span ng-if="!employer.clientName">NULL</span>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+
+                    <div class="toggle-select-client" ng-if="env.isOpenSelectClient">
+                      <div class="input-autocomplete">
+                        <input type="text"
+                               ng-model="paramsAutoComplete.employer"
+                               placeholder=""
+                               typeahead-editable="false"
+                               typeahead-wait-ms="500"
+                               typeahead-min-length="3"
+                               typeahead-on-select="choiceEmployer($item)"
+                               typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5"
+                               class="form-control">
+                      </div>
+                      <span class="close-btn">
+                        <i class="icon icon-close" ng-click="env.isOpenSelectClient = !env.isOpenSelectClient"></i>
+                      </span>
+                    </div>
+
+                  </span>
+                <!-- Filter Year -->
+                  <span class="title_label">BENEFIT YEAR:</span>
+                  <span class="dropdown">
+                    <button class="dropdown-toggle filter-select-year">
+                      <span data-ng-if="!benefitYear.currentIncentive">SELECT YEAR</span>
+                      <span data-ng-if="benefitYear.currentIncentive">{{ getLabelByIncentive(benefitYear.currentIncentive) }}</span>
+                      <span class="fa fa-angle-down"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li data-ng-repeat="incentive in benefitYear.incentiveList"
+                          data-ng-class="{ 'selected': incentive == benefitYear.currentIncentive }">
+                        <a data-ng-click="changeCurrentIncentive(incentive)"
+                           onclick="$('.filter-select-year').trigger('click');">
+                          <span>{{ getLabelByIncentive(incentive) }}</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </span>
+                </span>
+            </h4>
+          </div>
+
+          <!--<div class="col-md-6 upload" ng-if="!isHealthCoach">
+            <span class="btn btn-file">
+              <input type="file" class="btn-import" name="file"
+                     onchange="angular.element(this).scope().importFiles(this)"
+                     id="fileInput"
+                     multiple=""
+                     accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+              <span class="glyphicon glyphicon-open"></span> Upload Excel File
+            </span>
+            <span class="btn btn-href">
+                <a href="{{ templateUrl }}" target="_blank"
+                   class="btn btn-file download"><span
+                    class="glyphicon glyphicon-save"></span> Download Sample File</a>
+            </span>
+
+          </div>-->
+
+        </div>
+
+        <!-- Filter -->
+        <div class="filter">
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="filter-healthresult">
+                <div class="dropdown dropdown-label btn">
+                  <span class="dropdown-toggle">FILTERS:</span>
+                </div>
+
+                <!-- RISK LEVELS -->
+                <div class="dropdown btn">
+                  <span class="dropdown-toggle" ng-click="showHideSelect('risk')">RISK LEVELS <i
+                    class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu" ng-if="showSelect.riskLevels">
+                    <label ng-click="showHideSelect('risk')"
+                           class="close_filter"><a href=""
+                                                   title="close">X</a></label>
+                    <label class="ui-checkbox select-all">
+                      <input name="select_all"
+                             ng-change="riskLevelsSelect('select_all')"
+                             ng-model="filters.riskLevels.select_all"
+                             type="checkbox">
+                      <span>Select all</span>
+                    </label>
+
+                    <label class="ui-checkbox moderate">
+                      <input name="moderate_risk"
+                             ng-change="riskLevelsSelect('moderate_risk')"
+                             ng-model="filters.riskLevels.moderate_risk"
+                             type="checkbox">
+                      <span>Moderate Risk</span>
+                    </label>
+
+                    <label class="ui-checkbox high">
+                      <input name="high_risk" type="checkbox"
+                             ng-change="riskLevelsSelect('high_risk')"
+                             ng-model="filters.riskLevels.high_risk">
+                      <span>High Risk</span>
+                    </label>
+
+                    <label class="ui-checkbox critical">
+                      <input name="critical_risk" type="checkbox"
+                             ng-change="riskLevelsSelect('critical_risk')"
+                             ng-model="filters.riskLevels.critical_risk">
+                      <span>Critical Risk</span>
+                    </label>
+
+                  </div>
+                </div>
+
+                <!-- CLIENT INCENTIVES -->
+                <div class="dropdown btn">
+                  <span class="dropdown-toggle" ng-click="showHideSelect('incentives')">CLIENT INCENTIVES <i
+                    class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu" ng-if="showSelect.incentives">
+                    <label ng-click="showHideSelect('incentives')"
+                           class="close_filter"><a
+                      href=""
+                      title="close">X</a></label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('select_all')"
+                             ng-model="filters.incentives.select_all">
+                      <span>Select all</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('bodyMassIndex')"
+                             ng-model="filters.incentives.bodyMassIndex">
+                      <span> Failed BMI </span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('bloodPressure')"
+                             ng-model="filters.incentives.bloodPressure">
+                      <span>Failed Blood Pressure</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('bloodSugar')"
+                             ng-model="filters.incentives.bloodSugar">
+                      <span>Failed Glucose </span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('nicotinUse')"
+                             ng-model="filters.incentives.nicotinUse">
+                      <span>Failed Nicotine </span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="incentivesSelect('ldlCholesterol')"
+                             ng-model="filters.incentives.ldlCholesterol">
+                      <span>Failed LDL </span>
+                    </label>
+
+                    <!--<label class="ui-checkbox" ng-if="clientIncentiveParams.participation">
+                        <input type="checkbox"
+                               ng-change="incentivesSelect('participation')"
+                               ng-model="filters.incentives.participation">
+                        <span>Failed Participation </span>
+                    </label>
+                    <label class="ui-checkbox" ng-if="clientIncentiveParams.healthCoaching">
+                        <input type="checkbox"
+                               ng-change="incentivesSelect('healthCoaching')"
+                               ng-model="filters.incentives.healthCoaching">
+                        <span>Failed Health Coaching </span>
+                    </label>
+                    <label class="ui-checkbox" ng-if="clientIncentiveParams.healthRiskAssessment">
+                        <input type="checkbox"
+                               ng-change="incentivesSelect('healthRiskAssessment')"
+                               ng-model="filters.incentives.healthRiskAssessment">
+                        <!--<span&ndash;&gt;>Failed Health Risk Assessment </span>-->
+                    </label>
+
+                  </div>
+                </div>
+
+                <!--Metabolic Syndrome -->
+                <div class="dropdown btn">
+                  <span class="dropdown-toggle" ng-click="showHideSelect('metabolic')">METABOLIC SYNDROME<i
+                    class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu dropdownMenuMetabolic" ng-if="showSelect.metabolic">
+                    <label ng-click="showHideSelect('metabolic')"
+                           class="close_filter"><a
+                      href=""
+                      title="close">X</a></label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('select_all')"
+                             ng-model="filters.metabolic.select_all">
+                      <span>Select all</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeMinFail')"
+                             ng-model="filters.metabolic.metapolicSyndromeMinFail">
+                      <span>Failed Metabolic Syndrome (failed 3 or more) </span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeWaist')"
+                             ng-model="filters.metabolic.metapolicSyndromeWaist">
+                      <span>Failed Waist Circumference</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeBloodPressure')"
+                             ng-model="filters.metabolic.metapolicSyndromeBloodPressure">
+                      <span>Failed Blood Pressure</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeBloodSugar')"
+                             ng-model="filters.metabolic.metapolicSyndromeBloodSugar">
+                      <span>Failed Blood Glucose</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeTriglycerides')"
+                             ng-model="filters.metabolic.metapolicSyndromeTriglycerides">
+                      <span>Failed Triglycerides</span>
+                    </label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="metabolicSelect('metapolicSyndromeHdl')"
+                             ng-model="filters.metabolic.metapolicSyndromeHdl">
+                      <span>Failed HDL</span>
+                    </label>
+
+                  </div>
+                </div>
+
+                <!-- BIOMARKERS -->
+                <div class="dropdown btn">
+                                    <span class="dropdown-toggle"
+                                          ng-click="showHideSelect('biomarkers')">BIOMARKERS <i
+                                      class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu" ng-if="showSelect.biomarkers">
+                    <label ng-click="showHideSelect('biomarkers')"
+                           class="close_filter"><a href=""
+                                                   title="close">X</a></label>
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="biomarkersSelect('select_all')"
+                             ng-model="filters.biomarkers.select_all"/>
+                      <span>Select all</span>
+                    </label>
+                    <label class="ui-checkbox" ng-repeat="item in biomarkers">
+                      <input type="checkbox"
+                             ng-change="biomarkersSelect(item.value)"
+                             ng-model="filters.biomarkers[item.value]"/>
+                      <span>{{item.name}}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- RESULTS -->
+                <div class="dropdown btn">
+                                    <span class="dropdown-toggle"
+                                          ng-click="showHideSelect('results')">RESULTS <i
+                                      class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu dropdownMenu-results"
+                       ng-if="showSelect.results">
+                    <label ng-click="showHideSelect('results')"
+                           class="close_filter">
+                      <a href="" title="close">X</a>
+                    </label>
+
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="resultsSelect()"
+                             ng-model="filters.results.show_without_results">
+                      <span>Show without health results</span>
+                    </label>
+
+                  </div>
+                </div>
+
+                <!-- COACH -->
+                <div class="dropdown btn">
+                  <span class="dropdown-toggle" ng-click="showHideSelect('coach')">COACH <i
+                    class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu" ng-if="showSelect.coach">
+                    <label ng-click="showHideSelect('coach')"
+                           class="close_filter"><a
+                      href=""
+                      title="close">X</a></label>
+                    <label class="ui-checkbox">
+
+                      <input type="checkbox"
+                             ng-model="filters.coach.select_all"
+                             name="filter-checkbox-coach"
+                             id="select_all_coach"
+                             ng-change="selectedAllCoach()">
+                      <span>Select all</span>
+                    </label>
+                    <label class="ui-checkbox"
+                           ng-repeat="item in healthCoachList">
+                      <input type="checkbox" ng-model="item.selected"
+                             ng-change="itemCoachChecked(item)">
+                      <span>{{item.firstName}}</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- FLAG -->
+                <div class="dropdown btn">
+                   <span class="dropdown-toggle" ng-click="showHideSelect('flag')">FLAG
+                      <i class="fa fa-angle-down"></i></span>
+
+                  <div class="dropdownMenu dropdownMenu-results"
+                       ng-if="showSelect.flag">
+                    <label ng-click="showHideSelect('flag')"
+                           class="close_filter">
+                      <a href="" title="close">X</a>
+                    </label>
+
+                    <label class="ui-checkbox">
+                      <input type="checkbox"
+                             ng-change="resultsSelect()"
+                             ng-model="filters.flag.flagged_participants">
+                      <span>Flagged participants</span>
+                    </label>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="search-healthresult">
+                <div class="input-group">
+                  <input class="form-control input-filter"
+                         data-ng-model="filter.keyword"/>
+                  <span class="input-group-addon-clear"
+                        ng-click="filter.keyword = ''"
+                        ng-class="{'have-keyword': filter.keyword}">X</span>
+                  <span class="input-group-addon"><i class="icon icon-search"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Health result -->
+        <div class="form-content-heathResult" ng-class="{'healthresult-mobile': isSmartScreen}">
+
+          <div ng-class="{'group-common': isSmartScreen}">
+            <div ng-class="{'group-one': !isSmartScreen}">
+              <!-- Table 1 -->
+              <div class="table-heathResult-1">
+                <div class="">
+                  <div class="">
+
+                    <!--START: For select action-->
+                     <div class="select-action dropdown-toggle"
+                          ng-if="!isHealthCoach"
+                          ng-click="showHideSelect('selectAction')">
+                       <div class="checkbox-fa-caret-left">
+                         <i class="fa fa-angle-down" aria-hidden="true"></i>
+                         <!--<img src="assets/images/icons/checkbox-action.png">-->
+                       </div>
+                     </div>
+                    <div class="dropdownMenu-select-action dropdownMenu" ng-if="showSelect.selectAction">
+                      <label ng-click="showHideSelect('selectAction')"
+                             class="close_filter"><a href=""
+                                                     title="close">X</a></label>
+                      <p data-ng-click="acceptHealthResult()">Accept Health Result</p>
+                      <p data-ng-click="flagHealthResult(true)">Flag</p>
+                      <p data-ng-click="flagHealthResult(false)">UnFlag</p>
+                      <p ng-click="assignTo()">Assign Coach</p>
+                      <p data-ng-click="deleteHealthResult()">Delete</p>
+                    </div>
+                    <!--END: For select action-->
+
+                    <table show-filter="false" class="table tableScroll">
+                      <thead>
+                      <tr>
+                        <td class="participant-id">&nbsp</td>
+                        <!--<td class="participant-id">&nbsp</td>-->
+                        <td class="participant-id" ng-if="!isHealthCoach">&nbsp</td>
+                        <td class="participant-id">&nbsp</td>
+                        <td class="participant-id">&nbsp</td>
+                        <td ng-if="isAdmin" class="participant-id">&nbsp</td>
+                      </tr>
+                      <tr>
+                        <th class="sequential-list">
+                          <div class="table_rotate">
+                            <div class="sequential">
+                              <span>No.</span>
+                            </div>
+                          </div>
+                        </th>
+                        <!--<th class="compare-list">
+                          <div class="table_rotate">
+                            <div class="compare">
+                              <span>Compare</span>
+                            </div>
+                          </div>
+                        </th>-->
+                        <th class="hide-border-top" ng-if="!isHealthCoach">
+                          <div class="table_rotate">
+                            <div class="checkbox_all">
+
+                            <span class="checkboxAll">
+
+                              <div class="blue-box">
+                                <label class="i-checks">
+                                  <input type="checkbox"
+                                         ng-model="checkboxes.checked"
+                                         name="filter-checkbox"
+                                         id="select_all"
+                                         ng-change="selectedAll()"><i></i>
+                                </label>
+                              </div>
+
+                            </span>
+
+                            </div>
+                          </div>
+                        </th>
+
+                        <th class="status-public-list">
+                          <div class="table_rotate">
+                            <div class="status-public">
+                              <span>Status</span>
+                            </div>
+                          </div>
+                        </th>
+
+                        <th class="multiple-years">
+                          <div class="table_rotate">
+                            <div class="multiple"
+                                 data-ng-class="{'multiple-explain' : !isAdmin && !multiHeathResult.hideRows.value}">
+                              <span>MULTIPLE&nbsp;YEARS</span>
+                            </div>
+                          </div>
+                        </th>
+
+                        <th class="sortableparticipant-id sortable" width="100"
+                            ng-if="isAdmin"
+                            width="100"
+                            ng-click="tableParams.sorting({'pulseId' : tableParams.isSortBy('pulseId', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="participantid">
+                              <div ng-class="{
+                                                'sort-asc': tableParams.isSortBy('pulseId', 'asc'),
+                                                'sort-desc': tableParams.isSortBy('pulseId', 'desc')
+                                              }">
+                                <span>PulseID</span>
+                              </div>
+                            </div>
+                          </div>
+
+                        </th>
+
+
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat-start="(key, item) in tableParams.data"
+                          ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+                        <td ng-click="selectedRow(key)">
+                          <span class="sequential-value">{{(tableParams.page()-1)*tableParams.count() + (key + 1)}}</span>
+                        </td>
+                        <!--<td><input type="checkbox"></td>-->
+                        <td width="20" ng-if="!isHealthCoach">
+                          <label class="blue-box">
+                            <div class="i-checks">
+                              <input type="checkbox" ng-model="item.selected"
+                                     ng-change="itemChecked(item)"><i></i>
+                            </div>
+                          </label>
+                        </td>
+
+                        <td>
+                          <label class="ui-checkbox-disable">
+                            <input type="checkbox" ng-checked="item.acceptHealthResult" ng-disabled="true"><span></span>
+                          </label>
+                        </td>
+
+                        <td>
+                        <span ng-click="actionHideShowMultiHeathResult(item)"
+                              class="dropdown view-more fa"
+                              data-ng-class="{
+                                'fa-plus' : multiHeathResult.hideRows.participant !== item.participantId || (multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId),
+                                'fa-minus' : !multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId
+                                }"></span>
+                        </td>
+                        <td width="100"
+                            ng-if="isAdmin"
+                            ng-click="selectedPULSEID(item)"
+                            ng-class="{'value_null': !item.pulseId,
+                           'pulseID_selected': item.pulseId === pulseIDSelected}">
+                          <span class="pulseID-value" ng-if="item.pulseId">PAR-{{item.pulseId}}</span>
+                          <span ng-if="!item.pulseId">-</span>
+                        </td>
+                      </tr>
+
+                      <!--More health result-->
+                      <tr class="all-health-result"
+                          ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                          ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                        <td>&nbsp;</td>
+                        <td ng-if="!isHealthCoach">
+                          <label class="blue-box checkbox-disabled">
+                            <div class="i-checks">
+                              <input type="checkbox" ng-disabled="true"><i></i>
+                            </div>
+                          </label>
+                        </td>
+                        <td>
+                          <label class="ui-checkbox-disable">
+                            <input type="checkbox" ng-checked="idata.acceptHealthResult" ng-disabled="true"><span></span>
+                          </label>
+                        </td>
+                        <td ng-if="!isAdmin">{{idata.eventDate | contactFormat}}</td>
+                        <td ng-if="isAdmin" colspan="2">{{idata.eventDate | contactFormat}}</td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Table 2 -->
+              <div class="table-heathResult-2">
+                <div class="">
+                  <div class="" ng-if="action.participantOpen">
+                    <table show-filter="false" class="table tableScroll ng-table">
+                      <div class="title_table2">Participant
+                      <span ng-click="actionParticipant('close')"
+                            class="icon_title glyphicon glyphicon-chevron-left"></span>
+                      </div>
+                      <thead>
+                      <tr>
+                        <th width="110" class="sortable"
+
+                            ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="last_name">
+                              <div ng-class="{
+                                                                  'sort-asc': tableParams.isSortBy('lastName', 'asc'),
+                                                                  'sort-desc': tableParams.isSortBy('lastName', 'desc')
+                                                                }">
+                                <span>Last Name</span>
+                              </div>
+
+                            </div>
+                          </div>
+                        </th>
+                        <th width="110" class="sortable"
+
+                            ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="first_name">
+                              <div ng-class="{
+                                                                      'sort-asc': tableParams.isSortBy('firstName', 'asc'),
+                                                                      'sort-desc': tableParams.isSortBy('firstName', 'desc')
+                                                                    }">
+                                <span>First Name</span>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                        <th class="sortable"
+                            ng-if="isAdmin"
+                            ng-click="tableParams.sorting({'enrLevel' : tableParams.isSortBy('enrLevel', 'asc') ? 'desc' : 'asc'})">
+                          <div class="table_rotate">
+                            <div class="enrlevel">
+
+                              <div class="participantid">
+                                <div ng-class="{
+                                                                      'sort-asc': tableParams.isSortBy('enrLevel', 'asc'),
+                                                                      'sort-desc': tableParams.isSortBy('enrLevel', 'desc')
+                                                                    }">
+                                  <span>EnrLevel</span>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                        <th class="sortable"
+                            ng-click="tableParams.sorting({'phoneNumber' : tableParams.isSortBy('phoneNumber', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="phone">
+                              <div ng-class="{
+                                                                  'sort-asc': tableParams.isSortBy('phoneNumber', 'asc'),
+                                                                  'sort-desc': tableParams.isSortBy('phoneNumber', 'desc')
+                                                                }">
+                                <span>Phone</span>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+
+                        <th class="sortable"
+                            ng-click="tableParams.sorting({'dateOfBirth' : tableParams.isSortBy('dateOfBirth', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="age">
+                              <div ng-class="{
+                                                                  'sort-asc': tableParams.isSortBy('dateOfBirth', 'asc'),
+                                                                  'sort-desc': tableParams.isSortBy('dateOfBirth', 'desc')
+                                                                }">
+                                <span>AGE</span>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                        <th class="sortable"
+                            ng-click="tableParams.sorting({'gender' : tableParams.isSortBy('gender', 'asc') ? 'desc' : 'asc'})">
+
+                          <div class="table_rotate">
+                            <div class="gender">
+                              <div ng-class="{
+                                                                  'sort-asc': tableParams.isSortBy('gender', 'asc'),
+                                                                  'sort-desc': tableParams.isSortBy('gender', 'desc')
+                                                                }">
+                                <span>GENDER</span>
+                              </div>
+                            </div>
+                          </div>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr ng-repeat-start="(key, item) in tableParams.data"
+                          ng-click="selectedRow(key)"
+                          ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+
+                        <td width="110"
+                            ng-class="{'value_null': !item.lastName }">
+                          <div class="last-name">
+                            <span ng-if="item.lastName">{{item.lastName}}</span>
+                            <span ng-if="!item.lastName">-</span>
+                          </div>
+
+                        </td>
+
+                        <td width="110"
+                            ng-class="{'value_null': !item.firstName }">
+                          <div class="first-name">
+                            <span ng-if="!item.firstName">-</span>
+                          <span ng-if="item.firstName"
+                                ng-bind-html="item.firstName"></span>
+                            <span ng-if="item.firstName === 'N' || item.firstName === 'n'">N</span>
+                          </div>
+                        </td>
+
+                        <td ng-if="isAdmin" ng-class="{'value_null': !item.enrLevel }">
+                          <span ng-if="item.enrLevel">{{item.enrLevel}}</span>
+                          <span ng-if="!item.enrLevel">-</span>
+                        </td>
+                        <td ng-class="{'value_null': !item.phoneNumber }">
+                          <div class="phoneNumber">
+                            <span ng-if="item.phoneNumber">{{item.phoneNumber}}</span>
+                            <span ng-if="!item.phoneNumber">-</span>
+                          </div>
+
+                        </td>
+
+
+                        <td ng-class="{'value_null': !item.current_age }">
+                          <span ng-if="item.current_age">{{item.current_age}}</span>
+                          <span ng-if="!item.current_age">-</span>
+                        </td>
+
+                        <td>
+                          <span ng-bind-html="item.gender"></span>
+                        </td>
+                      </tr>
+
+                      <!--More health result-->
+                      <tr class="all-health-result"
+                          ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                          ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td ng-if="isAdmin">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div ng-if="!action.participantOpen">
+                    <div class="table_close">
+                      <table class="table">
+                        <div class="title_table2">
+                                              <span ng-click="actionParticipant('open')"
+                                                    class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="table_rotate">
+                              <div class="participant">
+                                <span>Participant</span>
+                              </div>
+                            </div>
+
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat-start="item in tableParams.data">
+                          <td>
+                            <div>&nbsp;</div>
+                          </td>
+                        </tr>
+
+                        <!--More health result-->
+                        <tr ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Table 5 -->
+              <div class="table-heathResult-5">
+
+                <div class="">
+                  <div class="" ng-if="action.coachingOpen">
+                    <table show-filter="false" class="table tableScroll ng-table">
+                      <div class="title_table5">
+                        Coaching <span ng-click="actionCoaching('close')"
+                                       class="icon_title glyphicon glyphicon-chevron-left"></span>
+                      </div>
+                      <thead>
+                      <tr>
+                        <th ng-if="!isHealthCoach && !isHealthCoachManager" class="hide-border-top" width="5">
+                          <div class="table_rotate">
+                            <div class="appeal">
+                              <span>APPEAL</span>
+                            </div>
+                          </div>
+                        </th>
+                        <th ng-if="!isHealthCoach && !isHealthCoachManager" class="hide-border-top" width="5">
+                          <div class="table_rotate">
+                            <div class="outreach"><span>OUTREACH</span>
+                            </div>
+                          </div>
+                        </th>
+
+
+                        <!--<th ng-if="!isHealthCoach" class="hide-border-top">
+                          <div class="table_rotate">
+                            <div class="assign">
+                              <span>ASSIGN</span>
+                            </div>
+                          </div>
+                        </th>-->
+
+                        <th ng-if="!isHealthCoach" class="hide-border-top">
+                          <div class="table_rotate">
+                            <div class="coach"><span>COACH</span>
+                            </div>
+                          </div>
+                        </th>
+
+                        <th class="hide-border-top">
+                          <div class="table_rotate">
+                            <div class="flag"><span>FLAG</span>
+                            </div>
+                          </div>
+                        </th>
+
+                        <!--<th ng-if="!isHealthCoach && !isHealthCoachManager" class="hide-border-top">
+                          <div class="table_rotate">
+                            <div class="notify"><span>NOTIFY</span>
+                            </div>
+                          </div>
+                        </th>-->
+
+                      </tr>
+                      </thead>
+                      <tfoot></tfoot>
+                      <tbody>
+                      <tr ng-repeat-start="(key, item) in tableParams.data"
+                          ng-click="selectedRow(key)"
+                          ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+                        <td ng-if="!isHealthCoach && !isHealthCoachManager" width="5">
+                        </td>
+                        <td ng-if="!isHealthCoach && !isHealthCoachManager" width="5">
+                          C
+                        </td>
+
+
+                        <!--<td ng-if="!isHealthCoach"
+                            ng-click="assignTo(item)"
+                            class="button_assign_healthcoach">
+                          <a href="">Assign</a>
+                        </td>-->
+
+                        <td ng-if="!isHealthCoach">
+                          <div class="healthCoachFirstName">
+                            <span ng-bind="item.healthCoachFirstName"></span>
+                          </div>
+
+                        </td>
+                        <td>
+                          <div class="flag-value">
+                            <div class="flag-box">
+                              <div class="i-checks">
+                                <input disabled type="checkbox" data-ng-model="item.flag">
+                                <i></i>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
+                        <!--<td ng-if="!isHealthCoach && !isHealthCoachManager" ng-click="notify(item)"
+                            class="button_assign_healthcoach">
+                          <a href="">Notify</a>
+                        </td>-->
+
+                      </tr>
+
+                      <!--More health result-->
+                      <tr class="all-health-result"
+                          ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                          ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                        <td ng-if="!isHealthCoach && !isHealthCoachManager" >&nbsp;</td>
+                        <td ng-if="!isHealthCoach && !isHealthCoachManager">C</td>
+                        <td ng-if="!isHealthCoach">&nbsp;</td>
+                        <td>
+                          <div class="flag-value">
+                            <input type="checkbox" data-ng-if="!idata.flag" disabled>
+                            <img src="assets/images/icons/flag-checkbox.png" width="15px" height="15px" data-ng-if="idata.flag">
+                          </div>
+
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div ng-if="!action.coachingOpen">
+                    <div class="table_close">
+                      <table class="table">
+                        <div class="title_table5">
+                                            <span ng-click="actionCoaching('open')"
+                                                  class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="table_rotate">
+                              <div class="participant">
+                                <span>Coaching</span>
+                              </div>
+                            </div>
+
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr ng-repeat-start="item in tableParams.data">
+                          <td>
+                            <div>&nbsp;</div>
+                          </td>
+                        </tr>
+
+                        <!--More health result-->
+                        <tr ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td>&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div ng-class="{'group-two': !isSmartScreen}" ng-style="!isSmartScreen && {'width': widthGroupTwo + 'px'}">
+
+              <div ng-class="{'overflow': !isSmartScreen}">
+
+                <!-- Table 3 -->
+                <div class="table-heathResult-3" ng-if="benefitYear.currentIncentive.clientIncentive && infoEmployer.products && infoEmployer.products.beniCompSelect">
+                  <div class="" ng-if="action.incentivesOpen">
+                    <div class="">
+                      <table show-filter="false" class="table tableScroll ng-table">
+                        <div class="title_table3">
+                          Client Incentives
+                        <span ng-click="actionIncentives('close')"
+                              class="icon_title glyphicon glyphicon-chevron-left"></span>
+                        </div>
+                        <thead>
+                        <tr style="background-color: #EEB375;">
+                          <th ng-if="clientIncentiveParams.bodyMassIndex"
+                              class="sortable"
+                              ng-click="tableParams.sorting({'bmiValue' : tableParams.isSortBy('bmiValue', 'desc') ? 'asc' : 'desc'})">
+
+                            <div class="table_rotate">
+                              <div class="bmi">
+                                <div ng-class="{ 'sort-asc': tableParams.isSortBy('bmiValue', 'asc'), 'sort-desc': tableParams.isSortBy('bmiValue', 'desc') }">
+                                  <span>BMI</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+                          <th style="line-height: 0"
+                              ng-if="clientIncentiveParams.bloodPressure"
+                              class="sortable"
+                              ng-click="tableParams.sorting({'bloodpressure' : tableParams.isSortBy('bloodpressure', 'desc') ? 'asc' : 'desc'})">
+
+                            <div class="table_rotate">
+                              <div class="blood_pressure">
+                                <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy('bloodpressure', 'asc'),
+                                              'sort-desc': tableParams.isSortBy('bloodpressure', 'desc')
+                                            }">
+                                  <span>BLOOD PRESSURE</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+
+                          <th class="sortable"
+                              ng-if="clientIncentiveParams.bloodSugar"
+                              ng-click="tableParams.sorting({'glucose' : tableParams.isSortBy('glucose', 'desc') ? 'asc' : 'desc'})">
+
+                            <div class="table_rotate">
+                              <div class="glucose">
+                                <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy('glucose', 'asc'),
+                                              'sort-desc': tableParams.isSortBy('glucose', 'desc')
+                                            }">
+                                  <span>BLOOD GLUCOSE</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+                          <th class="sortable"
+                              ng-if="clientIncentiveParams.nicotinUse"
+                              ng-click="tableParams.sorting({'smokerResponse' : tableParams.isSortBy('smokerResponse', 'desc') ? 'asc' : 'desc'})">
+                            <div class="table_rotate">
+                              <div class="nicotine">
+                                <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy('smokerResponse', 'asc'),
+                                              'sort-desc': tableParams.isSortBy('smokerResponse', 'desc')
+                                            }">
+                                  <span>NICOTINE</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+                          <th class="sortable"
+                              ng-if="clientIncentiveParams.ldlCholesterol"
+                              ng-click="tableParams.sorting({'ldl' : tableParams.isSortBy('ldl', 'desc') ? 'asc' : 'desc'})">
+
+                            <div class="table_rotate">
+                              <div class="ldl">
+                                <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy('ldl', 'asc'),
+                                              'sort-desc': tableParams.isSortBy('ldl', 'desc')
+                                            }">
+                                  <span>LDL</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+                          <!--<th ng-if="clientIncentiveParams.participation">
+                              <div class="table_rotate sortable"
+                                   ng-click="tableParams.sorting({'rewards.participationResult' :
+                              tableParams.isSortBy('rewards.participationResult', 'asc') ? 'desc' : 'asc'})">
+                                  <div class="participation">
+                                      <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy('rewards.participationResult', 'asc'),
+                                              'sort-desc': tableParams.isSortBy('rewards.participationResult', 'desc')
+                                            }">
+                                          <span>Participation</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </th>-->
+                          <th ng-if="clientIncentiveParams.healthCoaching">
+                            <div class="table_rotate">
+                              <div class="health_coaching"><span>Health Coaching</span>
+                              </div>
+                            </div>
+                          </th>
+                          <th ng-if="clientIncentiveParams.healthRiskAssessment">
+                            <div class="table_rotate">
+                              <div class="health_risk_assesment"><span>Risk Assesment</span>
+                              </div>
+                            </div>
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat-start="(key, item) in tableParams.data"
+                            ng-click="selectedRow(key)"
+                            ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+                          <td ng-if="clientIncentiveParams.bodyMassIndex"
+                              ng-class="{
+                              'value_null': item.statusHealthResult.clientIncentivesBodyMassIndex === null,
+                              'value_fail': item.statusHealthResult.clientIncentivesBodyMassIndex === false
+                            }">
+                            <!--<span ng-if="item.bmiValue || item.bmiValue === 0">{{item.bmiValue}}</span>
+                            <span ng-if="item.bmiValue === null">-</span>-->
+
+                            <span>{{item.bmiValue | valueBiomarker}}</span>
+                          </td>
+
+                          <td ng-if="clientIncentiveParams.bloodPressure"
+                              ng-class="{
+                              'value_null': item.statusHealthResult.clientIncentivesBloodPressure === null,
+                              'value_fail': item.statusHealthResult.clientIncentivesBloodPressure === false
+                            }">
+                            <span ng-if="item.diastolic && item.systolic">{{item.systolic}}/{{item.diastolic}}</span>
+                            <span ng-if="!item.diastolic || !item.systolic">-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.bloodSugar"
+                              ng-class="{
+                                'value_null': item.statusHealthResult.clientIncentivesBloodSugar === null,
+                                'value_fail': item.statusHealthResult.clientIncentivesBloodSugar === false
+                              }">
+                            <!--<span ng-if="item.glucose || item.glucose=== 0"
+                                  ng-bind="item.glucose"></span>
+                            <span ng-if="item.glucose === null">-</span>-->
+                            <span>{{item.glucose | valueBiomarker}}</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.nicotinUse"
+                              ng-class="{
+                                'value_null': item.statusHealthResult.clientIncentivesNicotin === null,
+                                'value_fail': item.statusHealthResult.clientIncentivesNicotin === false
+                              }">
+                            <span ng-if="item.smokerResponse === false">No</span>
+                            <span ng-if="item.smokerResponse === true">Yes</span>
+                            <span ng-if="item.smokerResponse === null">N/A</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.ldlCholesterol"
+                              ng-class="{
+                                'value_null': item.statusHealthResult.clientIncentivesLdl === null,
+                                'value_fail': item.statusHealthResult.clientIncentivesLdl === false
+                              }">
+                            <!--<span ng-if="item.ldl || item.ldl === 0"
+                                  ng-bind="item.ldl"></span>
+                            <span ng-if="item.ldl === null">-</span>-->
+                            <span>{{item.ldl | valueBiomarker}}</span>
+                          </td>
+                          <!--<td ng-if="clientIncentiveParams.participation"
+                              ng-class="{
+                              'value_null': item.statusHealthResult.clientIncentivesLdl === null,
+                              'value_fail': !item.statusHealthResult.clientIncentivesLdl === false}">
+                              <span ng-if="item.rewards"
+                                    ng-bind="item.rewards.participationResult"></span>
+                              <span ng-if="!item.rewards.participationResult">-</span>
+                          </td>-->
+                          <td ng-if="clientIncentiveParams.healthCoaching"
+                              ng-class="{'value_null': true}">
+                            <span>-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.healthRiskAssessment"
+                              ng-class="{'value_null': true}">
+                            <span>-</span>
+                          </td>
+                        </tr>
+
+                        <!--More health result-->
+                        <tr class="all-health-result"
+                            ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td ng-if="clientIncentiveParams.bodyMassIndex"
+                              ng-class="{ 'value_null': idata.statusHealthResult.clientIncentivesBodyMassIndex === null, 'value_fail': idata.statusHealthResult.clientIncentivesBodyMassIndex === false }">
+                            <span ng-if="idata.bmiValue || idata.bmiValue === 0">{{idata.bmiValue}}</span>
+                            <span ng-if="idata.bmiValue === null">-</span>
+                          </td>
+
+                          <td ng-if="clientIncentiveParams.bloodPressure"
+                              ng-class="{ 'value_null': idata.statusHealthResult.clientIncentivesBloodPressure === null, 'value_fail': idata.statusHealthResult.clientIncentivesBloodPressure === false}">
+                            <span ng-if="idata.diastolic && idata.systolic">{{idata.systolic}}/{{idata.diastolic}}</span>
+                            <span ng-if="!idata.diastolic || !idata.systolic">-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.bloodSugar"
+                              ng-class="{ 'value_null': idata.statusHealthResult.clientIncentivesBloodSugar === null, 'value_fail': idata.statusHealthResult.clientIncentivesBloodSugar === false}">
+                                                <span ng-if="idata.glucose || idata.glucose=== 0"
+                                                      ng-bind="idata.glucose"></span>
+                            <span ng-if="idata.glucose === null">-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.nicotinUse"
+                              ng-class="{ 'value_null': idata.statusHealthResult.clientIncentivesNicotin === null, 'value_fail': idata.statusHealthResult.clientIncentivesNicotin === false}">
+                            <span ng-if="idata.smokerResponse === false">No</span>
+                            <span ng-if="idata.smokerResponse === true">Yes</span>
+                            <span ng-if="idata.smokerResponse === null">-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.ldlCholesterol"
+                              ng-class="{ 'value_null': idata.statusHealthResult.clientIncentivesLdl === null, 'value_fail': idata.statusHealthResult.clientIncentivesLdl === false}">
+                                                <span ng-if="idata.ldl || idata.ldl === 0"
+                                                      ng-bind="idata.ldl"></span>
+                            <span ng-if="idata.ldl === null">-</span>
+                          </td>
+                          <!--<td ng-if="clientIncentiveParams.participation"
+                              ng-class="{
+                              'value_null': idata.statusHealthResult.clientIncentivesLdl === null,
+                              'value_fail': !idata.statusHealthResult.clientIncentivesLdl === false}">
+                              <span ng-if="idata.rewards"
+                                    ng-bind="idata.rewards.participationResult"></span>
+                              <span ng-if="!idata.rewards.participationResult">-</span>
+                          </td>-->
+                          <td ng-if="clientIncentiveParams.healthCoaching"
+                              ng-class="{'value_null': true}">
+                            <span>-</span>
+                          </td>
+                          <td ng-if="clientIncentiveParams.healthRiskAssessment"
+                              ng-class="{'value_null': true}">
+                            <span>-</span>
+                          </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div ng-if="!action.incentivesOpen">
+                    <div class="table_close">
+                      <table class="table">
+                        <div class="title_table3">
+                                            <span ng-click="actionIncentives('open')"
+                                                  class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="table_rotate">
+                              <div class="incentives">
+                                <span>Client&nbsp;Incentives</span></div>
+                            </div>
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat-start="item in tableParams.data">
+                          <td>
+                            <div>&nbsp;</div>
+                          </td>
+                        </tr>
+
+                        <!--More health result-->
+                        <tr ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Table 6 -->
+                <div class="table-heathResult-6" ng-if="filters.metabolicSyndrome.showTable">
+                  <div class="" ng-if="action.metabolicSyndromeOpen">
+                    <div class="">
+                      <table show-filter="false" class="table tableScroll ng-table">
+                        <div class="title_table6">Metabolic Syndrome
+                        <span ng-click="actionMetabolicSyndrome('close')"
+                              class="icon_title glyphicon glyphicon-chevron-left"></span>
+                        </div>
+                        <thead>
+                        <tr>
+
+                          <th ng-repeat="item in metabolicSyndrome"
+                              class="sortable"
+                              ng-click="tableParams.sorting(item.value, tableParams.isSortBy(item.value, 'desc') ? 'asc' : 'desc')">
+
+                            <div class="table_rotate">
+                              <div class="{{item.value}}">
+                                <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy(item.value, 'asc'),
+                                              'sort-desc': tableParams.isSortBy(item.value, 'desc')
+                                            }">
+                                  <span>{{item.title}}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat-start="(key, item) in tableParams.data"
+                            ng-click="selectedRow(key)"
+                            ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+                          <td ng-repeat="biomarker in metabolicSyndrome"
+                              ng-class="{
+                              'value_null': item.statusHealthResult[biomarker.statusHS] === null,
+                              'value_fail': item.statusHealthResult[biomarker.statusHS] === false
+                            }">
+                          <span ng-if="biomarker.value !== 'bloodpressure'">
+                              <!--<span ng-if="item[biomarker.value] !== null && item[biomarker.value] !== -1" ng-bind="item[biomarker.value]"></span>
+                              <span ng-if="item[biomarker.value] === -1">N/A</span>
+                              <span ng-if="item[biomarker.value] === null">-</span>-->
+                              <span>{{item[biomarker.value] | valueBiomarker}}</span>
+                          </span>
+
+
+                          <span ng-if="biomarker.value === 'bloodpressure'">
+                              <span ng-if="item.diastolic !== null && item.systolic !== null"> {{item.systolic}}/{{item.diastolic}}</span>
+                              <span ng-if="item.diastolic === null || item.systolic === null">N/A</span>
+                          </span>
+
+                          </td>
+
+                        </tr>
+
+                        <!--More health result-->
+                        <tr class="all-health-result"
+                            ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td ng-repeat="biomarker in metabolicSyndrome"
+                              ng-class="{
+                              'value_null': idata.statusHealthResult[biomarker.statusHS] === null,
+                              'value_fail': idata.statusHealthResult[biomarker.statusHS] === false
+                            }">
+                          <span ng-if="biomarker.value !== 'bloodpressure'">
+                              <span ng-if="item[biomarker.value] !== null && item[biomarker.value] !== -1" ng-bind="idata[biomarker.value]"></span>
+                              <span ng-if="item[biomarker.value] === -1">N/A</span>
+                              <span ng-if="item[biomarker.value] === null">-</span>
+                          </span>
+                          <span ng-if="biomarker.value === 'bloodpressure'">
+                              <span ng-if="idata.diastolic !== null && idata.systolic !== null"> {{idata.systolic}}/{{idata.diastolic}}</span>
+                              <span ng-if="idata.diastolic === null || idata.systolic === null">-</span>
+                          </span>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div ng-if="!action.metabolicSyndromeOpen">
+                    <div class="table_close">
+                      <table class="table">
+                        <div class="title_table6">
+                                            <span ng-click="actionMetabolicSyndrome('open')"
+                                                  class="glyphicon glyphicon-chevron-right"></span>
+                        </div>
+                        <thead>
+                        <tr>
+                          <th>
+                            <div class="table_rotate">
+                              <div class="metabolic-syndrome">
+                                <span>Metabolic&nbsp;Syndrome</span></div>
+                            </div>
+                          </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat-start="item in tableParams.data">
+                          <td>
+                            <div>&nbsp;</div>
+                          </td>
+                        </tr>
+
+                        <!--More health result-->
+                        <tr ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                            ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                          <td>&nbsp;</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Table 4 -->
+                <div class="table-heathResult-4" ng-if="filters.biomarkers.showTable">
+                  <table show-filter="false" class="table tableScroll ng-table">
+                    <div class="title_table4">Biomarkers</div>
+                    <thead>
+                    <tr>
+
+                      <th ng-repeat="item in biomarkers"
+                          ng-if="filters.biomarkers[item.value]"
+                          class="sortable"
+                          ng-click="tableParams.sorting(item.value, tableParams.isSortBy(item.value, 'desc') ? 'asc' : 'desc')">
+
+                        <div class="table_rotate">
+                          <div class="{{item.value}}">
+                            <div ng-class="{
+                                              'sort-asc': tableParams.isSortBy(item.value, 'asc'),
+                                              'sort-desc': tableParams.isSortBy(item.value, 'desc')
+                                            }">
+                              <span>{{item.title}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat-start="(key, item) in tableParams.data"
+                        ng-click="selectedRow(key)"
+                        ng-class="{'select-row': key === rowSelected,
+                                   'checked-row': item.selected}">
+                      <td ng-repeat="biomarker in biomarkers"
+                          ng-if="filters.biomarkers[biomarker.value]"
+                          ng-class="{
+                                      'value_null': item[biomarker.value] === null,
+                                      'risk_moderate' : item.statusHealthResult[biomarker.value] === 1,
+                                      'risk_high' : item.statusHealthResult[biomarker.value] === 2,
+                                      'risk_critical' : item.statusHealthResult[biomarker.value] === 3
+                                    }">
+                        <span>{{item[biomarker.value] | valueBiomarker:biomarker}}</span>
+                        <!--<span ng-if="biomarker.value === 'smokerResponse'">
+                           <span ng-if="item[biomarker.value] === true">Yes</span>
+                           <span ng-if="item[biomarker.value] === false">No</span>
+                           <span ng-if="item[biomarker.value] === null">-</span>
+                        </span>
+
+                        <span ng-if="biomarker.value !== 'smokerResponse'">
+                           &lt;!&ndash;<span ng-if="item[biomarker.value] !== null && item[biomarker.value] !== -1" ng-bind="item[biomarker.value]"></span>
+                           <span ng-if="item[biomarker.value] === -1 || item[biomarker.value] === 0">N/A</span>
+                           <span ng-if="item[biomarker.value] === null">-</span>&ndash;&gt;
+                       </span>-->
+                      </td>
+
+                      <!--More health result-->
+                    <tr class="all-health-result"
+                        ng-if="!multiHeathResult.hideRows.value && multiHeathResult.hideRows.participant === item.participantId"
+                        ng-repeat="idata in dataAllHealthResultSpecialPar" ng-repeat-end>
+                      <td ng-repeat="biomarker in biomarkers"
+                          ng-if="filters.biomarkers[biomarker.value]"
+                          ng-class="{
+                                        'value_null': item[biomarker.value] === null,
+                                        'risk_moderate' : idata.statusHealthResult[biomarker.value] === 1,
+                                        'risk_high' : idata.statusHealthResult[biomarker.value] === 2,
+                                        'risk_critical' : idata.statusHealthResult[biomarker.value] === 3
+                                      }">
+                        <span>{{idata[biomarker.value] | valueBiomarker:biomarker}}</span>
+                      </td>
+                    </tr>
+
+
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- !overflow -->
+
+            </div>
+          </div>
+          <!-- pagination -->
+          <div class="table-pagination">
+            <table ng-table="tableParams" ng-hide="true" show-filter="false" class="table tableScroll">
+              <thead>
+              <tr>
+                <td class="participant-id">&nbsp</td>
+              </tr>
+              <tr>
+                <th class="sequential-list">
+                  <div class="table_rotate">
+                    <div class="sequential">
+                      <span>No.</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="(key, item) in tableParams.data"
+                  ng-click="selectedRow(key)"
+                  ng-class="{'select-row': key === rowSelected}">
+                <td>{{(tableParams.page()-1)*tableParams.count() + (key + 1)}}</td>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

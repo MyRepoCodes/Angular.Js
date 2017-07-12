@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title">View Event</h3>
+</div>
+<div class="modal-body modal-form-event">
+  <form name="form" class="form-horizontal" novalidate autocomplete="off">
+    <div class="list-group">
+      <div class="form-group">
+        <input name="summary" type="text" placeholder="Untitled event" class="form-control" data-ng-model="params.summary" readonly>
+      </div>
+      <div class="row row-time">
+        <div class="col-sm-3 col-sm-25 form-group">
+          <div class="datepicker-wrap">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="params.startDate" readonly/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-22 form-group">
+          <div class="timepicker-wrap">
+            <div class="input-group bootstrap-timepicker timepicker">
+              <input type="text" class="form-control input-small" data-ng-model="params.startTime" readonly/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-6"><label class="control-label">to</label></div>
+        <div class="col-sm-3 col-sm-22 form-group">
+          <div class="timepicker-wrap">
+            <div class="input-group bootstrap-timepicker timepicker">
+              <input type="text" class="form-control input-small"
+                     data-ng-model="params.endTime"
+                     readonly/>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-sm-25 form-group">
+          <div class="datepicker-wrap">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="params.endDate" readonly />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Where</label>
+        <div class="col-sm-10">
+          <input name="location" type="text" placeholder="Enter a location" class="form-control" data-ng-model="params.location" readonly>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Attachments</label>
+        <div class="col-sm-10">
+          <div class="file_queue" style="margin-bottom: 5px;" data-ng-if="attachments.length>0">
+            <div class="uploadifive-queue-item" data-ng-repeat="attachment in attachments">
+              <div><a href="{{ attachment.downloadUrl }}" target="_blank"><span class="filename"><img align="absmiddle" class="file_attached" src="assets/images/icons/attach.gif">{{ attachment.title }}</span></a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="control-label col-sm-2">Description</label>
+        <div class="col-sm-10">
+          <textarea name="description" class="form-control" data-ng-model="params.description" rows="3" readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

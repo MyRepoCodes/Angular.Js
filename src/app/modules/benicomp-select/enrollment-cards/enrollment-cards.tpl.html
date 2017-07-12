@@ -1,0 +1,56 @@
+<div class="panel panel-green" data-ng-show="!params.state">
+  <div class="panel-heading">
+    <h4 class="text-center">Enrollment Cards</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <!-- Intro -->
+      <div class="col-md-12">
+        <h1 class="text-center">
+          <a title="BeniComp Select Online Enrollment Card Submission">BeniComp Select Online Enrollment Card Submission</a>
+        </h1>
+        <h2 style="text-align: center;"><span style="color: inherit; line-height: 1.1;">We've made submitting enrollment cards easy.</span></h2>
+        <h2 style="color: #000000; text-align: center;">&nbsp;</h2>
+        <h3 style="color: #000000; text-align: justify;"><strong><span style="color: #65b9a6;">How It Works</span></strong></h3>
+        <p><strong>STEP 1:</strong>&nbsp;Select your state below (please use the state where your group application was filed).</p>
+        <p><strong>STEP 2:</strong> Fill out the Enrollment Card form and click SUBMIT.<strong><br></strong></p>
+        <p>That's it! If you have questions, please don't hesitate to <a data-ui-sref="modules.contact" title="Contact BeniComp Select">contact us</a>.</p>
+        <p>
+          <!-- You can place html anywhere within the source tags -->
+          <select data-ng-model="state" data-ng-options="state.abbreviation as state.name for state in stateList" data-ng-change="changeState(state)">
+            <option value="">Select a state</option>
+          </select>
+        </p>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-green form-pagination" data-ng-show="params.state">
+  <div class="panel-heading">
+    <h4 class="text-center">Enrollment Card - Unified Life Insurance Company</h4>
+  </div>
+  <div class="panel-body">
+    <div class="pagination_header">
+      <table class="ap_table_pagination" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+          <td align="center">
+            <span id="page_num_1" class="ap_tp_num" data-ng-class="{ 'ap_tp_num_active': step==0 }">1</span>
+            <span id="page_title_1" class="ap_tp_text" data-ng-class="{ 'ap_tp_text_active': step==0 }">Participant Information</span>
+          </td>
+          <td align="center" class="ap_tp_arrow">&gt;</td>
+          <td align="center">
+            <span id="page_num_2" class="ap_tp_num" data-ng-class="{ 'ap_tp_num_active': step==1 }">2</span>
+            <span id="page_title_2" class="ap_tp_text" data-ng-class="{ 'ap_tp_text_active': step==1 }">Additional Information</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div data-ng-show="step == 0" data-ng-include="'modules/benicomp-select/enrollment-cards/templates/participant-information.tpl.html'">
+    </div>
+    <div data-ng-show="step == 1" data-ng-include="'modules/benicomp-select/enrollment-cards/templates/additional-information.tpl.html'">
+    </div>
+  </div>
+</div>

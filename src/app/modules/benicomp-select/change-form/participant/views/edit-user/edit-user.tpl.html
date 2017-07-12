@@ -1,0 +1,61 @@
+<div class="modal-body modal-body-default modal-add-dependent">
+    <div class="panel-body-modal">
+        <div class="form-content">
+            <div class="form-content-summary">
+                Edit {{inputData.typeUser}}
+            </div>
+
+            <div class="panel panel-green">
+                <div class="panel-body">
+                    <form name="form" novalidate autocomplete="off">
+
+
+                        <!-- Name Change -->
+                        <div data-ng-include="'modules/benicomp-select/change-form/participant/views/name-change/name-change.tpl.html'" data-ng-controller="BcsChangeFormNameChangeController">
+                        </div>
+
+                        <!-- dependentDOB -->
+                        <div data-ng-if="type !== 1">
+                            <date-input data-form="form" data-ng-model="params.dateOfBirth" data-control-label="Date of birth"
+                                data-values="env" data-row="4" data-tabindex="4"
+                                required></date-input>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div data-ng-if="type === 1" data-ng-include="'modules/benicomp-select/change-form/participant/views/contact-information/contact-information.tpl.html'"
+                            data-ng-controller="BcsChangeFormContactInformationController">
+                        </div>
+
+
+
+
+                        <!-- Check box agree -->
+                        <div class="dotted-line"></div>
+                        <div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+                            <div class="content">
+                                <div class="checkbox-line">
+                                    <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="996" />
+                                    <label class="choice" for="checkBoxAgree">I understand that by checking this box I am confirming all information provided is correct and will be used
+by BeniComp Insurance Company moving forward.<span class="is-required"> *</span></label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <date-input data-form="form" data-ng-model="params.signedDate" data-control-label="Signed Date" data-param-type="signedDate"
+                            data-values="env" data-row="signedDate" data-tabindex="997" data-readonly="true"></date-input>
+
+                        <div class="buttons">
+                            <button class="btn btn-green" data-ng-click="updateInfo(form.$valid, params)" tabindex="998">Save</button>
+                            <button class="btn btn-default fs-16" data-ng-click="cancel()" tabindex="999">Cancel</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title">Manage Categories</h3>
+    <div class="model-form-content">
+        <div>
+            <form name="addCategoryForm" novalidate>
+                <h4>Add Category</h4>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group" data-ng-class="{ 'has-error' : addCategoryForm.categoryName.$invalid && (!addCategoryForm.categoryName.$pristine || showValid) }">
+                            <label class="col-sm-3 control-label">Category Name</label>
+
+                            <div class="col-sm-6">
+                                <input name="categoryName" type="text" class="form-control" data-ng-model="params.categoryName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row buttons">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <span class="btn btn-green" data-ng-click="addCategory(addCategoryForm)">Add</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div data-ng-show="params2.id">
+            <form name="editCategoryForm" novalidate>
+                <h4>Edit Category <button type="button" class="close" data-ng-click="disableEdit()">×</button></h4>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group" data-ng-class="{ 'has-error' : editCategoryForm.categoryName.$invalid && (!editCategoryForm.categoryName.$pristine || showValid2) }">
+                            <label class="col-sm-3 control-label">Category Name</label>
+
+                            <div class="col-sm-6">
+                                <input name="categoryName" type="text" class="form-control" data-ng-model="params2.categoryName" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row buttons">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <span class="btn btn-green" data-ng-click="changeCategory(editCategoryForm)">Change</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-container">
+        <div class="table-filter">
+            <div class="input-group">
+                <input class="form-control input-filter" data-ng-model="filter.q"/>
+                <span class="input-group-addon"><i class="icon icon-search"></i></span>
+            </div>
+        </div>
+        <div class="table-double">
+            <div class="table-double-content">
+                <div class="table-responsive table-responsive-pagination">
+                    <table ng-table="tableParams" show-filter="false" class="table">
+                        <thead>
+                        <tr>
+                            <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('categoryName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('categoryName', 'desc')
+                                      }"
+                                    ng-click="tableParams.sorting({'categoryName' : tableParams.isSortBy('categoryName', 'asc') ? 'desc' : 'asc'})">
+                                <div>Category Name</div>
+                            </th>
+                            <th class="action"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in tableParams.data" data-ng-click="choiceCategory(item)">
+                            <td data-title="'Category Name'" sortable="'categoryName'">
+                                {{item.categoryName}}
+                            </td>
+                            <td class="action">
+                                <span class="button action-remove" title="Remove" data-ng-click="removeCategory(item)">
+                                    <i class="icon"></i>
+                                </span>
+                                <span class="button action-edit" title="Edit" data-ng-click="editCategory(item)">
+                                    <i class="icon"></i>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr class="empty" data-ng-if="loading">
+                            <td colspan="2" class="text-center">
+                                <div class="loading-indicator"></div>
+                            </td>
+                        </tr>
+                        <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                            <td colspan="2" class="text-center">
+                                {{ 'faqCategories.empty' | translate }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

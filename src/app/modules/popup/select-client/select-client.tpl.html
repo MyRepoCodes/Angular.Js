@@ -1,0 +1,18 @@
+<div class="modal-body modal-body-default">
+    <!--<button type="button" class="close" data-ng-click="cancel()">×</button>-->
+    <h3 class="modal-title">Select Client</h3>
+
+    <div class="table-container">
+        <select class="form-control"
+                name="select_client"
+                ng-model="select_client"
+                ng-selected="select_client"
+                ng-options="client as client.clientName for client in clientList"
+                required>
+        </select>
+
+        <div class="buttons" style="text-align: center;">
+            <button class="btn btn-green" data-ng-click="submit(select_client)">Submit</button>
+        </div>
+    </div>
+</div>

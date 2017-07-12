@@ -1,0 +1,51 @@
+<form name="sForm" novalidate autocomplete="off">
+  <name-input data-form="sForm" data-ng-params="params" data-control-label="Insured's Name"  data-env="env"
+              data-tabindex="100" required></name-input>
+  <date-input data-form="sForm" data-ng-model="params.insuredDob" data-control-label="Insured DOB"
+              data-values="env" data-row="insuredDOB" data-tabindex="101" required></date-input>
+  <div class="row-item"
+       data-ng-click="env.row='ssn'"
+       data-ng-class="{ 'highlighted': env.row=='ssn',
+                        'has-error': sForm.ssn.$invalid && (!sForm.ssn.$pristine || env.showValid)
+                      }">
+    <label class="description">Insured's Last 4 Digits of SS#<span class="is-required"> *</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6"
+             data-ng-class="{ 'has-error': sForm.ssn.$invalid && (!sForm.ssn.$pristine || env.showValid) }">
+          <input name="ssn" type="text" class="form-control"
+                 data-ng-model="params.ssn"
+                 input-mask="ssn2"
+                 tabindex="102" required/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item"
+       data-ng-click="env.row='signature'"
+       data-ng-class="{ 'highlighted': env.row=='signature',
+                        'has-error': env.signature().isEmpty && env.showValid
+                      }">
+    <label class="description">Draw your signature into the box below.<span class="is-required">*</span></label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-12"
+             tabindex="103"
+             data-ng-class="{ 'has-error': env.signature().isEmpty && env.showValid }">
+          <signature-pad dataurl="params.signature" accept="env.signature" clear="clear" height="130" width="309"></signature-pad>
+          <div style="width: 309px"><a ng-click="clear()" class="sigpad_clear text-underline pull-right">Clear</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dotted-bottom"></div>
+  <div class="row-item">
+    <small>I understand that by signing this form I am confirming all information provided is correct and will be used by BeniComp Insurance Company moving forward.</small>
+  </div>
+  <date-input data-form="sForm" data-ng-model="params.signedDate"
+              data-control-label="Signed Date" data-param-type="signedDate" data-values="env" data-row="signedDate" data-tabindex="104" required></date-input>
+  <div class="buttons ng-scope" data-ng-click="env.row=0">
+    <button class="btn btn-green" data-ng-click="previous()" tabindex="998"><i class="fa fa-chevron-left"></i> Previous</button>
+    <button class="btn btn-green" data-ng-click="continue(sForm.$valid)" tabindex="999">Submit <i class="fa fa-chevron-right"></i></button>
+  </div>
+</form>

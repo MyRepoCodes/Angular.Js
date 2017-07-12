@@ -1,0 +1,115 @@
+<div class="table-filter">
+  <div class="input-group">
+    <input class="form-control input-filter" data-ng-model="filter.displayName"/>
+    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+  </div>
+</div>
+<div class="table-double"
+     data-ng-class="{ 'full-control' : tableParams.data.length > 0 && !loading, 'one': isParticipant }">
+  <div class="table-double-content">
+    <div class="table-responsive table-responsive-pagination">
+      <table ng-table="tableParams" show-filter="false" class="tableDocument table">
+        <thead>
+        <tr>
+          <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('displayName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('displayName', 'desc')
+                                      }"
+              ng-click="tableParams.sorting({'displayName' : tableParams.isSortBy('displayName', 'asc') ? 'desc' : 'asc'})">
+            <div>Documents</div>
+          </th>
+          <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('uploadDate', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('uploadDate', 'desc')
+                                      }"
+              ng-click="tableParams.sorting({'uploadDate' : tableParams.isSortBy('uploadDate', 'asc') ? 'desc' : 'asc'})">
+            <div>Upload Date</div>
+          </th>
+          <th>Uploaded By</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="item in tableParams.data"
+            class="tableDocumentHref"
+            data-ng-class="{ 'highlight' : item.id == newDocumentId || isNewDocument(item.id) }"
+            fix-hover="$index">
+
+          <td data-title="'Documents'" sortable="'displayName'">
+            <a href="{{baseURL + '/documents/download?documentIds='+ item.id}}">
+              {{ item.displayName ? item.displayName : item.documentFilename }}
+            </a>
+          </td>
+          <td data-title="'Upload Date'" sortable="'uploadDate'">
+            <a href="{{baseURL + '/documents/download?documentIds='+ item.id}}">
+              {{ item.uploadDate | date : 'MM/dd/yyyy'}}
+            </a>
+          </td>
+          <td data-title="'Uploaded By'">
+            <a href="{{baseURL + '/documents/download?documentIds='+ item.id}}">
+              {{ item.uploadedBy.roleName }}
+            </a>
+          </td>
+        </tr>
+        <tr class="empty" data-ng-if="loading">
+          <td colspan="3" class="text-center">
+            <div class="loading-indicator"></div>
+          </td>
+        </tr>
+        <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+          <td colspan="3" class="text-center">
+
+            {{ 'document.empty_1' | translate }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="table-double-action" data-ng-if="tableParams.data.length > 0 && !loading">
+    <table class="table ng-table">
+      <thead>
+      <tr>
+        <th class="action">
+          <span class="button action-remove"
+                title="{{ 'document.button.title.removeMultiple' | translate }}"
+                data-ng-click="removeMultipleDocuments()"
+                data-ng-if="tableParams.data.length>0 && !isParticipant">
+              <i class="icon" data-ng-hide="controller === 'ImpDocumentsListForUserController'"></i>
+          </span>
+          <span class="button action-download"
+                title="{{ 'document.button.title.downloadMultiple' | translate }}"
+                data-ng-click="downloadMultipleDocuments(tableParams.data, currentName)"
+                data-ng-if="tableParams.data.length>0">
+              <i class="icon"></i>
+          </span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="item in tableParams.data" fix-hover="$index">
+        <td class="action">
+          <span class="button action-remove"
+                title="{{ 'document.button.title.remove' | translate }}"
+                data-ng-click="remove(item)"
+                data-ng-class="{ 'action-remove-disable' : (isEmployer || isHealthCoach) && (item.uploadedById != currentUser.id)  }"
+                data-ng-if="!isParticipant">
+              <i class="icon"></i>
+          </span>
+          <!--<span class="button ltr action-download"
+                title="{{ 'document.button.title.download' | translate }}"
+                data-ng-click="download(item, currentName)">
+              <i class="icon"></i>
+          </span>-->
+          <a href="{{baseURL + '/documents/download?documentIds='+ item.id}}" target="_blank">
+            <span class="button ltr action-download"
+                  title="{{ 'document.button.title.download' | translate }}">
+                <i class="icon"></i>
+            </span>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

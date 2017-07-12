@@ -1,0 +1,205 @@
+<form name="registerForm" novalidate>
+  <div class="form-description">
+    <h2>Participant Registration Completed
+      <span class="action-tools pull-right">
+        <a class="action-item" data-ng-click="editRegister(registerForm)">Edit</a>
+      </span>
+    </h2>
+  </div>
+  <div>
+    <div class="row-item">
+      <label class="description">Name</label>
+      <div class="content"><span>{{ originRegisterParams | fullName }}</span></div>
+    </div>
+    <div class="row-item">
+      <label class="description">Date of Birth</label>
+      <div class="content"><span>{{ originRegisterParams.dateOfBirth | date : 'MM-d-y' }}</span></div>
+    </div>
+    <div class="row-item">
+      <label class="description">Social Security Number</label>
+      <div class="content"><span>{{ originRegisterParams.ssn }}</span></div>
+    </div>
+    <div class="row-item">
+      <label class="description">Sex</label>
+      <div class="content">
+        <span data-ng-if="originRegisterParams.gender === 'M'">Male</span>
+        <span data-ng-if="originRegisterParams.gender === 'F'">Female</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Address</label>
+      <div class="content">
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <span>{{ originRegisterParams.streetAddress }}</span>
+          </div>
+          <div class="form-group col-xs-12" data-ng-if="registerParams.addressLine2">
+            <span>{{ originRegisterParams.addressLine2 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">City</label>
+      <div class="content">
+        <span>{{ originRegisterParams.city }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">State</label>
+      <div class="content">
+        <span>{{ getCurrentState(originRegisterParams.state) }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Postal / Zip Code</label>
+      <div class="content">
+        <span>{{ originRegisterParams.postalCode }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Country</label>
+      <div class="content">
+        <span>{{ countries[0] }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Phone</label>
+      <div class="content">
+        <span>{{ originRegisterParams.telephone }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Email</label>
+      <div class="content">
+        <span>{{ originRegisterParams.email }}</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Participant Type</label>
+      <div class="content">
+        <span data-ng-if="originRegisterParams.participantType==0">Employee</span>
+        <span data-ng-if="originRegisterParams.participantType==1">Spouse</span>
+      </div>
+    </div>
+    <enrollment-level-detail-view data-ng-model="originRegisterParams.coverageLevel" data-option="env.currentEnrollmentLevel" data-control-label="Enrollment Level"></enrollment-level-detail-view>
+    <div class="row-item">
+      <label class="description">Client Location</label>
+      <div class="content">
+        <span data-ng-if="env.clientLocationList[originRegisterParams.clientLocation]">{{ env.clientLocationList[originRegisterParams.clientLocation] | clientLocationLabel }}</span>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="line-green"></div>
+<form name="hraForm" novalidate>
+  <div class="form-description">
+    <h2>Health Risk Appraisal
+      <span class="action-tools pull-right">
+        <a class="action-item" data-ng-click="editHra(hraForm)">Edit</a>
+      </span>
+    </h2>
+  </div>
+  <div>
+    <div class="row-item">
+      <label class="description">I have not been diagnosed with any of the following (Select all that apply)</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.diabetes">- Diabetes</span>
+        <br data-ng-if="originHraParams.diabetes">
+        <span data-ng-if="originHraParams.heartDisease">- Heart Disease</span>
+        <br data-ng-if="originHraParams.heartDisease">
+        <span data-ng-if="originHraParams.cOPD">- COPD/Emphysema</span>
+        <br data-ng-if="originHraParams.cOPD">
+        <span data-ng-if="originHraParams.condition">- Musculoskeletal Injury/Condition</span>
+        <br data-ng-if="originHraParams.condition">
+        <span data-ng-if="originHraParams.hypertension">- Hypertension</span>
+        <br data-ng-if="originHraParams.hypertension">
+        <span data-ng-if="originHraParams.heartAttack">- Heart Attack</span>
+        <br data-ng-if="originHraParams.heartAttack">
+        <span data-ng-if="originHraParams.sleepDisorder">- Sleep Disorder</span>
+        <br data-ng-if="originHraParams.sleepDisorder">
+        <span data-ng-if="originHraParams.iHNBDWAOTA">- I have not been diagnosed with any of the above</span>
+        <br data-ng-if="originHraParams.iHNBDWAOTA">
+        <span data-ng-if="originHraParams.highCholesterol">- High Cholesterol</span>
+        <br data-ng-if="originHraParams.highCholesterol">
+        <span data-ng-if="originHraParams.stroke">- Stroke</span>
+        <br data-ng-if="originHraParams.stroke">
+        <span data-ng-if="originHraParams.thyroidDisease">- Thyroid Disease</span>
+      </div>
+    </div>
+    <div class="row-item" data-ng-if="originHraParams.diabetes">
+      <label class="description">How is your diabetes being treated? Select all that apply.</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.diabetesOralMedicine">- Oral medicine (Metformin, Januvia, etc.)</span>
+        <br data-ng-if="originHraParams.diabetesOralMedicine">
+        <span data-ng-if="originHraParams.diabetesInsulin">- Insulin</span>
+        <br data-ng-if="originHraParams.diabetesInsulin">
+        <span data-ng-if="originHraParams.diabetesCBDO">- Controlled by diet only</span>
+        <br data-ng-if="originHraParams.diabetesCBDO">
+        <span data-ng-if="originHraParams.diabetesINRDATCMD">- I’m not really doing anything to control my diabetes</span>
+        <br data-ng-if="originHraParams.diabetesINRDATCMD">
+        <span data-ng-if="originHraParams.diabetesOther">- Other</span>
+      </div>
+    </div>
+    <div class="row-item" data-ng-if="originHraParams.hypertension">
+      <label class="description">Were you prescribed medication to control your hypertension?</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.prescribedMedicationForHypertension">Yes</span>
+        <span data-ng-if="!originHraParams.prescribedMedicationForHypertension">No</span>
+      </div>
+    </div>
+    <div class="row-item" data-ng-if="originHraParams.highCholesterol && (originHraParams.highCholesterolMMD || originHraParams.highCholesterolExercise || originHraParams.highCholesterolTM)">
+      <label class="description">What was your physician’s recommendation for high cholesterol?</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.highCholesterolMMD">- Modify my diet</span>
+        <br data-ng-if="originHraParams.highCholesterolMMD">
+        <span data-ng-if="originHraParams.highCholesterolExercise">- Exercise</span>
+        <br data-ng-if="originHraParams.highCholesterolExercise">
+        <span data-ng-if="originHraParams.highCholesterolTM">- Take medication</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">How long has it been since your last physical exam/check up with primary health care provider?</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.lastPhysicalExamOrCheckup == 0">Less than 1 year</span>
+        <span data-ng-if="originHraParams.lastPhysicalExamOrCheckup == 1">1-2 years</span>
+        <span data-ng-if="originHraParams.lastPhysicalExamOrCheckup == 2">2-3 years</span>
+        <span data-ng-if="originHraParams.lastPhysicalExamOrCheckup == 3">3-4 years</span>
+        <span data-ng-if="originHraParams.lastPhysicalExamOrCheckup == 4">5 or more years</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">Do you visit your healthcare provider routinely as directed for management of a diagnosed condition?
+        (i.e. Diabetes, Hypertension, Thyroid Disease, Chronic back pain, etc.)
+      </label>
+      <div class="content">
+        <span data-ng-if="originHraParams.visitHealthcareProviderRoutinely">Yes</span>
+        <span data-ng-if="!originHraParams.visitHealthcareProviderRoutinely">No</span>
+      </div>
+    </div>
+    <div class="row-item" data-ng-if="!originHraParams.visitHealthcareProviderRoutinely && (originHraParams.doYouNPCP || originHraParams.doYouNUCC || originHraParams.doYouNER || originHraParams.doYouNS || originHraParams.doYouNNOTA)">
+      <label class="description">Where do you go when you need medical care?</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.doYouNPCP">- Primary care physician</span>
+        <br data-ng-if="originHraParams.doYouNPCP">
+        <span data-ng-if="originHraParams.doYouNUCC">- Urgent Care Clinic</span>
+        <br data-ng-if="originHraParams.doYouNUCC">
+        <span data-ng-if="originHraParams.doYouNER">- Emergency Room</span>
+        <br data-ng-if="originHraParams.doYouNER">
+        <span data-ng-if="originHraParams.doYouNS">- Specialist</span>
+        <br data-ng-if="originHraParams.doYouNS">
+        <span data-ng-if="originHraParams.doYouNNOTA">- None of the above</span>
+      </div>
+    </div>
+    <div class="row-item">
+      <label class="description">How would you describe your overall physical health?</label>
+      <div class="content">
+        <span data-ng-if="originHraParams.overallPhysicalHealth == 0">Poor</span>
+        <span data-ng-if="originHraParams.overallPhysicalHealth == 1">Fair</span>
+        <span data-ng-if="originHraParams.overallPhysicalHealth == 2">Good</span>
+        <span data-ng-if="originHraParams.overallPhysicalHealth == 3">Very Good</span>
+        <span data-ng-if="originHraParams.overallPhysicalHealth == 4">Excellent</span>
+      </div>
+    </div>
+  </div>
+</form>

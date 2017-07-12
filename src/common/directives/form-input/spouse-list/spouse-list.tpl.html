@@ -1,0 +1,23 @@
+<div data-ng-if="status == 'M' || status == 'P'">
+  
+  <div data-ng-repeat="item in listSpouse track by $index">
+    <name-input data-form="form" data-ng-params="item" data-control-label="Spouse {{ $index+1 }} Name" data-env="env" readonly></name-input>
+    <div class="row-item">
+      <label class="description">Spouse's Pulse ID: <span class="text-green">{{ participantInfo|formatNumberId:item.numberId:"Spouse" }}</span></label>
+    </div>
+    <ssn-input data-form="form" data-ng-model="item.ssn" data-control-label="Spouse {{ $index+1 }} Social Security Number"
+      data-env="env" readonly></ssn-input>
+    <date-input data-form="form" data-ng-model="item.dateOfBirth" data-control-label="Spouse {{ $index+1 }} Date of Birth"
+      data-values="env" readonly></date-input>
+    <sex-input data-form="form" data-ng-model="item.gender" data-control-label="Spouse {{ $index+1 }} Sex" data-env="env"
+      readonly></sex-input>
+
+  </div>
+
+  <div class="row-item">
+    <div class="content">
+      <a class="btn btn-green btn-small" ng-if="!readonly" data-ng-click="createOrUpdateSpouse()">Manage Spouse</a>
+    </div>
+  </div>
+
+</div>

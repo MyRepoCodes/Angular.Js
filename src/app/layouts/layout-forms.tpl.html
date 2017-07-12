@@ -1,0 +1,31 @@
+<!-- Header/Top bar view container-->
+<header data-ng-include="'header/header.tpl.html'" data-ng-controller="HeaderController"></header>
+
+<!-- Main Content view container -->
+<div class="page-container layout-forms-{{ checkState }}">
+    <div id="wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-4 left-sidebar"
+                     data-ng-if="isAuthenticated"
+                     data-ng-include="'modules/sidebar/sidebar.tpl.html'"
+                     data-ng-controller="SidebarController">
+                    sidebar left
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-4 left-sidebar hidden-xs"
+                     data-ng-if="!isAuthenticated"
+                     data-ng-include="'security/login/login-form.tpl.html'">
+                    login form
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-8 main-content">
+                    <div data-ui-view="main-content">
+                        main content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer view container -->
+<footer data-ng-include="'footer/footer.tpl.html'" data-ng-controller="FooterController"></footer>

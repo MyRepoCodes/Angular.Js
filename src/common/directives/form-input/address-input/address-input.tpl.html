@@ -1,0 +1,86 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['streetName_' + inputId].$invalid && (!form['streetName_' + inputId].$pristine || env.showValid) ||
+                                   form['addressLine2_' + inputId].$invalid && (!form['addressLine2_' + inputId].$pristine || env.showValid) ||
+                                   form['city_' + inputId].$invalid && (!form['city_' + inputId].$pristine || env.showValid) ||
+                                   form['postalCode_' + inputId].$invalid && (!form['postalCode_' + inputId].$pristine || env.showValid) ||
+                                   form['state_' + inputId].$invalid && (!form['state_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-12"
+           data-ng-class="{ 'has-error': form['streetName_' + inputId].$invalid && (!form['streetName_' + inputId].$pristine || env.showValid) }">
+        <input type="text" name="streetName_{{ inputId }}" class="form-control"
+               data-ng-model="params.streetAddress"
+               data-ng-disabled="readonly"
+               data-ng-required="required"
+               tabindex="{{ tabindex }}"/>
+        <label class="control-label">Street Address</label>
+      </div>
+      <div class="form-group col-xs-12"
+           data-ng-class="{ 'has-error': form['addressLine2_' + inputId].$invalid && (!form['addressLine2_' + inputId].$pristine || env.showValid) }">
+        <input type="text" name="addressLine2_{{ inputId }}" class="form-control"
+               data-ng-model="params.addressLine2"
+               data-ng-disabled="readonly"
+               maxlength="25"
+               tabindex="{{ tabindex }}"/>
+        <label class="control-label">Address Line 2</label>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group"
+             data-ng-class="{ 'has-error': form['city_' + inputId].$invalid && (!form['city_' + inputId].$pristine || env.showValid) }">
+          <input type="text" name="city_{{ inputId }}" class="form-control"
+                 data-ng-model="params.city"
+                 data-ng-disabled="readonly"
+                 data-ng-required="required"
+                 maxlength="20"
+                 tabindex="{{ tabindex }}"/>
+          <label class="control-label">City</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group"
+             data-ng-class="{ 'has-error': form['state_' + inputId].$invalid && (!form['state_' + inputId].$pristine || env.showValid) }">
+          <select name="state_{{ inputId }}"
+                  class="form-control"
+                  data-ng-model="params.state"
+                  data-ng-options="item.abbreviation as item.name for item in statesList"
+                  data-ng-disabled="readonly"
+                  data-ng-required="required"
+                  tabindex="{{ tabindex }}">
+            <option value="" selected>Select a State</option>
+          </select>
+          <label class="control-label">State</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group"
+             data-ng-class="{ 'has-error': form['postalCode_' + inputId].$invalid && (!form['postalCode_' + inputId].$pristine || env.showValid) }">
+          <input type="text" name="postalCode_{{ inputId }}" class="form-control"
+                 data-ng-model="params.postalCode"
+                 data-ng-disabled="readonly"
+                 data-ng-required="required"
+                 maxlength="9"
+                 tabindex="{{ tabindex }}"/>
+          <label class="control-label">Postal / Zip Code</label>
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <!--<select name="country_{{ inputId }}" class="form-control"
+                  data-ng-model="params.country"
+                  data-ng-class="{ 'ng-dirty' : form['country_' + inputId].$invalid && (!form['country_' + inputId].$pristine || env.showValid) || params.country }"
+                  data-ng-disabled="readonly"
+                  data-ng-required="required"
+                  tabindex="{{ tabindex }}">
+            <option data-ng-repeat="item in countries" value="{{ item }}">{{ item }}</option>
+          </select>-->
+          <div class="form-control ng-valid" data-ng-disabled="readonly" tabindex="{{ tabindex }}">{{ countries[0] }}</div>
+          <label class="control-label">Country</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="health-panel">
+  <div class="health-heading">
+    <span class="health-title">{{ title }}</span>
+    <span class="health-range">Ideal range: <strong data-ng-bind-html="rangeText"></strong></span>
+    <span>Your result: <strong data-ng-class="{ 'text-alert' : isDanger() }">{{ resultText }}</strong></span>
+    <a class="close">X</a>
+  </div>
+  <div class="health-content">
+    <p>{{ description }}</p>
+
+    <p data-ng-if="!chart" data-ng-bind-html="rangeDescription | safe_html"></p>
+
+
+    <table data-ng-if="chart" class="table table-chart">
+      <thead>
+      <tr data-ng-repeat="iheader in chart.list_header">
+        <th data-ng-repeat="itemHeader in iheader" colspan="{{itemHeader.colspan}}" class="{{itemHeader.class}}" data-ng-bind="itemHeader.label"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr data-ng-repeat="icontent in chart.list_content">
+        <th class="{{icontent.class}}" data-ng-bind="icontent.name"></th>
+        <th data-ng-repeat="item in icontent.data" class="{{item.class}}" data-ng-bind-html="item.value | convertOperatorToString"></th>
+      </tr>
+      </tbody>
+    </table>
+
+    <p data-ng-if="isDanger()"><span class="text-alert">Alert: </span>
+      <!--<span data-ng-if="name === 'protein' && value>8.3" >{{ alert2 }}</span>-->
+      <!--<span data-ng-if="name !== 'protein' || value<8.3">{{ alert }}</span>-->
+      Although this is not a diagnosis, your result may be associated with unusual and potentially dangerous or harmful health risks and you are encouraged to contact a BeniComp Health Coach or another qualified healthcare provider.
+    </p>
+    <button data-ng-if="isDanger()" class="btn btn-green btn-health">Contact a BeniComp<br>health coach at no cost to you</button>
+  </div>
+</div>

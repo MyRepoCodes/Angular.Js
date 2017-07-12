@@ -1,0 +1,105 @@
+<div class="guest-container page-auth-common">
+  <div class="verticalcenter">
+    <div class="panel panel-green">
+      <div class="panel-heading">
+        <div class="logo-small">
+
+          <a href="#/">
+            <img src="assets/images/logo1.png">
+          </a>
+          
+        </div>
+        <div class="content">
+
+          <div data-ng-if="!error">
+            <div>Hello {{ user.firstName }}</div>
+            <div class="step-name">Looks like we found your information</div>
+            <div class="step-name">Step 2: Create your account</div>
+          </div>
+
+          <div data-ng-if="error">
+            <div class="text-red">Oops!</div>
+            <div class="step-name">{{ error }}</div>
+          </div>
+        </div>
+
+      </div>
+      <div class="panel-body login">
+
+        <form name="usernameForm" novalidate>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.username.$invalid && (!usernameForm.username.$pristine || showValid) }">
+            <input type="text" name="username" class="form-control" placeholder="Create Username" data-ng-model="params.username" tabindex="1"
+              required/>
+          </div>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.password.$invalid && (!usernameForm.password.$pristine || showValid) }">
+            <a style="display: block" tooltips tooltip-show-trigger="click" tooltip-hide-trigger="change" tooltip-lazy="false" tooltip-side="top"
+              tooltip-class="tooltip-password" tooltip-content="{{ 'tooltip.password' | translate }}">
+              <input type="password" name="password" class="form-control" placeholder="Create Password" data-ng-model="params.password"
+                data-ng-minlength="{{ configs.passwordMinLength }}" data-ng-pattern="patternRegexs.password" data-password-equal="[params.username, user.firstName, user.lastName]"
+                tabindex="2" onfocus="$(this).parent().trigger('click')" onblur="$(this).parent().trigger('change')" required/>
+            </a>
+            <meter-password password="usernameForm.password" option="{ minLength: configs.passwordMinLength }">
+            </meter-password>
+          </div>
+          <div class="form-group" data-ng-class="{
+                                        'has-error' :
+                                            (usernameForm.confirm.$invalid && (!usernameForm.confirm.$pristine || showValid))
+                                            || (params.confirm!=params.password && (!!params.confirm || showValid))
+                                    }">
+            <input type="password" name="confirm" class="form-control" placeholder="Confirm Password" data-ng-model="params.confirm"
+              password-verify="params.password" tabindex="3" required/>
+          </div>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.question1.$invalid && (!usernameForm.question1.$pristine || showValid) }">
+            <select name="question1" class="form-control"
+             data-ng-model="params.question1" data-ng-change="change(1)"       
+              tabindex="4" required>
+                   <option value="" selected>Please Select Question 1</option>
+                   <option value="{{question.id}}" ng-repeat="question in questions1" >{{question.questionText}}</option>
+                  </select>
+          </div>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.answer1.$invalid && (!usernameForm.answer1.$pristine || showValid) }">
+            <input type="text" name="answer1" class="form-control" data-ng-model="params.answer1" placeholder="Question 1 Answer" tabindex="5"
+              required/>
+          </div>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.question2.$invalid && (!usernameForm.question2.$pristine || showValid) }">
+            <select name="question2" class="form-control" 
+              data-ng-model="params.question2"   data-ng-change="change(2)" 
+              tabindex="6" required>
+                <option value="" selected>Please Select Question 2</option>
+                <option value="{{question.id}}" ng-repeat="question in questions2" >{{question.questionText}}</option>
+          </select>
+          </div>
+          <div class="form-group" data-ng-class="{ 'has-error' : usernameForm.answer2.$invalid && (!usernameForm.answer2.$pristine || showValid) }">
+            <input type="text" name="answer2" class="form-control" data-ng-model="params.answer2" placeholder="Question 2 Answer" tabindex="7"
+              required/>
+          </div>
+
+          <div class="form-group" data-ng-if="!isHaveEmail" data-ng-class="{ 'has-error' : usernameForm.email.$invalid && (!usernameForm.email.$pristine || showValid) }">
+            <input type="text" name="email" class="form-control" data-ng-model="params.email" placeholder="Email" tabindex="8" required/>
+            <div class="text-danger" ng-if="env.isEmailExists && showValid">This email already exists.</div>
+
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-green btn-width-100" data-ng-click="submit(usernameForm.$valid)" tabindex="9">SUBMIT
+                  </button>
+          </div>
+
+        </form>
+
+        <div class="form-group text-center" data-ng-if="brand">
+          <div class="text-center">
+            <img class="logo-bank" data-ng-src="{{ brand }}" />
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="btn-note register">
+            Still having trouble?
+            <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

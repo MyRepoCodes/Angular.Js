@@ -1,0 +1,34 @@
+<div class="modal-body modal-body-default">
+    <button type="button" class="close" data-ng-click="cancel()">×</button>
+    <h3 class="modal-title" ng-bind="data.title"></h3>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Multiple Select</label>
+
+            <div class="col-sm-8">
+                <div class="ms-container">
+                    <div class="ms-selectable">
+                        <ul class="ms-list">
+                            <li class="ms-elem-selectable" data-ng-repeat="user in userList"
+                                data-ng-click="onSelected(user)">
+                                <span>{{ user.firstName |trust }} {{ user.lastName |trust }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ms-selection">
+                        <ul class="ms-list" data-ng-class="{ 'has-error' : selectedList.length == 0 && showValid }">
+                            <li class="ms-elem-selection" data-ng-repeat="user in selectedList"
+                                data-ng-click="onUnselected(user)">
+                                <span>{{ user.firstName |trust }} {{ user.lastName |trust }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="buttons" style="text-align: center;">
+            <button class="btn btn-green" data-ng-click="submit()" ng-bind="data.button_title"></button>
+        </div>
+    </form>
+</div>

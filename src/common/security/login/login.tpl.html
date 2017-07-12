@@ -1,0 +1,217 @@
+<div class="guest-container">
+    <div class="verticalcenter">
+
+        <!-- Form login -->
+        <div ng-if="env.step === 0" class="panel panel-green">
+            <div class="panel-heading">
+                <div class="logo-small">
+
+                    <a href="#/">
+                        <img src="assets/images/logo1.png">
+                    </a>
+
+                </div>
+
+                <div ng-if="env.stickiesLogin && env.stickiesLogin.type ==='success'" class="content">
+                    <div>Nailed it!</div>
+                    <div class="step-name">Your account has been created. Please login to access your information</div>
+                </div>
+
+                <div ng-if="authError" class="content">
+                    <div class="text-red">Oops!</div>
+                    <div class="step-name" ng-if="authError === '1001'">Incorrect Password</div>
+                    <div class="step-name" ng-if="authError === '1001'">You can click Forgot Password</div>
+
+                    <div class="step-name" ng-if="authError === '1002'">Incorrect Username/Password</div>
+                    <div class="step-name" ng-if="authError === '1002'">Please try again</div>
+                     <div class="step-name" ng-if="authError === '1010'">IP Address is not allowed</div>
+                    <div class="step-name" ng-if="authError !== '1002' && authError !== '1001' && authError !== '1010'" ng-bind-html="authError"></div>
+                </div>
+
+            </div>
+            <div class="panel-body login">
+                <form ng-show="!env.isClickButtonLogin" name="loginForm" novalidate autocomplete="off">
+                    <div class="form-group" data-ng-class="{ 'has-error' : loginForm.username.$invalid && (!loginForm.username.$pristine || showValid) }">
+                        <input type="text" name="username" class="form-control" placeholder="Username" data-ng-model="user.username" autofocus="autofocus"
+                            tabindex="1" required/>
+                    </div>
+                    <div class="form-group text-right">
+                        <a class="btn-link" data-ng-click="goForgotUsername()">Forgot Username</a>
+                    </div>
+                    <div class="form-group" data-ng-class="{ 'has-error' : loginForm.password.$invalid && (!loginForm.password.$pristine || showValid) }">
+                        <input type="password" name="password" class="form-control" placeholder="Password" data-ng-model="user.password" tabindex="2"
+                            required/>
+                    </div>
+                    <div class="form-group text-right">
+                        <a class="btn-link" data-ng-click="goForgotPassword()">Forgot Password</a>
+                    </div>
+                    <div class="form-group text-center" data-ng-if="!env.isClickButtonLogin">
+                        <button class="btn btn-green btn-width-100" data-ng-click="login(loginForm.$valid)" tabindex="3">LOGIN</button>
+                    </div>
+
+                    <div class="alert alert-warning" data-ng-if="authReason">{{ authReason }}</div>
+                </form>
+
+
+
+                <div ng-if="!env.isClickButtonLogin && !env.stickiesLogin || (env.stickiesLogin && env.stickiesLogin.type !=='success')"
+                    class="form-group text-center content-login-form">
+                    Don't have an account?
+                    <a data-ng-click="goFindAccount()" class="text-green">GET STARTED</a>
+
+                </div>
+                <div class="form-group text-center" data-ng-if="brand">
+                    <div class="text-center">
+                        <img class="logo-bank" data-ng-src="{{ brand }}" />
+                    </div>
+                </div>
+
+                <div ng-if="env.stickiesLogin && env.stickiesLogin.type ==='success'" class="text-center">
+                    <div class="btn-note register">
+                        Still having trouble?
+                        <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+                    </div>
+                </div>
+
+
+                <div ng-show="env.isClickButtonLogin">
+                    <div class="content-loading">
+                        <div id="fountainG">
+                            <div id="fountainG_1" class="fountainG"></div>
+                            <div id="fountainG_2" class="fountainG"></div>
+                            <div id="fountainG_3" class="fountainG"></div>
+                            <div id="fountainG_4" class="fountainG"></div>
+                            <div id="fountainG_5" class="fountainG"></div>
+                            <div id="fountainG_6" class="fountainG"></div>
+                            <div id="fountainG_7" class="fountainG"></div>
+                            <div id="fountainG_8" class="fountainG"></div>
+                        </div>
+                        <div class="content margin-top-20">Adding beats to your life</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Change new Password -->
+        <div ng-if="env.step === 1" class="panel panel-green">
+            <div class="panel-heading">
+                <div class="logo-small">
+
+                    <a href="#/">
+                    <img src="assets/images/logo1.png">
+                </a>
+
+                </div>
+
+                <div class="content">
+                    <div>Change password</div>
+                    <div class="step-name">You're using a temporary password.</div>
+                    <div class="step-name">Let's change that!</div>
+                </div>
+
+            </div>
+            <div class="panel-body login" ng-show="!env.isClickButtonLogin">
+                <form name="changePasswordForm" novalidate autocomplete="off">
+
+                    <div class="form-group" data-ng-class="{ 'has-error' : changePassParams.password.$invalid && (!changePassParams.password.$pristine || showValid) }">
+                        <a style="display: block" tooltips tooltip-show-trigger="click" tooltip-hide-trigger="change" tooltip-lazy="false" tooltip-side="top"
+                            tooltip-class="tooltip-password" tooltip-content="{{ 'tooltip.password' | translate }}">
+                        <input type="password" name="password" class="form-control" placeholder="New Password" data-ng-model="paramsChangePass.password"
+                            data-ng-minlength="{{ configs.passwordMinLength }}" data-ng-pattern="patternRegexs.password" data-password-equal="[paramsChangePass.username, user.firstName, user.lastName]"
+                            tabindex="2" onfocus="$(this).parent().trigger('click')" onblur="$(this).parent().trigger('change')"
+                            required/>
+                        </a>
+                        <meter-password password="changePassParams.password" option="{ minLength: configs.passwordMinLength }">
+                        </meter-password>
+                    </div>
+
+                    <div class="form-group" data-ng-class="{
+                                        'has-error' :
+                                            (changePassParams.confirm.$invalid && (!changePassParams.confirm.$pristine || showValid))
+                                            || (paramsChangePass.confirm!=paramsChangePass.password && (!!paramsChangePass.confirm || showValid))
+                                    }">
+                        <input type="password" name="confirm" class="form-control" placeholder="Confirm Password" data-ng-model="paramsChangePass.confirm"
+                            password-verify="paramsChangePass.password" tabindex="3" required/>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button class="btn btn-green btn-width-100" data-ng-click="changePassword(changePasswordForm.$valid, paramsChangePass)" tabindex="4">LOGIN</button>
+                    </div>
+
+                </form>
+
+                <div class="form-group text-center" data-ng-if="brand">
+                    <div class="text-center">
+                        <img class="logo-bank" data-ng-src="{{ brand }}" />
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <div class="btn-note register">
+                        Still having trouble?
+                        <a data-ng-click="goContact()" class="text-green">CONTACT US</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-body login" ng-show="env.isClickButtonLogin">
+
+                <div class="content-loading">
+                    <div class="title">Loading</div>
+                    <div id="fountainG">
+                        <div id="fountainG_1" class="fountainG"></div>
+                        <div id="fountainG_2" class="fountainG"></div>
+                        <div id="fountainG_3" class="fountainG"></div>
+                        <div id="fountainG_4" class="fountainG"></div>
+                        <div id="fountainG_5" class="fountainG"></div>
+                        <div id="fountainG_6" class="fountainG"></div>
+                        <div id="fountainG_7" class="fountainG"></div>
+                        <div id="fountainG_8" class="fountainG"></div>
+                    </div>
+                    <div class="content">Please don't touch the screen!</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- System Maintainance -->
+        <div ng-if="env.step === 2" class="panel panel-green">
+            <div class="panel-heading">
+                <div class="logo-small">
+
+                    <a href="#/">
+                <img src="assets/images/logo1.png">
+            </a>
+
+                </div>
+
+                <div class="content">
+                    <div>We are working to make your life easier!</div>
+                </div>
+
+            </div>
+            <div class="">
+
+                <div class="form-group text-center" ng-if="infoMaintenance.isHaveImage">
+                    <div class="text-center">
+
+                        <img ng-if="infoMaintenance.file.filesize" class="logo-bank" src="{{baseURL}}/systemconfigurations/maintainanceLogo" />
+                        <img ng-if="!infoMaintenance.file.filesize" class="logo-bank" src="assets/images/MaintenanceScreen.png" />
+                    </div>
+                </div>
+
+
+                <div class="form-group" ng-if="infoMaintenance.reasons">
+                    <div class="text-center" ng-bind-html="infoMaintenance.reasons">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

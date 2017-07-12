@@ -1,0 +1,107 @@
+<div class="table-double" data-ng-class="{'full-control' : isFullControl() && tableParams.data.length > 0 && !loading}">
+  <div class="table-double-content">
+    <div class="table-responsive table-responsive-pagination">
+      <table ng-table="tableParams" show-filter="false" class="table">
+        <thead>
+        <tr>          
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('OperationType', 'asc'), 'sort-desc': tableParams.isSortBy('OperationType', 'desc') }"
+              ng-click="tableParams.sorting({'OperationType' : tableParams.isSortBy('OperationType', 'asc') ? 'desc' : 'asc'})">
+            <div>Operation Type</div>
+          </th>
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('TableName', 'asc'), 'sort-desc': tableParams.isSortBy('TableName', 'desc') }"
+              ng-click="tableParams.sorting({'TableName' : tableParams.isSortBy('TableName', 'asc') ? 'desc' : 'asc'})">
+            <div>Table Name</div>
+          </th>
+
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('PrimaryKey', 'asc'), 'sort-desc': tableParams.isSortBy('PrimaryKey', 'desc') }"
+              ng-click="tableParams.sorting({'PrimaryKey' : tableParams.isSortBy('PrimaryKey', 'asc') ? 'desc' : 'asc'})">
+            <div>Primary Key</div>
+          </th>
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('FieldName', 'asc'), 'sort-desc': tableParams.isSortBy('FieldName', 'desc') }"
+              ng-click="tableParams.sorting({'FieldName' : tableParams.isSortBy('FieldName', 'asc') ? 'desc' : 'asc'})">
+            <div>Field Name</div>
+          </th>
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('NewValue', 'asc'), 'sort-desc': tableParams.isSortBy('NewValue', 'desc') }"
+              ng-click="tableParams.sorting({'NewValue' : tableParams.isSortBy('NewValue', 'asc') ? 'desc' : 'asc'})">
+            <div>New Value</div>
+          </th>
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('OldValue', 'asc'), 'sort-desc': tableParams.isSortBy('OldValue', 'desc') }"
+              ng-click="tableParams.sorting({'OldValue' : tableParams.isSortBy('OldValue', 'asc') ? 'desc' : 'asc'})">
+            <div>Old Value</div>
+          </th>
+          <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('OperationDate', 'asc'), 'sort-desc': tableParams.isSortBy('OperationDate', 'desc') }"
+              ng-click="tableParams.sorting({'OperationDate' : tableParams.isSortBy('OperationDate', 'asc') ? 'desc' : 'asc'})">
+            <div>Operation Date</div>
+          </th>
+           <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('UserName', 'asc'), 'sort-desc': tableParams.isSortBy('UserName', 'desc') }"
+              ng-click="tableParams.sorting({'UserName' : tableParams.isSortBy('UserName', 'asc') ? 'desc' : 'asc'})">
+            <div>User Name</div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="pointer" ng-repeat="item in tableParams.data" ng-click="goState('loggedIn.modules.user-manager.participantClient', item)">   
+          <td data-title="'Client Name'" sortable="'clientName'"  ng-bind-html="item.clientName"></td>
+          <td data-title="'Last Name'" sortable="'lastName'" ng-bind-html="item.lastName"></td>
+          <td data-title="'First Name'" sortable="'firstName'" ng-bind-html="item.firstName"></td>
+          <td data-title="'Email'" sortable="'email'" ng-bind-html="item.email"></td>
+        </tr>
+        <tr class="empty" data-ng-if="loading">
+          <td colspan="5" class="text-center">
+            <div class="loading-indicator"></div>
+          </td>
+        </tr>
+        <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+          <td colspan="5" class="text-center">
+            <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+            <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="table-double-action" data-ng-if="isFullControl() && tableParams.data.length > 0 && !loading">
+    <table class="table ng-table">
+      <thead>
+      <tr>
+        <th class="action">
+          <span class="button action-remove" title="{{ 'userManager.button.title.removeMultiple' | translate }}"
+                data-ng-click="removeMultipleUsers()"
+                data-ng-if="tableParams.data.length>0 && filter.status==='active'"><i class="icon"></i></span>
+          <span class="button action-remove" title="{{ 'userManager.button.title.restoreMultiple' | translate }}"
+                data-ng-click="restoreMultipleUsers()"
+                data-ng-if="tableParams.data.length>0 && filter.status==='inactive'"><i class="restore_icon glyphicon glyphicon-share-alt"></i></span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="item in tableParams.data">
+        <td class="action">
+          <!-- Filter INACTIVE -->
+          <span class="button action-remove"
+                data-ng-if="filter.status==='inactive'"
+                title="{{ 'userManager.button.title.restore' | translate }}"
+                data-ng-click="restore(item)">
+              <i class="restore_icon glyphicon glyphicon-share-alt"></i>
+          </span>
+
+          <span class="button action-remove" title="{{ 'userManager.button.title.permanentlyDelete' | translate }}"
+                data-ng-if="filter.status==='inactive'"
+                data-ng-click="permanentlyDelete(item)">
+              <i class="icon"></i>
+          </span>
+          <!-- Filter ACTIVE -->
+          <span class="button action-remove"
+                title="{{ 'userManager.button.title.remove' | translate }}"
+                data-ng-if="filter.status==='active'"
+                data-ng-click="remove(item)"><i class="icon"></i></span>
+          <span class="button action-edit" title="{{ 'userManager.button.title.edit' | translate }}"
+                data-ng-if="filter.status==='active'"
+                data-ng-click="edit(item)"><i class="icon"></i></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<!-- Header/Top bar view container-->
+<header class="state-{{ checkState }}" data-ui-view="header" data-ng-class="{'authenticated' : isAuthenticated && isCookies}"></header>
+
+<!-- Main Content view container -->
+<div class="page-container state-{{ checkState }}" data-ui-view="middle-container"></div>
+
+<!-- Footer view container -->
+<footer ng-mousedown="mouseClick()" class="state-{{ checkState }}" data-ui-view="footer"></footer>

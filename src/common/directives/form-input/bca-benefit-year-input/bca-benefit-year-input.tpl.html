@@ -1,0 +1,94 @@
+<div class="row-item" data-ng-click="env.row=row" data-ng-class="{ 'highlighted': env.row==row }">
+  <label class="description">Benefit Year</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <!-- Single button -->
+        <div class="btn-group incentive-dropdown" dropdown data-ng-if="ngModel.list.data.length > 0">
+          <button id="single-button" class="form-control" dropdown-toggle tabindex="1"><span data-ng-bind="getLabel(params)"></span> &nbsp;&nbsp;<span class="caret"></span></button>
+          <ul class="dropdown-menu" dropdown-menu role="menu" aria-labelledby="single-button">
+            <li role="menuitem" data-ng-repeat="item in ngModel.list.data">
+              <a data-ng-click="changeParams(item)" data-ng-bind="getLabel(item)" data-ng-class="{ 'error': item.hasError }"></a>
+              <span class="close" data-ng-click="removeBY(item)" data-ng-if="!isEmpty(item)"><i class="fa fa-times"></i></span>
+            </li>
+          </ul>
+        </div>
+        <span class="text-green" style="cursor: pointer" data-ng-if="ngModel.list.data.length == 0" data-ng-click="addBY()">Add Benefit Year</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="benefit-year" data-ng-if="params">
+  <div class="row">
+    <div class="col-xs-6">
+      <date-input data-form="form"
+                  data-ng-model="params.startDate"
+                  data-control-label="Benefit Start Date"
+                  data-values="env"
+                  data-has-error="{{ errors.startDate && !!params.hasError }}"
+                  data-row="{{ row }}_startDate"
+                  data-tabindex="{{ tabindex }}"
+                  required></date-input>
+    </div>
+    <div class="col-xs-6">
+      <date-input data-form="form"
+                  data-ng-model="params.endDate"
+                  data-control-label="Benefit End Date"
+                  data-values="env"
+                  data-has-error="{{ errors.endDate && !!params.hasError }}"
+                  data-row="{{ row }}_endDate"
+                  data-tabindex="{{ tabindex }}"
+                  required></date-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <date-input data-form="form"
+                  data-ng-model="params.registerStartDate"
+                  data-control-label="Registration Start Date"
+                  data-values="env"
+                  data-has-error="{{ errors.registerStartDate && !!params.hasError }}"
+                  data-row="{{ row }}_registerStartDate"
+                  data-tabindex="{{ tabindex }}"
+                  required></date-input>
+    </div>
+    <div class="col-xs-6">
+      <date-input data-form="form"
+                  data-ng-model="params.registerEndDate"
+                  data-control-label="Registration End Date"
+                  data-values="env"
+                  data-has-error="{{ errors.registerEndDate && !!params.hasError }}"
+                  data-row="{{ row }}_registerEndDate"
+                  data-tabindex="{{ tabindex }}"
+                  required></date-input>
+    </div>
+  </div>
+  <plan-input data-form="form"
+              data-ng-model="params.plans"
+              data-plan-option="params.planOption"
+              data-control-label="Benefit Plan Options"
+              data-env="env"
+              data-row="{{ row }}_plans"
+              data-tabindex="{{ tabindex }}"></plan-input>
+  <div class="row-item" data-ng-click="env.row=row+'_targetsOption'" data-ng-class="{ 'highlighted': env.row==row+'_targetsOption' }">
+    <label class="description">Targets option</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group targets-option col-xs-6">
+          <select class="form-control"
+                  data-ng-model="params.targetsOption"
+                  data-ng-options="item.value as item.name for item in clientIncentivesTargets"
+                  data-ng-change="changeTargetsOption(params.targetsOption)"
+                  tabindex="{{ tabindex }}">
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <client-incentives-input data-form="form"
+                           data-ng-model="params"
+                           data-control-label="Client Incentives"
+                           data-env="env"
+                           data-row="{{ row }}_client_incentives"
+                           data-tabindex="{{ tabindex }}"></client-incentives-input>
+</div>

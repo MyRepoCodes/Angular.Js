@@ -1,0 +1,59 @@
+<div class="row-item"
+     data-ng-click="env.row=row"
+     data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': form['enrollmentLevel_' + inputId].$invalid && (!form['enrollmentLevel_' + inputId].$pristine || env.showValid)
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="radio-line">
+      <input name="enrollmentLevel_{{ inputId }}" type="radio" id="enrollmentLevel_{{ inputId }}_0"
+             data-ng-model="ngModel"
+             data-ng-value="0"
+             data-ng-disabled="readonly"
+             tabindex="{{ tabindex }}"/>
+      <label for="enrollmentLevel_{{ inputId }}_0" class="choice">
+        Employee<br>
+        Employee + Child<br>
+        Employee + Children<br>
+        Employee + Spouse<br>
+        Family
+      </label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevel_{{ inputId }}" type="radio" id="enrollmentLevel_{{ inputId }}_1"
+             data-ng-model="ngModel"
+             data-ng-value="1"
+             data-ng-disabled="readonly"
+             tabindex="{{ tabindex }}"/>
+      <label for="enrollmentLevel_{{ inputId }}_1" class="choice">
+        Employee<br>
+        Employee + 1<br>
+        Employee + 2<br>
+        Family
+      </label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevel_{{ inputId }}" type="radio" id="enrollmentLevel_{{ inputId }}_2"
+             data-ng-model="ngModel"
+             data-ng-value="2"
+             data-ng-disabled="readonly"
+             tabindex="{{ tabindex }}"/>
+      <label for="enrollmentLevel_{{ inputId }}_2" class="choice">
+        Employee<br>
+        Employee + Spouse<br>
+        Family
+      </label>
+    </div>
+    <div class="radio-line">
+      <input name="enrollmentLevel_{{ inputId }}" type="radio" id="enrollmentLevel_{{ inputId }}_3"
+             data-ng-model="ngModel"
+             data-ng-value="3"
+             data-ng-disabled="readonly"
+             tabindex="{{ tabindex }}"/>
+      <label for="enrollmentLevel_{{ inputId }}_3" class="choice">
+        Employee<br>
+        Family
+      </label>
+    </div>
+  </div>
+</div>

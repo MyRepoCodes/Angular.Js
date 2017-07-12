@@ -1,0 +1,121 @@
+<div class="panel panel-green panel-manager">
+
+  <div class="panel-heading">
+    <h4 class="text-center">Invoice Upload Manager</h4>
+  </div>
+
+  <div class="panel-body">
+    <div class="form-content">
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+
+          <form name="userForm" novalidate autocomplete="off">
+            <div class="form-description">
+
+              <h2>Upload File</h2>
+
+              <!-- list User Types -->
+              <div class="row-item">
+                Please select a file format:
+                <select style="min-width: 100px" data-ng-model="env.fileTypeSelected" data-ng-options="key as value for (key, value) in env.listFileTypes"
+                  data-ng-change="selectFileType(env.fileTypeSelected)">
+                </select>
+              </div>
+
+
+
+              <div class="row-item">
+                <!-- Upload -->
+                <span class="btn btn-file" ng-if="env.fileTypeSelected">
+                  <input type="file"
+                  id="fileInput"
+                  class="btn-import" name="fileInput"
+                  onchange="angular.element(this).scope().importFiles(this)"
+                  multiple="false"
+                  accept=".txt">
+                  <span class="pulse-icon-basic pulse-icon-upload">
+                    <span>Upload</span>
+                </span>
+                </span>
+
+
+                <!-- File download -->
+                <a href="" target="_blank" class="btn btn-file download">
+
+                    <span class="pulse-icon-basic pulse-icon-download">
+                        <span>Download Sample File</span>
+                    </span> 
+                </a>
+              </div>
+
+            </div>
+          </form>
+
+          <!-- Show result -->
+          <div class="result" data-ng-if="resultUploadFileClient">
+
+            <!-- For file -->
+
+            <!-- If succefully -->
+            <div class="alert alert-success" data-ng-if="resultUploadFileClient.countError === 0">
+              {{resultUploadFileClient.countSucess}} out of {{resultUploadFileClient.total}} Spooler file were succefully loaded.
+            </div>
+
+            <!-- If fail -->
+            <div data-ng-if="resultUploadFileClient.countError > 0">
+              <div class="alert alert-danger">
+                Upload failed: {{resultUploadFileClient.countSucess}} out of {{resultUploadFileClient.total}} Spooler file were loaded.
+              </div>
+            </div>
+
+            <!-- For item -->
+            <div class="item-result" ng-repeat="item in resultUploadFileClient.results">
+
+              <p>
+                <b>File name: {{item.fileName}}</b>
+                <span ng-if="!item.error"> (
+                <!-- If succefully -->
+                <span data-ng-if="item.result.countError === 0">
+                  {{item.result.countSucess}} out of {{item.result.total}} invoices were succefully loaded
+                </span>
+
+                <!-- If fail -->
+                <span data-ng-if="item.result.countError > 0">
+                    Upload failed: {{item.result.countSucess}} out of {{item.result.total}} invoices were loaded
+                  </span> )
+
+                </span>
+
+              </p>
+              <div class="padding-left-5 text-danger" ng-if="item.error">
+                {{item.error}}
+              </div>
+
+              <div class="content-result" ng-if="item.result">
+
+                <!-- If fail -->
+                <div data-ng-if="item.result.countError > 0">
+
+                  <div class="padding-left-10 text-danger" data-ng-if="item.result.countError > 0">
+                    <p ng-repeat="(key,itemResult) in item.result.errors">
+                      {{key + 1}}. {{itemResult.clientName }} does not exist in the system
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+              <br/>
+            </div>
+
+            <div>
+              <button ui-sref="loggedIn.modules.invoice-manager" class="btn btn-green fs-14">Return to Invoice Manager</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

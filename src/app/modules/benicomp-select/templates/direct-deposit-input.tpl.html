@@ -1,0 +1,203 @@
+<div class="row-item" data-ng-click="env.row='groupName'" data-ng-class="{ 'highlighted': env.row=='groupName',
+                      'has-error': ddForm.groupName.$invalid && (!ddForm.groupName.$pristine || env.showValid)
+                    }">
+  <label class="description">Group Name</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.groupName.$invalid && (!ddForm.groupName.$pristine || env.showValid) }">
+        <input name="groupName" type="text" class="form-control" data-ng-model="params.groupName" data-ng-disabled="true" tabindex="1"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='groupNumber'" data-ng-class="{ 'highlighted': env.row=='groupNumber',
+                      'has-error': ddForm.groupNumber.$invalid && (!ddForm.groupNumber.$pristine || env.showValid)
+                    }">
+  <label class="description">Group Number</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.groupNumber.$invalid && (!ddForm.groupNumber.$pristine || env.showValid) }">
+        <input name="groupNumber" type="text" class="form-control" data-ng-model="params.groupNumber" data-ng-disabled="true" tabindex="2"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+<name-input data-form="ddForm" data-control-label="Insured's Name" data-ng-params="params" data-env="env" data-tabindex="3"
+  required></name-input>
+<div class="row-item" data-ng-click="env.row='ssn'" data-ng-class="{ 'highlighted': env.row=='ssn',
+                      'has-error': ddForm.ssn.$invalid && (!ddForm.ssn.$pristine || env.showValid)
+                    }">
+  <label class="description">Insured's Last 4 Digits of SS#<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.ssn.$invalid && (!ddForm.ssn.$pristine || env.showValid) }">
+        <input name="ssn" type="text" id="ssn" class="form-control" data-ng-model="params.ssn" input-mask="ssn2" tabindex="4" required/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='email'" data-ng-class="{ 'highlighted': env.row=='email',
+                      'has-error': ddForm.email.$invalid && (!ddForm.email.$pristine || env.showValid)
+                    }">
+  <label class="description">Insured's Email<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.email.$invalid && (!ddForm.email.$pristine || env.showValid) }">
+        <input name="email" type="email" class="form-control" data-ng-pattern="patternRegexs.email" data-ng-model="params.email"
+          tabindex="5" required/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='homePhoneNumber'" data-ng-class="{ 'highlighted': env.row=='homePhoneNumber',
+                      'has-error': ((ddForm.homePhoneNumber.$invalid && (!ddForm.homePhoneNumber.$pristine || env.showValid)) || (params.homePhoneNumber.indexOf('_')!=-1 && env.showValid))
+                    }">
+  <label class="description">Home Phone Number<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ((ddForm.homePhoneNumber.$invalid && (!ddForm.homePhoneNumber.$pristine || env.showValid)) || (params.homePhoneNumber.indexOf('_')!=-1 && env.showValid)) }">
+        <input name="homePhoneNumber" type="text" id="homePhoneNumber" class="form-control" data-ng-pattern="patternRegexs.phone"
+          data-ng-model="params.homePhoneNumber" input-mask="phone" tabindex="6" required/>
+        <label class="control-label">(###) ###-####</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='daytimePhoneNumber'" data-ng-class="{ 'highlighted': env.row=='daytimePhoneNumber',
+                      'has-error': ((ddForm.daytimePhoneNumber.$invalid && (!ddForm.daytimePhoneNumber.$pristine || env.showValid)) || (params.daytimePhoneNumber.indexOf('_')!=-1 && env.showValid))
+                    }">
+  <label class="description">Daytime Phone Number<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ((ddForm.daytimePhoneNumber.$invalid && (!ddForm.daytimePhoneNumber.$pristine || env.showValid)) || (params.daytimePhoneNumber.indexOf('_')!=-1 && env.showValid)) }">
+        <input name="daytimePhoneNumber" type="text" id="daytimePhoneNumber" class="form-control" data-ng-pattern="patternRegexs.phone"
+          data-ng-model="params.daytimePhoneNumber" input-mask="phone" tabindex="7" required/>
+        <label class="control-label">(###) ###-####</label>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='choiceType'" data-ng-class="{ 'highlighted': env.row=='choiceType' }">
+  <label class="description">Please Select One:</label>
+  <div class="content">
+    <div class="radio-line" ng-repeat="item in directDepositConstants.choiceType">
+      <input name="choiceType" type="radio" id="{{item.name}}" data-ng-value="item.value" data-ng-model="params.choiceType" tabindex="8.{{item.id}}"
+        required>
+      <label class="choice" for="{{item.name}}">{{item.label}}</label>
+    </div>
+  </div>
+</div>
+<date-input data-ng-if="params.choiceType==2" data-form="ddForm" data-ng-model="params.changeEffectiveDate" data-control-label="Change Effective Date"
+  data-values="env" data-row="changeEffectiveDate" data-tabindex="11" required></date-input>
+<date-input data-ng-if="params.choiceType==3" data-form="ddForm" data-ng-model="params.cancelEffectiveDate" data-control-label="Cancel Effective Date"
+  data-values="env" data-row="cancelEffectiveDate" data-tabindex="12" required></date-input>
+<div class="row-item" data-ng-click="env.row='bankName'" data-ng-class="{ 'highlighted': env.row=='bankName',
+                      'has-error': ddForm.bankName.$invalid && (!ddForm.bankName.$pristine || env.showValid)
+                    }">
+  <label class="description">Bank Name<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.bankName.$invalid && (!ddForm.bankName.$pristine || env.showValid) }">
+        <input name="bankName" type="text" class="form-control" data-ng-model="params.bankName" tabindex="13" required/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='accountType'" data-ng-class="{ 'highlighted': env.row=='accountType',
+                      'has-error': ddForm.accountType.$invalid && (!ddForm.accountType.$pristine || env.showValid)
+                    }">
+  <label class="description">Account Type<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.accountType.$invalid && (!ddForm.accountType.$pristine || env.showValid) }">
+        <select name="accountType" class="form-control" data-ng-model="params.accountType" data-ng-options="item.value as item.label for item in directDepositConstants.accountType"
+          tabindex="14" required>
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='routing'" data-ng-class="{ 'highlighted': env.row=='routing',
+                      'has-error': ddForm.routing.$invalid && (!ddForm.routing.$pristine || env.showValid)
+                    }">
+  <label class="description">Routing/ABA Number<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.routing.$invalid && (!ddForm.routing.$pristine || env.showValid) }">
+        <input name="routing" type="text" class="form-control" data-ng-model="params.routing" tabindex="15" required/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row='accountNumber'" data-ng-class="{ 'highlighted': env.row=='accountNumber',
+                      'has-error': ddForm.accountNumber.$invalid && (!ddForm.accountNumber.$pristine || env.showValid)
+                    }">
+  <label class="description">Account Number<span class="is-required"> *</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': ddForm.accountNumber.$invalid && (!ddForm.accountNumber.$pristine || env.showValid) }">
+        <input name="accountNumber" type="text" class="form-control" data-ng-model="params.accountNumber" tabindex="16" required/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row-item" data-ng-click="env.row='claim_item_' + key" data-ng-class="{ 'highlighted': env.row=='claim_item_' + key,
+        'has-error': (key === 0 && params.fileUploadVoidedChecks[0].listFiles.length <= 0) && env.showValid
+        }" ng-repeat="(key, file) in params.fileUploadVoidedChecks">
+  <input name="tempFile_{{key}}" type="hidden" data-ng-model="file.listFiles" />
+  <label class="description">
+    <span ng-if="key === 0">Please attach a voided check (for checking account deposits).For savings account deposits, a routing number and account number need to be obtained from the bank.This must be included to process. Incomplete forms will be returned.</span>
+    <span ng-if="key !== 0">Upload a {{key+1}}nd set of files </span>
+  </label>
+
+  <!--<div class="remove-file-upload-receipts">-->
+  <!--<i title="Remove Upload a {{ key +1 }}nd set of files" ng-click="removeGroupFileUploadReceipts(file, key)" class="glyphicon glyphicon-remove"></i>-->
+  <!--</div>-->
+  <div class="margin-top-5 content">
+    <div class="row">
+      <div class="form-group col-xs-8" ng-click="uploadAnotherFile('selected', key)">
+        <input id="file_element_{{ key }}" name="element_{{ key }}" class="element file" type="file" />
+        <div id="file_element_{{ key }}_queue" class="file_queue"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="row-item">-->
+<!--<button class="btn btn-success" ng-click="uploadAnotherFile('add')">Upload Another File</button>-->
+<!--</div>-->
+
+<div class="dotted-bottom"></div>
+
+<div class="row-item" data-ng-click="env.row='checkBoxAgree'" data-ng-class="{ 'highlighted': env.row=='checkBoxAgree',
+      'has-error': !params.checkBoxAgree && env.showValid}">
+  <div class="content">
+    <h4>Employee Authorization</h4>
+    <div class="checkbox-line">
+      <input name="checkBoxAgree" type="checkbox" id="checkBoxAgree" data-ng-model="params.checkBoxAgree" tabindex="20" />
+      <label class="choice" for="checkBoxAgree">I authorize BeniComp and its financial institution to initiate credit electronically or otherwise to my checking or savings account.
+    This authorization will remain in effect until BeniComp has received written notification.<span class="is-required"> *</span></label>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<date-input data-form="ddForm" data-ng-model="params.signedDate" data-param-type="signedDate" data-control-label="Signed Date"
+  data-values="env" readonly data-row="signedDate" data-tabindex="17"></date-input>
+<div class="dotted-bottom"></div>
+<small>
+  Administered by BeniComp, Inc. <br>
+  8310 Clinton Park Drive <br>
+  Fort Wayne, IN 46825 <br>
+  Phone (866) 797-3343<br>
+  Fax (260) 482-8991<br><br>
+  The promoters of this product make no representation concerning the tax advantages of this program and recommend that policyholders consult their tax advisor.
+</small>

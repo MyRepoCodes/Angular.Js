@@ -1,0 +1,91 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Benefit Year Manager</h4>
+  </div>
+  <div class="panel-body">
+    <div class="panel-manager-tool">
+      <div class="toolbar">
+        <a class="btn" data-ng-click="cancel()">Manage Users <span class="fa fa-angle-down"></span></a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="form-content">
+      <div class="table-container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-double" data-ng-class="{'full-control': incentiveList.length > 0 && !loading}">
+              <div class="table-double-content">
+                <div class="table-responsive table-responsive-pagination">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>
+                        <div>RegisterStartDate</div>
+                      </th>
+
+                      <th>
+                        <div>RegisterEndDate</div>
+                      </th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in incentiveList">
+                      <td>
+                        {{item.registerStartDate}}
+                      </td>
+                      <td>
+                        {{item.registerEndDate}}
+                      </td>
+                    </tr>
+                    <tr class="empty" data-ng-if="loading">
+                      <td colspan="2" class="text-center">
+                        <div class="loading-indicator"></div>
+                      </td>
+                    </tr>
+                    <tr class="empty" data-ng-if="incentiveList.length == 0 && !loading">
+                      <td colspan="2" class="text-center">
+                        <span>{{ 'userManager.empty_1' | translate }}</span>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="table-double-action" data-ng-if="incentiveList.length > 0 && !loading">
+                <table class="table ng-table">
+                  <thead>
+                  <tr>
+                    <th class="action">
+                      <span class="button action-remove"
+                            title="{{ 'userManager.button.title.removeMultiple' | translate }}"
+                            data-ng-click="removeAll()">
+                              <i class="icon"></i>
+                      </span>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="item in incentiveList">
+                    <td class="action">
+                      <span class="button action-remove"
+                            title="{{ 'userManager.button.title.remove' | translate }}"
+                            data-ng-click="remove(item)">
+                          <i class="icon"></i>
+                      </span>
+
+                      <span class="button action-edit"
+                            title="{{ 'userManager.button.title.edit' | translate }}"
+                            data-ng-click="edit(item)">
+                          <i class="icon"></i>
+                      </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

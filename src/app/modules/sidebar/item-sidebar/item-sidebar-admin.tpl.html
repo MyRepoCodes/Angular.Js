@@ -1,0 +1,127 @@
+<ul>
+  <!--<li data-ng-class="{'active': checkState == 'dashboard' }">
+      <a data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  </li>-->
+
+  <li data-ng-class="{'active': checkState == 'user-manager' }">
+    <a data-ui-sref="loggedIn.modules.user-manager" class="user-item">User Manager</a>
+  </li>
+
+  <!--<li data-ng-class="{'active': checkState == 'health-results' }">
+      <a data-ui-sref="public.healthresultadmin"
+         class="health-results-item">Health Results</a>
+  </li>-->
+
+  <li data-ng-class="{'active': checkState == 'health-results' }">
+    <a data-ui-sref="loggedIn.modules.health-results.list" class="health-results-item">Health Results</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'imp-documents', 'notif': !!badgeNotif }">
+    <a data-ui-sref="loggedIn.modules.imp-documents.client" class="imp-documents-item">
+      Important Documents
+      <span class="badge badge-danger"
+            tooltips
+            tooltip-lazy="true"
+            tooltip-side="right"
+            tooltip-class="tooltip-notif"
+            tooltip-content="{{ badgeMessage }}">{{ badgeNotif }}</span>
+    </a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'add-faqs' }">
+    <a data-ui-sref="loggedIn.modules.add-faqs" class="add-faqs-item">FAQs</a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'add-question' }">
+    <a data-ui-sref="loggedIn.modules.add-question" class="security-questions-item">Security Questions</a>
+  </li>
+
+
+  <!--<li data-ng-class="{'active': checkState == 'audit-logs' }">
+    <a data-ui-sref="loggedIn.modules.audit-logs" class="auditLogs">Audit Logs</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'login-logs' }">
+    <a data-ui-sref="loggedIn.modules.audit-logs.login-logs" class="loginLogs">Login Logs</a>
+  </li>-->
+
+  <li class="has-sub forms-admin" ng-class="{'closeSubMenu' : isUseMobile, 'notif': allNotifications.total > 0}">
+    <a class="" onclick="angular.element(this).scope().openSubMenu(this, event)"><span class="text-green icon-bss-plus-minus">+</span>
+    <span class="text-item audit-logs-item">Logs</span> </a>
+    <ul style="display: none;" class="icon-sub">
+      <li data-ng-class="{'active': checkState == 'audit-logs' }">
+        <a data-ui-sref="loggedIn.modules.audit-logs" class="auditLogs">
+          <span class="text-item audit-logs-item">Audits</span>
+        </a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'login-logs' }">
+        <a data-ui-sref="loggedIn.modules.audit-logs.login-logs" class="loginLogs">
+          <span class="text-item audit-logs-item">Logins</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+
+  <!--<li data-ng-class="{'active': checkState == 'list-contact' }">
+      <a data-ui-sref="loggedIn.modules.list-contact" class="list-contact">Contact Manager</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'list-participantsurveys' }">
+      <a data-ui-sref="loggedIn.modules.list-participantsurveys" class="participantsurveys">Survey
+          Manager</a>
+  </li>-->
+
+
+  <li class="has-sub forms-admin" ng-class="{'closeSubMenu' : isUseMobile, 'notif': allNotifications.total > 0}">
+    <a onclick="angular.element(this).scope().openSubMenu(this, event)" class="imp-documents-item">
+    <span class="text-green icon-bss-plus-minus">+</span>
+    
+    <span class="text-item registration-item">Forms</span>
+       <span class="badge badge-danger count-notif-total" data-ng-if="allNotifications.total> 0" >{{ allNotifications.total }}</span>
+    </a>
+    <ul style="display: none;" class="icon-sub">
+
+      <li data-ng-class="{'active': checkState == 'list-contact' }">
+        <a data-ui-sref="loggedIn.modules.list-contact" class="list-contact">
+          <span class="text-item registration-item">Contact Form</span>
+          <span class="badge badge-danger count-notif-countContact" data-ng-if="allNotifications.countContact> 0">{{ allNotifications.countContact }}</span>
+        </a>
+      </li>
+
+      <li data-ng-class="{'active': checkState == 'list-participantsurveys' }">
+        <a data-ui-sref="loggedIn.modules.list-participantsurveys" class="participantsurveys">
+          <span class="text-item registration-item">Surveys</span>
+          <span class="badge badge-danger count-notif-countSurvey" data-ng-if="allNotifications.countSurvey> 0">{{ allNotifications.countSurvey }}</span></a>
+      </li>
+
+      <li data-ng-class="{'active': checkState == 'direct-deposit-manager' }">
+        <a data-ui-sref="loggedIn.modules.direct-deposit-manager" class="participantsurveys">
+          <span class="text-item registration-item">Direct Deposit</span>
+          <span class="badge badge-danger count-notif-countDirectDeposit" data-ng-if="allNotifications.countDirectDeposit> 0">{{ allNotifications.countDirectDeposit }}</span></a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'privacy-authorization-form-manager' }">
+        <a data-ui-sref="loggedIn.modules.privacy-authorization-form-manager" class="participantsurveys">
+
+          <span class="text-item registration-item">Privacy Authorization Form</span>
+          <span class="badge badge-danger count-notif-countPrivacyAuthorizationForm" data-ng-if="allNotifications.countPrivacyAuthorizationForm> 0">{{ allNotifications.countPrivacyAuthorizationForm }}</span></a>
+      </li>
+      <li data-ng-class="{'active': checkState == 'change-form-manager' }">
+        <a data-ui-sref="loggedIn.modules.change-form-manager" class="participantsurveys">
+          <span class="text-item registration-item">Change Form</span>
+          <span class="badge badge-danger count-notif-countObjectChangeForm" data-ng-if="allNotifications.countObjectChangeForm> 0">{{ allNotifications.countObjectChangeForm }}</span></a>
+      </li>
+    </ul>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'manager-claims' }">
+    <a data-ui-sref="loggedIn.modules.manager-claims" class="new-claims-item">Claims</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'server-maintenance' }">
+    <a data-ui-sref="loggedIn.modules.server.maintenance" class="claims-server">Server</a>
+  </li>
+
+  <li data-ng-class="{'active': checkState == 'invoice-manager' }">
+    <a data-ui-sref="loggedIn.modules.invoice-manager" class="accounting-item">Accounting</a>
+  </li>
+
+</ul>

@@ -1,0 +1,198 @@
+<div class="panel panel-green">
+    <div class="panel-heading">
+        <h4 class="text-center">Question</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-content">
+            <div class="panel panel-green panel-faqs">
+                <div class="panel-body">
+                    <form name="questionAddForm" novalidate data-ng-hide="params2.id">
+                        <div class="form-description">
+                            <h2>Add Question</h2>
+                        </div>
+
+                        <div class="row-item">
+                            <label class="description">Question <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <input type="text" name="question" class="form-control" data-ng-model="params.questionText" tabindex="1" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- for question Group -->
+                        <!--  <div class="row-item" data-ng-if="hasCreatedFor">
+                            <label class="description">Group<span
+                                    class="is-required">*</span></label></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6"
+                                         data-ng-class="{ 'has-error' : faqsAddForm.createdFor.$invalid && (!faqsAddForm.createdFor.$pristine || showValid) }">
+                                        <select name="createdFor"
+                                                class="form-control"
+                                                data-ng-model="params.questionGroup"
+                                                data-ng-options="item in qGroup">
+                                            <option value="1">1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+                        <div class="buttons">
+                            <button class="btn btn-green" data-ng-click="add(questionAddForm)" tabindex="4">Add
+                            </button>
+                        </div>
+                    </form>
+                    <div class="distance-below"></div>
+                    <form name="questionEditForm" novalidate data-ng-show="params2.id">
+                        <div class="form-description">
+                            <h2>Edit Question<a class="close" data-ng-click="disableEdit()">X</a></h2>
+                        </div>
+                        <div class="row-item">
+                            <label class="description">Question <span
+                                    class="is-required">*</span></label>
+
+                            <div class="content">
+                                <div class="row">
+                                    <div class="form-group col-xs-6" data-ng-class="{ 'has-error' : questionEditForm.question.$invalid && (!questionEditForm.question.$pristine || showValid2) }">
+                                        <input type="text" name="question" class="form-control" data-ng-model="params2.QuestionText" tabindex="1" required/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons">
+                            <button class="btn btn-green" data-ng-click="change(questionEditForm)" tabindex="3">Change
+                            </button>
+
+                            <button class="btn btn-white" data-ng-click="disableEdit()" tabindex="3.1">Cancel
+                            </button>
+                        </div>
+                    </form>
+                    <div class="distance-below"></div>
+
+                    <br/>
+
+                    <!--  <div class="box-filter">
+                        <div class="row">
+
+                            <div class="form-group col-xs-6">
+                                <div class="description">Filter by category:</div>
+
+                                <select ng-options="item.id as item.categoryName for item in faqCategoriesList"
+                                        ng-model="filterFaq.categoryId"
+                                        class="form-control">
+                                    <option value=""> All FAQs</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-xs-6">
+                                <label class="description">Filter by Created For</label>
+
+                                <select name="createdFor"
+                                        class="form-control"
+                                        data-ng-model="filterFaq.nameRole"
+                                        data-ng-options="item.userRole as item.name for item in createdForListForFilter">
+                                </select>
+                            </div>
+
+                        </div>
+                    </div> -->
+                    <div class="faqs-manager">
+                        <div class="form-description">
+                            <h2>List Question</h2>
+                        </div>
+                        <div class="table-container">
+                            <div class="table-double pr-0" data-ng-class="{'full-control' : questionList.length > 0 && !loading}">
+                                <div class="table-double-content">
+                                    <div class="table-responsive table-responsive-pagination">
+                                        <table ng-table="tableParams" show-filter="false" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <div>Question</div>
+                                                    </th>
+                                                    <!--<th>
+                                                    <div>Answer</div>
+                                                </th>-->
+                                                    <th>
+                                                        <div></div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in questionList" class="cursor-pointer">
+                                                    <td data-title="'Question'" sortable="'question'">
+                                                        {{item.questionText}}
+                                                    </td>
+                                                    <!--<td data-title="'Answer'" sortable="'answer'" ng-bind="item.answer">-->
+
+                                                    </td>
+                                                    <!-- <td data-title="'Answer'" sortable="'Answer'">
+                                                    {{item.questionGroup}}
+                                                </td> -->
+                                                </tr>
+                                                <!-- <tr class="empty" data-ng-if="loading">
+                                                <td colspan="3" class="text-center"
+                                                    data-ng-if="!hasCreatedFor">
+                                                    <div class="loading-indicator"></div>
+                                                </td>
+                                                <td colspan="4" class="text-center"
+                                                    data-ng-if="hasCreatedFor">
+                                                    <div class="loading-indicator"></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="empty"
+                                                data-ng-if="questionList.length == 0 && !loading">
+                                                <td colspan="3" class="text-center"
+                                                    data-ng-if="!hasCreatedFor">
+                                                    {{ 'faqs.empty' | translate }}
+                                                </td>
+                                                <td colspan="4" class="text-center"
+                                                    data-ng-if="hasCreatedFor">
+                                                    {{ 'faqs.empty' | translate }}
+                                                </td>
+                                            </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="table-double-action" data-ng-if="questionList.length > 0 && !loading">
+                                    <table class="table ng-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="action">
+                                                    <span class="button"></span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in questionList">
+                                                <td class="action">
+                                                    <span class="button action-remove" title="{{ 'buttons.remove' | translate }}" data-ng-click="remove(item)">
+                                                    <i class="icon"></i>
+                                                </span>
+                                                    <span class="button action-edit" title="{{ 'buttons.edit' | translate }}" data-ng-click="edit(item)">
+                                                    <i class="icon"></i>
+                                                </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

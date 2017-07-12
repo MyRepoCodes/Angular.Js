@@ -1,0 +1,16 @@
+<div class="row-item ssn_input" data-ng-click="env.row=row" data-ng-class="{ 'highlighted': env.row==row,
+                      'has-error': ((form['ssn_' + inputId].$invalid && (!form['ssn_' + inputId].$pristine || env.showValid)) || (ngModel.indexOf('_')!=-1 && env.showValid))
+                    }">
+  <label class="description">{{ controlLabel }}<span class="is-required" data-ng-if="required">*</span></label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group" data-ng-class="{ 
+             'col-xs-6' : (isShowFull === 'false'),
+             'col-xs-12' : (isShowFull === 'true'),
+             'has-error' : ((form['ssn_' + inputId].$invalid && (!form['ssn_' + inputId].$pristine || env.showValid)) || (ngModel.indexOf('_')!=-1 && env.showValid)) }">
+        <input name="ssn_{{ inputId }}" type="text" class="form-control" data-ng-model="ngModel" data-ng-pattern="patternRegexs.ssn"
+          input-mask="ssn" data-ng-disabled="readonly" tabindex="{{ tabindex }}" data-ng-required="required" />
+      </div>
+    </div>
+  </div>
+</div>

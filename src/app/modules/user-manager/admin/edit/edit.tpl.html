@@ -1,0 +1,200 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="userForm" novalidate autocomplete="off">
+      <div class="form-description dotted-line row">
+        <div class="col-md-4">
+          <h2>Edit a Admin</h2>
+        </div>
+
+        <div class="col-md-8 row-item">
+          <label class="description">PULSE ID: <span class="text-green">{{dataClone.prefixPulseId + "-" + dataClone.pulseId}}</span> </label>
+        </div>
+      </div>
+      <name-input form="userForm" control-label="Name" data-ng-params="params" env="env" row="2" tabindex="2" required></name-input>
+      <div class="row-item" data-ng-click="env.row=2" data-ng-class="{ 'highlighted': env.row==2 }">
+        <label class="description"> Name <span class="is-required">*</span></label>
+
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': userForm.firstName.$invalid && (!userForm.firstName.$pristine || env.showValid) }">
+              <input type="text" name="firstName" class="form-control"
+                     data-ng-model="params.firstName"
+                     tabindex="2"
+                     required/>
+              <label class="control-label">First</label>
+            </div>
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': userForm.lastName.$invalid && (!userForm.lastName.$pristine || env.showValid) }">
+              <input type="text" name="lastName" class="form-control"
+                     data-ng-model="params.lastName"
+                     tabindex="3"
+                     required/>
+              <label class="control-label">Last</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item" data-ng-click="env.row=4" data-ng-class="{ 'highlighted': env.row==4 }">
+        <label class="description">Phone </label>
+
+        <div class="content">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <input id="phoneNumber" type="text" name="phoneNumber"
+                       class="form-control"
+                       data-ng-model="params.phoneNumber"
+                       tabindex="5"
+                       input-mask="phone"
+                />
+                <label class="control-label" for="phoneNumber">(###)
+                  ###-####</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item"
+           data-ng-click="env.row=5"
+           data-ng-class="{ 'highlighted': env.row==5,
+                            'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist
+                          }">
+        <label class="description">Email <span class="is-required">*</span></label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist}">
+              <input name="email" type="email" class="form-control"
+                     data-ng-model="params.email"
+                     data-ng-pattern="patternRegexs.email"
+                     tabindex="8"
+                     required/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <address-input form="userForm" control-label="Address" data-ng-params="params" env="env" row="6" tabindex="9"></address-input>
+      <div class="row-item" data-ng-click="env.row=7" data-ng-class="{ 'highlighted': env.row==7 }">
+        <label class="description">Portfolio <span class="is-required">*</span></label>
+
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': createAdminForm.portfolio.$invalid && (!createAdminForm.portfolio.$pristine || env.showValid)}">
+
+              <select name="portfolio" id="portfolio" class="form-control"
+                      data-ng-model="params.portfolioId"
+                      tabindex="14.1"
+                      data-ng-options="item.id as item.name for item in portfoliosList"
+                      required>
+                <option value="" data-ng-if="!portfolioSelected">Select one Portfolio</option>
+              </select>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item"
+           data-ng-click="env.row=8"
+           data-ng-class="{ 'highlighted': env.row==8,
+                            'has-error': userForm.username.$invalid && (!userForm.username.$pristine || env.showValid) || env.usernameExist
+                          }">
+        <label class="description">Username <span class="is-required">*</span></label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': userForm.username.$invalid && (!userForm.username.$pristine || env.showValid) || env.usernameExist }">
+              <input type="text" name="username" class="form-control"
+                     data-ng-model="params.username"
+                     tabindex="15"
+                     autocomplete="off"
+                     required/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item"
+           data-ng-click="env.row=9"
+           data-ng-class="{ 'highlighted': env.row==9,
+                            'has-error': userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)
+                          }">
+        <label class="description">Password</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': userForm.password.$invalid && (!userForm.password.$pristine || env.showValid) }">
+              <a style="display: block"
+                 tooltips
+                 tooltip-show-trigger="click"
+                 tooltip-hide-trigger="change"
+                 tooltip-lazy="false"
+                 tooltip-side="top"
+                 tooltip-class="tooltip-password"
+                 tooltip-content="{{ 'tooltip.password' | translate }}"
+                 tooltip-password="userForm.password"
+                 tooltip-show-box="{{ userForm.password.$invalid && (!userForm.password.$pristine || env.showValid) }}">
+
+                <input type="password" name="password" class="form-control"
+                       data-ng-model="params.password"
+                       data-ng-pattern="patternRegexs.password"
+                       data-ng-minlength="{{ configs.passwordMinLength }}"
+                       data-password-equal="[params.username, params.firstName, params.lastName]"
+                       tabindex="16"
+                       onfocus="$(this).parent().trigger('click')"
+                       onblur="$(this).parent().trigger('change')"
+                       autocomplete="off"
+                />
+              </a>
+              <meter-password
+                  password="userForm.password"
+                  option="{ minLength: configs.passwordMinLength }">
+              </meter-password>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item"
+           data-ng-click="env.row=9.1"
+           data-ng-class="{ 'highlighted': env.row==9.1,
+                            'has-error': (userForm.confirm.$invalid && (!userForm.confirm.$pristine || env.showValid)) ||
+                                               (params.confirm!=params.password && (!!params.confirm || env.showValid))
+                          }">
+        <label class="description">Password Verification</label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': (userForm.confirm.$invalid && (!userForm.confirm.$pristine || env.showValid)) ||
+                                               (params.confirm!=params.password && (!!params.confirm || env.showValid))
+                                }">
+              <input type="password" name="confirm" class="form-control"
+                     data-ng-model="params.confirm"
+                     password-verify="params.password"
+                     tabindex="16.1"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-xs-4">
+          <div class="checkbox-line">
+            <input name="isipAllowed" type="checkbox" id="isipAllowed" data-ng-model="params.isipAllowed" tabindex="100" />
+            <label class="choice" for="isipAllowed">Remote Access</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons" data-ng-click="env.row=0">
+        <button class="btn btn-green" data-ng-click="update(userForm.$valid)"
+                tabindex="39">Save
+        </button>
+        <button class="btn btn-green" data-ng-click="update(userForm.$valid, 'close')" tabindex="39.1">Save and Close</button>
+        <a class="btn btn-white" data-ng-click="cancel()" tabindex="40">Cancel</a>
+      </div>
+      <div class="alert alert-danger" data-ng-show="env.error">{{ env.error }}</div>
+      <br/>
+      <div class="alert alert-success" data-ng-if="env.successMessage">{{ env.successMessage }}</div>
+    </form>
+  </div>
+</div>

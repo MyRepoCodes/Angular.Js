@@ -1,0 +1,157 @@
+<div class="row-item" data-ng-click="env.row=30" data-ng-class="{ 'highlighted': env.row==30 }">
+  <label class="description">Group Number</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input type="text" name="groupNumber" class="form-control"
+               data-ng-model="params.groupNumber"
+               data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row=31" data-ng-class="{ 'highlighted': env.row==31 }">
+  <label class="description">Federal ID #</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <input type="text" name="federalId" class="form-control"
+               data-ng-model="params.federalId"
+               data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<date-input data-form="userForm"
+            data-ng-model="params.effectiveDateOfInsurance"
+            data-control-label="Effective Date of Insurance"
+            data-values="env"
+            data-row="32"
+            readonly></date-input>
+<date-input data-form="userForm"
+            data-ng-model="params.enrollmentDate"
+            data-control-label="Enrollment Date"
+            data-values="env"
+            data-row="'enrollmentDate'"
+            readonly></date-input>
+<div class="row-item" data-ng-click="env.row=33" data-ng-class="{ 'highlighted': env.row==33 }">
+  <label class="description">Total Number of Employees Employed</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <input type="text" name="totalNumberOfEmployeesEmployed" class="form-control"
+               data-ng-model="params.totalNumberOfEmployeesEmployed"
+               filtered-input="number"
+               data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-item" data-ng-click="env.row=34" data-ng-class="{ 'highlighted': env.row==34 }">
+  <label class="description">Total Number of Eligible Employees</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <input type="text" name="totalNumberOfEligibleEmployees" class="form-control"
+               data-ng-model="params.totalNumberOfEligibleEmployees"
+               filtered-input="number"
+               data-ng-disabled="true"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Start Classes of Eligible Employees -->
+<div class="row-item"
+     data-ng-click="env.row='numberOfClasses'"
+     data-ng-class="{ 'highlighted' : env.row=='numberOfClasses' }">
+  <label class="description">Classes of Eligible Employees</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-4">
+        <select name="numberOfClasses" class="form-control"
+                data-ng-model="env.numberOfClasses"
+                data-ng-options="n for n in [] | range:1:6"
+                data-ng-disabled="true">
+          <option></option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dotted-bottom" data-ng-if="env.numberOfClasses"></div>
+<classes-of-eligible-employees-item data-form="userForm" data-ng-repeat="n in [] | range:0:env.numberOfClasses" data-params="params" data-index="{{ $index+1 }}" data-env="env" readonly></classes-of-eligible-employees-item>
+<!-- End Classes of Eligible Employees -->
+<!-- Start Is there an Agent -->
+<div class="row-item" data-ng-click="env.row='isThereAnAgent'" data-ng-class="{ 'highlighted': env.row=='isThereAnAgent' }">
+  <label class="description">Is there an Agent?</label>
+  <div class="content">
+    <div class="radio-line">
+      <input name="isThereAnAgent_1" type="radio" id="isThereAnAgent_1"
+             data-ng-model="params.isThereAnAgent"
+             data-ng-value="1"
+             data-ng-disabled="true">
+      <label for="isThereAnAgent_1" class="choice">Yes</label>
+    </div>
+    <div class="radio-line">
+      <input name="isThereAnAgent_0" type="radio" id="isThereAnAgent_0"
+             data-ng-model="params.isThereAnAgent"
+             data-ng-value="0"
+             data-ng-disabled="true">
+      <label for="isThereAnAgent_0" class="choice">No</label>
+    </div>
+  </div>
+</div>
+<div data-ng-if="params.isThereAnAgent">
+  <name-input form="userForm" data-ng-params="params.agentEmployer" data-control-label="Agent Name" data-env="env" data-row="'agentName'" readonly></name-input>
+  <div class="row-item" data-ng-click="env.row='AgentLicenseNumber'" data-ng-class="{ 'highlighted': env.row=='AgentLicenseNumber' }">
+    <label class="description">Agent's State License Number</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="stateLicenseNumber" class="form-control"
+                 data-ng-model="params.agentEmployer.stateLicenseNumber"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <phone-input data-form="userForm" data-ng-model="params.agentEmployer.phoneNumber" data-control-label="Agent's Phone Number" data-env="env" data-row="'AgentPhoneNumber'" readonly></phone-input>
+  <div class="row-item" data-ng-click="env.row='NameOfFirm'" data-ng-class="{ 'highlighted': env.row=='NameOfFirm' }">
+    <label class="description">Name of Firm</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="nameOfFirm" class="form-control"
+                 data-ng-model="params.agentEmployer.nameOfFirm"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <address-input data-form="userForm" data-ng-params="params.agentEmployer" data-control-label="Address" data-env="env" data-row="'AgentParamsAddress'" readonly></address-input>
+  <div class="row-item" data-ng-click="env.row='TaxpayerIDNumber'" data-ng-class="{ 'highlighted': env.row=='TaxpayerIDNumber' }">
+    <label class="description">Taxpayer I.D. Number</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="taxpayerIDNumber" class="form-control"
+                 data-ng-model="params.agentEmployer.taxpayerIDNumber"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-item" data-ng-click="env.row='AgentEmail'" data-ng-class="{ 'highlighted': env.row=='AgentEmail' }">
+    <label class="description">Agent's Email Address</label>
+    <div class="content">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <input type="text" name="agentEmail" class="form-control"
+                 data-ng-model="params.agentEmployer.emailAddress"
+                 data-ng-disabled="true"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Is there an Agent -->

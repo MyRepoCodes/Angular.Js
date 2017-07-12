@@ -1,0 +1,113 @@
+.modal-dialog {
+  .modal-content {
+    border: 1px solid @color-green;
+    .modal-header {
+      .modal-title {
+        font-weight: 400;
+        color: @color-green;
+      }
+      .modal-summary {
+
+      }
+    }
+    .modal-body {
+      &.modal-body-default {
+        .modal-title {
+          font-weight: 400;
+          color: @color-green;
+          margin-bottom: 10px;
+        }
+        .modal-summary {
+          margin-bottom: 20px;
+        }
+        .close {
+          font-size: 40px;
+          font-weight: 100;
+          line-height: 24px;
+          color: @color-green;
+          opacity: 1;
+        }
+      }
+
+      &.modal-body-contact {
+        .content-contact {
+          margin-left: 10px;
+        }
+      }
+
+      &.modal-form-event {
+        @media (min-width: @screen-sm-min) {
+          .form-horizontal {
+            .form-group {
+              margin-left: 0;
+              margin-right: 0;
+            }
+          }
+
+          .row-time {
+            margin-left: -3px;
+            margin-right: -3px;
+            .col-sm-6, .col-sm-22, .col-sm-25 {
+              padding-left: 3px;
+              padding-right: 3px;
+            }
+            .col-sm-6 {
+              width: 6%;
+            }
+            .col-sm-22 {
+              width: 22%;
+            }
+            .col-sm-25 {
+              width: 25%
+            }
+          }
+        }
+      }
+    }
+
+    .table-container {
+      overflow: hidden;
+      padding: 20px 0;
+      .table-responsive {
+        overflow-x: visible;
+        overflow-y: auto;
+        max-height: 300px;
+      }
+    }
+    .model-form-content {
+      h4 {
+        color: #707070;
+        padding-bottom: 3px;
+        margin-bottom: 9px;
+        border-bottom: 1px dotted #ccc;
+      }
+      .close {
+        color: #707070;
+      }
+    }
+
+    .form-content {
+      margin: 0;
+      padding: 0;
+      [class*="panel-"].panel .panel-body {
+        padding: 20px;
+      }
+      .panel.panel-modal-default {
+        .panel-body {
+          padding: 0;
+          min-height: inherit;
+          border: 0 none;
+        }
+        &.modal-termination-date {
+          .row-item {
+            padding-left: 0;
+            padding-right: 0;
+            &.highlighted, &.has-error {
+              background: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

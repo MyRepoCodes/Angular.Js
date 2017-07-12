@@ -1,0 +1,23 @@
+<ul>
+  <li data-ng-class="{'active': checkState == 'dashboard' }">
+    <a data-ng-click="goDashboard()" class="dashboard-item">Dashboard</a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'user-manager' }">
+    <a data-ui-sref="loggedIn.modules.user-manager" class="user-item">User Manager</a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'health-results' }">
+    <a data-ui-sref="loggedIn.modules.health-results" class="health-results-item">Health Results</a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'health-coaching' }">
+    <a data-ui-sref="loggedIn.modules.health-coaching" class="health-coaching-item">Coaching</a>
+  </li>
+  <li data-ng-class="{'active': checkState == 'add-faqs' }">
+    <a data-ui-sref="loggedIn.modules.add-faqs" class="add-faqs-item">FAQs</a>
+  </li>
+  <!--<li data-ng-class="{'active': checkState == 'profile' }">
+    <a data-ui-sref="loggedIn.modules.profile" class="profile-item">Profile</a>
+  </li>
+  <li ng-if="!isUseMobile">
+    <a data-ng-click="logout()" class="logout-item">Logout</a>
+  </li>-->
+</ul>

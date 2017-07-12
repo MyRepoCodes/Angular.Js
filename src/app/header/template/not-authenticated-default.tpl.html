@@ -1,0 +1,138 @@
+<div data-ng-controller="HeaderController">
+
+  <div id="wrap">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" ng-class="{'is-allow-show-logo': (checkState === 'about' || checkState === 'listFaqs')}">
+
+          <div ng-if="!isUseMobile" ng-style="{ display : (checkState === 'about' || checkState === 'listFaqs') ? 'block' : 'none'}"
+            class="logo">
+            <a href="#/" class="logo-image">
+              <img src="assets/images/logo1.png" />
+            </a>
+          </div>
+
+          <div ng-if="!isUseMobile" class="menu">
+            <i class="fa fa-reorder"></i>
+            <div class="group-menu-common">
+              <ul>
+
+                <li data-ng-if="isAuthenticated" data-ui-sref="loggedIn.modules.faqs" data-ng-class="{ 'active' : checkState == 'faqs' }">
+
+                  <div class="pulse-icon-faq">
+                    <i class="pulse-icons"></i>
+                  </div>
+                  <div class="pulse-content">FAQs</div>
+
+                </li>
+                <li data-ng-if="!isAuthenticated" data-ui-sref="public.listFaqs" data-ng-class="{ 'active' : checkState == 'listFaqs' }">
+                  <div class="pulse-icon-faq">
+                    <i class="pulse-icons"></i>
+                  </div>
+                  <div class="pulse-content">FAQs</div>
+
+                </li>
+
+                <li data-ng-class="{ 'active' : checkState == 'about' }" data-ui-sref="public.pagesAbout">
+                  <div class="pulse-icon-about">
+                    <i class="pulse-icons"></i>
+                  </div>
+                  <div class="pulse-content">About Us</div>
+                </li>
+
+                <li data-ui-sref="modules.contact" data-ng-class="{ 'active' : checkState == 'contact' }">
+                  <div class="pulse-icon-contact">
+                    <i class="pulse-icons"></i>
+                  </div>
+                  <div class="pulse-content">Contact Us</div>
+                </li>
+
+
+                <li data-ui-sref="loginForm" data-ng-class="{ 'active' : checkState == 'login'}" data-ng-show="!isAuthenticated || (isAuthenticated && !isCookies)">
+
+                  <div class="pulse-icon-login">
+                    <i class="pulse-icons"></i>
+                  </div>
+                  <div class="pulse-content">Login</div>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+
+          <div ng-if="isUseMobile" class="logo">
+            <a href="#/" class="logo-image">
+              <img src="assets/images/logo1.png" />
+            </a>
+          </div>
+
+
+          <!-- View On Mobile -->
+          <nav ng-if="isUseMobile" ng-class="{'use-on-mobile' : !isUseMobile}" class="navbar" role="navigation">
+            <div class="navbar-header">
+
+              <!--START: Icon on mobile -->
+              <div class="button-mobile" ng-if="isUseMobile">
+                <!--<button ng-if="showMenuOnMobile" ng-click="toggleMenuOnMobile()" type="button" class="navbar-toggle margin-right-10">
+                  <img class="img-icon-close"
+                       src="assets/images/close.png"/>
+                </button>-->
+                <button type="button" class="fa-reorder-mobile navbar-toggle margin-right-10">
+                  <i class="fa fa-reorder"></i>
+
+
+                    <div id="menu-mobile-right" class="mobile-nav-flyout">
+
+                      <div ng-if="isAuthenticated" data-ng-controller="SidebarItemController">
+                        <div data-ng-if="isParticipant" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-participant.tpl.html'"></div>
+                        <div data-ng-if="isEmployer" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-employer.tpl.html'"></div>
+                        <div data-ng-if="isAgentTheAgent" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-agent.tpl.html'"></div>
+                        <div data-ng-if="isHealthCoach" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoach.tpl.html'"></div>
+                        <div data-ng-if="isHealthCoachManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-healthcoachmanager.tpl.html'"></div>
+                        <div data-ng-if="isClientManager" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clientmanager.tpl.html'"></div>
+                        <div data-ng-if="isClinicalDirector" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-clinicaldirector.tpl.html'"></div>
+                        <div data-ng-if="isAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-admin.tpl.html'"></div>
+                        <div data-ng-if="isSuperAdmin" data-ng-include="'modules/sidebar/item-sidebar/item-sidebar-superadmin.tpl.html'"></div>
+                      </div>
+
+                      <ul ng-if="isAuthenticated">
+                        <li class="separator"></li>
+                      </ul>
+
+                      <div data-ng-include="'header/top-menu/top-menu.tpl.html'" data-ng-controller="HeaderTopMenuController">
+                      </div>
+                    </div>
+                </button>
+              </div>
+              <!--END: Icon on mobile -->
+
+              <button class="navbar-toggle margin-right-10" data-ng-if="isAuthenticated">
+                <a data-ui-sref="loggedIn.modules.profile">
+                  <img class="img-circle img-icon"
+                       src="assets/images/default-profile.png"
+                       data-ng-src="{{ avatar }}"/>
+                </a>
+              </button>
+
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <div data-ng-include="'header/top-menu/top-menu.tpl.html'" data-ng-controller="HeaderTopMenuController">
+              </div>
+            </div>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+<!-- View On Mobile-->
+<div ng-if="isUseMobile">
+
+</div>

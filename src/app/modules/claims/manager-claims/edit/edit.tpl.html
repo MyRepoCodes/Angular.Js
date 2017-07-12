@@ -1,0 +1,48 @@
+<div class="panel panel-green form-pagination claim-participant">
+  <div class="panel-heading">
+    <h4 class="text-center">Edit a Claim</h4>
+  </div>
+  <div class="panel-body introduction">
+    <div class="pagination_header">
+      <table class="ap_table_pagination" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        <tr>
+          <td align="center">
+            <span id="page_num_1" ng-class="{'ap_tp_num_active': step==0}" class="ap_tp_num">1</span>
+            <span id="page_title_1" ng-class="{'ap_tp_text_active': step==0}" class="ap_tp_text">Profile Information</span>
+          </td>
+          <td align="center" class="ap_tp_arrow">&gt;</td>
+          <td align="center">
+            <span id="page_num_2" ng-class="{'ap_tp_num_active': step==1}" class="ap_tp_num">2</span>
+            <span id="page_title_2" ng-class="{'ap_tp_text_active': step==1}" class="ap_tp_text">Add Claims</span>
+          </td>
+          <td align="center" class="ap_tp_arrow">&gt;</td>
+          <td align="center">
+            <span id="page_num_3" ng-class="{'ap_tp_num_active': step==2}" class="ap_tp_num">3</span>
+            <span id="page_title_3" ng-class="{'ap_tp_text_active': step==2}" class="ap_tp_text">Review Your Entry</span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="group_price" data-ng-if="step !== 3">
+        <div class="price_show">
+          <div class="number_price">{{ env.amountTotal | currency }}</div>
+          <div class="title_price">TOTAL</div>
+        </div>
+      </div>
+      <div class="panel panel-green warp-shadow">
+        <div data-ng-show="step == 0"
+             data-ng-include="'modules/claims/submit-claims/participant/templates/profile.tpl.html'">
+        </div>
+        <div data-ng-show="step == 1"
+             data-ng-include="'modules/claims/submit-claims/participant/templates/add-claims.tpl.html'">
+        </div>
+        <div data-ng-show="step == 2"
+             data-ng-include="'modules/claims/submit-claims/participant/templates/review-entry.tpl.html'">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

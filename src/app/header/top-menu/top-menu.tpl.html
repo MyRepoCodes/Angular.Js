@@ -1,0 +1,29 @@
+<ul class="nav navbar-nav navbar-right menu-on-mobile">
+
+  <li>
+    <a data-ui-sref="public.pagesAbout" data-ng-class="{ 'active' : checkState == 'about' }">About Us</a>
+  </li>
+
+  <li>
+    <a data-ui-sref="modules.contact" data-ng-class="{ 'active' : checkState == 'contact' }">Contact Us</a>
+  </li>
+
+  <li>
+    <a data-ng-click="goFAQs()" data-ng-class="{ 'active' : checkState == 'listFaqs' }">FAQs</a>
+  </li>
+
+  <li data-ng-if="isHealthCoachManager || isHealthCoach || isClientManager || isAdmin">
+    <a data-ui-sref="loggedIn.modules.mail.list" data-ng-class="{ 'active' : checkState == 'mail' }">Email</a>
+  </li>
+
+  <li data-ng-show="!isAuthenticated">
+    <a data-ng-click="goLogin()" data-ng-class="{ 'active' : checkState == 'login' }">Login</a>
+  </li>
+ 
+
+  <li class="avatar" data-ng-if="isAuthenticated">
+    <a data-ui-sref="loggedIn.modules.profile">
+      <img class="img-circle" src="assets/images/default-profile.png" data-ng-src="{{ avatar }}" />
+    </a>
+  </li>
+</ul>

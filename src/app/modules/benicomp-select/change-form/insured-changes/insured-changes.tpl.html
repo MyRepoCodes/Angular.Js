@@ -1,0 +1,173 @@
+<form name="icForm" novalidate autocomplete="off">
+
+  <!-- *********************** START: Insured and Dependent Information *********************** -->
+  <div ng-if="params.typeOfChange.insuredAndDependentInformation">
+
+    <div class="dotted-line"></div>
+    <div class="row-item">
+      <h3>Insured and Dependent Information</h3>
+      <small>Please be sure to update all applicable fields.</small>
+    </div>
+
+    <!-- Changes to be Made -->
+    <div class="change-to-be-made">
+      <div class="row-item"
+           data-ng-click="env.row='changesToBeMade'"
+           data-ng-class="{ 'highlighted': env.row=='changesToBeMade',
+            'has-error': !changesToBeMadeIsValid(params) && env.showValid}">
+        <label class="description">Changes to be Made</label>
+        <div class="content">
+          <div class="checkbox-line">
+            <input name="mcNameChange" type="checkbox" id="mcNameChange"
+                   data-ng-model="params.changesToBeMade.nameChange"
+                   tabindex="10"/>
+            <label class="choice" for="mcNameChange">Name Change</label>
+          </div>
+          <div class="checkbox-line">
+            <input name="contactInformation" type="checkbox" id="contactInformation"
+                   data-ng-model="params.changesToBeMade.contactInformation"
+                   tabindex="11"/>
+            <label class="choice" for="contactInformation">Contact Information</label>
+          </div>
+          <div class="checkbox-line">
+            <input name="participantMaritalStatus" type="checkbox" id="participantMaritalStatus"
+                   data-ng-model="params.changesToBeMade.participantMaritalStatus"
+                   tabindex="12"/>
+            <label class="choice" for="participantMaritalStatus">Participant Marital Status</label>
+          </div>
+          <div class="checkbox-line">
+            <input name="addTerminateDependent" type="checkbox" id="addTerminateDependent"
+                   data-ng-model="params.changesToBeMade.addTerminateDependent"
+                   tabindex="13"/>
+            <label class="choice" for="addTerminateDependent">Add/Terminate Dependent</label>
+          </div>
+          <div class="checkbox-line">
+            <input name="aDDBeneficiary" type="checkbox" id="aDDBeneficiary"
+                   data-ng-model="params.changesToBeMade.addBeneficiary"
+                   tabindex="14"/>
+            <label class="choice" for="aDDBeneficiary">AD&D Beneficiary</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Name Change -->
+    <div class="name-change">
+      <div data-ng-if="params.changesToBeMade.nameChange"
+           data-ng-include="'modules/benicomp-select/change-form/insured-changes/templates/information-name-change-insured-dependent.tpl.html'">
+      </div>
+    </div>
+
+
+    <!-- Contact Information -->
+    <div class="contact-information" ng-if="params.changesToBeMade.contactInformation">
+      <div class="dotted-line"></div>
+      <div class="row-item">
+        <h3>Contact Information</h3>
+      </div>
+      <address-input data-form="icForm" data-ng-params="params"
+                     data-control-label="Change Address To:" data-env="env"
+                     data-row="address" data-tabindex="30" required></address-input>
+      <phone-input data-form="icForm" data-ng-model="params.phoneNumber"
+                   data-control-label="Change Phone Number To: " data-env="env" data-row="'phoneNumber'" data-tabindex="31" required></phone-input>
+      <div class="row-item"
+           data-ng-click="env.row='email'"
+           data-ng-class="{ 'highlighted': env.row=='email',
+                        'has-error': (icForm.email.$invalid && (!icForm.email.$pristine || env.showValid)) || (env.isEmailExists && env.showValid)
+                      }">
+        <label class="description">Change Email Address to:<span class="is-required">*</span></label>
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{'has-error': icForm.email.$invalid && (!icForm.email.$pristine || env.showValid)}">
+              <input name="email" type="email" class="form-control"
+                     data-ng-pattern="patternRegexs.email"
+                     data-ng-model="params.email"
+                     tabindex="32" required/>
+                <div ng-if="env.isEmailExists && env.showValid">This email already exists.</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Participant Marital Status -->
+    <div class="participant-marital-status" ng-if="params.changesToBeMade.participantMaritalStatus">
+
+      <div class="dotted-line"></div>
+      <div class="row-item">
+        <h3>Marital Status</h3>
+      </div>
+
+      <div class="row-item"
+           data-ng-click="env.row='reasonForChange'"
+           data-ng-class="{ 'highlighted': env.row=='reasonForChange' }">
+        <label class="description">Reason for Change<span class="is-required"> *</span></label>
+        <div class="content">
+          <div class="radio-line" ng-repeat="item in env.maritalStatusList">
+            <input name="ms{{item.id}}" type="radio" id="ms{{item.id}}"
+                   data-ng-model="params.maritalStatus"
+                   value="{{item.id}}"
+                   tabindex="33"/>
+            <label class="choice" for="ms{{item.id}}">{{item.label}}</label>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row-item"
+           data-ng-if="params.maritalStatus === 'other'"
+           data-ng-click="env.row='maritalStatusOther'"
+           data-ng-class="{ 'highlighted': env.row=='maritalStatusOther',
+                      'has-error': icForm.maritalStatusOther.$invalid &&
+                      (!icForm.maritalStatusOther.$pristine || env.showValid)
+                    }">
+        <div class="content">
+          <div class="row">
+            <div class="form-group col-xs-6"
+                 data-ng-class="{ 'has-error': icForm.maritalStatusOther.$invalid &&
+             (!icForm.maritalStatusOther.$pristine || env.showValid) }">
+              <input name="maritalStatusOther" type="text"
+                     required
+                     class="form-control"
+                     data-ng-model="params.maritalStatusOther"
+                     tabindex="34"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Add/Terminate Dependent -->
+    <div class="add-terminate-dependent">
+      <div data-ng-if="params.changesToBeMade.addTerminateDependent"
+           data-ng-include="'modules/benicomp-select/change-form/insured-changes/templates/add-terminate-dependent.tpl.html'">
+      </div>
+    </div>
+
+    <!-- AD&D Beneficiary -->
+    <div class="ad-d-beneficiary" >
+      <div data-ng-if="params.changesToBeMade.addBeneficiary"
+           data-ng-include="'modules/benicomp-select/change-form/insured-changes/templates/add-beneficiary.tpl.html'">
+      </div>
+    </div>
+
+
+  </div>
+  <!-- *********************** END: Insured and Dependent Information *********************** -->
+
+
+  <!-- *********************** START: Base Health Insurance Summary Plan Description *********************** -->
+  <div data-ng-if="params.typeOfChange.baseHealthInsuranceSpd"
+       data-ng-include="'modules/benicomp-select/change-form/insured-changes/templates/base-health-insurance-spd.tpl.html'">
+  </div>
+
+  <!-- *********************** END: Base Health Insurance Summary Plan Description *********************** -->
+
+  <div class="buttons ng-scope" data-ng-click="env.row=0">
+    <button class="btn btn-default" data-ng-click="previous()" tabindex="98"><i class="fa fa-chevron-left"></i> Previous</button>
+    <button class="btn btn-green" data-ng-click="continue(icForm.$valid)" tabindex="99">Continue <i class="fa fa-chevron-right"></i></button>
+  </div>
+</form>

@@ -1,0 +1,55 @@
+<div class="panel panel-green panel-manager">
+    <div class="panel-heading">
+        <h4 class="text-center">Health Coach Request</h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-content">
+            <div class="table-container">
+                <div class="table-double">
+                    <div class="table-double-content">
+                        <div class="table-responsive table-responsive-pagination">
+                            <table ng-table="tableParams" show-filter="false" class="table">
+                                <thead>
+                                <tr>
+                                    <th><div>Reason For Request</div></th>
+                                    <th><div>Phone</div></th>
+                                    <th><div>Email</div></th>
+                                    <th><div>Comments</div></th>
+                                    <th><div>Method Of Contact</div></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in tableParams.data">
+                                    <td>
+                                        <ul>
+                                            <li data-ng-repeat="reason in item.reasonForRequest">{{ reason }}</li>
+                                        </ul>
+                                    </td>
+                                    <td>{{item.phone}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.comments}}</td>
+                                    <td>
+                                        <ul>
+                                            <li data-ng-repeat="method in item.methodOfContact">{{ method }}</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr data-ng-if="loading">
+                                    <td colspan="5" class="text-center">
+                                        <div class="loading-indicator"></div>
+                                    </td>
+                                </tr>
+                                <tr data-ng-if="tableParams.data.length == 0 && !loading">
+                                    <td colspan="5" class="text-center">
+                                        Empty!
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

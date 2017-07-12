@@ -1,0 +1,27 @@
+<div class="view-claim change-form">
+  <div class="panel-heading">
+    <p class="text-center title-modal-info">Change Form</p>
+  </div>
+  <div class="form-content">
+    <div class="panel panel-green warp-shadow">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="machform_review_table" class="table">
+            <tr data-ng-repeat="item in tableData" class="{{item.class}}">
+              <td style="vertical-align: top" colspan=" {{ item.value ? 1 : 2}}" data-ng-bind-html="item.label"></td>
+              <td ng-if="item.value" data-ng-bind-html="item.value"></td>
+            </tr>
+          </table>
+          <div class="text-right">
+            <span class="btn btn-file" ng-click="runAction('download')">
+              <span class="pulse-icon-basic pulse-icon-download-green">
+                    <span>Download File</span>
+                  </span> 
+              </span>
+            <a href="" data-ng-if="dataCurrentItem.objectChangeFormType === 0" class="btn btn-success" ng-click="runAction('accept')"><span class="glyphicon glyphicon-ok"></span> Approve From</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

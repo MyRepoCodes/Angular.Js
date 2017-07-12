@@ -1,0 +1,36 @@
+<div class="panel-manager-tool">
+    <div class="breadcrumb">
+        <a data-ng-click="goParent()">{{ 'document.breadcrumb' | translate }}</a>
+        <span>></span>
+        <span>{{ currentName }}</span>
+    </div>
+    <!--<div class="filter">-->
+        <!--<div class="dropdown">-->
+            <!--<button class="dropdown-toggle">{{ getFilterName() }} <i class="icon icon-filter"></i></button>-->
+            <!--<ul class="dropdown-menu" data-ng-if="isClientManager">-->
+                <!--<li data-ng-hide="parentState == 'participant'"-->
+                        <!--data-ng-class="{ 'selected': parentState == 'participant' }">-->
+                    <!--<a data-ng-click="goState('loggedIn.modules.imp-documents.participant')">Participant</a>-->
+                <!--</li>-->
+                <!--<li data-ng-hide="parentState == 'client'"-->
+                        <!--data-ng-class="{ 'selected': parentState == 'client' }">-->
+                    <!--<a data-ng-click="goState('loggedIn.modules.imp-documents.client')">Client</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="clearfix"></div>
+</div>
+<div class="form-content">
+    <div class="table-container" data-ng-include="'modules/imp-documents/list/list_document.tpl.html'"></div>
+    <div class="form-footer-tools">
+        <span class="btn btn-file">
+            <input type="file" class="btn-import" name="file"
+                    onchange="angular.element(this).scope().uploadFiles(this)"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.csv">
+                <span class="pulse-icon-basic pulse-icon-upload">
+              <span>Upload File</span>
+            </span>
+        </span>
+    </div>
+</div>

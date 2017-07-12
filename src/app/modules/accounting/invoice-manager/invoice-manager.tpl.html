@@ -1,0 +1,246 @@
+<div class="panel panel-green panel-manager invoice-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Invoice Manager</h4>
+  </div>
+  <div class="panel-body">
+    <!-- Search -->
+    <div class="col-xs-12">
+      <div class="box-filter">
+        <div class="input-group">
+          <input class="form-control input-filter" data-ng-model="filterSurvey.answer" placeholder="Search" />
+          <span class="input-group-addon"><i class="icon icon-search"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- For filter -->
+    <div class="table-container">
+      <div class="table-dropdown">
+        <div class="pull-left">
+
+          <span ng-if="ids === ''" style="cursor: default;" class="btn btn-file btn-file-white">
+              <span class="pulse-icon-basic pulse-icon-download-green">
+                  <span class="fs-13">DOWNLOAD</span>
+          </span>
+          </span>
+
+          <div ng-if="ids !== ''" class="dropdown padding-right-4 floatLeft">
+            <button class="dropdown-toggle filter-archive">
+            <span class="btn btn-file btn-file-white">
+              <span class="pulse-icon-basic pulse-icon-download-green">
+                <span class="fs-13">DOWNLOAD</span>
+              </span>
+            </span>
+          </button>
+            <ul class="dropdown-menu">
+              <li ng-repeat="item in listActionDownload">
+                <a onclick="$('.filter-archive').trigger('click')" href="{{domain}}/spoolers/download?format={{item.value}}&ids={{ids}}">{{item.text}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <span class="btn btn-file">
+              <span class="pulse-icon-basic pulse-icon-upload" ui-sref="loggedIn.modules.invoice-manager-upload">
+                  <span class="fs-13">UPLOAD</span>
+          </span>
+          </span>
+
+        </div>
+
+        <div class="pull-right">
+          <div class="dropdown">
+            <button class="dropdown-toggle filter-archive">
+                    <span data-ng-if="filter.status === 'active'">Active</span>
+                    <span data-ng-if="filter.status === 'inactive'">InActive</span>
+                    <span class="fa fa-angle-down"></span>
+                </button>
+            <ul class="dropdown-menu">
+              <li ng-click="selectStatusArchive('active')">
+                <a onclick="$('.filter-archive').trigger('click');">Active</a>
+              </li>
+              <li ng-click="selectStatusArchive('inactive')">
+                <a onclick="$('.filter-archive').trigger('click');">InActive</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Data table -->
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="table-container panel-invoice-manager">
+          <div class="table-double" data-ng-class="{'full-control' : isFullControl() && tableParams.data.length > 0 && !loading}">
+
+            <!-- For Data -->
+            <div class="table-double-content">
+              <div class="table-responsive table-responsive-pagination">
+                <table ng-table="tableParams" show-filter="false" class="table">
+
+                  <thead>
+                    <tr>
+                      <th>
+                        <input type="checkbox" ng-model="checkboxes.checked" id="select_all_invoice" ng-change="selectedAllInvoice()">
+                      </th>
+
+                      <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('selectionDate', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('selectionDate', 'desc')
+                                  }" ng-click="tableParams.sorting({'selectionDate' : tableParams.isSortBy('selectionDate', 'asc') ? 'desc' : 'asc'})">
+                        <div>Created Date</div>
+                      </th>
+
+                      <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('groupNumber', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('groupNumber', 'desc')
+                                  }" ng-click="tableParams.sorting({'groupNumber' : tableParams.isSortBy('groupNumber', 'asc') ? 'desc' : 'asc'})">
+                        <div>GROUP</div>
+                      </th>
+
+                      <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('clientName', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('clientName', 'desc')
+                                  }" ng-click="tableParams.sorting({'clientName' : tableParams.isSortBy('clientName', 'asc') ? 'desc' : 'asc'})">
+                        <div>CLIENT</div>
+                      </th>
+
+                      <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('fileName', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('fileName', 'desc')
+                                  }" ng-click="tableParams.sorting({'fileName' : tableParams.isSortBy('fileName', 'asc') ? 'desc' : 'asc'})">
+                        <div>SPOOLER</div>
+                      </th>
+
+                      <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('divisionPayment', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('divisionPayment', 'desc')
+                                  }" ng-click="tableParams.sorting({'divisionPayment' : tableParams.isSortBy('divisionPayment', 'asc') ? 'desc' : 'asc'})">
+                        <div>PAYMENT</div>
+                      </th>
+
+                      <!--<th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('contactType', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('contactType', 'desc')
+                                  }" ng-click="tableParams.sorting({'contactType' : tableParams.isSortBy('contactType', 'asc') ? 'desc' : 'asc'})">
+                      <div>CARRIER</div>
+                    </th>
+
+                    <th class="sortable" ng-class="{
+                                    'sort-asc': tableParams.isSortBy('contactType', 'asc'),
+                                    'sort-desc': tableParams.isSortBy('contactType', 'desc')
+                                  }" ng-click="tableParams.sorting({'contactType' : tableParams.isSortBy('contactType', 'asc') ? 'desc' : 'asc'})">
+                      <div>RFF AMOUNT</div>
+                    </th>-->
+
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr ng-repeat="item in tableParams.data" class="cursor-pointer">
+
+                      <td>
+                        <input type="checkbox" ng-model="item.selected" ng-change="itemCheckedInvoice(item)">
+                      </td>
+
+                      <td data-title="'selectionDate'" sortable="'selectionDate'" ng-click="openContent(item)" ng-bind="item.selectionDate | limitTo:10"></td>
+
+                      <td data-title="'groupNumber'" sortable="'groupNumber'" ng-click="openContent(item)" ng-bind="item.groupNumber"></td>
+
+
+                      <td data-title="'clientName'" sortable="'clientName'" ng-click="openContent(item)" ng-bind="item.clientName"></td>
+
+                      <td data-title="'fileName'" sortable="'fileName'" ng-click="openContent(item)" ng-bind="item.fileName"></td>
+
+                      <td data-title="'divisionPayment'" ng-click="openContent(item)">{{item.divisionPayment|invoiceCurrency:2:'$'}}</td>
+
+                      <!--<td data-title="'Contact Preference'" ng-click="openContent(item)"></td>
+
+                    <td data-title="'clientName'" sortable="'clientName'" ng-click="openContent(item)" ng-bind="item.acv"></td>-->
+
+
+                    </tr>
+
+
+                    <tr class="empty" data-ng-if="loading">
+                      <td colspan="7" class="text-center">
+                        <div class="loading-indicator"></div>
+                      </td>
+                    </tr>
+                    <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                      <td colspan="7" class="text-center">
+                        {{ 'faqs.empty' | translate }}
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
+            <!-- For Action -->
+            <div class="table-double-action" data-ng-if="isFullControl() && tableParams.data.length > 0 && !loading">
+              <table class="table ng-table">
+                <thead>
+                  <tr>
+                    <th class="action">
+                      <span class="button action-remove" title="{{ 'userManager.button.title.removeMultiple' | translate }}" data-ng-if="filter.status ==='active'"
+                        data-ng-click="removeMultiple(ids)" data-ng-if="tableParams.data.length>0">
+                                    <i class="icon"></i>
+                            </span>
+
+                      <span class="button action-remove" title="{{ 'userManager.button.title.restoreMultiple' | translate }}" data-ng-click="restoreMultipleUsers(ids)"
+                        data-ng-if="tableParams.data.length>0 && filter.status==='inactive'">
+                                    <i class="restore_icon glyphicon glyphicon-share-alt"></i>
+                            </span>
+                    </th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in tableParams.data">
+                    <td class="action">
+
+                      <!-- Filter ACTIVE -->
+                      <span class="button action-remove" title="{{ 'userManager.button.title.remove' | translate }}" data-ng-if="filter.status ==='active'"
+                        data-ng-click="remove(item)">
+                                    <i class="icon"></i>
+                                </span>
+
+                      <span invoice-manger-popup="item" data-ng-if="filter.status ==='active'" 
+                      class="button action-view" title="{{ 'userManager.button.title.view' | translate }}">
+                                    <i class="icon"></i>
+                                </span>
+
+                      <!-- Filter INACTIVE -->
+
+                      <span class="button action-remove" data-ng-if="filter.status==='inactive'" title="{{ 'userManager.button.title.restore' | translate }}"
+                        data-ng-click="restore(item)">
+                                    <i class="restore_icon glyphicon glyphicon-share-alt"></i>
+                                </span>
+
+                      <span class="button action-remove" title="{{ 'userManager.button.title.remove' | translate }}" data-ng-if="filter.status ==='inactive'"
+                        data-ng-click="permanentlyDelete(item)">
+                                    <i class="icon"></i>
+                                </span>
+
+
+
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

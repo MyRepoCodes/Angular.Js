@@ -1,0 +1,47 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Report Health Result</h4>
+  </div>
+  <div class="panel-body admin-health-results">
+    <div class="table-container">
+      <div class="table-responsive table-responsive-pagination">
+        <table ng-table="tableParams" show-filter="false" class="table">
+          <thead>
+          <tr>
+            <th>
+              <span>Create Date</span>
+            </th>
+            <th ng-repeat="(key, item) in listData[0].healthResults">
+              <span ng-bind="key"></span>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="item in tableParams.data">
+            <td>
+              {{item.createdDate | limitTo :10}}
+            </td>
+            <td ng-repeat="(key, value) in item.healthResults">
+              <div ng-repeat="(keyCount, valueCount) in value">
+                <p>{{keyCount}} : {{valueCount}}</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="empty" data-ng-if="loading">
+            <td colspan="5" class="text-center">
+              <div class="loading-indicator"></div>
+            </td>
+          </tr>
+          <tr class="empty"
+              data-ng-if="tableParams.data.length == 0 && !loading">
+            <td colspan="5" class="text-center">
+              <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+              <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="dotted-bottom"></div>
+<div class="row-item">
+  <h3>Base Health Insurance Summary Plan Description</h3>
+  <small>Please upload your Summary Plan Description at each Renewal and/or when your plan experiences any changes.</small>
+</div>
+
+<div class="row-item"
+     data-ng-click="env.row='claim_item_' + key"
+     data-ng-class="{ 'highlighted': env.row=='claim_item_' + key,
+        'has-error': (key === 0 && params.fileUploadSPD[0].listFiles.length <= 0) && env.showValid
+        }"
+     ng-repeat="(key, file) in params.fileUploadSpd">
+  <input name="tempFile_{{key}}" type="hidden" ng-required="key === 0" data-ng-model="file.listFiles"/>
+  <label class="description">
+    <span ng-if="key === 0">Upload Your Most Recent Summary Plan Description </span>
+    <span ng-if="key !== 0">Upload a {{key+1}}nd set of files </span>
+  </label>
+
+  <!--<div class="remove-file-upload-receipts">-->
+  <!--<i title="Remove Upload a {{ key +1 }}nd set of files" ng-click="removeGroupFileUploadReceipts(file, key)" class="glyphicon glyphicon-remove"></i>-->
+  <!--</div>-->
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-8" ng-click="uploadAnotherFile('selected', key)">
+        <input id="file_element_{{ key }}" name="element_{{ key }}" class="element file" type="file"/>
+        <div id="file_element_{{ key }}_queue" class="file_queue"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,227 @@
+<form name="userForm" novalidate autocomplete="off">
+  <!--<div class="row form-description dotted-line infoClient">
+
+    <div class="col-md-4">
+      <h2>Profile</h2>
+    </div>
+
+    <div class="col-md-8 row-item">
+      <label class="description" ng-if="currentUser.customerId">
+        Participant ID:&nbsp <span class="text-green">{{currentUser.customerId}}</span>
+      </label>
+      <label class="description" ng-if="currentUser.employer.pulseId">
+        Client ID:&nbsp <span class="text-green">{{currentUser.parentPrefixPulseId}}-{{currentUser.employer.pulseId}}</span>
+      </label>
+      <label class="description" ng-if="currentUser.pulseId">
+        PULSE ID:&nbsp <span class="text-green">{{currentUser.prefixPulseId}}-{{currentUser.pulseId}}-00</span>
+      </label>
+    </div>
+    <div class="col-md-12 summary">Please review your profile below and update your information if it has changed.</div>
+  </div>-->
+
+  <div class="header-tab">
+    <tabset class="tab-set">
+      <!-- Profile -->
+      <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+        <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+        <div class="content-tab">
+
+          <!-- Participant-->
+          <pv-profile data-info="params" data-current-user="currentUser" data-avatar="avatar" data-type="'Participant'" data-no-pulseid="'0'"></pv-profile>
+
+
+          <!--Spouse-->
+          <!--<div ng-if="spouseInfo">
+            <pv-profile data-ng-if="params.maritalStatus === 'M'" data-avatar="avatarSpouse" data-info="spouseInfo" data-current-user="currentUser"
+              data-type="'Spouse'" data-no-pulseid="'01'"></pv-profile>
+            <pv-profile data-ng-if="params.maritalStatus === 'P'" data-avatar="avatarSpouse" data-info="spouseInfo" data-current-user="currentUser"
+              data-type="'Domestic'" data-no-pulseid="'01'"></pv-profile>
+          </div>-->
+
+          <!--Spouse-->
+          <div ng-if="spouseList.length > 0">
+            <div ng-repeat="(key, iSpouse) in spouseList">
+
+              <pv-profile data-ng-if="params.maritalStatus === 'M'" data-avatar="avatarSpouseList[key]" data-info="iSpouse" data-current-user="currentUser"
+                data-type="'Spouse'" data-no-pulseid="iSpouse.numberId"></pv-profile>
+              <pv-profile data-ng-if="params.maritalStatus === 'P'" data-avatar="avatarSpouseList[key]" data-info="iSpouse" data-current-user="currentUser"
+                data-type="'Domestic'" data-no-pulseid="iSpouse.numberId"></pv-profile>
+
+            </div>
+          </div>
+
+          <!--Dependent-->
+          <div ng-if="dependentList.length > 0">
+            <div ng-repeat="(key, iDependent) in dependentList">
+              <pv-profile data-info="iDependent" data-avatar="avatarDependentList[key]" data-current-user="currentUser" data-type="'Child'"
+                data-no-pulseid="iDependent.numberId"></pv-profile>
+            </div>
+
+          </div>
+
+          <div class="buttons">
+            <button class="btn btn-green fs-14" data-ng-click="addTheDependent()">Add Dependent</button>
+          </div>
+
+        </div>
+      </tab>
+      <!-- BeniComp Advantage -->
+      <tab select="selectTab(tabsets.beniCompAdvantage.tabindex)" active="tabsets.beniCompAdvantage.active" disabled="tabsets.beniCompAdvantage.disabled"
+        data-ng-if="!tabsets.beniCompAdvantage.disabled">
+        <tab-heading class="tab-beniCompAdvantage">{{ tabsets.beniCompAdvantage.title }}</tab-heading>
+        <div class="content-tab">
+          <enrollment-level-detail-input data-form="userForm" data-ng-model="params.coverageLevel" data-option="env.currentEnrollmentLevel"
+            data-control-label="Enrollment Level" data-env="env" data-row="16" data-tabindex="1" disabled></enrollment-level-detail-input>
+          <div class="row-item" data-ng-click="env.row=17" data-ng-class="{ 'highlighted': env.row==17 }" data-ng-if="env.clientLocationList.length>0">
+            <label class="description">Client Location</label>
+            <div class="content">
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6">
+                    <select name="clientLocation" class="form-control" data-ng-model="params.clientLocation" tabindex="2" data-ng-options="env.clientLocationList.indexOf(clientLocation) as (clientLocation | clientLocationLabel) for clientLocation in env.clientLocationList">
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<client-location-input data-ng-if="env.currentClientLocation" client-location="env.currentClientLocation"></client-location-input>-->
+        </div>
+      </tab>
+      <!-- BeniComp Select -->
+      <tab select="selectTab(tabsets.beniCompSelect.tabindex)" active="tabsets.beniCompSelect.active" disabled="tabsets.beniCompSelect.disabled"
+        data-ng-if="!tabsets.beniCompSelect.disabled">
+        <tab-heading class="tab-beniCompSelect">{{ tabsets.beniCompSelect.title }}</tab-heading>
+        <div class="content-tab">
+          <div class="row-item" data-ng-click="env.row='groupNumber'" data-ng-class="{ 'highlighted': env.row=='groupNumber' }">
+            <label class="description">Group Number</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input type="text" name="groupNumber" class="form-control" data-ng-model="params.groupNumber" tabindex="1" data-ng-disabled="true"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <date-input data-form="userForm" data-ng-model="params.employmentDate" data-control-label="Employment Date" data-values="env"
+            data-row="employmentDate" data-tabindex="2"></date-input>
+          <date-input data-form="userForm" data-ng-model="params.effectiveDate" data-control-label="Effective Date" data-values="env"
+            data-row="effectiveDate" data-tabindex="3" readonly></date-input>
+          <div class="row-item" data-ng-click="env.row='benefitYearBcsId'" data-ng-class="{ 'highlighted': env.row=='benefitYearBcsId' }">
+            <!--<label class="description">Enrollment Period</label>-->
+            <label class="description">Plan Benefit Year</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input name="benefitYearBcsId" class="form-control" data-ng-value="getLabelByIncentive(currentBenefitYearBcs)" data-ng-disabled="true"
+                    tabindex="4" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-ng-if="currentEmployer.classesOfEligibleEmployees.length>0">
+            <div class="row-item" data-ng-click="env.row='nameClass'" data-ng-class="{ 'highlighted': env.row=='nameClass' }">
+              <label class="description">Name of Class</label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6" data-ng-class="{ 'has-error': userForm.nameClass.$invalid && (!userForm.nameClass.$pristine || env.showValid) }">
+                    <select name="nameClass" data-ng-disabled="true" class="form-control" data-ng-model="params.indexClassesOfEligibleEmployees" data-ng-options="currentEmployer.classesOfEligibleEmployees.indexOf(classes) as classes.name for classes in currentEmployer.classesOfEligibleEmployees"
+                      tabindex="4">
+                      <option></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row-item" data-ng-click="env.row='annualMaximum'" data-ng-class="{ 'highlighted': env.row=='annualMaximum' }">
+              <label class="description">Annual Maximum Medical Benefit</label>
+              <div class="content">
+                <div class="row">
+                  <div class="form-group col-xs-6">
+                    <!--<input name="annualMaximum" type="text" class="form-control" data-ng-model="params.annualClassesOfEligibleEmployees" tabindex="5"
+                      data-ng-disabled="true" />-->
+
+                    <select tabindex="5" name="annualMaximum" class="form-control" data-ng-disabled="true" ng-options="item.value as item.label for item in benicompSelectConstant.annualMaximum"
+                      data-ng-model="params.annualClassesOfEligibleEmployees"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- START: AD&D Beneficiary -->
+          <div class="dotted-line"></div>
+          <div class="row-item" data-ng-click="env.row='primaryBeneficiaryForAdd'" data-ng-class="{
+        'highlighted': env.row=='primaryBeneficiaryForAdd',
+        'has-error': userForm.primaryBeneficiaryForAdd.$invalid && (!userForm.primaryBeneficiaryForAdd.$pristine || env.showValid)
+    }">
+            <label class="description">Primary Beneficiary for AD&D</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input name="primaryBeneficiaryForAdd" type="text" class="form-control" data-ng-model="params.primaryBeneficiaryForAdd" tabindex="6"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-item" data-ng-click="env.row='primaryBeneficiaryRelationship'" data-ng-class="{ 'highlighted': env.row=='primaryBeneficiaryRelationship' ,
+        'has-error': userForm.primaryBeneficiaryRelationship.$invalid && (!userForm.primaryBeneficiaryRelationship.$pristine || env.showValid)}">
+            <label class="description">Primary Beneficiary Relationship</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input name="primaryBeneficiaryRelationship" type="text" class="form-control" data-ng-model="params.primaryBeneficiaryRelationship"
+                    tabindex="7" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-item" data-ng-click="env.row='contingentBeneficiaryForAdd'" data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryForAdd' ,
+        'has-error': userForm.contingentBeneficiaryForAdd.$invalid && (!userForm.contingentBeneficiaryForAdd.$pristine || env.showValid)}">
+            <label class="description">Contingent Beneficiary for AD&D</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input name="contingentBeneficiaryForAdd" type="text" class="form-control" data-ng-model="params.contingentBeneficiaryForAdd"
+                    tabindex="8" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-item" data-ng-click="env.row='contingentBeneficiaryRelationship'" data-ng-class="{ 'highlighted': env.row=='contingentBeneficiaryRelationship' ,
+        'has-error': userForm.contingentBeneficiaryRelationship.$invalid && (!userForm.contingentBeneficiaryRelationship.$pristine || env.showValid)}">
+            <label class="description">Contingent Beneficiary Relationship</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <input name="contingentBeneficiaryRelationship" type="text" class="form-control" data-ng-model="params.contingentBeneficiaryRelationship"
+                    tabindex="9" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dotted-line"></div>
+          <!-- END: AD&D Beneficiary -->
+        </div>
+      </tab>
+    </tabset>
+  </div>
+  <div class="content-footer" data-ng-if="env.currentTab !== 1">
+    <div class="buttons" data-ng-click="env.row=0">
+      <button class="btn btn-green" data-ng-click="update(userForm)" tabindex="100">Save changes</button>
+      <!--<button class="btn btn-green" data-ng-if="env.totalTab>env.currentTab" data-ng-click="continue(userForm.$valid)" tabindex="100">Continue</button>-->
+      <button class="btn btn-white" data-ng-click="cancel()" tabindex="101">Cancel</button>
+    </div>
+    <div class="alert alert-danger" data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid">Entered invalid. Please check your data.</div>
+    <br data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid" />
+    <div class="alert alert-danger" data-ng-if="env.error">{{ env.error }}</div>
+    <div class="alert alert-success" data-ng-if="env.success">{{ env.success }}</div>
+    <div class="alert alert-info" data-ng-if="env.inforChangePassword">{{ env.inforChangePassword }}</div>
+  </div>
+</form>

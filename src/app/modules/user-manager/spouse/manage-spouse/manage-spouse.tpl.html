@@ -1,0 +1,191 @@
+<div class="modal-body modal-body-default">
+  <button type="button" class="close" data-ng-click="cancel()">×</button>
+  <h3 class="modal-title">
+    <span data-ng-if="env.status==0">Manage Spouse</span>
+    <span data-ng-if="env.status==1">Add a Spouse</span>
+    <span data-ng-if="env.status==2">Edit Spouse</span>
+  </h3>
+  <div class="form-content">
+    <div class="panel panel-modal-default">
+      <div class="panel-body">
+
+
+        <div data-ng-show="env.status==0">
+
+          <div class="table-container">
+            <a data-ng-click="openCreateDependent()" ng-if="!isHaveSpouseActive">Add Spouse</a>
+
+
+            <div class="table-dropdown">
+              <div class="pull-left">
+                <div class="dropdown">
+                  <button class="dropdown-toggle filter-archive">
+                    <span data-ng-if="filter.status === false">Active</span>
+                    <span data-ng-if="filter.status === true">InActive</span>
+                    <span class="fa fa-angle-down"></span>
+                </button>
+                  <ul class="dropdown-menu">
+                    <li ng-click="selectStatusArchive(false)">
+                      <a onclick="$('.filter-archive').trigger('click');">Active</a>
+                    </li>
+                    <li ng-click="selectStatusArchive(true)">
+                      <a onclick="$('.filter-archive').trigger('click');">InActive</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <div class="table-double" data-ng-class="{
+                     'full-control' : isFullControl() && tableParams.data.length > 0 && !loading
+                     }">
+              <div class="table-double-content">
+                <div class="table-responsive no-max-hight table-responsive-pagination">
+                  <table ng-table="tableParams" show-filter="false" class="table">
+                    <thead>
+                      <tr>
+                        <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('lastName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('lastName', 'desc')
+                                      }" ng-click="tableParams.sorting({'lastName' : tableParams.isSortBy('lastName', 'asc') ? 'desc' : 'asc'})">
+                          <div>Last Name</div>
+                        </th>
+                        <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('firstName', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('firstName', 'desc')
+                                      }" ng-click="tableParams.sorting({'firstName' : tableParams.isSortBy('firstName', 'asc') ? 'desc' : 'asc'})">
+                          <div>First Name</div>
+                        </th>
+                        <th class="sortable" ng-class="{
+                                        'sort-asc': tableParams.isSortBy('email', 'asc'),
+                                        'sort-desc': tableParams.isSortBy('email', 'desc')
+                                      }" ng-click="tableParams.sorting({'email' : tableParams.isSortBy('email', 'asc') ? 'desc' : 'asc'})">
+                          <div>Email</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="item in tableParams.data" data-ng-click="choiceUser(item)">
+                        <td data-title="'Last Name'" sortable="'lastName'">
+                          {{item.lastName}}
+                        </td>
+                        <td data-title="'First Name'" sortable="'firstName'">
+                          {{item.firstName}}
+                        </td>
+                        <td data-title="'Email'" sortable="'email'">
+                          {{item.email}}
+                        </td>
+                      </tr>
+                      <tr class="empty" data-ng-if="loading">
+                        <td colspan="3" class="text-center">
+                          <div class="loading-indicator"></div>
+                        </td>
+                      </tr>
+                      <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+                        <td colspan="3" class="text-center">
+                          {{ 'userManager.empty_1' | translate }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="table-double-action" data-ng-if="isFullControl() && tableParams.data.length > 0 && !loading">
+                <table class="table ng-table">
+                  <thead>
+                    <tr>
+                      <th class="action">
+
+
+                        <!--<span class="button action-remove" title="{{ 'userManager.button.title.removeMultiple' | translate }}" data-ng-click="removeMultipleUsers()"
+                          data-ng-if="tableParams.data.length>0 && filter.status===false">
+                                    <i class="icon"></i>
+                            </span>
+
+                        <span class="button action-remove" title="{{ 'userManager.button.title.restoreMultiple' | translate }}" data-ng-click="restoreMultipleUsers()"
+                          data-ng-if="tableParams.data.length>0 && filter.status===true">
+                                    <i class="restore_icon glyphicon glyphicon-share-alt"></i>
+                            </span>-->
+
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in tableParams.data">
+                      <td class="action">
+
+                        <!-- Filter INACTIVE -->
+                        <span class="button action-remove" data-ng-if="filter.status===true && !isHaveSpouseActive" title="{{ 'userManager.button.title.restore' | translate }}"
+                          data-ng-click="restore(item)">
+                                        <i class="restore_icon glyphicon glyphicon-share-alt"></i>
+                                </span>
+
+                        <span class="button action-remove" title="{{ 'userManager.button.title.permanentlyDelete' | translate }}" data-ng-if="filter.status===true"
+                          data-ng-click="permanentlyDelete(item)">
+                                    <i class="icon"></i>
+                                </span>
+
+                        <!-- Filter ACTIVE -->
+                        <span class="button action-remove" title="{{ 'userManager.button.title.remove' | translate }}" data-ng-if="filter.status===false"
+                          data-ng-click="inactive(item)">
+                                    <i class="icon"></i>
+                                </span>
+
+                        <span class="button action-edit" title="{{ 'userManager.button.title.edit' | translate }}" data-ng-if="filter.status===false"
+                          data-ng-click="edit(item)">
+                                    <i class="icon"></i>
+                                </span>
+
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Add or Edit-->
+        <form name="form" novalidate autocomplete="off" data-ng-if="env.status==1 || env.status==2">
+          <name-input data-form="form" data-ng-params="params" data-control-label="Spouse Name" data-env="env" data-tabindex="101" required></name-input>
+          <ssn-input data-form="form" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="102"
+            data-tabindex="102"></ssn-input>
+          <date-input data-form="form" data-ng-model="params.dateOfBirth" data-control-label="Spouse Date of Birth" data-param-type="birthday"
+            data-values="env" data-tabindex="103" required></date-input>
+          <sex-input data-form="form" data-ng-model="params.gender" data-control-label="Spouse Sex" data-env="env" data-tabindex="104"
+            required></sex-input>
+
+          <phone-input data-form="form" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="105"
+            data-tabindex="105"></phone-input>
+          <div class="row-item" data-ng-click="env.row=106" data-ng-class="{ 'highlighted': env.row==106,
+                      'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist
+                    }">
+            <label class="description">Email</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (form.email.$invalid && (!form.email.$pristine || env.showValid)) || env.emailExist }">
+                  <input name="email" type="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                    tabindex="106" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="group-buttons-modal" style="text-align: center;" data-ng-click="env.row=0">
+            <button class="btn btn-green" data-ng-click="submit(form.$valid, params)">
+              <span data-ng-if="env.status==1">Create</span>
+              <span data-ng-if="env.status==2">Edit</span>
+            </button>
+            <button class="btn btn-white" data-ng-click="goList()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

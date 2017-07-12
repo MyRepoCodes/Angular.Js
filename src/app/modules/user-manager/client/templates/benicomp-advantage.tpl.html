@@ -1,0 +1,26 @@
+<enrollment-level-input data-form="userForm"
+                        data-ng-model="params.enrollmentLevel"
+                        data-control-label="Enrollment Level Options"
+                        data-env="env"
+                        data-row="enrollmentLevel"
+                        data-tabindex="1"></enrollment-level-input>
+<div class="dotted-bottom"></div>
+<div class="row-item" data-ng-click="env.row='registrationClosedMessageBCA'"
+     data-ng-class="{ 'highlighted': env.row=='registrationClosedMessageBCA',
+                      'has-error': userForm.registrationClosedMessage.$invalid && (!userForm.registrationClosedMessage.$pristine || env.showValid)
+                    }">
+  <label class="description">Registration Closed Message</label>
+  <div class="content">
+    <div class="row">
+      <div class="form-group col-xs-12"
+           data-ng-class="{ 'has-error': userForm.registrationClosedMessage.$invalid && (!userForm.registrationClosedMessage.$pristine || env.showValid) }">
+        <textarea name="registrationClosedMessage" class="form-control"
+                  data-ng-model="params.registrationClosedMessage"
+                  rows="3"
+                  tabindex="1"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<bca-benefit-year-input data-form="userForm" data-ng-model="bcaBYModel" data-env="env" data-tabindex="2"></bca-benefit-year-input>
+<div class="dotted-bottom"></div>

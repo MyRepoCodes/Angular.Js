@@ -1,0 +1,117 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="createParticipantForm" novalidate autocomplete="off">
+      <div class="form-description">
+        <h2>Upload Health Results</h2>
+        <p>Upload Multiple Group's Health Results</p>
+        <div class="alert alert-success" data-ng-if="env.successForMultiple" data-ng-bind-html="env.successForMultiple"></div>
+        <p>
+          <span class="btn btn-file" style="margin-bottom: 5px;">
+            <input type="file" class="btn-import" name="fileInput-1"
+                   onchange="angular.element(this).scope().importMultipleHealthResults(this)"
+                   multiple="false"
+                   accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+            <span class="pulse-icon-basic pulse-icon-upload">
+              <span>Upload</span>
+          </span>
+
+          </span>
+          <a href="{{ templateMultipleUrl }}" target="_blank" ng-if="env.fileFormatMultiple ==='hooperHolmes'" class="btn btn-file download"
+            style="margin-bottom: 5px;">
+            
+            <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File (Hooper Holmes)</span>
+                  </span> 
+            </a>
+          <a href="{{ templateMultipleUrlParkview }}" target="_blank" ng-if="env.fileFormatMultiple ==='parkview'" class="btn btn-file download"
+            style="margin-bottom: 5px;">
+            <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File (Parkview)</span>
+                  </span> 
+            </a>
+        </p>
+        <p>
+          File Format:
+          <select style="min-width: 218px" data-ng-model="env.fileFormatMultiple" data-ng-options="item.value as item.label for item in fileFormatList">
+          </select>
+        </p>
+        <p data-ng-if="env.isGoHealthResults"><a data-ng-click="goHealthResults()" class="btn btn-primary" style="margin-bottom: 5px;">Go to Health Results</a></p>
+        <div class="alert alert-danger" data-ng-if="env.errorForMultiple">{{ env.errorForMultiple }}</div>
+        <div class="alert alert-warning" data-ng-if="env.duplicateMultipleList.length > 0">
+          <div data-ng-repeat="item in env.duplicateMultipleList track by $index" data-ng-bind="item"></div>
+        </div>
+        <div class="alert alert-danger" data-ng-if="env.errorMultipleList.length > 0">
+          <div data-ng-repeat="item in env.errorMultipleList track by $index" data-ng-bind="item"></div>
+        </div>
+        <p><br></p>
+      </div>
+
+      <div class="form-description">
+        <p><br></p>
+        <p>Upload Individual Group's Health Results</p>
+        <div class="alert alert-success" data-ng-if="env.successForSingle" data-ng-bind-html="env.successForSingle"></div>
+        <p>
+          Please select group:
+          <!--<select style="min-width: 100px"-->
+          <!--data-ng-model="env.currentClient"-->
+          <!--data-ng-options="item as item.clientName for item in employerList"-->
+          <!--data-ng-change="changeCurrentClient(env.currentClient)">-->
+          <!--</select>-->
+
+          <div class="input-autocomplete">
+            <input type="text" ng-model="env.currentClient" placeholder="Client Name (Minimum 3 characters)" typeahead-editable="false"
+              typeahead-wait-ms="500" typeahead-min-length="3" typeahead-on-select="changeCurrentClient($item, $model, $label)"
+              typeahead="item as item.clientName for item in findClient($viewValue) | limitTo:5" class="form-control">
+          </div>
+        </p>
+        <p>
+          Please benefit year:
+          <select style="min-width: 100px" data-ng-model="env.currentIncentive" data-ng-options="item as getLabelByIncentive(item) for item in incentiveList">
+          </select>
+
+
+        </p>
+        <p>
+          File Format:
+          <select style="min-width: 150px" data-ng-model="env.fileFormatIndividual" data-ng-options="item.value as item.label for item in fileFormatList">
+          </select>
+        </p>
+        <p>
+          <span class="btn btn-file" style="margin-bottom: 5px;">
+            <input type="file" class="btn-import" name="fileInput-2"
+                   onchange="angular.element(this).scope().importIndividualHealthResults(this)"
+                   multiple="false"
+                   accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+            <span class="pulse-icon-basic pulse-icon-upload">
+              <span>Upload</span>
+          </span>
+
+          </span>
+          <a href="{{ templateSingleUrl }}" target="_blank" ng-if="env.fileFormatIndividual ==='hooperHolmes'" class="btn btn-file download"
+            style="margin-bottom: 5px;">
+            <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File (Hooper Holmes)</span>
+                  </span> 
+            </a>
+          <a href="{{ templateSingleUrlParkview }}" target="_blank" ng-if="env.fileFormatIndividual ==='parkview'" class="btn btn-file download"
+            style="margin-bottom: 5px;">
+            
+            <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File (Parkview)</span>
+                  </span> 
+
+            </a>
+        </p>
+        <p data-ng-if="env.isGoHealthResults"><a data-ng-click="goHealthResults(env.currentClient)" class="btn btn-primary" style="margin-bottom: 5px;">Go to Health Results</a></p>
+        <div class="alert alert-danger" data-ng-if="env.errorForSingle">{{ env.errorForSingle }}</div>
+        <div class="alert alert-warning" data-ng-if="env.duplicateSingleList.length > 0">
+          <div data-ng-repeat="item in env.duplicateSingleList track by $index" data-ng-bind="item"></div>
+        </div>
+        <div class="alert alert-danger" data-ng-if="env.errorSingleList.length > 0">
+          <div data-ng-repeat="item in env.errorSingleList track by $index" data-ng-bind="item"></div>
+        </div>
+        <p><br></p>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Manage Participants</h4>
+  </div>
+  <div class="panel-body">
+    <div class="panel-manager-tool">
+      <div class="toolbar">
+        <a class="btn" data-ui-sref="loggedIn.modules.participant">Manage Participants</a>
+        <a class="btn active" data-ui-sref="loggedIn.modules.participant.create">Add a Participant <span class="fa fa-angle-down"></span></a>
+      </div>
+    </div>
+    <div class="form-content">
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+          <form name="userForm" novalidate autocomplete="off">
+            <div class="form-description">
+              <h2>{{ 'participant.create.header' | translate }}</h2>
+              <p>{{ 'participant.create.info' | translate }}
+                <span class="btn btn-file">
+                  <input type="file" id="btn-import" class="btn-import" name="file"
+                         onchange="angular.element(this).scope().importFiles(this)"
+                         multiple=""
+                         accept=".xls,.xlsx,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                  <span class="pulse-icon-basic pulse-icon-upload">
+                    <span>Upload Excel File</span>
+                  </span> 
+                </span>
+                <a href="{{ templateUrl }}" target="_blank" class="btn btn-file download">
+                  
+                  <span class="pulse-icon-basic pulse-icon-download">
+                    <span>Download Sample File</span>
+                  </span> 
+
+                  </a></p>
+            </div>
+            <div class="header-tab">
+              <tabset class="tab-set">
+                <!-- Profile -->
+                <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+                  <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+                  <div class="content-tab">
+                    <name-input data-form="userForm" data-control-label="Name" data-ng-params="params" data-env="env" data-row="1" data-tabindex="1" required></name-input>
+                    <date-input data-control-label="Date of Birth"
+                                data-form="userForm"
+                                data-ng-model="params.dateOfBirth"
+                                data-values="env"
+                                data-date-options="dateOptions"
+                                data-param-type="birthday"
+                                data-row="2"
+                                data-tabindex="2" required></date-input>
+                    <sex-input data-form="userForm" data-ng-model="params.gender" data-control-label="Sex" data-env="env" data-tabindex="3"></sex-input>
+                    <ssn-input data-form="userForm" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="3" data-tabindex="4" required></ssn-input>
+                    <!-- Marital Status -->
+                    <marital-status data-form="userForm" data-ng-model="params.maritalStatus" data-control-label="Marital Status" data-env="env" data-row="'maritalStatus'" data-tabindex="5"></marital-status>
+                    <!-- End Marital Status -->
+                    <address-input data-form="userForm" data-control-label="Address" data-ng-params="params" data-env="env" data-row="4" data-tabindex="6"></address-input>
+                    <phone-input data-form="userForm" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="5" data-tabindex="7"></phone-input>
+                    <div class="row-item"
+                         data-ng-click="env.row=6"
+                         data-ng-class="{ 'highlighted': env.row==6,
+                                          'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist
+                                        }">
+                      <label class="description">Email <!--<span class="is-required">*</span>--></label>
+                      <div class="content">
+                        <div class="row">
+                          <div class="form-group col-xs-6"
+                               data-ng-class="{ 'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist }">
+                            <input name="email" type="email" class="form-control"
+                                   data-ng-model="params.email"
+                                   data-ng-pattern="patternRegexs.email"
+                                   tabindex="8"
+                                   required/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row-item" data-ng-click="env.row=6.1" data-ng-class="{ 'highlighted': env.row==6.1 }">
+                      <label class="description">BenCompID</label>
+                      <div class="content">
+                        <div class="row">
+                          <div class="form-group col-xs-6">
+                            <input name="participantid" type="text" class="form-control"
+                                   maxlength="20"
+                                   data-ng-model="params.beniCompID"
+                                   tabindex="9"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div data-ng-if="env.products.beniCompAdvantage || env.products.beniCompSelect">
+                      <div class="dotted-bottom"></div>
+                      <div class="row-item" data-ng-click="env.row=11.2" data-ng-class="{ 'highlighted': env.row==11.2 }">
+                        <label class="description">Products</label>
+                        <div class="content">
+                          <div class="checkbox-line" data-ng-if="env.products.beniCompAdvantage">
+                            <input name="beniCompAdvantage" type="checkbox" id="beniCompAdvantage"
+                                   data-ng-model="params.products.beniCompAdvantage"
+                                   tabindex="10"/>
+                            <label class="choice" for="beniCompAdvantage">BeniComp Advantage</label>
+                          </div>
+                          <div class="checkbox-line" data-ng-if="env.products.beniCompSelect">
+                            <input name="beniCompSelect" type="checkbox" id="beniCompSelect"
+                                   data-ng-model="params.products.beniCompSelect"
+                                   tabindex="11"/>
+                            <label class="choice" for="beniCompSelect">BeniComp Select</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </tab>
+                <!-- BeniComp Advantage -->
+                <tab select="selectTab(tabsets.beniCompAdvantage.tabindex)" active="tabsets.beniCompAdvantage.active" disabled="tabsets.beniCompAdvantage.disabled" data-ng-if="!tabsets.beniCompAdvantage.disabled">
+                  <tab-heading class="tab-beniCompAdvantage">{{ tabsets.beniCompAdvantage.title }}</tab-heading>
+                  <div class="content-tab">
+                    <div data-ng-include="'modules/user-manager/participant/templates/benicomp-advantage.tpl.html'"></div>
+                  </div>
+                </tab>
+                <!-- BeniComp Select -->
+                <tab select="selectTab(tabsets.beniCompSelect.tabindex)" active="tabsets.beniCompSelect.active" disabled="tabsets.beniCompSelect.disabled" data-ng-if="!tabsets.beniCompSelect.disabled">
+                  <tab-heading class="tab-beniCompSelect">{{ tabsets.beniCompSelect.title }}</tab-heading>
+                  <div class="content-tab">
+                    <div data-ng-include="'modules/user-manager/participant/templates/benicomp-select.tpl.html'"></div>
+                  </div>
+                </tab>
+              </tabset>
+            </div>
+            <div class="content-footer">
+              <div class="buttons" data-ng-click="env.row=0">
+                <button class="btn btn-green" data-ng-if="env.totalTab<=env.currentTab" data-ng-click="create(userForm.$valid)" tabindex="18">Create</button>
+                <button class="btn btn-green" data-ng-if="env.totalTab>env.currentTab" data-ng-click="continue(userForm.$valid)" tabindex="18">Continue</button>
+                <a class="btn btn-white" data-ng-click="cancel()" tabindex="19">Cancel</a>
+              </div>
+              <div class="alert alert-danger" data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid">Entered invalid. Please check your data.</div>
+              <br data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.error && env.showValid"/>
+              <div class="alert alert-danger" data-ng-if="env.error">{{ env.error }}</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

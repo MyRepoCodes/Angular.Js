@@ -1,0 +1,100 @@
+<div id="participant-view">
+  <div class="pv-header">
+    <div class="pv-avatar">
+
+      <img src="" data-ng-src="{{ avatar }}" class="img-circle">
+       <!--<remove-file 
+      data-class-name="'profile-avatar'"
+      data-user-info="info"></remove-file>-->
+      <div class="upload-avatar">
+        <file-upload data-ng-model="uploadImage.file" 
+        data-class-name="'profile-edit-picture'"
+        data-id-input="uploadImage.idInput" 
+        data-id-button="uploadImage.idButton" file-types="uploadImage.fileTypes"></file-upload>
+      </div>
+
+    </div>
+
+    <div class="pv-name">
+      <div class="full-name" ng-bind-html="info.fullName"></div>
+      <small class="type" ng-bind="info.typeUser"></small>
+    </div>
+
+    <div class="pv-button-edit">
+      <span class="icon-edit-cus" title="Edit" data-ng-click="editProfile(info)"><i class="icon"></i></span>
+      <span ng-if="info.typeUser !== 'Participant'" class="icon-remove-cus" title="Remove" data-ng-click="deleteTheDependent(info)"><i class="icon"></i></span>
+    </div>
+  </div>
+  <div class="pv-content">
+    <div class="content">
+      <div class="row">
+
+        <!-- Participant -->
+        <div ng-if="info.typeUser === 'Participant'" class="group-label-1">
+          <div class="group-label">
+            <p>Address 1</p>
+            <p>Address 2</p>
+            <p>City</p>
+            <p>State</p>
+            <p>Zip Code</p>
+            <p>Email</p>
+            <p>Phone</p>
+          </div>
+          <div class="group-value">
+            <p>
+              <span ng-bind-html="info.streetAddress"></span>
+            </p>
+
+            <p ng-bind-html="info.addressLine2"></p>
+            <p ng-bind-html="info.city"></p>
+            <p ng-bind-html="info.state"></p>
+            <p ng-bind-html="info.postalCode"></p>
+            <p ng-bind-html="info.email"></p>
+            <p ng-bind-html="info.phoneNumber"></p>
+          </div>
+
+        </div>
+
+        <!-- Spouse -->
+        <div ng-if="info.typeUser === 'Spouse' || info.typeUser === 'Domestic'" class="group-label-1">
+          <div class="group-label">
+            <p>Email</p>
+            <p>Phone</p>
+          </div>
+          <div class="group-value">
+            <p ng-bind-html="info.email"></p>
+            <p ng-bind-html="info.phoneNumber"></p>
+          </div>
+
+        </div>
+
+        <!-- Child -->
+        <div ng-if="info.typeUser === 'Child'" class="group-label-1">
+          <div class="group-label">
+
+          </div>
+          <div class="group-value">
+
+          </div>
+
+        </div>
+
+        <!-- Group ID -->
+        <div class="group-label-2">
+          <div class="group-label">
+            <p>PULSE ID</p>
+            <p>Client ID</p>
+            <p>Participant ID</p>
+          </div>
+          <div class="group-value">
+            <p>{{ currentUser|formatNumberId:info.noPulseid:info.typeUser }}</p>
+            <p>{{currentUser.parentPrefixPulseId}}-{{currentUser.employer.pulseId}}</p>
+            <p>{{currentUser.customerId}}</p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

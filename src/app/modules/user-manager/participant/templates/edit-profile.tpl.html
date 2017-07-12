@@ -1,0 +1,165 @@
+<name-input data-form="userForm" data-control-label="Name" data-ng-params="params" data-env="env" data-row="1" data-tabindex="1"
+  required></name-input>
+  <date-input data-control-label="Date of Birth" data-form="userForm" data-ng-model="params.dateOfBirth" data-values="env"
+    data-param-type="birthday" data-row="2" data-tabindex="2" required></date-input>
+    <sex-input data-form="userForm" data-ng-model="params.gender" data-control-label="Sex" data-env="env" data-tabindex="3"></sex-input>
+    <ssn-input data-form="userForm" data-ng-model="params.ssn" data-control-label="Social Security Number" data-env="env" data-row="3"
+      data-tabindex="4" required></ssn-input>
+      <!-- Marital Status -->
+      <marital-status data-form="userForm" data-ng-model="params.maritalStatus" data-control-label="Marital Status" data-env="env"
+        data-row="'maritalStatus'" data-tabindex="5"></marital-status>
+        <!-- End Marital Status -->
+
+        <div class="dotted-line"></div>
+        <!--<spouse-input data-form="userForm" data-participant-info="participantInfo" data-status="params.maritalStatus" data-spouse-info="spouseInfo" data-callback="spouseCallback" data-env="env"></spouse-input>-->
+
+        <spouse-list data-form="userForm" data-participant-info="participantInfo" data-status="params.maritalStatus" data-list-spouse="spouseList"
+          data-callback="spouseListCallback" data-env="env"></spouse-list>
+          <!-- Start Dependents -->
+          <div class="dotted-line"></div>
+          <div class="row-item" data-ng-click="env.row='numberOfDependents'" data-ng-class="{ 'highlighted': env.row=='numberOfDependents',
+                      'has-error': userForm.numberOfDependents.$invalid && (!userForm.numberOfDependents.$pristine || env.showValid)
+                    }">
+            <label class="description">Number of Dependents</label>
+            <div class="content">
+              <div class="row">
+                <div class="form-group col-xs-4" data-ng-class="{ 'has-error': userForm.numberOfDependents.$invalid && (!userForm.numberOfDependents.$pristine || env.showValid) }">
+                  <input name="numberOfDependents" type="text" class="form-control" data-ng-model="params.numberOfDependents" tabindex="6"
+                    readonly/>
+                </div>
+              </div>
+            </div>
+            </div>
+            
+            <dependent-input data-form="userForm" data-participant-info="participantInfo" data-dependent-List="dependentList" data-callback="dependentCallback"
+              data-env="env"></dependent-input>
+              <div class="dotted-line"></div>
+              <!-- End Dependents -->
+              <address-input data-form="userForm" data-ng-params="params" data-control-label="Address" data-env="env" data-row="4" data-tabindex="7"></address-input>
+              <phone-input data-form="userForm" data-ng-model="params.phoneNumber" data-control-label="Phone" data-env="env" data-row="5"
+                data-tabindex="8"></phone-input>
+                <div class="row-item" data-ng-click="env.row=6" data-ng-class="{ 'highlighted': env.row==6,
+                      'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist
+                    }">
+                  <label class="description">Email</label>
+                  <div class="content">
+                    <div class="row">
+                      <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (userForm.email.$invalid && (!userForm.email.$pristine || env.showValid)) || env.emailExist }">
+                        <input name="email" type="email" class="form-control" data-ng-model="params.email" data-ng-pattern="patternRegexs.email"
+                          tabindex="9" />
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row-item" data-ng-click="env.row=6.1" data-ng-class="{ 'highlighted': env.row==6.1,
+                      'has-error': env.customerIdExist
+                    }">
+                    <label class="description">Participant ID</label>
+                    <div class="content">
+                      <div class="row">
+                        <div class="form-group col-xs-6" data-ng-class="{ 'has-error': env.customerIdExist }">
+                          <input name="customerId" type="text" class="form-control" maxlength="20" data-ng-model="params.customerId" tabindex="10"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+                    <div class="row-item" data-ng-click="env.row=6.2" data-ng-class="{ 'highlighted': env.row==6.2
+                    }">
+                      <label class="description">Participant ID 2</label>
+                      <div class="content">
+                        <div class="row">
+                          <div class="form-group col-xs-6" data-ng-class="">
+                            <input name="participantId2" type="text" class="form-control" data-ng-model="params.participantId2" tabindex="10.1" />
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+
+
+                      <div class="row-item" data-ng-click="env.row=9" data-ng-class="{ 'highlighted': env.row==9 }">
+                        <label class="description">Username</label>
+                        <div class="content">
+                          <div class="row">
+                            <div class="form-group col-xs-6" data-ng-class="{ 'has-error': env.usernameExist }">
+                              <input type="text" name="username" class="form-control" data-ng-model="params.username" autocomplete="off" tabindex="11"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row-item" data-ng-click="env.row=10" data-ng-class="{ 'highlighted': env.row==10,
+                      'has-error': (userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)) || env.passwordExist
+                    }">
+                        <label class="description">Password</label>
+                        <div class="content">
+                          <div class="row">
+                            <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)) || env.passwordExist }">
+                              <a style="display: block" tooltips tooltip-show-trigger="click" tooltip-hide-trigger="change" tooltip-lazy="false" tooltip-side="top"
+                                tooltip-class="tooltip-password" tooltip-content="{{ 'tooltip.password' | translate }}" tooltip-password="userForm.password"
+                                tooltip-show-box="{{ (userForm.password.$invalid && (!userForm.password.$pristine || env.showValid)) || env.passwordExist }}">
+                                <input type="password" name="password" class="form-control" data-ng-model="params.password" data-ng-pattern="patternRegexs.password"
+                                  data-ng-minlength="{{ configs.passwordMinLength }}" data-password-equal="[params.username, params.firstName, params.lastName]"
+                                  placeholder="{{participantInfo.isAlreadyCreated ? '********' : ''}}" onfocus="$(this).parent().trigger('click')"
+                                  onblur="$(this).parent().trigger('change')" autocomplete="off" tabindex="12" />
+                                </a>
+                                <meter-password password="userForm.password" option="{ minLength: configs.passwordMinLength }"></meter-password>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="row-item" data-ng-click="env.row=10.1" data-ng-class="{ 'highlighted': env.row==10.1,
+                      'has-error': (userForm.confirm.$invalid && (!userForm.confirm.$pristine || env.showValid))
+                    }">
+                          <label class="description">Password Verification</label>
+                          <div class="content">
+                            <div class="row">
+                              <div class="form-group col-xs-6" data-ng-class="{ 'has-error': (userForm.confirm.$invalid && (!userForm.confirm.$pristine || env.showValid)) }">
+                                <input type="password" name="confirm" class="form-control" data-ng-model="env.confirm" password-verify="params.password"
+                                  tabindex="13" />
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          <div class="row-item" data-ng-click="env.row=11" data-ng-class="{ 'highlighted': env.row==11 }">
+                            <label class="description">Client</label>
+                            <div class="content">
+                              <div class="content">
+                                <div class="row">
+                                  <div class="form-group col-xs-6 input-autocomplete" data-ng-class="{ 'has-error': userForm.employerId.$invalid && (!userForm.employerId.$pristine || env.showValid) }">
+                                    <!--<select name="employerId" class="form-control"-->
+                                    <!--data-ng-model="params.employerId"-->
+                                    <!--data-ng-options="employer.id as employer.clientName for employer in employerList"-->
+                                    <!--data-ng-change="changeEmployer(params.employerId)"-->
+                                    <!--tabindex="14"-->
+                                    <!--required>-->
+                                    <!--<option value="" data-ng-if="!isEmployerId"></option>-->
+                                    <!--</select>-->
+
+                                    <input type="text" ng-model="paramsAutoComplete.employer" placeholder="Client Name (Minimum 3 characters)" typeahead-editable="false"
+                                      tabindex="14" typeahead-wait-ms="500" typeahead-min-length="3" typeahead-on-select="changeEmployer($item['id'], $model, $label)"
+                                      typeahead="item as item.clientName for item in findClient($viewValue)" class="form-control">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div data-ng-if="env.products.beniCompAdvantage || env.products.beniCompSelect">
+                            <div class="dotted-bottom"></div>
+                            <div class="row-item" data-ng-click="env.row=11.2" data-ng-class="{ 'highlighted': env.row==11.2 }">
+                              <label class="description">Products</label>
+                              <div class="content">
+                                <div class="checkbox-line" data-ng-if="env.products.beniCompAdvantage">
+                                  <input name="beniCompAdvantage" type="checkbox" id="beniCompAdvantage" data-ng-model="params.products.beniCompAdvantage"
+                                    tabindex="15" />
+                                  <label class="choice" for="beniCompAdvantage">BeniComp Advantage</label>
+                                </div>
+                                <div class="checkbox-line" data-ng-if="env.products.beniCompSelect">
+                                  <input name="beniCompSelect" type="checkbox" id="beniCompSelect" data-ng-model="params.products.beniCompSelect" tabindex="16"
+                                  />
+                                  <label class="choice" for="beniCompSelect">BeniComp Select</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>

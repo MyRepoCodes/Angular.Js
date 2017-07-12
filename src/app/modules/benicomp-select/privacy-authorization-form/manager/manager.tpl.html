@@ -1,0 +1,143 @@
+<div class="panel panel-green panel-manager">
+  <div class="panel-heading">
+    <h4 class="text-center">Privacy Authorization Form Manager</h4>
+  </div>
+  <div class="panel-body contact_manager" id="claims_manager">
+
+    <div class="col-xs-12">
+      <div class="box-filter">
+        <div class="input-group">
+          <input class="form-control input-filter"
+                 data-ng-model="filterSurvey.answer"
+                 placeholder="Search"
+          />
+          <span class="input-group-addon"><i class="icon icon-search"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-container">
+      <div class="table-dropdown">
+        <div class="pull-left">
+          <span ng-if="ids === ''" style="cursor: default;" class="btn btn-file">
+                        <span class="pulse-icon-basic pulse-icon-download-green">
+                            <span class="fs-13">Download Forms</span>
+                    </span>
+                    </span>
+          <a ng-if="ids !== ''" href="" ng-click="downloadClaims(listIDDocuments)">
+             <span class="btn btn-file">
+                        <span class="pulse-icon-basic pulse-icon-download-green">
+                            <span class="fs-13">Download Forms</span>
+                        </span>
+                        </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="table-container panel-contactManger1">
+        <div class="table-one-control">
+          <div class="table-double"
+               data-ng-class="{'full-control' : tableParams.data.length > 0 && !loading}">
+            <div class="table-double-content">
+              <div class="table-responsive table-responsive-pagination">
+                <table ng-table="tableParams" show-filter="false"
+                       class="table">
+
+                  <thead>
+                  <tr>
+
+                    <th>
+                      <input type="checkbox" ng-model="checkboxes.checked" id="select_all" ng-change="selectedAll()">
+                    </th>
+
+                    <th class="sortable"
+                        ng-if="label.active"
+                        ng-repeat="label in  listLabel"
+                        ng-class="{
+                                    'sort-asc': tableParams.isSortBy(label.name, 'asc'),
+                                    'sort-desc': tableParams.isSortBy(label.name, 'desc')
+                                  }"
+                        ng-click="tableParams.sorting(label.name, tableParams.isSortBy(label.name, 'asc') ? 'desc' : 'asc')">
+                      <div>
+                        {{label.label}}
+                      </div>
+                    </th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr ng-repeat="(key,item) in tableParams.data" class="cursor-pointer">
+                    <td>
+                      <input type="checkbox" ng-model="item.selected" ng-change="itemChecked(item)">
+                    </td>
+
+
+                    <td ng-if="label.active"
+                        ng-repeat="label in  listLabel"
+                        ng-click="viewResult(item)">
+
+                      <span ng-if="label.name === 'createdDate'">{{item[label.name] | date:'MM/dd/yyyy'}}</span>
+                      <span ng-if="label.name === 'isDownloaded'">{{item[label.name] ? "Downloaded" : '' }}</span>
+
+                      <span ng-if="label.name !== 'createdDate' && label.name !== 'isDownloaded'">{{item[label.name]}}</span>
+
+                    </td>
+
+
+                  </tr>
+
+
+                  <tr class="empty" data-ng-if="loading">
+                    <td colspan="5" class="text-center">
+                      <div class="loading-indicator"></div>
+                    </td>
+                  </tr>
+                  <tr class="empty"
+                      data-ng-if="tableParams.data.length == 0 && !loading">
+                    <td colspan="5" class="text-center">
+                      {{ 'faqs.empty' | translate }}
+                    </td>
+                  </tr>
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
+            <div class="table-double-action" data-ng-if="tableParams.data.length > 0 && !loading">
+              <table class="table ng-table">
+                <tr>
+                  <th class="action">
+                  <span class="button action-remove" title="{{ 'userManager.button.title.removeMultiple' | translate }}"
+                        data-ng-click="removeMultiple(ids)"
+                        data-ng-if="tableParams.data.length>0"><i class="icon"></i></span>
+
+
+                  </th>
+                </tr>
+                <tr ng-repeat="item in tableParams.data">
+                  <td class="action">
+
+                   <span class="button action-remove"
+                         title="{{ 'userManager.button.title.remove' | translate }}"
+                         data-ng-click="remove(item)"><i class="icon"></i></span>
+
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

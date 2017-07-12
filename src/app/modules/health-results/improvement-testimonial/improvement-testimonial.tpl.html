@@ -1,0 +1,120 @@
+<div class="form-content">
+  <div class="panel panel-green">
+    <div class="panel-body" data-ng-show="step==1">
+      <a class="close" ng-click="cancel()">X</a>
+      <form name="healthCoachForm" novalidate>
+        <div class="form-description">
+          <h2>Participant Improvement Survey</h2>
+
+          <p>Congratulations! We see your dedication and hard work has paid off, and hope you're as happy as we are.
+            It's clients like you that make our dedicated team of coaches successful!</p>
+
+          <p> We value your feedback and would greatly appreciate a brief testimonial on your personal experience with
+            BeniComp. Below are several questions to help get you started.</p>
+        </div>
+
+        <!--<div class="row-item" data-ng-click="row=0" data-ng-class="{ 'highlighted' : row==0 }">
+          <label class="description">Survey name</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <input id="surveyname" name="surveyname"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.surveyName"
+                                      required>
+            </div>
+          </div>
+        </div>
+        <br/>-->
+
+        <div class="row-item" data-ng-click="row=1" data-ng-class="{ 'highlighted' : row==1 }">
+          <label class="description">What wellness obstacles did you face before working with a coach from BeniComp
+            Advantage?</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <textarea id="line1" name="line1"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.line1"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-item" data-ng-click="row=2" data-ng-class="{ 'highlighted' : row==2 }">
+          <label class="description">What lifestyle changes have you made since speaking with a coach?</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <textarea id="line2" name="line2"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.line2"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-item" data-ng-click="row=3" data-ng-class="{ 'highlighted' : row==3 }">
+          <label class="description">What were the two most influential factors in your success?</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <textarea id="line3" name="line3"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.line3"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-item" data-ng-click="row=4" data-ng-class="{ 'highlighted' : row==4 }">
+          <label class="description">How has your success in health and wellness affected other areas of your life?</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <textarea id="line4" name="line4"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.line4"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-item" data-ng-click="row=5" data-ng-class="{ 'highlighted' : row==5 }">
+          <label class="description">Is there anything else you would like to say?</label>
+
+          <div class="content">
+            <div class="form-group">
+                            <textarea id="line5" name="line5"
+                                      class="form-control text-default"
+                                      maxlength="255"
+                                      data-ng-model="params.line5"
+                                      style="height: 100px"
+                                      required></textarea>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="buttons">
+          <button class="btn btn-green" data-ng-click="submit()">SUBMIT</button>
+          <!--<button class="btn btn-white" data-ng-click="cancel()">CANCEL</button>-->
+        </div>
+      </form>
+    </div>
+    <div class="panel-body" data-ng-show="step==2">
+      <div class="congratulations">
+        <span>Thank you for taking the time respond. Healthy living has its rewards!</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="view-claim">
+  <div class="panel-heading">
+    <p class="text-center title-modal-info">Privacy Authorization Form</p>
+  </div>
+  <div class="form-content">
+    <div class="panel panel-green warp-shadow">
+      <div class="panel-body">
+        <div class="table-responsive">
+          <table id="machform_review_table" class="table">
+            <tr data-ng-repeat="item in tableData" class="{{item.class}}">
+              <td style="vertical-align: top" colspan=" {{ item.value ? 1 : 2}}" data-ng-bind-html="item.label"></td>
+              <td ng-if="item.value" data-ng-bind-html="item.value"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

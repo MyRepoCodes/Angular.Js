@@ -1,0 +1,15 @@
+<div class="panel panel-green page-settings">
+  <div class="panel-heading">
+    <h4 class="text-center">My Settings</h4>
+  </div>
+  <div class="panel-body">
+    <div class="form-content">
+      <div class="panel panel-green warp-shadow">
+        <div class="panel-body">
+          <div data-ng-if="isParticipant" data-ng-controller="SettingsParticipantController" data-ng-include="'modules/settings/participant/settings.tpl.html'"></div>
+          <div data-ng-if="!isParticipant" data-ng-controller="SettingsDefaultController" data-ng-include="'modules/settings/default/default.tpl.html'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="panel panel-green warp-shadow">
+  <div class="panel-body">
+    <form name="userForm" novalidate autocomplete="off" class="add-one-client">
+      <div class="form-description">
+        <h2>Add a Client</h2>
+        <p>Add a client below (often a client is an employer)</p>
+      </div>
+      <div class="header-tab">
+        <tabset class="tab-set">
+          <!-- Profile -->
+          <tab select="selectTab(tabsets.profile.tabindex)" active="tabsets.profile.active" disabled="tabsets.profile.disabled">
+            <tab-heading class="tab-profile">{{ tabsets.profile.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/create-profile.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Advantage -->
+          <tab select="selectTab(tabsets.beniCompAdvantage.tabindex)" active="tabsets.beniCompAdvantage.active" disabled="tabsets.beniCompAdvantage.disabled" data-ng-if="!tabsets.beniCompAdvantage.disabled">
+            <tab-heading class="tab-beniCompAdvantage">{{ tabsets.beniCompAdvantage.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/benicomp-advantage.tpl.html'"></div>
+            </div>
+          </tab>
+          <!-- BeniComp Select -->
+          <tab select="selectTab(tabsets.beniCompSelect.tabindex)" active="tabsets.beniCompSelect.active" disabled="tabsets.beniCompSelect.disabled" data-ng-if="!tabsets.beniCompSelect.disabled">
+            <tab-heading class="tab-beniCompSelect">{{ tabsets.beniCompSelect.title }}</tab-heading>
+            <div class="content-tab">
+              <div data-ng-include="'modules/user-manager/client/templates/benicomp-select.tpl.html'"></div>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+      <div class="content-footer">
+        <div class="buttons" data-ng-click="env.row=0">
+          <button class="btn btn-green" data-ng-click="create(userForm.$valid)" tabindex="1000">Create</button>
+          <button class="btn btn-white" data-ng-click="goStateList()" tabindex="1001">Cancel</button>
+        </div>
+        <div class="alert alert-danger" data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.errorMessage && (bcaBYModel.errorList.length == 0 && params.products.beniCompAdvantage) && (bcsBYModel.errorList.length == 0 && params.products.beniCompSelect) && env.showValid">Entered invalid. Please check your data.</div>
+        <br data-ng-if="env.totalTab<=env.currentTab && !userForm.$valid && !env.errorMessage && (bcaBYModel.errorList.length == 0 && params.products.beniCompAdvantage) && (bcsBYModel.errorList.length == 0 && params.products.beniCompSelect) && env.showValid"/>
+        <div class="alert alert-danger" data-ng-if="env.errorMessage">{{ env.errorMessage }}</div>
+        <ul class="alert alert-danger" data-ng-if="bcaBYModel.errorList.length > 0 && params.products.beniCompAdvantage && env.showValid">
+          <li data-ng-repeat="error in bcaBYModel.errorList">BeniComp Advantage Benefit year {{ getLabelByIncentive(error) }} is invalid.</li>
+        </ul>
+        <ul class="alert alert-danger" data-ng-if="bcsBYModel.errorList.length > 0 && params.products.beniCompSelect && env.showValid">
+          <li data-ng-repeat="error in bcsBYModel.errorList">BeniComp Select Benefit year {{ getLabelByIncentive(error) }} is invalid.</li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>

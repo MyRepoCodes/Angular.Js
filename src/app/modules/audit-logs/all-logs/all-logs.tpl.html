@@ -1,0 +1,206 @@
+<!--<div class="table-filter">
+  <div class="input-group">
+    <input class="form-control input-filter" data-ng-model="filter.keyword" />
+    <span class="input-group-addon"><i class="icon icon-search"></i></span>
+  </div>
+</div>-->
+<!-- Filter status-->
+<div class="table-dropdown all-logs">
+
+  <!--  History Filter-->
+  <div class="pull-left padding-right-15">
+    <div class="dropdown">
+      <button class="dropdown-toggle filter-archive">       
+          <span data-ng-if="filter.activity === item.value" ng-repeat="item in activityTypes">{{item.text}} History</span>  <span class="fa fa-angle-down"></span>
+        </button>
+      <ul class="dropdown-menu">
+        <li ng-click="activity(item.value)" ng-repeat="item in activityTypes">
+          <a onclick="$('.filter-archive').trigger('click')">{{item.text}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Table Column filter -->
+
+  <div class="pull-left padding-right-15 dropdown-column">
+    <div class="dropdown">
+      <div ng-dropdown-multiselect="" translation-texts="customTexts" extra-settings="customSettings" checkboxes="true" options="columnNames"
+        events="customEvents" selected-model="columnModel" class="selectColumn"></div>
+    </div>
+  </div>
+
+  <!--<div class="pull-left padding-right-15 input-block-css keyword">
+    <div class="input-group">
+      <input class="form-control input-filter" placeholder="Search user..." data-ng-model="filter.keyword" />
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+  </div>-->
+
+    <!--<div class="pull-left padding-right-15 input-block-css screen">
+    <div class="input-group">
+      <input class="form-control input-filter" placeholder="Search screen..." data-ng-model="filter.screen" />
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+  </div>-->
+
+
+  <!--<div class="pull-left padding-right-15">
+    <div class="dropdown">
+      <button class="dropdown-toggle filter-archive">
+          <span data-ng-if="!filter.tableId">All Tables</span>   
+          <span data-ng-if="filter.tableId === item.value" ng-repeat="item in allTables">{{item.text}}</span>        
+          <span class="fa fa-angle-down"></span>
+        </button>
+      <ul class="dropdown-menu">
+
+        <li ng-click="tableMapping(0)">
+          <a onclick="$('.filter-archive').trigger('click')">ALL Tables</a>
+        </li>
+        <li ng-click="tableMapping(item.value)" ng-repeat="item in allTables">
+          <a onclick="$('.filter-archive').trigger('click')">{{item.text}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>-->
+
+  <!-- user name Filter status-->
+
+  <div class="pull-left padding-right-15 position-relative" data-ng-if="filter.userId">
+    <input class="form-control username" readonly="readonly" data-ng-if="filter.name" type="text" placeholder="{{filter.name}}"
+    />
+    <span class="fa fa-times position-absolute close" ng-click="clearUser()"></span>
+  </div>
+
+  <!-- Date Range Filter status-->
+  <div class="pull-right date-wrap">
+    <div class="date-range-picker">
+      <input date-range-picker class="form-control date-picker" type="text" clearable="true" placeholder="start date - end date"
+        ng-model="dateRange" options="dateRangeOptions" />
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+
+<div class="table-filter">
+    <div class="input-group">
+      <input class="form-control input-filter ng-pristine ng-valid ng-touched" data-ng-model="filter.keyword" ng-change="keySearch()">
+      <span class="input-group-addon"><i class="icon icon-search"></i></span>
+    </div>
+</div>
+
+<div class="table-double all-logs" data-ng-class="">
+  <div class="table-double-content">
+    <div class="table-responsive table-responsive-pagination audit-data-table">
+      <table ng-table="tableParams" show-filter="false" class="table">
+        <thead>
+          <tr>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('tableName', 'asc'), 'sort-desc': tableParams.isSortBy('tableName', 'desc') }"
+              ng-click="tableParams.sorting({'tableName' : tableParams.isSortBy('tableName', 'asc') ? 'desc' : 'asc'})" data-ng-if="filter.column.tableName">
+              <div>Table Name</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('primaryKey', 'asc'), 'sort-desc': tableParams.isSortBy('primaryKey', 'desc') }"
+              ng-click="tableParams.sorting({'primaryKey' : tableParams.isSortBy('primaryKey', 'asc') ? 'desc' : 'asc'})" data-ng-if="filter.column.primaryKey">
+              <div>Primary Key</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('operationDate', 'asc'), 'sort-desc': tableParams.isSortBy('operationDate', 'desc') }"
+              ng-click="tableParams.sorting({'operationDate' : tableParams.isSortBy('operationDate', 'asc') ? 'desc' : 'asc'})">
+              <div>Date</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('userName', 'asc'), 'sort-desc': tableParams.isSortBy('userName', 'desc') }"
+              ng-click="tableParams.sorting({'userName' : tableParams.isSortBy('userName', 'asc') ? 'desc' : 'asc'})">
+              <div>User</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('userIPAddress', 'asc'), 'sort-desc': tableParams.isSortBy('userIPAddress', 'desc') }"
+              ng-click="tableParams.sorting({'userIPAddress' : tableParams.isSortBy('userIPAddress', 'asc') ? 'desc' : 'asc'})">
+              <div>User IP Address</div>
+            </th>
+
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('screenName', 'asc'), 'sort-desc': tableParams.isSortBy('screenName', 'desc') }"
+              ng-click="tableParams.sorting({'screenName' : tableParams.isSortBy('screenName', 'asc') ? 'desc' : 'asc'})">
+              <div>Screen</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('changeText', 'asc'), 'sort-desc': tableParams.isSortBy('changeText', 'desc') }"
+              ng-click="tableParams.sorting({'changeText' : tableParams.isSortBy('changeText', 'asc') ? 'desc' : 'asc'})">
+              <div>change</div>
+            </th>
+            <th class="sortable" ng-class="{ 'sort-asc': tableParams.isSortBy('changesCount', 'asc'), 'sort-desc': tableParams.isSortBy('changesCount', 'desc') }"
+              ng-click="tableParams.sorting({'changesCount' : tableParams.isSortBy('changesCount', 'asc') ? 'desc' : 'asc'})">
+              <div>Count</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="{{item.rowNumber}}" data-ng-class="{'pointer': (item.operationTypeID === 2) || (item.operationTypeID === 3) }" class="row-clicked"
+            ng-repeat-start="item in tableParams.data" ng-click="showContent(item,item.rowNumber)">
+            <td data-title="'Table Name'" data-ng-if="filter.column.tableName" sortable="'tableName'">{{item.tableName}}</td>
+            <td data-title="'Primary Key'" data-ng-if="filter.column.primaryKey" sortable="'primaryKey'">{{item.primaryKey}}</td>
+            <td data-title="'Operation Date'" sortable="'operationDate'">{{item.operationDate | date:'MM-dd-yyyy hh:mm:ss'}}</td>
+            <td data-title="'User Name'" sortable="'userName'">{{item.userName}}</td>
+            <td data-title="'User IP Address'" sortable="'userName'">{{item.userIPAddress}}</td>
+            <td data-title="'Screen Name'" sortable="'screenName'">{{item.screenName}}</td>
+            <td data-title="'Operation Type'" sortable="'operationType'">{{item.changeText}}</td>
+            <td data-title="'Changes Count'" sortable="'changesCount'">{{item.changesCount}}</td>
+          </tr>
+          <tr class="emp0ty" data-ng-if="loading">
+            <td colspan="3" class="text-center">
+              <div class="loading-indicator"></div>
+            </td>
+          </tr>
+          <tr class="table-content" data-ng-show="clicked" ng-repeat-end="">
+            <td colspan="6" class="text-center set-padding audit-td" width="830">
+              <div>
+                <h2>Data Audit Logs</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <hr>
+                <div class="audit-log">
+                  <table class="inner-table">
+
+                    <tr>
+                      <th>
+                        <div>Filed</div>
+                      </th>
+                      <th>
+                        <div>New Value</div>
+                      </th>
+                      <th>
+                        <div>Old Value</div>
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                    </tr>
+                    <tr>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                    </tr>
+                    <tr>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                      <td>dddffdsfd</td>
+                    </tr>
+
+                  </table>
+                </div>
+                <button class="btn btn-success pull-right" data-ng-click="close()">Close</button>
+              </div>
+            </td>
+          </tr>
+
+
+          <tr class="empty" data-ng-if="tableParams.data.length == 0 && !loading">
+            <td colspan="3" class="text-center">
+              <span ng-if="filter.keyword">{{ 'userManager.empty_1' | translate }}</span>
+              <span ng-if="!filter.keyword">{{ 'userManager.empty_2' | translate }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
